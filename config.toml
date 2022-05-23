@@ -28,7 +28,7 @@ canonifyurls = true
 [taxonomies]
   tag = "Tags"
   category = "Categories"
-  archive = "Crchives"
+  archive = "Archives"
 
 # ------
 # Markup
