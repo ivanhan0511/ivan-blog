@@ -5,21 +5,17 @@
 [TOC]
 
 ## CONFIGURATIONS ON GITHUB
----
 
 Create repository
 Create a respository which is named like .github.io
 
 ## DEPLOYMENT WITH HUGO
----
 
 
 ## CONFIGURATIONS OF THEME
----
 
 
 ## QUOTES
----
 
 - `https://youngkin.github.io/post/createafreeblogsite/`
 - `https://themes.gohugo.io/themes/hugo-tranquilpeak-theme/`
