@@ -5,12 +5,12 @@ categories:
 - DB
 - MySQL
 tags:
+- MySQL
+keywords:
 - mysql
 - init
-keywords:
-- tech
 
-#thumbnailImage: //example.com/image.jpg
+thumbnailImage: //https://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_D.png
 ---
 
 ## INIT

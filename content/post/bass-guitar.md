@@ -15,7 +15,7 @@ keywords:
 - pjb
 - akg 
 
-#thumbnailImage: //example.com/image.jpg
+thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
 ---
 
 <!--more-->
