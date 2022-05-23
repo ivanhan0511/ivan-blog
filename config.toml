@@ -1,6 +1,6 @@
-baseURL = 'http://example.org/'
+baseURL = 'http://ivanhan0511.github.io/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'IVAN BLOG'
 theme = "hugo-tranquilpeak-theme"
 
 [markup]
@@ -9,11 +9,11 @@ theme = "hugo-tranquilpeak-theme"
       unsafe = true
 
 [params]
-  header_image = "images/main_go_wideandtall_darklayer.jpeg"
+  header_image = "images/A.jpg"
   title = "Software Engineering"
   slogan = "$ grep -rni \"The how's and why's\" ."
-  SEOTitle = "Rich Youngkin Blog"
-  keyword = "Rich, Youngkin, Raspberry, Pi, Docker, Kubernetes, Go, Golang, Microservice"
+  SEOTitle = "Ivan Han Blog"
+  keyword = "Ivan, Python, Raspberry, Pi, Docker, Kubernetes, Go, Golang, Microservice"
  
   # Sidebar settings
   sidebar_about_description = "Father, Husband, Skier, Cyclist, and, oh yeah, Software Developer"
@@ -34,9 +34,5 @@ theme = "hugo-tranquilpeak-theme"
 
   [params.social]
   rss            = true
-  email          = "rich.youngkin@gmail.com"
-  linkedin       = "https://www.linkedin.com/in/richard-youngkin-0749763"
-  github         = "https://github.com/youngkin"
-  medium         = "https://medium.com/@RichYoungkin"
-  stackoverflow  = "https://stackoverflow.com/users/2646870/rich"
-  reddit         = "https://www.reddit.com/user/elevation5280"
+  email          = "ivanhan0511@gmail.com"
+  github         = "https://github.com/ivanhan0511"
