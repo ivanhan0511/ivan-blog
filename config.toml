@@ -1,4 +1,4 @@
-baseURL = 'http://ivanhan0511.github.io/'
+baseURL = 'https://ivanhan0511.github.io/'
 languageCode = 'en-us'
 title = 'IVAN BLOG'
 theme = "hugo-tranquilpeak-theme"
@@ -9,12 +9,13 @@ theme = "hugo-tranquilpeak-theme"
       unsafe = true
 
 [params]
+  dateFormat = "2 January 2006"
   header_image = "images/A.jpg"
   title = "Software Engineering"
   slogan = "$ grep -rni \"The how's and why's\" ."
   SEOTitle = "Ivan Han Blog"
-  keyword = "Ivan, Python, Raspberry, Pi, Docker, Kubernetes, Go, Golang, Microservice"
- 
+  keywords = ["Ivan", "Python", "C/C++", "Coffee", "Bass"]
+
   # Sidebar settings
   sidebar_about_description = "Father, Husband, Skier, Cyclist, and, oh yeah, Software Developer"
   sidebar_avatar = "images/MeAtJackson.jpeg"
