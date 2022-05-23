@@ -11,7 +11,7 @@ keywords:
 - helor
 - handy
 
-#thumbnailImage: //example.com/image.jpg
+thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_E.png
 ---
 
 ## HELOR

@@ -10,7 +10,7 @@ keywords:
 - mysql
 - init
 
-thumbnailImage: //https://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_D.png
+thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_D.png
 ---
 
 ## INIT

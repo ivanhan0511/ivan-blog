@@ -5,8 +5,7 @@ categories:
 - Coffee
 - Beans
 tags:
-- 
-- tag2
+- Ethiopia
 keywords:
 - coffee
 - beans
