@@ -7,15 +7,17 @@ categories:
 tags:
 - Bass
 - Fender
-- Phil Jones Bass X4
-- AKG K240S
 keywords:
 - bass
 - fender
 - pjb
 - akg 
 
+thumbnailImagePosition: right
 thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
+coverImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
+metaAlignment: center
+coverMeta: out
 ---
 
 <!--more-->
