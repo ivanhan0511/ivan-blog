@@ -6,22 +6,37 @@
 
 ## CONFIGURATIONS ON GITHUB
 
-Create repository
-Create a respository which is named like ivanhan0511.github.io
+Create a normal repository, like ivan-blog as example
+
+Create a respository, must with `<username>.github.io`
 
 
 
 
-## DEPLOYMENT WITH HUGO
+## DEPLOYMENT
 
 ```shell
 git clone git@github.com:ivanhan0511/ivan-blog.git
+
+# Create Hugo local site
 cd ivan-blog
 hugo new site . --force
+
+# Visit https://themes.gohugo.io/ and choose a theme
+# And add it as a submodule into the `theme` folder
 git submodule add git@github.com:kakawait/hugo-tranquilpeak-theme.git themes/hugo-tranquilpeak-theme
+
+# Copy and use `config.toml` from the theme
 cp themes/tranquilpeak/exampleSite/config.toml .
+
+# Create your new post
 hugo new post/testpage.md
-git submodule add -b master git@ivanhan0511.github.io.git public
+
+# Locoal testing
+hugo server -D
+```
+```shell
+git submodule add -b master git@github.com:ivanhan0511/ivanhan0511.github.io.git public
 vi deploy.sh
 ```
 
@@ -69,7 +84,19 @@ git push origin master
 
 
 
-## CONFIGURATIONS OF THEME
+## USAGE OF THE THEME
+
+### Configuration
+
+```shell
+vi config.toml
+```
+
+
+### Create content with Hugo
+```shell
+hugo new post/hello-world.md
+```
 
 
 
