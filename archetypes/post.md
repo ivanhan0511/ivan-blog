@@ -145,7 +145,6 @@ def say_hello:
     for _ in 'hello':
         print(i)
     <!-- endtab -->
-
     <!-- tab python -->
 import datetime
 
