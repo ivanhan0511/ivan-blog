@@ -1,13 +1,11 @@
 # DEPLOY BLOG WITH GITHUB PAGES AND HUGO
 
-## Sources for ivanhan0511.github.io
-
 
 [TOC]
 
 ## CONFIGURATIONS ON GITHUB
 
-Create a normal repository, like ivan-blog as example
+Create a normal repository, like "ivan-blog" as example
 
 Create a respository, must with `<username>.github.io`
 
@@ -96,20 +94,16 @@ vi config.toml
 
 ## WRITING POSTS
 
-### Create content with Hugo
+### Front matter
 
-```shell
-hugo new post/hello-world.md
-```
+To customize your post, refers to the 
+[user manual](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md) of tranquilpeak-theme
 
-
-### Grammar
-
-Refers to the [user manual](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md)
 
 ```shell
 vi archetypes/post.md
 ```
+
 ```md
 ---
 title: "EXAMPLE TITLE"
@@ -148,6 +142,13 @@ summary: "This is a custom summary and does *not* appear in the post."
 ---
 
 <!--more-->
+```
+
+
+### Create content with Hugo
+
+```shell
+hugo new post/hello-world.md
 ```
 
 

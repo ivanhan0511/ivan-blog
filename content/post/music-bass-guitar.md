@@ -10,9 +10,6 @@ tags:
 keywords:
 - bass
 - fender
-- pjb
-- akg 
-
 thumbnailImagePosition: right
 #thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
 #coverImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
@@ -58,6 +55,9 @@ What to do as a newbee.
 
 - First
 - Second
+  ```shell
+  echo $?
+  ```
 
 
 | item | name | remark |
