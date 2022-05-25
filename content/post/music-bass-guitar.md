@@ -14,8 +14,8 @@ keywords:
 - akg 
 
 thumbnailImagePosition: right
-thumbnailImage: //cdn.zhzhiyu.com/\_uploads/photos/2_gaoda_B.png
-coverImage: //cdn.zhzhiyu.com/\_uploads/photos/2_gaoda_B.png
+thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
+coverImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
 metaAlignment: center
 coverMeta: out
 coverSize: partial
@@ -27,27 +27,27 @@ What to do as a newbee.
 
 {{< toc >}}
 
-{{<alert info >}}
+{{< alert info >}}
 Alert Info
 {{< /alert >}}
 
-{{<alert success >}}
+{{< alert success >}}
 Alert success
 {{< /alert >}}
 
-{{<alert warning >}}
+{{< alert warning >}}
 Alert warning
 {{< /alert >}}
 
-{{<alert danger >}}
+{{< alert danger >}}
 Alert danger
 {{< /alert >}}
 
-{{<alert noicon >}}
+{{< alert noicon >}}
 Alert noicon
 {{< /alert >}}
 
-{{<alert danger noicon >}}
+{{< alert danger noicon >}}
 Alert Danger NOicon
 {{< /alert >}}
 
