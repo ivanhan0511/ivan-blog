@@ -77,3 +77,26 @@ your highlighted text
 Image example
 
 {{< image classes="fancybox right clear" src="image2.png" thumbnail="http://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png" group="group:travel" thumbnail-width="150px" thumbnail-height="300px" title="A beautiful Gundam" >}}
+
+
+
+
+## CHAPTER 3
+
+Coding:
+
+{{< tabbed-codeblock Python example >}}
+    <!-- tab python -->
+        for _ in 'foo':
+            print(i)
+    <!-- endtab -->
+    <!-- tab python -->
+        print('Hello World!')
+    <!-- endtab -->
+    <!-- tab css -->
+        .btn {
+            color: red;
+        }
+    <!-- endtab -->
+{{< /tabbed-codeblock >}}
+
