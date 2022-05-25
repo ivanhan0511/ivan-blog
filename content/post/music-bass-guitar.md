@@ -63,11 +63,13 @@ What to do as a newbee.
 | item | name | remark |
 | :--- | :---: | --- |
 | 1 | Foo | Foo remark |
-| 2 | Bar | Bar remark |
+| 2 | Bar | Bar remarkkkkkkkkkkkkkkk |
+| 2000 | Bar | Bar remarkkkkkkkkkkkkkkk |
 
 
 {{< hl-text yellow >}}
 your highlighted text
+Hellooooooooooooooooooooooooooooooo
 {{< /hl-text >}}
 
 
@@ -77,7 +79,7 @@ your highlighted text
 
 Image example
 
-{{< image classes="fancybox right clear" src="image2.png" thumbnail="http://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png" group="group:travel" thumbnail-width="250px" thumbnail-height="250" title="A beautiful Gundam" >}}
+{{< image classes="fancybox right clear" src="A.jpg" thumbnail="http://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png" group="group:travel" thumbnail-width="250px" thumbnail-height="250" title="A beautiful Gundam" >}}
 
 
 
@@ -91,6 +93,11 @@ Coding:
 def say_hello:
     for _ in 'hello':
         print(i)
+    <!-- endtab -->
+    <!-- tab python -->
+import datetime
+def print_time:
+    print(datetime.datetime.now())
     <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
