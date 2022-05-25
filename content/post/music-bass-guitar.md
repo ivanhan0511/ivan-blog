@@ -86,7 +86,7 @@ Image example
 
 Coding:
 
-{{< tabbed-codeblock Python Fragment >}}
+{{< tabbed-codeblock PythonFragment >}}
     <!-- tab python -->
 def say_hello:
     for _ in 'hello':
