@@ -76,4 +76,4 @@ your highlighted text
 
 Image example
 
-{{< image classes="fancybox right clear" src="image2.png" thumbnail="http://google.fr/images/image125.png" group="group:travel" thumbnail-width="150px" thumbnail-height="300px" title="A beautiful sunrise" >}}
+{{< image classes="fancybox right clear" src="image2.png" thumbnail="http://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png" group="group:travel" thumbnail-width="150px" thumbnail-height="300px" title="A beautiful Gundam" >}}
