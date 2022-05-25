@@ -14,15 +14,16 @@ keywords:
 - akg 
 
 thumbnailImagePosition: right
-thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
-coverImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
+#thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
+#coverImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
 metaAlignment: center
 coverMeta: out
 coverSize: partial
 coverCaption: This is a partial cover
+summary: "What to do as a newbee"
 ---
-What to do as a newbee.
-<!--more -->
+
+<!--more-->
 
 {{< toc >}}
 
@@ -85,7 +86,7 @@ Image example
 
 Coding:
 
-{{< tabbed-codeblock Python >}}
+{{< tabbed-codeblock Python Fragment >}}
     <!-- tab python -->
 def say_hello:
     for _ in 'hello':
