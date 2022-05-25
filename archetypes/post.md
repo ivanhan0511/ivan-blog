@@ -121,7 +121,7 @@ API file is important
   }
   ```
   {{< hl-text yellow >}}
-  *Please pay attention: xxx*
+  \*Please pay attention: xxx\*
   {{< /hl-text >}}
 
 
