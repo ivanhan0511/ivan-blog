@@ -11,13 +11,11 @@ keywords:
 - mysql
 - view
 clearReading: true
-#thumbnailImage: //example.com/static/A.png
-thumbnailImage: image-1.png
+thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city-750.jpg
 thumbnailImagePosition: bottom
 autoThumbnailImage: yes
 metaAlignment: center
-#coverImage: //example.com/static/B.png
-coverImage: image-2.png
+coverImage: //d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city.jpg
 coverCaption: "A beautiful image"
 coverMeta: out
 coverSize: full
@@ -32,9 +30,9 @@ showTags: true
 showPagination: true
 showSocial: true
 showDate: true
-summary: "Create a SQLView to make query fast"
 ---
 
+Create a SQLView to make query fast
 <!--more-->
 
 {{< toc >}}
@@ -129,7 +127,7 @@ API file is important
 ### Image Gallery
 Image example
 
-{{< image classes="fancybox right clear" src="A.jpg" thumbnail="http://example.com/static/B.png" group="group:travel" thumbnail-width="250px" thumbnail-height="250" title="A beautiful Gundam" >}}
+{{< image classes="fancybox right clear" src="20220426_banner_example.jpg" thumbnail="http://example.com/static/B.png" group="group:travel" thumbnail-width="750px" thumbnail-height="321px" title="One Piece" >}}
 
 
 
