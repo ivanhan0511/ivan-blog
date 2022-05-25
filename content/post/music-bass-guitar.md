@@ -76,7 +76,7 @@ your highlighted text
 
 Image example
 
-{{< image classes="fancybox right clear" src="image2.png" thumbnail="http://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png" group="group:travel" thumbnail-width="150px" thumbnail-height="300px" title="A beautiful Gundam" >}}
+{{< image classes="fancybox right clear" src="image2.png" thumbnail="http://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png" group="group:travel" thumbnail-width="250px" thumbnail-height="250" title="A beautiful Gundam" >}}
 
 
 
@@ -85,18 +85,11 @@ Image example
 
 Coding:
 
-{{< tabbed-codeblock Python example >}}
+{{< tabbed-codeblock Python >}}
     <!-- tab python -->
-        for _ in 'foo':
-            print(i)
-    <!-- endtab -->
-    <!-- tab python -->
-        print('Hello World!')
-    <!-- endtab -->
-    <!-- tab css -->
-        .btn {
-            color: red;
-        }
+def say_hello:
+    for _ in 'hello':
+        print(i)
     <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
