@@ -5,7 +5,7 @@ categories:
 - C/C++
 - Basic
 tags:
-- C/C++
+- c/c++
 keywords:
 - c
 - c++

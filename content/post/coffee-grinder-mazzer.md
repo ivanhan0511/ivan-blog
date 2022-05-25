@@ -5,14 +5,14 @@ categories:
 - Coffee
 - Grinder
 tags:
-- Grider
-- Mazzer
+- grinder
+- mazzer
 keywords:
-- grider
+- grinder
 - mazzer
 ---
 
-Which type of Mazzer grider?
+Which type of Mazzer grinder?
 <!--more-->
 
 Mazzer

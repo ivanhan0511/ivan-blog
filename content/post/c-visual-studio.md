@@ -5,7 +5,7 @@ categories:
 - C/C++
 - Visual Studio
 tags:
-- Visual Studio
+- visual studio
 keywords:
 - c
 - c++

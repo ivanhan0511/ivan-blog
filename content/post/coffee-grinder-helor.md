@@ -5,9 +5,9 @@ categories:
 - Coffee
 - Grinder
 tags:
-- Coffee
-- Grinder
-- Helor
+- coffee
+- grinder
+- helor
 keywords:
 - grinder
 - helor
