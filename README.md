@@ -1,4 +1,5 @@
 # DEPLOY BLOG WITH GITHUB PAGES AND HUGO
+
 ## Sources for ivanhan0511.github.io
 
 
@@ -84,18 +85,69 @@ git push origin master
 
 
 
-## USAGE OF THE THEME
-
-### Configuration
+## CONFIGURATION
 
 ```shell
 vi config.toml
 ```
 
 
+
+
+## WRITING POSTS
+
 ### Create content with Hugo
+
 ```shell
 hugo new post/hello-world.md
+```
+
+
+### Grammar
+
+Refers to the [user manual](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md)
+
+```shell
+vi archetypes/post.md
+```
+```md
+---
+title: "EXAMPLE TITLE"
+date: {{ .Date }}
+categories:
+- Coffee
+- Grinder
+tags:
+- Mazzer
+keywords:
+- coffee
+- grinder
+clearReading: true
+#thumbnailImage: //cdn.zhzhiyu.com/uploads/photos/B.png
+thumbnailImage: image-1.png
+thumbnailImagePosition: bottom
+autoThumbnailImage: yes
+metaAlignment: center
+#coverImage: //cdn.zhzhiyu.com/uploads/B.png
+coverImage: image-2.png
+coverCaption: "A beautiful sunrise"
+coverMeta: out
+coverSize: full
+coverImage: image-2.png
+gallery:
+- image-3.jpg "New York"
+- image-4.png "Paris"
+- http://i.imgur.com/o9r19kD.jpg "Dubai"
+- https://example.com/original.jpg https://example.com/thumbnail.jpg "Sidney"
+comments: false
+showTags: true
+showPagination: true
+showSocial: true
+showDate: true
+summary: "This is a custom summary and does *not* appear in the post."
+---
+
+<!--more-->
 ```
 
 
@@ -104,4 +156,6 @@ hugo new post/hello-world.md
 ## QUOTES
 
 - `https://youngkin.github.io/post/createafreeblogsite/`
-- `https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md`
+- `https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md`  
+  I chose this theme as default
+
