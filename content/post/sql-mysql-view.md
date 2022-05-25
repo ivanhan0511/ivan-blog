@@ -15,11 +15,11 @@ thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city-750.jp
 thumbnailImagePosition: bottom
 autoThumbnailImage: yes
 metaAlignment: center
-coverImage: //d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city.jpg
-coverCaption: "A beautiful image"
+#coverImage: //d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city.jpg
+coverImage: cover.jpg
+coverCaption: "Cover source"
 coverMeta: out
 coverSize: full
-coverImage: image-2.png
 gallery:
 - image-3.jpg "New York"
 - image-4.png "Paris"
@@ -127,7 +127,7 @@ API file is important
 ### Image Gallery
 Image example
 
-{{< image classes="fancybox right clear" src="20220426_banner_example.jpg" thumbnail="http://example.com/static/B.png" group="group:travel" thumbnail-width="750px" thumbnail-height="321px" title="One Piece" >}}
+{{< image classes="fancybox right clear" src="images/20220426_banner_example.jpg" thumbnail="http://example.com/static/B.png" group="group:travel" thumbnail-width="750px" thumbnail-height="321px" title="One Piece" >}}
 
 
 
