@@ -118,18 +118,18 @@ API file is important
           "some_info":"xxx",
           "some_status":1
       },
-      "msg":"提交成功"
+      "msg":"Submit Success"
   }
   ```
   {{< hl-text yellow >}}
-*Please pay attention: xxx*
+  *Please pay attention: xxx!!!*
   {{< /hl-text >}}
 
 
 ### Image Gallery
 Image example
 
-{{< image classes="fancybox right clear" src="A.jpg" thumbnail="http://cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png" group="group:travel" thumbnail-width="250px" thumbnail-height="250" title="A beautiful Gundam" >}}
+{{< image classes="fancybox right clear" src="A.jpg" thumbnail="http://example.com/static/B.png" group="group:travel" thumbnail-width="250px" thumbnail-height="250" title="A beautiful Gundam" >}}
 
 
 
@@ -154,5 +154,4 @@ def print_time:
     print(datetime.datetime.now())
     <!-- endtab -->
 {{< /tabbed-codeblock >}}
-
 
