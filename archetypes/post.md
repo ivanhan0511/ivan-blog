@@ -20,19 +20,14 @@ coverImage: image-2.png
 coverCaption: "A beautiful image"
 coverMeta: out
 coverSize: full
-gallery:
-- image-3.jpg "New York"
-- image-4.png "Paris"
-- http://i.imgur.com/o9r19kD.jpg "Dubai"
-- https://example.com/original.jpg https://example.com/thumbnail.jpg "Sidney"
 comments: false
 showTags: true
 showPagination: true
 showSocial: true
 showDate: true
-summary: "This is a custom summary and does *NOT* appear in the post."
 ---
 
+This is a custom summary and does *NOT* appear in the post.
 <!--more-->
 
 {{< toc >}}

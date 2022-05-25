@@ -12,33 +12,24 @@ keywords:
 - flask
 - pear-admin
 clearReading: true
-#thumbnailImage: //example.com/static/A.png
-thumbnailImage: image-1.png
-thumbnailImagePosition: bottom
+thumbnailImage: images/E.jpg
+thumbnailImagePosition: left
 autoThumbnailImage: yes
 metaAlignment: center
-#coverImage: //example.com/static/B.png
-coverImage: image-2.png
+coverImage: images/E.jpg
 coverCaption: "A beautiful image"
 coverMeta: out
 coverSize: full
 coverImage: image-2.png
-gallery:
-- image-3.jpg "New York"
-- image-4.png "Paris"
-- http://i.imgur.com/o9r19kD.jpg "Dubai"
-- https://example.com/original.jpg https://example.com/thumbnail.jpg "Sidney"
-comments: false
+comments: true
 showTags: true
 showPagination: true
 showSocial: true
 showDate: true
-summary: "This is a custom summary and does *NOT* appear in the post."
 ---
 
+Deploy a project of PearAdmin Flask
 <!--more-->
 
 {{< toc >}}
-
-Deploy Pear Admin
 

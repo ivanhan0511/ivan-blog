@@ -10,17 +10,10 @@ tags:
 keywords:
 - bass
 - fender
-thumbnailImagePosition: right
-#thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
-#coverImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
-metaAlignment: center
-coverMeta: out
-coverSize: partial
-coverCaption: This is a partial cover
-summary: "What to do as a newbee"
 ---
 
-<!-- I choose Fender -->
+What to do as a newbee
+<!--more-->
 
 I want buy second handy Bass.
 

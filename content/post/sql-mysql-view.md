@@ -11,20 +11,6 @@ keywords:
 - mysql
 - view
 clearReading: true
-thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city-750.jpg
-thumbnailImagePosition: bottom
-autoThumbnailImage: yes
-metaAlignment: center
-#coverImage: //d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city.jpg
-coverImage: cover.jpg
-coverCaption: "Cover source"
-coverMeta: out
-coverSize: full
-gallery:
-- image-3.jpg "New York"
-- image-4.png "Paris"
-- http://i.imgur.com/o9r19kD.jpg "Dubai"
-- https://example.com/original.jpg https://example.com/thumbnail.jpg "Sidney"
 comments: false
 showTags: true
 showPagination: true
@@ -127,7 +113,7 @@ API file is important
 ### Image Gallery
 Image example
 
-{{< image classes="fancybox right clear" src="images/20220426_banner_example.jpg" thumbnail="http://example.com/static/B.png" group="group:travel" thumbnail-width="750px" thumbnail-height="321px" title="One Piece" >}}
+{{< image classes="fancybox right clear" src="images/eva.jpg" thumbnail="http://example.com/static/B.png" group="group:travel" thumbnail-width="750px" thumbnail-height="321px" title="One Piece" >}}
 
 
 

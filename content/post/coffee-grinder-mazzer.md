@@ -10,13 +10,10 @@ tags:
 keywords:
 - grider
 - mazzer
-
-thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_C.png
 ---
 
+Which type of Mazzer grider?
 <!--more-->
 
 Mazzer
-
-Three level of categories?
 

@@ -2,14 +2,19 @@
 title: "Music Headphones"
 date: 2022-05-24T18:50:54+08:00
 categories:
-- category
-- subcategory
+- Music
+- Instrument
 tags:
-- tag1
-- tag2
+- AKG
+- K240S
 keywords:
-- tech
-#thumbnailImage: //example.com/image.jpg
+- headphones
+- akg
+- k240
 ---
 
+AKG nice
 <!--more-->
+
+I bought a AKG K240S.
+

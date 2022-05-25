@@ -9,11 +9,10 @@ tags:
 keywords:
 - coffee
 - beans
-
-thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_A.png
 ---
 
+Whick kind of coffee beans do you like?
 <!--more-->
 
-Whick kind of coffee beans do you like?
+Ethiopia
 

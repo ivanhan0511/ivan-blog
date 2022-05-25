@@ -2,14 +2,16 @@
 title: "Sports Badminton"
 date: 2022-05-24T18:59:42+08:00
 categories:
-- category
-- subcategory
+- Sports
+- Badminton
 tags:
-- tag1
-- tag2
+- Badminton
 keywords:
-- tech
-#thumbnailImage: //example.com/image.jpg
+- badminton
 ---
 
+Start with badminton at 38 ages
 <!--more-->
+
+Hello Badminton!
+

@@ -9,9 +9,12 @@ tags:
 keywords:
 - mysql
 - init
-
-thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_D.png
 ---
+
+Init MySQL 8.0
+<!--more-->
+
+{{< toc >}}
 
 ## INIT
 

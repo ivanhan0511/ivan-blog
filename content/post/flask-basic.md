@@ -2,14 +2,15 @@
 title: "Flask Basic"
 date: 2022-05-24T16:57:10+08:00
 categories:
-- category
-- subcategory
+- Flask
 tags:
-- tag1
-- tag2
+- Flask
 keywords:
-- tech
-#thumbnailImage: //example.com/image.jpg
+- flask
 ---
 
+Some records of Flask
 <!--more-->
+
+Hello Flask!
+
