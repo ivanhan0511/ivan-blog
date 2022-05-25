@@ -64,7 +64,7 @@ Alert danger
 {{< /alert >}}
 
 {{< alert no-icon >}}
-~~Alert no-icon~~  
+Alert no-icon  
 So far, I don't know where to be used
 {{< /alert >}}
 
@@ -154,4 +154,5 @@ def print_time:
     print(datetime.datetime.now())
     <!-- endtab -->
 {{< /tabbed-codeblock >}}
+
 
