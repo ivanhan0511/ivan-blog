@@ -17,19 +17,15 @@ thumbnailImagePosition: right
 thumbnailImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
 coverImage: //cdn.zhzhiyu.com/_uploads/photos/2_gaoda_B.png
 metaAlignment: center
-coverMeta: out
+coverMeta: in
 coverSize: partial
 coverCaption: This is a partial cover
 ---
-toc
-<!--more-->
+<!-- some more -->
 What to do as a newbee.
 
 {{< toc >}}
 
-{{< alert info >}}
-Alert Info
-{{< /alert >}}
 
 {{< alert success >}}
 Alert success
@@ -55,4 +51,29 @@ Alert Danger NOicon
 
 ## CHAPTER 1
 
+{{< alert info >}}
 What to do as a newbee.
+{{< /alert >}}
+
+- First
+- Second
+
+
+| item | name | remark |
+| :--- | :---: | --- |
+| 1 | Foo | Foo remark |
+| 2 | Bar | Bar remark |
+
+
+{{< hl-text yellow >}}
+your highlighted text
+{{< /hl-text >}}
+
+
+
+
+## CHAPTER 2
+
+Image example
+
+{{< image classes="fancybox right clear" src="image2.png" thumbnail="http://google.fr/images/image125.png" group="group:travel" thumbnail-width="150px" thumbnail-height="300px" title="A beautiful sunrise" >}}
