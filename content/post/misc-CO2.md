@@ -1,14 +1,14 @@
 ---
-title: "EXAMPLE TITLE"
+title: "气候变暖的神话"
 date: 2022-05-25T20:54:13+08:00
 categories:
-- Coffee
-- Grinder
+- Misc
+- Thought
 tags:
-- Mazzer
+- 气候变暖
+- 颠覆世界观
 keywords:
-- coffee
-- grinder
+- co2
 clearReading: true
 comments: false
 showTags: true
@@ -17,15 +17,15 @@ showSocial: true
 showDate: true
 ---
 
-This is a custom summary and does *NOT* appear in the post.
+[转载]从新认识气候变暖和温室效应
 <!--more-->
 
 {{< toc >}}
 
 https://mp.weixin.qq.com/s/tnqJQ0xs-CBE4dEmRZWm5g
 
-气候变暖的神话
 原创 摸象的盲人 摸象的盲人 2021-10-19 12:48
+
 人类所属的灵长目诞生于地球上最热的时期，而地球今天在二氧化碳和气温方面双双处于历史低谷，气候变冷才是人类最大的威胁。
 
 （长文预警，全文4万字，且极度烧脑。这是一篇全面颠覆世界观的科普文章，请读者根据自身智商量力而行，若出现抑郁、魔怔、癫狂等症状，本人概不负责。）
