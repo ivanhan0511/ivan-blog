@@ -2,7 +2,7 @@
 title: "INIT OPERATIONS"
 date: 2022-05-24T02:58:26+08:00
 categories:
-- DB
+- SQL
 - MySQL
 tags:
 - MySQL

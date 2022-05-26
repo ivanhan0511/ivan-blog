@@ -2,7 +2,7 @@
 title: "MySQL View"
 date: 2022-05-25T15:48:48+08:00
 categories:
-- DB
+- SQL
 - MySQL
 tags:
 - MySQL

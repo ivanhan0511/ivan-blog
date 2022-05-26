@@ -2,7 +2,7 @@
 title: "气候变暖的神话"
 date: 2022-05-25T20:54:13+08:00
 categories:
-- Misc
+- Miscellaneous
 - Thought
 tags:
 - 气候变暖
