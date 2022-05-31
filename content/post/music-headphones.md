@@ -18,3 +18,9 @@ AKG nice
 
 I bought a AKG K240S.
 
+
+## COMPARATION
+
+### K701 VS K712 Pro
+
+http://erji.net/forum.php?mod=viewthread&tid=1888572
