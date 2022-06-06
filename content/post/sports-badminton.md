@@ -8,6 +8,8 @@ tags:
 - Badminton
 keywords:
 - badminton
+- victory
+- yonex
 ---
 
 Start with badminton at 38 ages
