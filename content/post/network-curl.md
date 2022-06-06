@@ -73,8 +73,8 @@ class SomeClass:
 
 
 
-H~2~O
+H<sub>2</sub>O
 
-x^2^
+x<sup>2</sup>
 
 
