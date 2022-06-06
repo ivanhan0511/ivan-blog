@@ -56,7 +56,7 @@ gantt
     完成甘特图实例2    :doc1, after a1  , 48h
 {{< /codeblock >}}
 
-{{< codeblock "archives.py" "python" "http://underscorejs.org/#compact" "archives.py" >}}
+{{< codeblock "archives.py" "python" >}}
 @requires_authorization
 def somefunc(param1='', param2=0):
     r'''A docstring'''
@@ -75,6 +75,6 @@ class SomeClass:
 
 H<sub>2</sub>O
 
-x<sup>2</sup>
+a = S<sup>2</sup>
 
 
