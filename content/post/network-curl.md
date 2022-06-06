@@ -31,7 +31,7 @@ This is a custom summary and does *NOT* appear in the post.
 
 {{< toc >}}
 
-```mermaid
+{{< codeblock >}}
 gantt         
     dateFormat  YYYY-MM-DD   
     title 使用mermaid语言定制甘特图
@@ -54,4 +54,21 @@ gantt
     描述甘特图语法               :active, a1, after des1, 3d
     完成甘特图实例1      :after a1  , 20h
     完成甘特图实例2    :doc1, after a1  , 48h
-```
+{{< /codeblock >}}
+
+{{< codeblock "archives.py" "python" "http://underscorejs.org/#compact" "archives.py" >}}
+@requires_authorization
+def somefunc(param1='', param2=0):
+    r'''A docstring'''
+    if param1 > param2: # interesting
+        print 'Gre\'ater'
+    return (param2 - param1 + 1 + 0b10l) or None
+
+class SomeClass:
+    pass
+
+>>> message = '''interpreter
+... prompt'''
+{{< /codeblock >}}
+
+
