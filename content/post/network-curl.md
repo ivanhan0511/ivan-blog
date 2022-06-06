@@ -72,3 +72,9 @@ class SomeClass:
 {{< /codeblock >}}
 
 
+
+H~2~O
+
+x^2^
+
+
