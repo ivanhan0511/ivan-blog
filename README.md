@@ -156,7 +156,9 @@ hugo new post/hello-world.md
 
 ## QUOTES
 
+I chose this theme as default
+
 - `https://youngkin.github.io/post/createafreeblogsite/`
 - `https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md`  
-  I chose this theme as default
+- `https://tranquilpeak.kakawait.com/`
 
