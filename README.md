@@ -1,4 +1,4 @@
-# DEPLOY BLOG WITH GITHUB PAGES AND HUGO
+# Deploy a blog with Github Pages and Hugo
 
 
 [TOC]
