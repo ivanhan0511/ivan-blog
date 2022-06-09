@@ -3,7 +3,7 @@
 
 [TOC]
 
-## CONFIGURATIONS ON GITHUB
+## REPOSITORY ON GITHUB
 
 Create a normal repository, like "ivan-blog" as example
 
@@ -12,7 +12,7 @@ Create a respository, must with `<username>.github.io`
 
 
 
-## DEPLOYMENT
+## DEPLOYMENT WITH HUGO
 
 ```shell
 git clone git@github.com:ivanhan0511/ivan-blog.git
@@ -83,12 +83,20 @@ git push origin master
 
 
 
-## CONFIGURATION
+## CONFIGURATIONS
+
+### Local settings
 
 ```shell
 vi config.toml
 ```
 
+
+### Configure Disqus
+
+To enable discuss under the content, to register an account on Disqus website, 
+   and get a "Short Name".  
+Set the `disqusShortname` in the `config.toml`
 
 
 
