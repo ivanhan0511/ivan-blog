@@ -26,7 +26,7 @@ showSocial: true
 showDate: true
 ---
 
-This is a custom summary and does *NOT* appear in the post.
+This is a custom summary and does **NOT** appear in the post.
 <!--more-->
 
 {{< toc >}}
@@ -48,14 +48,15 @@ class SomeClass:
 
 
 
-H <sub>2</sub> O
+#H <sub>2</sub> O
+#
+#a = S <sup>2</sup> 
+#
+#1/2 * gt <sup>2</sup> ...
+#
+#hello * sdk  
+#hello *sdk
+#
+#end
 
-a = S <sup>2</sup> 
-
-1/2 * gt <sup>2</sup> ...
-
-hello * sdk 
-hello *sdk
-
-end
-
+Lorem <sup>superscript</sup> dolor <sub>subscript</sub> amet, consectetuer adipiscing <kdb>ctrl + c</kdb>. Nullam dignissim convallis est. Quisque aliquam. <cite>cite</cite>. Nunc iaculis suscipit dui.
