@@ -1,5 +1,5 @@
 ---
-title: "COFFEE BEANS"
+title: "Coffee Beans"
 date: 2022-06-09T21:33:05+08:00
 categories:
 - Coffee
