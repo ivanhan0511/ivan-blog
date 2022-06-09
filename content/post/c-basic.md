@@ -5,11 +5,12 @@ categories:
 - C/C++
 - Basic
 tags:
-- C/C++
-- Gramma
+- C
+- Naming Convention
 keywords:
 - c
-- c++
+- naming convention
+- pointer
 ---
 
 Hello, world!\n
@@ -18,11 +19,63 @@ Some basic knowledge or principles of C/C++
 
 <!--more-->
 
-## C
+## NAMING CONVENTION
 
-### Gramma Style
+### Example 1
+- 类型大写首字母驼峰
+- 变量和函数名小写下划线
+- 常量大写下划线
+- 驼峰和下划线不混用
+- 需要 export 的类型和函数加对应的驼峰/小写下划线前缀前缀
+- 到处都有人人都知道的, 可以缩写, 后面部分尽量不要缩写
 
-#### `*`
+个人喜欢用下划线, 也是赞同一个观点: 因为阅读需要空间  
+其实驼峰和下划线, 纯看个人信仰
+
+Web 语言也推荐下划线. 因为RFC4343 规定了域名是不分大小写的, 
+url 的其他部分就各家有各家的玩法, 那请求参数还是用下划线的比较保险. 
+然后你在语言里用驼峰的命名, 又天天处理各种请求参数, 就... 乱了...
+
+作者：luikore
+链接：https://www.zhihu.com/question/31498049/answer/120351303
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+### Example 2
+
+camelCase
+
+PascalCase
+
+underscore_case
+
+_private_underscore_case
+
+UPPERCASE_UNDERSCORE
+
+不要用匈牙利命名法，那是为没有IDE而且不面向对象的时代准备的，你在C++里面遇到的大部分是对象，拿什么前缀都是白费。
+
+camel还是下划线仅仅是一个信仰的差异，Python推荐用下划线是因为有_开头是私有的约定，
+对Java和C++这样有private和protected的功能的其实没啥用，
+而且我到现在仍然觉得下划线比camel丑……
+但终究来说，下划线还是camel是个信仰问题。
+
+其他的其实Python的约定挺合理的，类用PascalCase，全局常量用全部大写的下划线分割。
+局部变量尽量用比较短的表述。其他语言也都可以参考（而且实际上本来就是参考其他语言的规范制定的）
+
+作者：灵剑
+链接：https://www.zhihu.com/question/31498049/answer/120343046
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
+
+## GRAMMA STYLE
+
+### Pointer
+
 话说在 Objective－C 里声明指针变量时，星号(`*`) 该放到哪个位置，是紧贴变量类型，紧贴变量名还是放它们之间两边用空格，或者全挤在一起？到底还是在思考 C/C++ 中指针变量的声明风格，因为 Objective－C 是 C 的超集。
 
 纯粹讲 Objective－C 的代码风格，我觉得 Google 的 Google Objective-C Style Guide 非常有指导意义。转回来看 Objective－C 声明指针变量时什么风格好些，下面四种都符合语法：
@@ -51,8 +104,4 @@ NSString* name = (NSSting*) anyType;
 
 你呢？也许本身就无足轻重！
 
-
-## C++
-
-null
 
