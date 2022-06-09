@@ -1,16 +1,17 @@
 ---
-title: "C Basic"
+title: "C Miscellaneous"
 date: 2022-05-24T16:51:56+08:00
 categories:
 - C/C++
-- Basic
+- Miscellaneous
 tags:
 - C
 - Naming Convention
+- Pointer`*`
 keywords:
 - c
 - naming convention
-- pointer
+- pointer`*`
 ---
 
 Hello, world!\n
