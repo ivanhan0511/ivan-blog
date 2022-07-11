@@ -62,13 +62,14 @@ Please refer to []this post](sql-mysql-init.md)
 
 ### Configuration
 
-- .flaskenv  
+- .flaskenv
+
   Checkout every line in this file
 
 
 - gunicorn.conf.py
 
-  Edit this line: `bind = '0.0.0.0:5001'`
+  Edit this line: `bind = '0.0.0.0:5000'`
 
 - start.sh
 
@@ -96,7 +97,7 @@ chmod 0755 start.sh
 ### Windows Env
 
 ```cmd
-cd c:\program
+cd C:\program
 redis-server redis.windows-service.conf
 # 重启Redis服务
 redis-cli.exe
@@ -107,7 +108,8 @@ auth CofH2020
 
 ### Linux ENV
 
-
+```shell
+```
 
 
 
