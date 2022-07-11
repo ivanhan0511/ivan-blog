@@ -50,9 +50,59 @@ apt install git python3.8-dev mysql-server-8.0
 
 With MySQL as example
 
-### INIT DB
+### Init MySQL
 
 Please refer to []this post](sql-mysql-init.md)
+
+
+
+
+## APPLICATION
+
+### Configuration
+
+- .flaskenv
+  Checkout every line in this file
+
+
+- gunicorn.conf.py
+  Edit this line: `bind = '0.0.0.0:5001'`
+
+- start.sh
+  Choose a pattern to run: `production`, `development`, `testing`  
+  `exec gunicorn -c gunicorn.conf.py "applications:create_app('production')"`
+
+
+### Init DB
+
+```shell
+flask init
+```
+
+### Run
+```shell
+chmod 0755 start.sh
+./start.sh
+```
+
+
+
+
+## REDIES
+
+### Windows Env
+
+```cmd
+cd c:\program
+redis-server redis.windows-service.conf
+# 重启Redis服务
+redis-cli.exe
+#config set requirepass CofH2020
+auth CofH2020
+```
+
+
+### Linux ENV
 
 
 
@@ -115,15 +165,15 @@ Please refer to []this post](sql-mysql-init.md)
 
 
 
-## TINYPROXY
+### Tinyproxy
 
 
 
 
 
-## LANPROXY or Frp?
+### Lanproxy or Frp?
 
-### SERVER
+#### Server
 
 - Download lanproxy  server from the [github website](https://github.com/ffay/lanproxy/releases).
 
@@ -142,7 +192,7 @@ Please refer to []this post](sql-mysql-init.md)
 
 
 
-### CLIENT
+#### Client
 
 下载[客户端](https://github.com/ffay/lanproxy-go-client/releases), 并使用screen保持会话
 
@@ -171,25 +221,6 @@ Please refer to []this post](sql-mysql-init.md)
     # windows 64 位
     ./client_windows_amd64.exe -s SERVER_IP -p SERVER_SSL_PORT -k CLIENT_KEY -ssl true
     ```
-
-
-
-
-## REDIES
-
-### WINDOWS ENV
-
-```cmd
-cd c:\program
-redis-server redis.windows-service.conf
-# 重启Redis服务
-redis-cli.exe
-#config set requirepass CofH2020
-auth CofH2020
-```
-
-
-### LINUX ENV
 
 
 
