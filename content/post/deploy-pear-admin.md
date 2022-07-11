@@ -7,10 +7,11 @@ categories:
 tags:
 - Flask
 - PearAdmin
+- Deploy
 keywords:
-- deploy
 - flask
 - pear-admin
+- deploy
 clearReading: true
 thumbnailImage: images/E.jpg
 thumbnailImagePosition: left
@@ -61,14 +62,16 @@ Please refer to []this post](sql-mysql-init.md)
 
 ### Configuration
 
-- .flaskenv
+- .flaskenv  
   Checkout every line in this file
 
 
 - gunicorn.conf.py
+
   Edit this line: `bind = '0.0.0.0:5001'`
 
 - start.sh
+
   Choose a pattern to run: `production`, `development`, `testing`  
   `exec gunicorn -c gunicorn.conf.py "applications:create_app('production')"`
 
