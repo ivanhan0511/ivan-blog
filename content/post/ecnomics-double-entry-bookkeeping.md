@@ -67,25 +67,21 @@ It is difficult to understand double-entry bookkeeping.
 ## BASIC KNOWLEDGE
 
 ### 六大分类
-资产
-负债
-所有者权益
-收益
-费损
-利润
+资产 负债 所有者权益 收益 费损 利润
 
 
 ### 名词缩写
-a/c - 账户（account）
-B/S - 资产负债表（Balance Sheet）
-c/d - carried down
-b/d - brought down
-c/f - carried forward
-b/f - brought forward
-Dr - 借方（debit）
-Cr - 贷方（credit）
-G/L - 总分类帐（General Ledger）；或 N/L - 名细分类帐（Nominal Ledger）
-P&L - 损益（Profit & Loss）；或 I/S - 损益表（Income Statement）
-PP&E - 财产，工厂和设备（Property, Plant and Equipment）
-TB - 试算表（Trial Balance）
+
+a/c - 账户(account)  
+B/S - 资产负债表(Balance Sheet)  
+c/d - carried down  
+b/d - brought down  
+c/f - carried forward  
+b/f - brought forward  
+Dr - 借方(debit)  
+Cr - 贷方(credit)  
+G/L - 总分类帐(General Ledger)；或 N/L - 名细分类帐(Nominal Ledger)  
+P&L - 损益(Profit & Loss)；或 I/S - 损益表(Income Statement)  
+PP&E - 财产，工厂和设备(Property, Plant and Equipment)  
+TB - 试算表(Trial Balance)  
 
