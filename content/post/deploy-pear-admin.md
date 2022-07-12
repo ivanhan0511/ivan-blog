@@ -53,63 +53,7 @@ With MySQL as example
 
 ### Init MySQL
 
-Please refer to []this post](sql-mysql-init.md)
-
-
-
-
-## APPLICATION
-
-### Configuration
-
-- .flaskenv
-
-  Checkout every line in this file
-
-
-- gunicorn.conf.py
-
-  Edit this line: `bind = '0.0.0.0:5000'`
-
-- start.sh
-
-  Choose a pattern to run: `production`, `development`, `testing`  
-  `exec gunicorn -c gunicorn.conf.py "applications:create_app('production')"`
-
-
-### Init DB
-
-```shell
-flask init
-```
-
-### Run
-```shell
-chmod 0755 start.sh
-./start.sh
-```
-
-
-
-
-## REDIES
-
-### Windows Env
-
-```cmd
-cd C:\program
-redis-server redis.windows-service.conf
-# 重启Redis服务
-redis-cli.exe
-#config set requirepass CofH2020
-auth CofH2020
-```
-
-
-### Linux ENV
-
-```shell
-```
+Please refer to [this post](sql-mysql-init.md)
 
 
 
@@ -132,13 +76,13 @@ auth CofH2020
 
 - ~~添加私有桥接docker网络~~
 
-    ```shell
-    apt install docker-compose
-    docker network ls
-    docker network create --driver bridge --subnet 172.18.0.0/16 --gateway 172.18.0.1 proxy-network
-    docker network inspect proxy-network
-    docker run -itd --name fuel_admin -p 25022:22 --network proxy-network ubuntu:20.04
-    ```
+  ```shell
+  apt install docker-compose
+  docker network ls
+  docker network create --driver bridge --subnet 172.18.0.0/16 --gateway 172.18.0.1 proxy-network
+  docker network inspect proxy-network
+  docker run -itd --name fuel_admin -p 25022:22 --network proxy-network ubuntu:20.04
+  ```
 
 
 
@@ -148,25 +92,81 @@ auth CofH2020
 
 - 容器内部部署
 
-    ```shell
-    apt install python3-venv iproute2 -y
-    git clone <github or gitee projuect>
-    cd <project>
-    python3 -m venv venv
-    ```
+  ```shell
+  apt install python3-venv iproute2 -y
+  git clone <github or gitee projuect>
+  cd <project>
+  python3 -m venv venv
+  ```
 
 - 进入screen环境
 
-    ```shell
-    screen -S run  # 或screen -dr run
-    # screen环境
-    source venv/bin/activate
-    ## venv环境
-    python -m pip install -r requirement/requirement-dev.txt
-    #flask init  # 初始化数据库, 如果需要
-    flask run
-    ```
+  ```shell
+  screen -S run  # 或screen -dr run
+  # screen环境
+  source venv/bin/activate
+  ## venv环境
+  python -m pip install -r requirement/requirement-dev.txt
+  #flask init  # 初始化数据库, 如果需要
+  flask run
+  ```
 
+- 安装Nginx并配置
+
+  ```shell
+  cd /www/server/nginx/conf/vhost
+  cat example.conf
+  ```
+  ```txt
+  server {
+      listen 80;
+      server_name example.domain.com;
+      location / {
+      	  return 301 https://$host$request_uri;
+      }
+  }
+  
+  server {
+      listen       443 ssl;
+      server_name  example.domain.com;# 服务器地址或绑定域名
+   
+      #ssl证书的pem文件路径
+      ssl_certificate /www/server/nginx/ssl/domain.com.pem;
+  
+      #ssl证书的key文件路径
+      ssl_certificate_key /www/server/nginx/ssl/domain.com.key;
+  
+      ssl_session_timeout 5m;
+  
+      ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+      # 按照这个协议配置
+      ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+  
+      # 按照这个配置
+      ssl_prefer_server_ciphers on;
+  
+      location / {  # ^~/api 表示匹配前缀为api的请求
+          proxy_pass  http://127.0.0.1:5000/;  # 注：proxy_pass的结尾有/， -> 效果：会在请求时将/api/*后面的路径直接拼接到后面
+    
+          # proxy_set_header作用：设置发送到后端服务器(上面proxy_pass)的请求头值  
+              # 【当Host设置为 $http_host 时，则不改变请求头的值;
+              #   当Host设置为 $proxy_host 时，则会重新设置请求头中的Host信息;
+              #   当为$host变量时，它的值在请求包含Host请求头时为Host字段的值，在请求未携带Host请求头时为虚拟主机的主域名;
+              #   当为$host:$proxy_port时，即携带端口发送 ex: $host:8080 】
+          proxy_set_header Host $host; 
+    
+          proxy_set_header X-Real-IP $remote_addr; # 在web服务器端获得用户的真实ip 需配置条件①    【 $remote_addr值 = 用户ip 】
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;# 在web服务器端获得用户的真实ip 需配置条件②	
+  	      proxy_set_header X-Forwarded-Proto "https";
+  	      proxy_set_header REMOTE-HOST $remote_addr;
+          # proxy_set_header X-Forwarded-For $http_x_forwarded_for; # $http_x_forwarded_for变量 = X-Forwarded-For变量
+      }
+  
+      access_log  /www/wwwlogs/example_access.log;
+  }
+  ```
+  
+  去宝塔页面点击Nginx模块的"服务"->"重载配置"
 
 
 
@@ -226,6 +226,61 @@ auth CofH2020
     # windows 64 位
     ./client_windows_amd64.exe -s SERVER_IP -p SERVER_SSL_PORT -k CLIENT_KEY -ssl true
     ```
+
+
+
+
+## APPLICATION
+
+### Configuration
+
+- .flaskenv
+
+  Checkout every line in this file
+
+- gunicorn.conf.py
+
+  Edit this line: `bind = '0.0.0.0:5000'`
+
+- start.sh
+
+  Choose a pattern to run: `production`, `development`, `testing`  
+  `exec gunicorn -c gunicorn.conf.py "applications:create_app('production')"`
+
+
+### Init DB
+
+```shell
+flask init
+```
+
+### Run
+```shell
+chmod 0755 start.sh
+./start.sh
+```
+
+
+
+
+## REDIES
+
+### Windows Env
+
+```cmd
+cd C:\program
+redis-server redis.windows-service.conf
+# 重启Redis服务
+redis-cli.exe
+#config set requirepass CofH2020
+auth CofH2020
+```
+
+
+### Linux ENV
+
+```shell
+```
 
 
 
