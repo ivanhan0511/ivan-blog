@@ -10,13 +10,12 @@ keywords:
 - ivan-blog
 clearReading: true
 thumbnailImage: //example.com/static/A.png
-thumbnailImage: image-1.png
 thumbnailImagePosition: top
 autoThumbnailImage: false
 metaAlignment: center
 coverImage: //example.com/static/B.png
-coverCaption: "Welcome to Ivan's Blog"
-coverMeta: out
+coverCaption: "A Beautifull Cover Image"
+coverMeta: in
 coverSize: full
 comments: false
 showTags: true
@@ -28,11 +27,10 @@ showDate: true
 This is Ivan's BLog.
 <!--more-->
 
-{{< toc >}}
 
 Some record for Tec, Coffee, Sports and Photography.
 
 TODO:
 - [ ] Take photos for all posts
-- [ ] Write content for all posts
+- [x] Write content for all posts
 
