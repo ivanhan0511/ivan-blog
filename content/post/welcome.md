@@ -13,9 +13,9 @@ thumbnailImage: //example.com/static/A.png
 thumbnailImagePosition: top
 autoThumbnailImage: false
 metaAlignment: center
+coverMeta: in
 coverImage: //example.com/static/B.png
 coverCaption: "A Beautifull Cover Image"
-coverMeta: in
 coverSize: full
 comments: false
 showTags: true

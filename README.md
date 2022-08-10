@@ -103,10 +103,6 @@ Set the `disqusShortname` in the `config.toml`
 
 ### Front matter
 
-To customize your post, refers to the 
-[user manual](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md) of tranquilpeak-theme
-
-
 ```shell
 vi archetypes/post.md
 ```
@@ -168,6 +164,8 @@ vi content/post/hello-world.md
 Refers to these articles:
 
 - [A helper](https://youngkin.github.io/post/createafreeblogsite/)
-- [Home page of this theme](https://tranquilpeak.kakawait.com/)
-- [User doc](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md)
+- [Home page of this theme](https://tranquilpeak.kakawait.com/) for display
+- [User doc](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md) for learning and configuration
+- When writing content, refers to all the .md files in 
+  `/path/to/project/themes/hugo-tranquilpeak-theme/exampleSite/content/posts/`
 
