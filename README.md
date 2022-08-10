@@ -157,6 +157,11 @@ vi content/post/hello-world.md
 ```
 
 
+### Sort by
+If always wanna "Welcome.md" displayed on the top, edit the `date:` in welcome.md with latest datetime.  
+So this post will be pinned on the top.
+
+
 
 
 ## QUOTES
@@ -165,7 +170,8 @@ Refers to these articles:
 
 - [A helper](https://youngkin.github.io/post/createafreeblogsite/)
 - [Home page of this theme](https://tranquilpeak.kakawait.com/) for display
-- [User doc](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md) for learning and configuration
-- When writing content, refers to all the .md files in 
+- [User doc](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md) for 
+  learning grama and configurations
+- When writing content, refers to all the .md examples in 
   `/path/to/project/themes/hugo-tranquilpeak-theme/exampleSite/content/posts/`
 

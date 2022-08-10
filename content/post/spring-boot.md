@@ -1,14 +1,15 @@
 ---
-title: "EXAMPLE TITLE"
+title: "SpringBoot"
 date: 2022-07-29T15:34:14+08:00
 categories:
-- Coffee
-- Grinder
+- Java
+- Web Frame
 tags:
-- Mazzer
+- SpringBoot
 keywords:
-- coffee
-- grinder
+- java
+- springboot
+- web frame
 clearReading: true
 #thumbnailImage: //example.com/static/A.png
 thumbnailImage: image-1.png
