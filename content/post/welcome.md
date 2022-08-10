@@ -24,11 +24,10 @@ showSocial: false
 showDate: true
 ---
 
-This is Ivan's BLog.
+Some record for Tec, Coffee, Sports and Photography.
 <!--more-->
 
 
-Some record for Tec, Coffee, Sports and Photography.
 
 TODO:
 - [ ] Take photos for all posts
