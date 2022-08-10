@@ -13,8 +13,25 @@ keywords:
 - relationship
 ---
 
-I need SQLAlchemy, so far
+I need SQLAlchemy, so far...
+
 <!--more-->
 
-Hello SQLAlchemy!
+[TOC]
 
+## PRICIPLES
+
+SQL databases behave less like object collections the more size and performance start to matter;  
+object collections behave less like tables and rows the more abstraction starts to matter.  
+SQLAlchemy aims to accommodate both of these principles.
+
+
+
+
+## DB SESSION
+
+
+## CRUD TIPS
+
+
+## ORM

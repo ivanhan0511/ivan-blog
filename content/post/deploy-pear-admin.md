@@ -35,7 +35,9 @@ Deploy a project which is small or flexible project, with PearAdmin Flask
 
 {{< toc >}}
 
-## SYSTEM
+## CLOUD SERVER
+
+### SYSTEM
 
 With Ubuntu Server 20.04 LTS as example
 
@@ -43,6 +45,18 @@ With Ubuntu Server 20.04 LTS as example
 apt update
 apt install git python3.8-dev mysql-server-8.0
 ```
+
+### Domain
+
+Create a new domain,
+
+
+
+
+## WEIXIN
+
+Log into [微信开发平台](https://mp.weixin.qq.com), Configure the new domain
+into R&D settings
 
 
 
@@ -166,7 +180,8 @@ Please refer to [this post](sql-mysql-init.md)
   }
   ```
   
-  去宝塔页面点击Nginx模块的"服务"->"重载配置"
+- 将云服务器的证书文件放在指定位置
+- 去宝塔页面点击Nginx模块的"服务"->"重载配置"
 
 
 
@@ -231,6 +246,10 @@ Please refer to [this post](sql-mysql-init.md)
 
 
 ## APPLICATION
+
+### Download WeChat Cert
+
+Download the certifications into `cert` folder in the project
 
 ### Configuration
 

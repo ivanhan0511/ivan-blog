@@ -17,12 +17,11 @@ Create a respository, must with `<username>.github.io`
 ```shell
 git clone git@github.com:ivanhan0511/ivan-blog.git
 
-# Create Hugo local site
+# Create local Hugo site
 cd ivan-blog
 hugo new site . --force
 
-# Visit https://themes.gohugo.io/ and choose a theme
-# And add it as a submodule into the `theme` folder
+# Visit https://themes.gohugo.io/ and choose a theme and add it as a submodule into the `theme` folder
 git submodule add git@github.com:kakawait/hugo-tranquilpeak-theme.git themes/hugo-tranquilpeak-theme
 
 # Copy and use `config.toml` from the theme
@@ -156,7 +155,9 @@ summary: "This is a custom summary and does *not* appear in the post."
 ### Create content with Hugo
 
 ```shell
+cd /path/to/project
 hugo new post/hello-world.md
+vi content/post/hello-world.md
 ```
 
 
@@ -164,9 +165,9 @@ hugo new post/hello-world.md
 
 ## QUOTES
 
-I chose this theme as default
+Refers to these articles:
 
-- `https://youngkin.github.io/post/createafreeblogsite/`
-- `https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md`  
-- `https://tranquilpeak.kakawait.com/`
+- [A helper](https://youngkin.github.io/post/createafreeblogsite/)
+- [Home page of this theme](https://tranquilpeak.kakawait.com/)
+- [User doc](https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md)
 
