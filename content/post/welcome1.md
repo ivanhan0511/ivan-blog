@@ -29,6 +29,7 @@ Some record for Tec, Coffee, Sports and Photography.
 
 
 
+
 TODO:
 - [ ] Take photos for all posts
 - [x] Write content for all posts
