@@ -66,3 +66,19 @@ DELETE FROM <table_name> WHERE ...;
 ## EXPLAIN PLAN
 ## LOCK TABLE
 
+
+## EXAMPLES
+### Kill
+数据库锁死的问题解决
+{{< codeblock "Kill lock" "sql" >}}
+select *
+from information_schema.PROCESSLIST;
+
+select *
+from information_schema.INNODB_TRX;
+
+select A.trx_started, B.*
+from information_schema.INNODB_TRX A
+left join (select * from information_schema.PROCESSLIST) B on A.trx_mysql_thread_id = B.ID;
+{{< /codeblock >}}
+
