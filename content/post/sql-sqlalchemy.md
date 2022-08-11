@@ -1,5 +1,5 @@
 ---
-title: "Sql Sqlalchemy"
+title: "SQLAlchemy"
 date: 2022-08-10T18:32:18+08:00
 categories:
 - SQL
@@ -89,9 +89,10 @@ class Category(db.Model):
 Let’s look at the posts. Accessing them will load them from the database since the relationship is lazy-loaded, 
     but you will probably not notice the difference - loading a list is quite fast:
 
-
+{{< codeblock "shell" >}}
 >>> py.posts
 [<Post 'Hello Python!'>, <Post 'Snakes'>]
+{{< /codeblock >}}
 
 
 ## ORM
