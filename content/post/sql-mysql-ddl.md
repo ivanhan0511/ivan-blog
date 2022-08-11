@@ -1,6 +1,6 @@
 ---
 title: "MySQL DDL Operations"
-date: 2022-06-16T14:42:36+08:00
+date: 2022-08-10T14:42:36+08:00
 categories:
 - SQL
 - MySQL
@@ -12,6 +12,8 @@ keywords:
 - alter
 - drop
 - truncate
+- comment
+- rename
 comments: true
 showTags: true
 showPagination: true
@@ -30,16 +32,19 @@ DDL: Data Definition Language
 
 
 
-### CREATE TABLE
+### CREATE
+#### CREATE TABLE
 {{< codeblock "CREATE TABLE" >}}
 CREATE TABLE ...
 [TODO]: To be continued...
 {{< /codeblock >}}
 
 
+#### CREATE INDEX
 
 
-### ALTER TABLE
+
+### ALTER
 
 {{< codeblock "ALTER TABLE" >}}
 ALTER TABLE ...
@@ -48,8 +53,9 @@ ALTER TABLE ...
 
 
 
+### DROP
 
-### DROP TABLE
+#### DROP TABLE
 
 {{< codeblock "DROP TABLE" >}}
 DROP TABLE <table_name>;
@@ -58,10 +64,11 @@ DROP TABLE <table_name>;
 
 
 
-### CREATE INDEX
-
-
-### DROP INDEX
+#### DROP INDEX
 
 ### TRUNCATE
+
+### COMMENT
+
+### RENAME
 

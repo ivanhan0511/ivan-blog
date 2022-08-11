@@ -1,6 +1,6 @@
 ---
 title: "MySQL DDL Operations"
-date: 2022-06-16T14:42:36+08:00
+date: 2022-08-10T14:42:36+08:00
 categories:
 - SQL
 - MySQL

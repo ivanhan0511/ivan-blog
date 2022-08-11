@@ -1,6 +1,6 @@
 ---
 title: "MySQL DDL Operations"
-date: 2022-06-16T14:42:36+08:00
+date: 2022-08-10T14:42:36+08:00
 categories:
 - SQL
 - MySQL
@@ -12,6 +12,10 @@ keywords:
 - select
 - update
 - delete
+- merge
+- call
+- explain plan
+- lock table
 comments: true
 showTags: true
 showPagination: true
@@ -59,6 +63,7 @@ UPDATE <table_name> SET ...;
 DELETE FROM <table_name> WHERE ...;
 {{< /codeblock >}}
 
+### MERGE
+### CALL
 ### EXPLAIN PLAN
 ### LOCK TABLE
-### UNLOCK
