@@ -8,8 +8,10 @@ tags:
 - MySQL
 - DDL
 keywords:
-- delete from
+- create
+- alter
 - drop
+- truncate
 comments: true
 showTags: true
 showPagination: true
@@ -17,22 +19,49 @@ showSocial: true
 showDate: true
 ---
 
-Some basic operation of MySQL
+
+DDL: Data Definition Language
 <!--more-->
 
 {{< toc >}}
 
-### drop
+## MySQL DDL
 
-```sql
+
+
+
+### CREATE TABLE
+{{< codeblock "CREATE TABLE" >}}
+CREATE TABLE ...
+[TODO]: To be continued...
+{{< /codeblock >}}
+
+
+
+
+### ALTER TABLE
+
+{{< codeblock "ALTER TABLE" >}}
+ALTER TABLE ...
+[TODO]: To be continued...
+{{< /codeblock >}}
+
+
+
+
+### DROP TABLE
+
+{{< codeblock "DROP TABLE" >}}
 DROP TABLE <table_name>;
-```
+{{< /codeblock >}}
 
 
 
 
-### delete
+### CREATE INDEX
 
-```sql
-DELETE FROM <table_name>;
-```
+
+### DROP INDEX
+
+### TRUNCATE
+
