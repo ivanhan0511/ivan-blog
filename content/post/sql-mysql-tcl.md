@@ -1,5 +1,5 @@
 ---
-title: "MySQL DDL Operations"
+title: "MySQL TCL Operations"
 date: 2022-08-10T14:42:36+08:00
 categories:
 - SQL
@@ -23,9 +23,8 @@ TCL: Transaction Control Language
 <!--more-->
 
 {{< toc >}}
-## MySQL TCL
 
-### COMMIT
-### ROLLBACK
-### SAVEPOINT
-### START TRANSACTION
+## COMMIT
+## ROLLBACK
+## SAVEPOINT
+## START TRANSACTION

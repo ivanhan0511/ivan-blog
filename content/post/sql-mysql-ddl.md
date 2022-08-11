@@ -27,24 +27,19 @@ DDL: Data Definition Language
 
 {{< toc >}}
 
-## MySQL DDL
-
-
-
-
-### CREATE
-#### CREATE TABLE
+## CREATE
+### CREATE TABLE
 {{< codeblock "CREATE TABLE" >}}
 CREATE TABLE ...
 [TODO]: To be continued...
 {{< /codeblock >}}
 
 
-#### CREATE INDEX
+### CREATE INDEX
 
 
 
-### ALTER
+## ALTER
 
 {{< codeblock "ALTER TABLE" >}}
 ALTER TABLE ...
@@ -53,9 +48,9 @@ ALTER TABLE ...
 
 
 
-### DROP
+## DROP
 
-#### DROP TABLE
+### DROP TABLE
 
 {{< codeblock "DROP TABLE" >}}
 DROP TABLE <table_name>;
@@ -64,11 +59,11 @@ DROP TABLE <table_name>;
 
 
 
-#### DROP INDEX
+### DROP INDEX
 
-### TRUNCATE
+## TRUNCATE
 
-### COMMENT
+## COMMENT
 
-### RENAME
+## RENAME
 

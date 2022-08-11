@@ -1,5 +1,5 @@
 ---
-title: "MySQL DDL Operations"
+title: "MySQL DML Operations"
 date: 2022-08-10T14:42:36+08:00
 categories:
 - SQL
@@ -28,9 +28,7 @@ DML: Data Manipulation Language
 
 {{< toc >}}
 
-## MySQL DML
-
-### INSERT
+## INSERT
 
 {{< codeblock "INSERT" "sql" >}}
 INSERT INTO <table_name>...
@@ -40,7 +38,7 @@ INSERT INTO <table_name>...
 
 
 
-### SELECT
+## SELECT
 {{< codeblock "SELECT" "sql" >}}
 SELECT * FROM <table_name>;
 {{< /codeblock >}}
@@ -48,7 +46,7 @@ SELECT * FROM <table_name>;
 
 
 
-### UPDATE
+## UPDATE
 {{< codeblock "UPDATE" "sql" >}}
 UPDATE <table_name> SET ...;
 [TODO]: To be continued...
@@ -57,13 +55,14 @@ UPDATE <table_name> SET ...;
 
 
 
-### DELETE
+## DELETE
 
 {{< codeblock "DELETE" "sql" >}}
 DELETE FROM <table_name> WHERE ...;
 {{< /codeblock >}}
 
-### MERGE
-### CALL
-### EXPLAIN PLAN
-### LOCK TABLE
+## MERGE
+## CALL
+## EXPLAIN PLAN
+## LOCK TABLE
+

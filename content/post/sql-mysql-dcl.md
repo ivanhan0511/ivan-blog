@@ -1,5 +1,5 @@
 ---
-title: "MySQL DDL Operations"
+title: "MySQL DCL Operations"
 date: 2022-08-10T14:42:36+08:00
 categories:
 - SQL
@@ -22,9 +22,8 @@ DCL: Data Control Language
 <!--more-->
 
 {{< toc >}}
-## MySQL DCL
 
-### GRANT
-### REVOKE
-### DENY
+## GRANT
+## REVOKE
+## DENY
 
