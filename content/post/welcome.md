@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Ivan's Blog"
-date: 2022-08-10T18:33:21+08:00
+date: 2022-08-25T15:07:21+08:00
 categories:
 - Welcome
 tags:
@@ -32,5 +32,5 @@ Some record for Tec, Coffee, Sports and Photography.
 
 TODO:
 - [ ] Take photos for all posts
-- [x] Write content for all posts
+- [ ] Write content for all posts
 

@@ -3,9 +3,9 @@ title: "BASIC USAGE OF VISUAL STUDIO"
 date: 2022-05-25T13:41:34+08:00
 categories:
 - C/C++
-- Visual Studio
+- IDE
 tags:
-- visual studio
+- Visual Studio
 keywords:
 - c
 - c++
@@ -19,9 +19,13 @@ showSocial: true
 showDate: true
 ---
 
-Newbee to C/C++. Some records for using Visual Studio to start learning C/C++
+Hello Visual Studio!
 <!--more-->
 
+Newbee to C/C++. Some records for using Visual Studio to start learning C/C++
 
-Hello Visual Studio!
+## TIPS
+### Configure Font
+"工具" -> "选项" -> "环境" -> "字体和颜色"  
+I like "DejaVu Sans Mono"
 

@@ -1,6 +1,6 @@
 ---
 title: "SpringBoot"
-date: 2022-07-29T15:34:14+08:00
+date: 2022-08-25T15:02:14+08:00
 categories:
 - Java
 - Web Frame
@@ -33,8 +33,6 @@ This is a custom summary and does *NOT* appear in the post.
 
 {{< toc >}}
 
-# Spring Boot
-
 
 ## Java名词理解与对应
 
@@ -56,7 +54,7 @@ Spring的核心包括2个概念：控制反转(IOC)和面向切面(AOP)。
 这就是IOC（控制反转）的核心思想。
 
 
-###
+
 controller中包含具体API
 
 
@@ -75,6 +73,11 @@ In this article, we examined the various possibilities of using the @Value annot
 
 
 
-## Maven or Gradle
+## 集成/构建
+
+### Maven or Gradle
 
 The maven pom.xml defines lifecycle goals and the gradle build.gradle defines tasks.
+
+又看了一篇[文章](https://www.zhihu.com/question/29338218), 对于两者的取舍, 还是暂且倾向于Maven的通用, 稳定, 兼容
+

@@ -80,5 +80,7 @@ from information_schema.INNODB_TRX;
 select A.trx_started, B.*
 from information_schema.INNODB_TRX A
 left join (select * from information_schema.PROCESSLIST) B on A.trx_mysql_thread_id = B.ID;
+
+kill 12345;
 {{< /codeblock >}}
 
