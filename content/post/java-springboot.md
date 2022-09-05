@@ -47,7 +47,7 @@ Spring
 
 
 
-## Architecture
+## ARCHITECTURE
 
 三层架构
 经典的三层架构主要是Dao/Service/Controller层这三层. 相应的, 对应这3层的对象为DO/BO/VO对象.
@@ -104,12 +104,12 @@ JavaBean与Entity很像
 
 
 
-## Annotation
+## ANNOTATION
 
 ### @Resource vs @Autowired
 
 {{< blockquote "stackoverflow" "https://stackoverflow.com/questions/4093504/resource-vs-autowired" "@Resource vs @Autowired" >}}
-Both @Autowired (or @Inject) and @Resource work equally well. But there is a conceptual difference or a difference in the meaning
+Both @Autowired (or @Inject) and @Resource work equally well. But there is a conceptual difference or a difference in the meaning  
 
 @Resource means get me a known resource by name. The name is extracted from the name of the annotated setter or field, or it is taken from the name-Parameter.
 @Inject or @Autowired try to wire in a suitable other component by type.
