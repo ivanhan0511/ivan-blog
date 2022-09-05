@@ -71,7 +71,6 @@ SPI: Service Provider Interface. 常见的 SPI 有 JDBC、JNDI、JAXP 等，这�
 PS: 最后插一句. 其实, 如果你的项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要.
 
 阿里开发手册的部分约定
-{{< blockquote >}}
 [参考]Domain对象各层命名约定:
 
 - Service/DAO层方法命名规约
@@ -91,7 +90,6 @@ PS: 最后插一句. 其实, 如果你的项目功能足够简单. 项目比较�
 
 即复杂对象的交互必须封装成Request 和 Response与前端进行交互
 
-{{< /blockquote >}}
 
 个人理解:  
 POJO中一般不允许有业务逻辑方法, 不能带有connection之类的方法
@@ -107,13 +105,6 @@ JavaBean与Entity很像
 
 
 ## Annotation
-@Value
-https://www.baeldung.com/spring-value-annotation
-In this article, we examined the various possibilities of using the @Value annotation with simple properties defined in the file, with system properties, and with properties calculated with SpEL expressions.
-
-@Service
-@Transactional
-@Autowired
 
 
 
@@ -129,43 +120,44 @@ The maven pom.xml defines lifecycle goals and the gradle build.gradle defines ta
 又看了一篇[文章](https://www.zhihu.com/question/29338218), 对于两者的取舍, 还是暂且倾向于Maven的通用, 稳定, 兼容
 
 
-### Maven 3.8.1 blocked http connection
+### Maven 3.8.1
+Maven 3.8.1 blocked http connection
 - Find maven path, which is embedded in IDEA, like
   `C:\Program Files\JetBrains\IntelliJ IDEA 2022.2.1\plugins\maven\lib\maven3\conf`
 - Edit `settings.xml`
 
-{{< codeblock "conf.xml" >}}
-...
-<mirrors>
-  <!-- mirror
-   | Specifies a repository mirror site to use instead of a given repository. The repository that
-   | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
-   | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
-   |
-  <mirror>
-    <id>mirrorId</id>
-    <mirrorOf>repositoryId</mirrorOf>
-    <name>Human Readable Name for this Mirror.</name>
-    <url>http://my.repository.com/repo/path</url>
-  </mirror>
-   -->
-  <mirror>
-    <id>maven-default-http-blocker</id>
-    <mirrorOf>external:http:*</mirrorOf>
-    <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
-    <url>http://0.0.0.0/</url>
-    <blocked>true</blocked>
-  </mirror>
-
-  <mirror>
-    <id>aliyunmaven</id>
-    <mirrorOf>*</mirrorOf>
-    <name>阿里云公共仓库</name>
-    <url>https://maven.aliyun.com/repository/public</url>
-  </mirror>
-</mirrors>
-...
-{{< /codeblock >}}
+  {{< codeblock "conf.xml" >}}
+  ...
+  <mirrors>
+    <!-- mirror
+     | Specifies a repository mirror site to use instead of a given repository. The repository that
+     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+     |
+    <mirror>
+      <id>mirrorId</id>
+      <mirrorOf>repositoryId</mirrorOf>
+      <name>Human Readable Name for this Mirror.</name>
+      <url>http://my.repository.com/repo/path</url>
+    </mirror>
+     -->
+    <mirror>
+      <id>maven-default-http-blocker</id>
+      <mirrorOf>external:http:*</mirrorOf>
+      <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+      <url>http://0.0.0.0/</url>
+      <blocked>true</blocked>
+    </mirror>
+  
+    <mirror>
+      <id>aliyunmaven</id>
+      <mirrorOf>*</mirrorOf>
+      <name>阿里云公共仓库</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+  </mirrors>
+  ...
+  {{< /codeblock >}}
 
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
