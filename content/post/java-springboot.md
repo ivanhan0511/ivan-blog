@@ -73,21 +73,24 @@ PS: 最后插一句. 其实, 如果你的项目功能足够简单. 项目比较�
 阿里开发手册的部分约定
 {{< blockquote >}}
 [参考]Domain对象各层命名约定:
-A) Service/DAO层方法命名规约
-   1) 获取单个对象的方法用get做前缀
-   2) 获取多个对象的方法用list做前缀
-   1) 获取统计值的方法用count做前缀
-   1) 插入的方法用save/insert做前缀
-   1) 删除的方法用remove/delete做前缀
-   1) 修改的方法用update做前缀
-B) 领域模型命名规约
-   1) 数据对象: xxxDO, xxx即表名
-   2) 数据传输对象: xxxDTO, xxx即业务领域相关的名称
-   1) 展示对象: xxxVO, xxx一般为网页名称
-   1) POJO是DO/DTO/BO/VO的统称, 禁止命名成xxxPOJO
+
+- Service/DAO层方法命名规约
+  + 获取单个对象的方法用get做前缀
+  + 获取多个对象的方法用list做前缀
+  + 获取统计值的方法用count做前缀
+  + 插入的方法用save/insert做前缀
+  + 删除的方法用remove/delete做前缀
+  + 修改的方法用update做前缀
+- 领域模型命名规约
+  + 数据对象: xxxDO, xxx即表名
+  + 数据传输对象: xxxDTO, xxx即业务领域相关的名称
+  + 展示对象: xxxVO, xxx一般为网页名称
+  + POJO是DO/DTO/BO/VO的统称, 禁止命名成xxxPOJO
 
 [参考]Request和Response对象的约定
+
 即复杂对象的交互必须封装成Request 和 Response与前端进行交互
+
 {{< /blockquote >}}
 
 个人理解:  
@@ -131,7 +134,8 @@ The maven pom.xml defines lifecycle goals and the gradle build.gradle defines ta
   `C:\Program Files\JetBrains\IntelliJ IDEA 2022.2.1\plugins\maven\lib\maven3\conf`
 - Edit `settings.xml`
 
-{{< blockquote >}}
+{{< codeblock "conf.xml" >}}
+...
 <mirrors>
   <!-- mirror
    | Specifies a repository mirror site to use instead of a given repository. The repository that
@@ -160,7 +164,8 @@ The maven pom.xml defines lifecycle goals and the gradle build.gradle defines ta
     <url>https://maven.aliyun.com/repository/public</url>
   </mirror>
 </mirrors>
-{{< /blockquote >}}
+...
+{{< /codeblock >}}
 
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
@@ -169,18 +174,28 @@ The maven pom.xml defines lifecycle goals and the gradle build.gradle defines ta
 
 ### int or Integer
 
-用int还是用Integer？
+用int还是用Integer?  
 昨天例行code review时大家有讨论到int和Integer的比较和使用。 这里做个整理，发表一下个人的看法。
 
 【int和Integer的区别】
+
 int是java提供的8种原始类型之一，java为每个原始类型提供了封装类，Integer是int的封装类。int默认值是0，而Integer默认值是null；
+
 int和Integer（无论是否new）比较，都为true， 因为会把Integer自动拆箱为int再去比；
+
 Integer是引用类型，用==比较两个对象，其实比较的是它们的内存地址，所以不同的Integer对象肯定是不同的；
+
 但是对于Integer i=*，java在编译时会将其解释成Integer i=Integer.valueOf(*)；。但是，Integer类缓存了[-128,127]之间的整数， 所以对于Integer i1=127；与Integer i2=127； 来说，i1==i2，因为这二个对象指向同一个内存单元。 而Integer i1=128；与Integer i2=128； 来说，i1==i2为false。
+
 【各自的应用场景】
+
 Integer默认值是null，可以区分未赋值和值为0的情况。比如未参加考试的学生和考试成绩为0的学生
+
 加减乘除和比较运算较多，用int
+
 容器里推荐用Integer。 对于PO实体类，如果db里int型字段允许null，则属性应定义为Integer。————默认也应当定义为包装类型，从而兼容数据为null的情况，规避NPE异常。诸如mybatis这些代码生成器生成的属性就是包装类型，我们从阿里开发规范里也可以找到类似声明———— 当然，如果系统限定db里int字段不允许null值，则也可考虑将属性定义为int。
+
 对于应用程序里定义的枚举类型， 其值如果是整型，则最好定义为int，方便与相关的其他int值或Integer值的比较
+
 Integer提供了一系列数据的成员和操作，如Integer.MAX_VALUE，Integer.valueOf(),Integer.compare(),compareTo(),不过一般用的比较少。建议，一般用int类型，这样一方面省去了拆装箱，另一方面也会规避数据比较时可能带来的bug。
 
