@@ -53,33 +53,42 @@ Spring
 经典的三层架构主要是Dao/Service/Controller层这三层. 相应的, 对应这3层的对象为DO/BO/VO对象.
 
 POJO: Plain Old Java Object. 是DO/DTO/BO/VO的统称
-PO: Persistant Object. 持久层对象. 类似数据库内的一条记录.
-DO: Domain Object. 领域对象. 我们在三层架构中使用的DO其实是PO.
+
+PO: Persistant Object. 持久层对象. 类似数据库内的一条记录
+
+DO: Domain Object. 领域对象. 我们在三层架构中使用的DO其实是PO
+
 BO: Business Object. 业务对象.
+
 VO: Value Object. 表现对象. 主要用于与前端直接的交互与信息传递.
+
 DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象.
+
 DAO: Data Access Object. 相当于Python的CRUD
+
 SPI: Service Provider Interface. 常见的 SPI 有 JDBC、JNDI、JAXP 等，这些SPI的接口由核心类库提供，却由第三方实现
+
 PS: 最后插一句. 其实, 如果你的项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要.
 
 阿里开发手册的部分约定
+{{< blockquote >}}
+[参考]Domain对象各层命名约定:
+A) Service/DAO层方法命名规约
+   1) 获取单个对象的方法用get做前缀
+   2) 获取多个对象的方法用list做前缀
+   1) 获取统计值的方法用count做前缀
+   1) 插入的方法用save/insert做前缀
+   1) 删除的方法用remove/delete做前缀
+   1) 修改的方法用update做前缀
+B) 领域模型命名规约
+   1) 数据对象: xxxDO, xxx即表名
+   2) 数据传输对象: xxxDTO, xxx即业务领域相关的名称
+   1) 展示对象: xxxVO, xxx一般为网页名称
+   1) POJO是DO/DTO/BO/VO的统称, 禁止命名成xxxPOJO
 
-> [参考]Domain对象各层命名约定:
-> A) Service/DAO层方法命名规约
->    1) 获取单个对象的方法用get做前缀
->    2) 获取多个对象的方法用list做前缀
->    1) 获取统计值的方法用count做前缀
->    1) 插入的方法用save/insert做前缀
->    1) 删除的方法用remove/delete做前缀
->    1) 修改的方法用update做前缀
-> B) 领域模型命名规约
->    1) 数据对象: xxxDO, xxx即表名
->    2) 数据传输对象: xxxDTO, xxx即业务领域相关的名称
->    1) 展示对象: xxxVO, xxx一般为网页名称
->    1) POJO是DO/DTO/BO/VO的统称, 禁止命名成xxxPOJO
->
-> [参考]Request和Response对象的约定
-> 即复杂对象的交互必须封装成Request 和 Response与前端进行交互
+[参考]Request和Response对象的约定
+即复杂对象的交互必须封装成Request 和 Response与前端进行交互
+{{< /blockquote >}}
 
 个人理解:  
 POJO中一般不允许有业务逻辑方法, 不能带有connection之类的方法
@@ -122,36 +131,37 @@ The maven pom.xml defines lifecycle goals and the gradle build.gradle defines ta
   `C:\Program Files\JetBrains\IntelliJ IDEA 2022.2.1\plugins\maven\lib\maven3\conf`
 - Edit `settings.xml`
 
-  {{< blockquote >}}
-  <mirrors>
-    <!-- mirror
-     | Specifies a repository mirror site to use instead of a given repository. The repository that
-     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
-     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
-     |
-    <mirror>
-      <id>mirrorId</id>
-      <mirrorOf>repositoryId</mirrorOf>
-      <name>Human Readable Name for this Mirror.</name>
-      <url>http://my.repository.com/repo/path</url>
-    </mirror>
-     -->
-    <mirror>
-      <id>maven-default-http-blocker</id>
-      <mirrorOf>external:http:*</mirrorOf>
-      <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
-      <url>http://0.0.0.0/</url>
-      <blocked>true</blocked>
-    </mirror>
-  
-    <mirror>
-      <id>aliyunmaven</id>
-      <mirrorOf>*</mirrorOf>
-      <name>阿里云公共仓库</name>
-      <url>https://maven.aliyun.com/repository/public</url>
-    </mirror>
-  </mirrors>
-  {{< /blockquote >}}
+{{< blockquote >}}
+<mirrors>
+  <!-- mirror
+   | Specifies a repository mirror site to use instead of a given repository. The repository that
+   | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+   | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+   |
+  <mirror>
+    <id>mirrorId</id>
+    <mirrorOf>repositoryId</mirrorOf>
+    <name>Human Readable Name for this Mirror.</name>
+    <url>http://my.repository.com/repo/path</url>
+  </mirror>
+   -->
+  <mirror>
+    <id>maven-default-http-blocker</id>
+    <mirrorOf>external:http:*</mirrorOf>
+    <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+    <url>http://0.0.0.0/</url>
+    <blocked>true</blocked>
+  </mirror>
+
+  <mirror>
+    <id>aliyunmaven</id>
+    <mirrorOf>*</mirrorOf>
+    <name>阿里云公共仓库</name>
+    <url>https://maven.aliyun.com/repository/public</url>
+  </mirror>
+</mirrors>
+{{< /blockquote >}}
+
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
 
