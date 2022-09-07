@@ -1,6 +1,6 @@
 ---
 title: "SpringBoot"
-date: 2022-08-30T16:02:14+08:00
+date: 2022-09-06T13:34:17+08:00
 categories:
 - Java
 - Web Frame
@@ -28,7 +28,9 @@ showSocial: true
 showDate: true
 ---
 
-I don't wanna buy a book to study this time.
+I like this framework more and more.
+
+It could be a productional framework to make my project stronger.
 
 
 <!--more-->
@@ -105,6 +107,10 @@ JavaBean与Entity很像
 
 
 ## ANNOTATION
+
+### @Component
+With this annotation, a class can be scaned manually or automaticlly
+
 
 ### @Resource vs @Autowired
 
@@ -204,7 +210,7 @@ Integer提供了一系列数据的成员和操作，如Integer.MAX_VALUE，Integ
 
 
 ### slf4j.Logger and log4j.Logger
-{{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." >}}
+{{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
 Comparison SLF4J and Log4j<br/>
 
 Unlike log4j, SLF4J (Simple Logging Facade for Java) is not an implementation of logging framework, 
