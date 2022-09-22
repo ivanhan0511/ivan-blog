@@ -2,13 +2,13 @@
 title: "Java Basic"
 date: 2022-09-14T17:05:15+08:00
 categories:
-- Coffee
-- Grinder
+- Java
+- Basic
 tags:
-- Mazzer
+- Java
 keywords:
-- coffee
-- grinder
+- java
+- basic
 clearReading: true
 #thumbnailImage: //example.com/static/A.png
 thumbnailImage: image-1.png
@@ -27,7 +27,7 @@ showSocial: true
 showDate: true
 ---
 
-This is a custom summary and does *NOT* appear in the post.
+Java basic knowledge.
 <!--more-->
 
 {{< toc >}}
@@ -37,7 +37,9 @@ This is a custom summary and does *NOT* appear in the post.
 
 ### ArrayList
 
-{{< tabbed-codeblock T >}}
+## 泛型
+
+{{< tabbed-codeblock T "泛型" >}}
 <!-- tab java -->
 public class A {
 }
