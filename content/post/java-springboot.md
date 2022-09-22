@@ -1,6 +1,6 @@
 ---
 title: "SpringBoot"
-date: 2022-09-06T13:34:17+08:00
+date: 2022-09-14T17:05:59+08:00
 categories:
 - Java
 - Web Frame
@@ -45,6 +45,15 @@ Spring
 - AOP
 自动配置
 双亲委派
+
+
+
+
+## CORE
+
+### IoC
+
+### AOP
 
 
 
@@ -108,11 +117,13 @@ JavaBean与Entity很像
 
 ## ANNOTATION
 
-### @Component
+### @Component or @Bean
 With this annotation, a class can be scaned manually or automaticlly
 
+@Bean一般是调用第三方的
 
-### @Resource vs @Autowired
+
+### @Resource VS @Autowired
 
 {{< blockquote "stackoverflow" "https://stackoverflow.com/questions/4093504/resource-vs-autowired" "@Resource vs @Autowired" >}}
 Both @Autowired (or @Inject) and @Resource work equally well. But there is a conceptual difference or a difference in the meaning<br/><br/>
@@ -122,6 +133,17 @@ So, basically these are two quite distinct concepts. Unfortunately the Spring-Im
 While this fallback is convenient, IMHO it causes a lot of confusion, because people are unaware of the conceptual difference and tend to use @Resource for type-based autowiring.
 
 {{< /blockquote >}}
+
+
+### @Repository or @Mapper
+DAO层的用@Repository
+
+和@Mapper的对比还没了解到
+
+总结
+@Mapper 一定要有，否则 Mybatis 找不到 mapper。
+@Repository 可有可无，可以消去依赖注入的报错信息。
+@MapperScan 可以替代 @Mapper。
 
 
 
@@ -219,4 +241,12 @@ However, it is always difficult to prefer one between the two.
 {{< /blockquote >}}
 
 {{< image classes="fancybox fig-100" src="https://www.tutorialspoint.com/slf4j/images/application.jpg" thumbnail="https://www.tutorialspoint.com/slf4j/images/application.jpg" >}}
+
+
+### application.yml
+dependency
+springboot自己的依赖: spring-boot-starter-xxx
+第三方的以来: xxx-spring-boot-starter
+
+
 
