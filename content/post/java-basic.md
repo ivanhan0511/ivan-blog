@@ -39,20 +39,13 @@ Java basic knowledge.
 
 ## 泛型
 
-{{< tabbed-codeblock T "泛型" >}}
-<!-- tab java -->
-public class A {
-}
+{{< codeblock "A.java" "T" "https://www.163.com" >}}
+public class A {}
 
-<!-- endtab -->
-<!-- tab java -->
 public static <A> List<A> asList(A... a);
-<!-- endtab -->
 
-<!-- tab java -->
 public static List<A> asList(A... a);
-<!-- endtab -->
-{{< /tabbed-codeblock >}}
+{{< /codeblock >}}
 
 <T>是申明T为泛型，以区别于类名
 
@@ -61,7 +54,9 @@ public static List<A> asList(A... a);
 
 案例1中A为“泛型A”，参数可以传入任何类型对象的数组；案例2则不是，其中A为“类A”，参数只能传入“类A”的对象的数组。
 
+{{< alert info >}}
 案例1中使用泛型绝不是因为要使参数可以传入任意类型，如果仅仅是这样，直接用Object就可以了。
 用泛型是因为可以使该方法的返回值成为一个指定类型的集合，这样再次使用该集合的时候就有一个明确的类型了，
 这使的在将来该类型发生改变的时候编译器会报错，提醒你做相应的修改，而不是让问题暴露在运行阶段。
+{{< /alert >}}
 
