@@ -2,7 +2,8 @@
 title: "Flask Basic"
 date: 2022-05-24T16:57:10+08:00
 categories:
-- Flask
+- Python
+- WebFramework
 tags:
 - Flask
 keywords:

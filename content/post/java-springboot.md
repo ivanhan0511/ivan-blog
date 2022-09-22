@@ -3,7 +3,7 @@ title: "SpringBoot"
 date: 2022-09-14T17:05:59+08:00
 categories:
 - Java
-- Web Frame
+- WebFramework
 tags:
 - SpringBoot
 keywords:

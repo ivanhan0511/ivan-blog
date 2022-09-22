@@ -2,8 +2,8 @@
 title: "Deploy Pear Admin"
 date: 2022-05-25T15:39:32+08:00
 categories:
+- Python
 - Deploy
-- Flask
 tags:
 - Flask
 - PearAdmin

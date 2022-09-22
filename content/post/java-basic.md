@@ -10,16 +10,6 @@ keywords:
 - java
 - basic
 clearReading: true
-#thumbnailImage: //example.com/static/A.png
-thumbnailImage: image-1.png
-thumbnailImagePosition: bottom
-autoThumbnailImage: yes
-metaAlignment: center
-#coverImage: //example.com/static/B.png
-coverImage: image-2.png
-coverCaption: "A beautiful image"
-coverMeta: out
-coverSize: full
 comments: false
 showTags: true
 showPagination: true
@@ -33,13 +23,18 @@ Java basic knowledge.
 {{< toc >}}
 
 ## BASIC
-### String[]
 
-### ArrayList
+### 类型对比
+String[]
+
+ArrayList
+
+
+
 
 ## 泛型
 
-{{< codeblock "A.java" "T" "https://www.163.com" >}}
+{{< codeblock "A.java" "https://www.163.com" >}}
 public class A {}
 
 public static <A> List<A> asList(A... a);
@@ -52,7 +47,7 @@ public static List<A> asList(A... a);
 即：<T> List<T> 中，第一个T是告诉大家，T不是类T.class，而是泛型T
 （如果只写List<T>则编译器以为是类T.class，如果不存在T.class类，则报错）。
 
-案例1中A为“泛型A”，参数可以传入任何类型对象的数组；案例2则不是，其中A为“类A”，参数只能传入“类A”的对象的数组。
+案例1中A为“泛型A”，参数可以传入任何类型对象的数组；案例2则不是，其中A为"类A"，参数只能传入"类A"的对象的数组。
 
 {{< alert info >}}
 案例1中使用泛型绝不是因为要使参数可以传入任意类型，如果仅仅是这样，直接用Object就可以了。
