@@ -28,7 +28,6 @@ showSocial: true
 showDate: true
 ---
 
-I like this framework more and more.
 
 It could be a productional framework to make my project stronger.
 
@@ -159,6 +158,20 @@ POJO中一般不允许有业务逻辑方法, 不能带有connection之类的方�
 
 
 
+
+## DB
+
+
+
+## SECURITY
+
+
+
+## LOG
+
+
+
+
 ## ANNOTATION
 
 ### @Component or @Bean
@@ -192,7 +205,7 @@ DAO层的用@Repository
 
 
 
-## 集成/构建
+## DEPLOYMENT(集成/构建)
 
 ### Maven or Gradle
 
@@ -242,6 +255,8 @@ Maven 3.8.1 blocked http connection
   {{< /codeblock >}}
 
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
+
+
 
 
 ## TIPs
