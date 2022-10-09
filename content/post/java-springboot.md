@@ -209,23 +209,23 @@ Maven 3.8.1 blocked http connection
 Here is the changed points list of my project which is based on pear-admin-pro
 
 
-#### pom.xml
-- ~~Comment `dynamic-datasource-spring-boot-starter`~~
+- pom.xml
+  ~~Comment `dynamic-datasource-spring-boot-starter`~~
 
-#### resources
-- Change server port
-- Change DB username and password
-- Add password for Redis
-- ~~Cancel connection pool~~
-- ~~Cancel redundant DBs~~
-
-
-#### common
-- Security, `anyRequest().permitAll()`
-- Security, comment `http.addFilterBefore();`
+- resources
+  + Change server port
+  + Change DB username and password
+  + Add password for Redis
+  + ~~Cancel connection pool~~
+  + ~~Cancel redundant DBs~~
 
 
-#### modules
+- common
+  + Security, `anyRequest().permitAll()`
+  + Security, comment `http.addFilterBefore();`
+
+
+- modules
 
 
 
