@@ -67,15 +67,15 @@ So far, we didn't use it so much.
 
 VO: Value Object. 表现对象. 主要用于与前端直接的交互与信息传递(小规模项目, 使用DTO即可).
 
-DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象.
+**DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象.**
 
 BO: Business Object. 业务对象(个人理解, BO和DO很像, 是一个综合多个PO的复合抽象对象).
 
-DO: Domain Object. 领域对象(我们在三层架构中使用的DO其实是PO)
+**DO: Domain Object. 领域对象(我们在三层架构中使用的DO其实是PO)**
 
 PO: Persistant Object. 持久层对象. 类似数据库内的一条记录
 
-DAO: Data Access Object.(小规模项, 使用DAO即可)
+**DAO: Data Access Object.(小规模项, 使用DAO即可)**
 
 PS: 
 - POJO: Plain Old Java Object. 是PO/DO/DTO/BO/VO的统称
