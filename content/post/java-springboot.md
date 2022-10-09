@@ -1,6 +1,6 @@
 ---
 title: "SpringBoot"
-date: 2022-09-14T17:05:59+08:00
+date: 2022-09-28T22:01:01+08:00
 categories:
 - Java
 - WebFramework
@@ -29,7 +29,7 @@ showDate: true
 ---
 
 
-It could be a productional framework to make my project stronger.
+It could be a productional framework to make a software project stronger.
 
 
 <!--more-->
@@ -49,13 +49,14 @@ Spring
 ## CORE
 
 ### IoC
+It's anywhere!
+
 
 ### AOP
+So far, we didn't use it so much.
+
 
 ### ARCHITECTURE
-
-三层架构
-经典的三层架构主要是Dao/Service/Controller层这三层. 相应的, 对应这3层的对象为DO/BO/VO对象.
 
 POJO: Plain Old Java Object. 是DO/DTO/BO/VO的统称
 
@@ -69,7 +70,7 @@ VO: Value Object. 表现对象. 主要用于与前端直接的交互与信息传
 
 DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象.
 
-DAO: Data Access Object. 相当于Python的CRUD
+DAO: Data Access Object.
 
 SPI: Service Provider Interface. 常见的 SPI 有 JDBC、JNDI、JAXP 等，这些SPI的接口由核心类库提供，却由第三方实现
 
@@ -161,26 +162,40 @@ POJO中一般不允许有业务逻辑方法, 不能带有connection之类的方�
 
 ## DB
 
+### Configuration
+
+### MyBatisPlus
+
+
 
 
 ## SECURITY
+It's a deep track!
+
+Need do really deep reseach for it.
+
 
 
 
 ## LOG
+
+So far, use the original log systemt of pear-admin-pro
 
 
 
 
 ## ANNOTATION
 
-### @Component or @Bean
+### 常用注解的深入理解
+
+### 易混淆注解的对比
+#### @Component or @Bean
 With this annotation, a class can be scaned manually or automaticlly
 
 @Bean一般是调用第三方的
 
 
-### @Resource VS @Autowired
+#### @Resource VS @Autowired
 
 {{< blockquote "stackoverflow" "https://stackoverflow.com/questions/4093504/resource-vs-autowired" "@Resource vs @Autowired" >}}
 Both @Autowired (or @Inject) and @Resource work equally well. But there is a conceptual difference or a difference in the meaning<br/><br/>
@@ -192,7 +207,7 @@ While this fallback is convenient, IMHO it causes a lot of confusion, because pe
 {{< /blockquote >}}
 
 
-### @Repository or @Mapper
+#### @Repository or @Mapper
 DAO层的用@Repository
 
 和@Mapper的对比还没了解到
@@ -201,6 +216,10 @@ DAO层的用@Repository
 @Mapper 一定要有，否则 Mybatis 找不到 mapper。
 @Repository 可有可无，可以消去依赖注入的报错信息。
 @MapperScan 可以替代 @Mapper。
+
+
+#### SpringBoot中的@EqualsAndHashCode注解与@Data注解
+https://blog.csdn.net/gdkyxy2013/article/details/104769897
 
 
 
@@ -255,6 +274,29 @@ Maven 3.8.1 blocked http connection
   {{< /codeblock >}}
 
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
+
+
+### Changed Points
+Here is the changed points list of my project which is based on pear-admin-pro
+
+
+#### pom.xml
+- ~~Comment `dynamic-datasource-spring-boot-starter`~~
+
+#### resources
+- Change server port
+- Change DB username and password
+- Add password for Redis
+- ~~Cancel connection pool~~
+- ~~Cancel redundant DBs~~
+
+
+#### common
+- Security, `anyRequest().permitAll()`
+- Security, comment `http.addFilterBefore();`
+
+
+#### modules
 
 
 
