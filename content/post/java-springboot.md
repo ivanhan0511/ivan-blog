@@ -153,6 +153,41 @@ https://blog.csdn.net/gdkyxy2013/article/details/104769897
 
 
 
+## DB MAPPER
+Use MyBatisPLus maven and use default CRUD methods.  
+But refuse to use QueryWrapper, use MyBatis' XML mapper.
+
+[MyBatis Documents](https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#Parameters)
+
+
+### Returned values
+
+#### Service layer(DO)
+- Get
+  + Get one
+    * Success -> T entity
+    * Failure -> null
+  + Get list
+    * Success -> List<T> entityList
+- INSERT
+- UPDATE
+- DELETE
+
+
+#### Repositery layer(DAO)
+- SELECT
+  + Select one
+    * Success -> T entity
+    * Failure -> null
+  + Select multi
+    *
+- INSERT
+- UPDATE
+- DELETE
+
+
+
+
 ## DEPLOYMENT(集成/构建)
 
 ### Maven or Gradle
@@ -226,6 +261,7 @@ Here is the changed points list of my project which is based on pear-admin-pro
 
 
 - modules
+  + common.web.domain.Result, ~~<T>~~
 
 
 
@@ -260,6 +296,5 @@ dependency
 springboot自己的依赖: spring-boot-starter-xxx
 
 第三方的以来: xxx-spring-boot-starter
-
 
 

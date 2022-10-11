@@ -84,3 +84,11 @@ left join (select * from information_schema.PROCESSLIST) B on A.trx_mysql_thread
 kill 12345;
 {{< /codeblock >}}
 
+
+
+
+## JOIN
+
+![Joins](https://upload.wikimedia.org/wikipedia/commons/9/9d/SQL_Joins.svg)
+
+
