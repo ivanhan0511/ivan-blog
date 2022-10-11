@@ -23,7 +23,8 @@ showSocial: true
 showDate: true
 ---
 
-DML: Data Manipulation Language
+DML: Data Manipulation Language, like `INSERT`, `SELECT`, `UPDATE`, `DELETE`, 
+    `MERGE`, `CALL`, `EXPLAIN PLAN`, `LOCK TABLE`
 <!--more-->
 
 {{< toc >}}

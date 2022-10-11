@@ -18,7 +18,7 @@ showSocial: true
 showDate: true
 ---
 
-DCL: Data Control Language
+DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 <!--more-->
 
 {{< toc >}}

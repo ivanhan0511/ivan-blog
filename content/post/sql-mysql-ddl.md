@@ -22,7 +22,7 @@ showDate: true
 ---
 
 
-DDL: Data Definition Language
+DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMMENT`, `RENAME`
 <!--more-->
 
 {{< toc >}}

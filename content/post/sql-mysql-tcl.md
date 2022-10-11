@@ -19,7 +19,7 @@ showSocial: true
 showDate: true
 ---
 
-TCL: Transaction Control Language
+TCL: Transaction Control Language, like `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `START TRANSACTION`
 <!--more-->
 
 {{< toc >}}
