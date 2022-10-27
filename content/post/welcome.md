@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Ivan's Blog"
-date: 2022-10-09T17:01:00+08:00
+date: 2022-10-27T17:41:00+08:00
 categories:
 - Welcome
 tags:
@@ -24,7 +24,7 @@ showSocial: false
 showDate: true
 ---
 
-Some record for Tec, Coffee, Sports and Photography.
+Some records for Software, Coffee and Sports.
 <!--more-->
 
 
