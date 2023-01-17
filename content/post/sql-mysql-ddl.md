@@ -37,6 +37,20 @@ CREATE TABLE ...
 
 ### CREATE INDEX
 
+### COPY with data
+```sql
+create table  table_name
+as   
+select * from  Source_table
+where   1=1;
+```
+### COPY without data
+```sql
+create table  table_name
+as
+select  * from
+Source_table where   1 <> 1;
+```
 
 
 ## ALTER
