@@ -1,6 +1,6 @@
 ---
 title: "SpringBoot"
-date: 2022-09-28T22:01:01+08:00
+date: 2023-01-30T15:40:01+08:00
 categories:
 - Java
 - WebFramework
@@ -47,6 +47,8 @@ It's anywhere!
 
 ### AOP
 So far, we didn't use it so much.
+
+
 
 
 ## PROJECT ARCHITECTURE
@@ -160,30 +162,81 @@ But refuse to use QueryWrapper, use MyBatis' XML mapper.
 [MyBatis Documents](https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#Parameters)
 
 
-### Returned values
+### MultiDataSources
 
-#### Service layer(DO)
-- Get
-  + Get one
-    * Success -> T entity
-    * Failure -> null
-  + Get list
-    * Success -> List<T> entityList
-- INSERT
-- UPDATE
-- DELETE
+application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
 
 
-#### Repositery layer(DAO)
-- SELECT
-  + Select one
-    * Success -> T entity
-    * Failure -> null
-  + Select multi
-    *
-- INSERT
-- UPDATE
-- DELETE
+#### MultiDB & Transactional
+- 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
+- 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
+
+{{< alert info >}}
+注意：@DS 必须加在 @Transactional 对应的类或者方法上  
+如在 mapper中加了@DS，但是 @Transactional 加在 service 方法中，此时获取为默认的datasource  
+(因为在事务中已经获取了一次datasource的connection，而此时无DS注解)
+{{< /alert >}}
+
+{{< tabbed-codeblock MultiDataSourceTransactional >}}
+<!-- tab SomeService java -->
+public interface SomeService extends IService<Some> {}
+<!-- endtab -->
+
+<!-- tab SomeServiceImpl -->
+@Service
+public class SomeServiceImpl extends ServiceImpl<SomeRepository, Some> implements SomeService {}
+<!-- endtab -->
+
+<!-- tab OtherService -->
+public interface OtherService extends IService<Other> {}
+<!-- endtab -->
+
+<!-- tab OtherServiceImpl -->
+@Service
+@DS("db2")
+public class OtherServiceImpl extends ServiceImpl<OtherRepository, Other> implements OtherService {}
+<!-- endtab -->
+
+<!-- tab CombineService -->
+public interface CombineService {
+    Boolean save(CombineRequest request);
+}
+<!-- endtab -->
+
+<!-- tab CombineServiceImpl -->
+@Service
+public class CombineServiceImpl implements CombineService {
+    @Resource
+    private SomeService someService;
+
+    @Resource
+    private OtherService otherService;
+
+    @Override
+    @DSTransactional
+    public Boolean save(CombineRequest request) {
+        Boolean r1 = saveSome(request);
+        Boolean r2 = saveOthers(request);
+        return r1 && r2;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    protected Boolean saveOthers(CombineRequest request) {
+        List<Other> others = methodToGetOthers(request);
+        return otherService.saveBatch(others);
+    }
+
+    private Boolean saveSome(CombineRequest request) {
+        Some some = methodToGetSome(request);
+        return someService.save(some);
+    }
+}
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
+
+
+#### TODO
+And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContextHolder.poll()`?
 
 
 
