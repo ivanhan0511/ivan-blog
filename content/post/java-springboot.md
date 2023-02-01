@@ -172,13 +172,13 @@ application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"
 - 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
 
 {{< alert info >}}
-注意：@DS 必须加在 @Transactional 对应的类或者方法上  
-如在 mapper中加了@DS，但是 @Transactional 加在 service 方法中，此时获取为默认的datasource  
+@DS 必须加在 @Transactional 对应的类或者方法上  
+如在 mapper中加了@DS，但是 @Transactional 加在 service 方法中，此时则会获取默认的datasource
 (因为在事务中已经获取了一次datasource的connection，而此时无DS注解)
 {{< /alert >}}
 
-{{< tabbed-codeblock MultiDataSourceTransactional >}}
-<!-- tab SomeService java -->
+{{< tabbed-codeblock "MultiDataSourceTransactional" >}}
+<!-- tab SomeService -->
 public interface SomeService extends IService<Some> {}
 <!-- endtab -->
 
