@@ -189,7 +189,7 @@ application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"
 public interface SomeService extends IService<Some> {}
 <!-- endtab -->
 
-<!-- tab simpl -->
+<!-- tab "sImpl" -->
 @Service
 public class SomeServiceImpl extends ServiceImpl<SomeRepository, Some> implements SomeService {}
 <!-- endtab -->
