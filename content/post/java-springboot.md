@@ -184,24 +184,24 @@ application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"
 (因为在事务中已经获取了一次datasource的connection，而此时无DS注解)
 {{< /alert >}}
 
-{{< tabbed-codeblock "MultiDataSourceTransactional 空格测试" >}}
-<!-- tab IS -->
-public interface SomeService extends IService\<Some\> {}
+{{< tabbed-codeblock MultiDataSourceTransactional 空格测试 >}}
+<!-- tab s service -->
+public interface SomeService extends IService<Some> {}
 <!-- endtab -->
 
-<!-- tab SImpl -->
+<!-- tab s impl -->
 @Service
-public class SomeServiceImpl extends ServiceImpl\<SomeRepository, Some\> implements SomeService {}
+public class SomeServiceImpl extends ServiceImpl<SomeRepository, Some> implements SomeService {}
 <!-- endtab -->
 
-<!-- tab IO -->
+<!-- tab o service -->
 public interface OtherService extends IService<Other> {}
 <!-- endtab -->
 
-<!-- tab OImpl -->
+<!-- tab o impl -->
 @Service
 @DS("db2")
-public class OtherServiceImpl extends ServiceImpl\<OtherRepository, Other\> implements OtherService {}
+public class OtherServiceImpl extends ServiceImpl<OtherRepository, Other> implements OtherService {}
 <!-- endtab -->
 
 <!-- tab ComboService -->
@@ -210,7 +210,7 @@ public interface CombineService {
 }
 <!-- endtab -->
 
-<!-- tab CSImpl -->
+<!-- tab cs impl -->
 @Service
 public class CombineServiceImpl implements CombineService {
     @Resource
