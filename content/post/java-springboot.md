@@ -184,9 +184,9 @@ application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"
 (因为在事务中已经获取了一次datasource的connection，而此时无DS注解)
 {{< /alert >}}
 
-{{< tabbed-codeblock MultiDataSourceTransactional 空格测试 >}}
+{{< tabbed-codeblock MultiDSTransactional >}}
 <!-- tab s service -->
-public interface SomeService extends IService<Some> {}
+public interface SomeService extends IService\<Some\> {}
 <!-- endtab -->
 
 <!-- tab s impl -->
