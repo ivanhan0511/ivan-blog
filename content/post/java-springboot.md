@@ -185,8 +185,8 @@ application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"
 {{< /alert >}}
 
 {{< tabbed-codeblock MultiDSTransactional >}}
-<!-- tab sservice -->
-public interface SomeService extends IService\<Some\> {}
+<!-- tab sinterface -->
+public interface SomeService extends IService<Some> {}
 <!-- endtab -->
 
 <!-- tab simpl -->
@@ -194,7 +194,7 @@ public interface SomeService extends IService\<Some\> {}
 public class SomeServiceImpl extends ServiceImpl<SomeRepository, Some> implements SomeService {}
 <!-- endtab -->
 
-<!-- tab oservice -->
+<!-- tab ointerface -->
 public interface OtherService extends IService<Other> {}
 <!-- endtab -->
 
@@ -204,13 +204,13 @@ public interface OtherService extends IService<Other> {}
 public class OtherServiceImpl extends ServiceImpl<OtherRepository, Other> implements OtherService {}
 <!-- endtab -->
 
-<!-- tab ComboService -->
+<!-- tab combo -->
 public interface CombineService {
     Boolean save(CombineRequest request);
 }
 <!-- endtab -->
 
-<!-- tab csimpl -->
+<!-- tab comboimpl -->
 @Service
 public class CombineServiceImpl implements CombineService {
     @Resource
