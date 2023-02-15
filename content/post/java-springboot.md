@@ -37,17 +37,12 @@ It could be a productional framework to make a software project stronger.
 {{< toc >}}
 
 ## CORE
-To be grabbed deeply.
-
-### Spring
-
-### IoC
-It's anywhere!
+To be grabbed deeply. IoC and AoP
 
 
-### AOP
-So far, we didn't use it so much.
+Transactional传播生效的设置与Bean和代理有关
 
+@DS()源于Mybatis-Plus
 
 
 
@@ -168,8 +163,20 @@ application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"
 
 
 #### MultiDB & Transactional
+[TODO]: 将该理论的总结归类到SQL下  
+
 - 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
 - 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
+- 事务隔离(更新丢失, 脏读, 不可重复读, 幻读)
+  - READ_UNCOMMITTED,它受到所有三个提到的并发副作用的影响
+    + Postgres 不支持 READ_UNCOMMITTED 隔离，而是会退到 READ_COMMITED
+    + Oracle 不 支持或允许 READ_UNCOMMITTED
+  - READ_COMMITTED, 可防止脏读
+    + Postgres、SQL Server 和 Oracle 的默认级别
+  - REPEATABLE_READ, 可防止脏读和不可重复读
+    + Mysql 中的默认级别
+    + Oracle 不支持 REPEATABLE_READ
+  - SERIALIZABLE, 最高级别的隔离
 
 {{< alert info >}}
 @DS 必须加在 @Transactional 对应的类或者方法上  
@@ -177,33 +184,33 @@ application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"
 (因为在事务中已经获取了一次datasource的connection，而此时无DS注解)
 {{< /alert >}}
 
-{{< tabbed-codeblock "MultiDataSourceTransactional" >}}
-<!-- tab SomeService -->
-public interface SomeService extends IService<Some> {}
+{{< tabbed-codeblock "MultiDataSourceTransactional 空格测试" >}}
+<!-- tab IS -->
+public interface SomeService extends IService\<Some\> {}
 <!-- endtab -->
 
-<!-- tab SomeServiceImpl -->
+<!-- tab SImpl -->
 @Service
-public class SomeServiceImpl extends ServiceImpl<SomeRepository, Some> implements SomeService {}
+public class SomeServiceImpl extends ServiceImpl\<SomeRepository, Some\> implements SomeService {}
 <!-- endtab -->
 
-<!-- tab OtherService -->
+<!-- tab IO -->
 public interface OtherService extends IService<Other> {}
 <!-- endtab -->
 
-<!-- tab OtherServiceImpl -->
+<!-- tab OImpl -->
 @Service
 @DS("db2")
-public class OtherServiceImpl extends ServiceImpl<OtherRepository, Other> implements OtherService {}
+public class OtherServiceImpl extends ServiceImpl\<OtherRepository, Other\> implements OtherService {}
 <!-- endtab -->
 
-<!-- tab CombineService -->
+<!-- tab ComboService -->
 public interface CombineService {
     Boolean save(CombineRequest request);
 }
 <!-- endtab -->
 
-<!-- tab CombineServiceImpl -->
+<!-- tab CSImpl -->
 @Service
 public class CombineServiceImpl implements CombineService {
     @Resource
@@ -220,7 +227,7 @@ public class CombineServiceImpl implements CombineService {
         return r1 && r2;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
     protected Boolean saveOthers(CombineRequest request) {
         List<Other> others = methodToGetOthers(request);
         return otherService.saveBatch(others);

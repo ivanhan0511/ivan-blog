@@ -1,9 +1,9 @@
 ---
-title: "Coffee Grinder Mazzer"
+title: "Coffee Equipment"
 date: 2022-05-24T05:49:34+08:00
 categories:
 - Coffee
-- Grinder
+- Equipment
 tags:
 - grinder
 - mazzer
@@ -15,5 +15,16 @@ keywords:
 Which type of Mazzer grinder?
 <!--more-->
 
-Mazzer
+## POUR-OVER COFFEE
+### Grinder
+Helor
+
+
+## ESPRESSO
+### Grinder
+- ~~Mazzer Super Jolly~~
+
+- 迈拓600AE(仿Mazzer SJ)
+
+
 
