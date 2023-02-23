@@ -112,16 +112,49 @@ POJO中一般不允许有业务逻辑方法, 不能带有connection之类的方�
 ### 常用注解的深入理解
 [TODO]: To be done...
 
+- Controller控制Headers/Content-Type/Accept
+  
+  [TODO]: 各种继承关系的注解, 后续补充
+
+  - Springboot中Controller中的comsumes指定的是HTTP客户端的Content-Type, 默认application/x-www-form-urlencoded
+  - Springboot中Controller中的produces指定的是HTTP客户端的Accept
+
+http头部字段Content-Type约定请求和响应的HTTP body内容编码类型，客户端和服务端根据http头部字段Content-Type正确解码HTTP body内容。
+
+常见的http头部Content-Type：
+
+application/x-www-form-urlencoded
+multipart/form-data
+application/json
+application/xml
+示例说明
+
+前端使用Content-Type:"application/json"编码http请求内容并提交给服务端；服务端使用Content-Type:"application/json"解码http请求内容。
+如果不明确指定http Request头部Content-Type，将使用application/x-www-form-urlencoded; charset=UTF-8作为默认值，后端方法不能解码Content-Type:application/x-www-form-urlencoded的http Request body内容。同时也说明后端方法只能解码请求头部Content-Type为application/json的http Request body内容。
+
+服务端使用Content-Type:"application/json"编码http响应body内容返回给前端；前端使用Content-Type:"application/json"解码http响应body内容。
+服务端返回Response Content-Type:application/json，前端dataType不指定值。此时，解码http响应body内容，data类型是Object。
+服务端不返回Response Content-Type:application/json，前端dataType指定值json。些时，解码http响应body内容，data类型是Object。
+服务端不返回Response Content-Type:application/json，前端dataType不指定值"json"。此时，不能解码http响应body的json字符串，data类型是String。
+1人点赞
+网络编程
+
+
+作者：番薯大佬
+链接：https://www.jianshu.com/p/b7956dd875a5
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 
 ### 易混淆注解的对比
 
-#### @Component or @Bean
+- @Component or @Bean
 With this annotation, a class can be scaned manually or automaticlly
 
 @Bean一般是调用第三方的
 
 
-#### @Resource VS @Autowired
+- @Resource VS @Autowired
 
 {{< blockquote "stackoverflow" "https://stackoverflow.com/questions/4093504/resource-vs-autowired" "@Resource vs @Autowired" >}}
 Both @Autowired (or @Inject) and @Resource work equally well. But there is a conceptual difference or a difference in the meaning<br/><br/>
@@ -133,7 +166,7 @@ While this fallback is convenient, IMHO it causes a lot of confusion, because pe
 {{< /blockquote >}}
 
 
-#### @Repository or @Mapper
+- @Repository or @Mapper
 DAO层的用@Repository
 
 和@Mapper的对比还没了解到
@@ -144,8 +177,18 @@ DAO层的用@Repository
 @MapperScan 可以替代 @Mapper。
 
 
-#### SpringBoot中的@EqualsAndHashCode注解与@Data注解
+- SpringBoot中的@EqualsAndHashCode注解与@Data注解
 https://blog.csdn.net/gdkyxy2013/article/details/104769897
+
+- @Validate @Valid
+
+  @Validate是org.springframework.validation.annotation.Validated 导入的
+
+  @Valid是javax.validation.Valid 导入的
+
+  controller类上写: @Validated
+    - 如果是Bean的对象xxxRequest类限制参数, 则参数类中各自校验; 在controller类中的方法参数括号内写: @Valid
+    - 如果是属性String number限制, 在controller类中的方法入参前写: @NotBlank(message = "xxx不能为空")
 
 
 
