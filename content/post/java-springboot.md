@@ -51,11 +51,14 @@ Transactional传播生效的设置与Bean和代理有关
 ### Architecture
 {{< alert info >}}
 Controller  
+VO: Value Object. 表现对象. 目前主要由前端负责, 给终端用户传递信息.
 - 简单分流前端业务, 因地制宜地回复错误信息
 {{< /alert >}}
 
 {{< alert success >}}
 Service  
+DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象.  
+BO: Business Object. 业务对象(个人理解, BO和DO很像, 是一个综合多个PO的复合抽象对象).
 - 只管业务流的处理, 不负责数据库查询
 - 可以调用其它Service, 也可以调用其它Repository
 - DTO的数据转换(暂且)也在Service层处理
@@ -63,62 +66,23 @@ Service
 
 {{< alert warning >}}
 DAO / Repository  
+DAO: Data Access Object. 小规模项, 使用DAO即可
 - MyBatis 接口与XML查询
 - 能通过数据库查询的尽量通过数据库直接查询
 {{< /alert >}}
 
 {{< alert danger >}}
 DB / Domain  
-- 数据库表关联关系设计, 与Domain联动
+PO: Persistant Object. 持久层对象. 类似数据库内的一条记录  
+DO: Domain Object. 领域对象
+- 数据库表PO关联关系设计, 与DO联动
+- 一个DO可能是多个PO关联组成的
 {{< /alert >}}
 
-
-### 名词解释
-[项目开发中，真的有必要定义VO，BO，PO，DO，DTO这些吗？](https://blog.51cto.com/u_12302929/4811425)
-
-自上而下的顺序:
-
-VO: Value Object. 表现对象. 主要用于与前端直接的交互与信息传递(小规模项目, 使用DTO即可).
-
-**DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象.**
-
-BO: Business Object. 业务对象(个人理解, BO和DO很像, 是一个综合多个PO的复合抽象对象).
-
-**DO: Domain Object. 领域对象(我们在三层架构中使用的DO其实是PO)**
-
-PO: Persistant Object. 持久层对象. 类似数据库内的一条记录
-
-**DAO: Data Access Object.(小规模项, 使用DAO即可)**
-
 PS: 
+- [项目开发中，真的有必要定义VO，BO，PO，DO，DTO这些吗？](https://blog.51cto.com/u_12302929/4811425)
 - POJO: Plain Old Java Object. 是PO/DO/DTO/BO/VO的统称
 - 其实, 如果你的项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要.
-
-
-POJO的一些参考(阿里内部)
-
-[参考]Domain对象各层命名约定:
-
-- Service/DAO层方法命名规约
-  + 获取单个对象的方法用get做前缀
-  + 获取多个对象的方法用list做前缀
-  + 获取统计值的方法用count做前缀
-  + 插入的方法用save/insert做前缀
-  + 删除的方法用remove/delete做前缀
-  + 修改的方法用update做前缀
-- 领域模型命名规约
-  + 数据对象: xxxDO, xxx即表名
-  + 数据传输对象: xxxDTO, xxx即业务领域相关的名称
-  + 展示对象: xxxVO, xxx一般为网页名称
-  + POJO是DO/DTO/BO/VO的统称, 禁止命名成xxxPOJO
-
-[参考]Request和Response对象的约定
-
-即复杂对象的交互必须封装成Request 和 Response与前端进行交互
-
-
-个人理解:  
-POJO中一般不允许有业务逻辑方法, 不能带有connection之类的方法
 
 
 
@@ -369,9 +333,7 @@ Need do really deep reseach for it.
 
 
 
-## TIPs
-
-### Logger
+## Logger
 
 **slf4j.Logger and log4j.Logger**
 {{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
@@ -385,11 +347,26 @@ However, it is always difficult to prefer one between the two.
 {{< image classes="fancybox fig-100" src="https://www.tutorialspoint.com/slf4j/images/application.jpg" thumbnail="https://www.tutorialspoint.com/slf4j/images/application.jpg" >}}
 
 
-### application.yml
-dependency
 
-springboot自己的依赖: spring-boot-starter-xxx
 
-第三方的以来: xxx-spring-boot-starter
+## Appendix
+
+### 软件开发规范
+
+- Service/DAO层方法命名规约
+  + 获取单个对象的方法用get做前缀
+  + 获取多个对象的方法用list做前缀
+  + 获取统计值的方法用count做前缀
+  + 插入的方法用save/insert做前缀
+  + 删除的方法用remove/delete做前缀
+  + 修改的方法用update做前缀
+- 领域模型命名规约
+  + 数据对象: xxxDO, xxx即表名
+  + 数据传输对象: xxxDTO, xxx即业务领域相关的名称
+  + 展示对象: xxxVO, xxx一般为网页名称
+  + POJO是DO/DTO/BO/VO的统称, 禁止命名成xxxPOJO
+
+- Request和Response对象的约定[参考]
+  + 复杂对象的交互必须封装成Request 和 Response与前端进行交互
 
 
