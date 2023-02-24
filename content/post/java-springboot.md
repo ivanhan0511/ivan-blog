@@ -1,6 +1,6 @@
 ---
 title: "SpringBoot"
-date: 2023-01-30T15:40:01+08:00
+date: 2023-02-24T14:10:01+08:00
 categories:
 - Java
 - WebFramework
@@ -51,25 +51,29 @@ Transactional传播生效的设置与Bean和代理有关
 ### Architecture
 {{< alert info >}}
 Controller
-简单分流前端业务, 因地制宜地回复错误信息
+
+- 简单分流前端业务, 因地制宜地回复错误信息
 {{< /alert >}}
 
 {{< alert success >}}
 Service
-只管业务流的处理, 不负责数据库查询  
-可以调用其它Service, 也可以调用其它Repository  
-DTO的数据转换(暂且)也在Service层处理
+
+- 只管业务流的处理, 不负责数据库查询  
+- 可以调用其它Service, 也可以调用其它Repository  
+- DTO的数据转换(暂且)也在Service层处理
 {{< /alert >}}
 
 {{< alert warning >}}
 DAO / Repository
-MyBatis 接口与XML查询
-能通过数据库查询的尽量通过数据库直接查询
+
+- MyBatis 接口与XML查询
+- 能通过数据库查询的尽量通过数据库直接查询
 {{< /alert >}}
 
 {{< alert danger >}}
 DB / Domain
-数据库表关联关系设计, 与Domain联动
+
+-数据库表关联关系设计, 与Domain联动
 {{< /alert >}}
 
 
