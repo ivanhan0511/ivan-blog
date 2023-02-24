@@ -34,14 +34,16 @@ This is a custom summary and does *NOT* appear in the post.
 {{< toc >}}
 
 ## 登录/认证/签名
-接口明确规定HEADER
+接口明确规定HEADER内容, 例如Content-Type, Accept等
 
-用户ID之类 用String(Java Long 会在JavaScript中溢出)
-Double数据 用String
-Data String等 用String
-Data类 用Object
-List列表中的类型 用Object
-Boolean类 最好用0, 1
+- 用户ID之类 用String(Java Long 会在JavaScript中溢出)
+- Double数据 用String
+- Data String等 用String
+- Data类 用Object
+- List列表中的类型 用Object
+- Boolean类 最好用0, 1
+
+以确保加密/签名时的精度和非常规字符不会丢失/变形
 
 
 
@@ -50,3 +52,5 @@ Boolean类 最好用0, 1
 
 ### 数据类型
 Integer, Double, String, List[], Boolean等等, 均可
+
+该怎么用怎么用
