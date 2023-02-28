@@ -27,11 +27,21 @@ In this post, I have to write with Chinese.
 
 {{< toc >}}
 
-## P
+## 中文歧义
+
+### Queue up VS Line up
+For me, queues are formed when you're wanting to be served such as at a counter, or for admission - so queues are formed in the post office, or at the bus stop. I can use lines too in this context. We can say queue up or form a queue.
+
+If you are just making a line formation, then I would say line. Schoolchildren might be asked for form lines at assembly. Queue is not possible here.
+
+
+
+
+## 英文相近
 
 ### Pricipal VS Priciple
 
-principal
+- principal
 
 adj. 主要的；资本的
 
@@ -39,7 +49,7 @@ n. 首长；校长；资本；当事人
 
 principal是“校长，尤指学校的校长”。Principal也可以用作形容词，意为“第一或最高的等级、重要性或价值”。
 
-principle
+- principle
 n. 原理，原则；主义，道义；本质，本义；根源，源泉
 
 原则是“行为或行为准则”或“基本教义或宗旨”。"原则"常与"道德"相关，并被用作"道德"的同义词，意思是"关于"正确行为的原则或规则"或"对与错的区别"。

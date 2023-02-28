@@ -48,34 +48,33 @@ Transactional传播生效的设置与Bean和代理有关
 
 ## PROJECT ARCHITECTURE
 
-### Architecture
 {{< alert info >}}
-Controller  
+Controller层  
 VO: Value Object. 表现对象. 目前主要由前端负责, 给终端用户传递信息.
 - 简单分流前端业务, 因地制宜地回复错误信息
 {{< /alert >}}
 
 {{< alert success >}}
-Service  
+Service层  
 DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象.  
-BO: Business Object. 业务对象(个人理解, BO和DO很像, 是一个综合多个PO的复合抽象对象).
+BO: Business Object. 业务对象(BO和DO很像, 是一个综合多个PO的复合抽象对象, 而且小项目无需BO).
 - 只管业务流的处理, 不负责数据库查询
 - 可以调用其它Service, 也可以调用其它Repository
 - DTO的数据转换(暂且)也在Service层处理
 {{< /alert >}}
 
 {{< alert warning >}}
-DAO / Repository  
-DAO: Data Access Object. 小规模项, 使用DAO即可
+DAO / Repository层  
+DAO: Data Access Object. 数据访问层
 - MyBatis 接口与XML查询
 - 能通过数据库查询的尽量通过数据库直接查询
 {{< /alert >}}
 
 {{< alert danger >}}
-DB / Domain  
+DB / Domain层  
 PO: Persistant Object. 持久层对象. 类似数据库内的一条记录  
 DO: Domain Object. 领域对象
-- 数据库表PO关联关系设计, 与DO联动
+- 数据库表关联关系设计, 与DO联动. 小项目也无需PO层
 - 一个DO可能是多个PO关联组成的
 {{< /alert >}}
 
