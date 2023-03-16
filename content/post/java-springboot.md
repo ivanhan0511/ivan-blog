@@ -285,8 +285,7 @@ The maven pom.xml defines lifecycle goals and the gradle build.gradle defines ta
 Maven 3.8.1 blocked http connection
 - Do NOT edit this original IDEA maven settings file
   `C:\Program Files\JetBrains\IntelliJ IDEA 2022.2.1\plugins\maven\lib\maven3\conf\settings.xml`
-
-  {{< codeblock "settings.xml" JSON >}}
+  {{< codeblock "settings.xml" XML >}}
   ...
   <mirrors>
     <!-- mirror
@@ -321,7 +320,6 @@ Maven 3.8.1 blocked http connection
 
 - Find personal maven setting path in IDEA settings and DIY it `C:\Users\ivan\.m2\settings.xml`  
   (If not exists, create this file)
-
   {{< codeblock "settings.xml" XML >}}
   <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -348,7 +346,6 @@ Maven 3.8.1 blocked http connection
     </mirrors>
   </settings>
   {{< /codeblock >}}
-
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
 
