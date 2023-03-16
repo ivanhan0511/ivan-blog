@@ -320,32 +320,34 @@ Maven 3.8.1 blocked http connection
 
 - Find personal maven setting path in IDEA settings and DIY it `C:\Users\ivan\.m2\settings.xml`  
   (If not exists, create this file)
+
   {{< codeblock "settings.xml" XML >}}
-  <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
-    <mirrors>
-      <!-- mirror
-       | Specifies a repository mirror site to use instead of a given repository. The repository that
-       | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
-       | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
-       |
-      <mirror>
-        <id>mirrorId</id>
-        <mirrorOf>repositoryId</mirrorOf>
-        <name>Human Readable Name for this Mirror.</name>
-        <url>http://my.repository.com/repo/path</url>
-      </mirror>
-      -->
-      <mirror>
-        <id>aliyunmaven</id>
-        <mirrorOf>*</mirrorOf>
-        <name>阿里云公共仓库</name>
-        <url>https://maven.aliyun.com/repository/public</url>
-      </mirror>
-    </mirrors>
-  </settings>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
+  <mirrors>
+    <!-- mirror
+     | Specifies a repository mirror site to use instead of a given repository. The repository that
+     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+     |
+    <mirror>
+      <id>mirrorId</id>
+      <mirrorOf>repositoryId</mirrorOf>
+      <name>Human Readable Name for this Mirror.</name>
+      <url>http://my.repository.com/repo/path</url>
+    </mirror>
+    -->
+    <mirror>
+      <id>aliyunmaven</id>
+      <mirrorOf>*</mirrorOf>
+      <name>阿里云公共仓库</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+  </mirrors>
+</settings>
   {{< /codeblock >}}
+
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
 
