@@ -53,3 +53,8 @@ FLUSH PRIVILEGES;
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
+
+
+区别
+| caching_sha2_password |
+|  mysql_native_password |
