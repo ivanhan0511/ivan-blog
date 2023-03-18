@@ -89,40 +89,25 @@ PS:
 ## ANNOTATION
 
 ### 常用注解的深入理解
-[TODO]: To be done...
-
-- Controller控制Headers/Content-Type/Accept
-  
-  [TODO]: 各种继承关系的注解, 后续补充
-
-  - Springboot中Controller中的comsumes指定的是HTTP客户端的Content-Type, 默认application/x-www-form-urlencoded
-  - Springboot中Controller中的produces指定的是HTTP客户端的Accept
-
-http头部字段Content-Type约定请求和响应的HTTP body内容编码类型，客户端和服务端根据http头部字段Content-Type正确解码HTTP body内容。
-
+- [TODO]: 各种继承关系的注解, 类似RestController, 包含了ResponseBody等, 后续补充
+- Controller中设置Headers, 指定Content-Type/Accept
+  - Springboot中Controller中的comsumes所指定的是HTTP客户端的Content-Type的内容, 默认application/x-www-form-urlencoded
+  - Springboot中Controller中的produces所指定的是HTTP客户端的Accept的内容
+  {{< blockquote HTTP回顾 >}}
 常见的http头部Content-Type：
-
-application/x-www-form-urlencoded
-multipart/form-data
-application/json
-application/xml
-示例说明
+- application/x-www-form-urlencoded
+- multipart/form-data
+- application/json
+- application/xml
 
 前端使用Content-Type:"application/json"编码http请求内容并提交给服务端；服务端使用Content-Type:"application/json"解码http请求内容。
 如果不明确指定http Request头部Content-Type，将使用application/x-www-form-urlencoded; charset=UTF-8作为默认值，后端方法不能解码Content-Type:application/x-www-form-urlencoded的http Request body内容。同时也说明后端方法只能解码请求头部Content-Type为application/json的http Request body内容。
 
-服务端使用Content-Type:"application/json"编码http响应body内容返回给前端；前端使用Content-Type:"application/json"解码http响应body内容。
-服务端返回Response Content-Type:application/json，前端dataType不指定值。此时，解码http响应body内容，data类型是Object。
-服务端不返回Response Content-Type:application/json，前端dataType指定值json。些时，解码http响应body内容，data类型是Object。
-服务端不返回Response Content-Type:application/json，前端dataType不指定值"json"。此时，不能解码http响应body的json字符串，data类型是String。
-1人点赞
-网络编程
-
-
-作者：番薯大佬
-链接：https://www.jianshu.com/p/b7956dd875a5
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+- 服务端使用Content-Type:"application/json"编码http响应body内容返回给前端；前端使用Content-Type:"application/json"解码http响应body内容。
+- 服务端返回Response Content-Type:application/json，前端dataType不指定值。此时，解码http响应body内容，data类型是Object。
+- 服务端不返回Response Content-Type:application/json，前端dataType指定值json。些时，解码http响应body内容，data类型是Object。
+- 服务端不返回Response Content-Type:application/json，前端dataType不指定值"json"。此时，不能解码http响应body的json字符串，data类型是String。
+{{< /blockquote >}}
 
 
 ### 易混淆注解的对比
@@ -173,19 +158,30 @@ https://blog.csdn.net/gdkyxy2013/article/details/104769897
 
 
 ## DB MAPPER
-Use MyBatisPLus maven and use default CRUD methods.  
-But refuse to use QueryWrapper, use MyBatis' XML mapper.
+~~Use MyBatisPLus maven and use default CRUD methods.  ~~
+~~But refuse to use QueryWrapper, use MyBatis' XML mapper.~~
 
+全面拥抱MyBatis
 [MyBatis Documents](https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#Parameters)
 
 
 ### MultiDataSources
 
-application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
+#### Settings
+- application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
+
+- 使用多数据源时, 配置PageHelper时要注意(只有在使用application.yml格式的配置文件时会有问题):  
+  ```yml
+  ...
+  pagehelper:
+    autoRuntimeDialect: true  # 此处的配置项是驼峰, 不是IDEA自动提示的`auto-runtime-dialect: true`
+  ...
+  ```
+  因为如果驼峰被自动转译为横线分隔符, 会导致PageHelper切换多数据源时失效
 
 
 #### MultiDB & Transactional
-[TODO]: 将该理论的总结归类到SQL下  
+[TODO]: 后续不再使用MyBatis-Plus,也不会用到@DS(),而采用配置类的形式;将该理论的总结归类到SQL下  
 
 - 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
 - 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
