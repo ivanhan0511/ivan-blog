@@ -93,7 +93,7 @@ PS:
 - Controller中设置Headers, 指定Content-Type/Accept
   - Springboot中Controller中的comsumes所指定的是HTTP客户端的Content-Type的内容, 默认application/x-www-form-urlencoded
   - Springboot中Controller中的produces所指定的是HTTP客户端的Accept的内容
-  {{< blockquote HTTP回顾 >}}
+  {{< blockquote HTTP回顾 来自于网络 >}}
 常见的http头部Content-Type:<br>
 - application/x-www-form-urlencoded<br>
 - multipart/form-data<br>
