@@ -282,7 +282,7 @@ chmod 0755 start.sh
 
 
 
-## REDIES
+## REDIS
 
 ### Windows Env
 

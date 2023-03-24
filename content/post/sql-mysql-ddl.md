@@ -28,10 +28,21 @@ DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMM
 {{< toc >}}
 
 ## CREATE
+
+### CREATE DATABASE
+{{< codeblock "CREATE DATABASE" >}}
+CREATE DATABASE pear-admin-pro CHARACTER SET UTF8;
+{{< /codeblock >}}
+
+
+
+
 ### CREATE TABLE
 {{< codeblock "CREATE TABLE" >}}
-CREATE TABLE ...
-[TODO]: To be continued...
+CREATE TABLE student (
+        id INT,
+        name VARCHAR(32)
+        );
 {{< /codeblock >}}
 
 

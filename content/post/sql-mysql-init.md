@@ -40,13 +40,14 @@ mysql -h 127.0.0.1 -u root -p
 # Collect infomation
 show databases;
 
-SELECT user FROM mysql.user;
+SELECT host, user FROM mysql.user;
 
 SET GLOBAL validate_password.policy=LOW;
 
-#CREATE DATABASE xxxdb charset=utf8;
+CREATE DATABASE `some-db` CHARACTER SET UTF8;
 CREATE USER 'rd'@'%' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES on xxxdb.* TO 'rd'@'%';
+#CREATE USER 'rd'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES on `some-db`.* TO 'rd'@'%';
 #GRANT ALL PRIVILEGES ON *.* TO 'rd'@'%' WITH GRANT OPTION;  # This is deprecated!
 #GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'rd'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
