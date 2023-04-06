@@ -6,7 +6,7 @@ categories:
 - WebFramework
 tags:
 - SpringBoot
-- Domain Design Drive
+- DomainDesignDrive
 keywords:
 - java
 - springboot
@@ -109,7 +109,7 @@ PS:
 - Controller中设置Headers, 指定Content-Type/Accept
   - Springboot中Controller中的comsumes所指定的是HTTP客户端的Content-Type的内容, 默认application/x-www-form-urlencoded
   - Springboot中Controller中的produces所指定的是HTTP客户端的Accept的内容
-  {{< blockquote HTTP回顾 来自于网络 >}}
+{{< blockquote HTTP回顾 来自于网络 >}}
 常见的http头部Content-Type:<br>
 - application/x-www-form-urlencoded<br>
 - multipart/form-data<br>
@@ -391,6 +391,11 @@ However, it is always difficult to prefer one between the two.
 
 ### 软件开发规范
 
+#### 设计规范
+参考[PROJECT ARCHITECTURE](# PROJECT ARCHITECTURE)
+
+
+#### 命名规范
 - Service/DAO层方法命名规约
   + 获取单个对象的方法用get做前缀
   + 获取多个对象的方法用list做前缀

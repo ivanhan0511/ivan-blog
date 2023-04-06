@@ -1,14 +1,14 @@
 ---
-title: "EXAMPLE TITLE"
+title: "CONFIGURATION IN macOS"
 date: 2023-02-15T15:17:20+08:00
 categories:
-- Coffee
-- Grinder
+- OS
+- macOS
 tags:
-- Mazzer
+- macOS
 keywords:
-- coffee
-- grinder
+- config
+- macos
 clearReading: true
 #thumbnailImage: //example.com/static/A.png
 thumbnailImage: image-1.png
@@ -27,7 +27,7 @@ showSocial: true
 showDate: true
 ---
 
-This is a custom summary and does *NOT* appear in the post.
+Some record for configuring macOS
 <!--more-->
 
 {{< toc >}}
