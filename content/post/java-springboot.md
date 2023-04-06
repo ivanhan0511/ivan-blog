@@ -1,15 +1,17 @@
 ---
 title: "SpringBoot"
-date: 2023-02-24T14:10:01+08:00
+date: 2023-04-06T14:10:22+08:00
 categories:
 - Java
 - WebFramework
 tags:
 - SpringBoot
+- Domain Design Drive
 keywords:
 - java
 - springboot
-- web frame
+- framework
+- domain
 clearReading: true
 #thumbnailImage: //example.com/static/A.png
 thumbnailImage: image-1.png
@@ -37,46 +39,60 @@ It could be a productional framework to make a software project stronger.
 {{< toc >}}
 
 ## CORE
-To be grabbed deeply. IoC and AoP
+Architecture, IoC and AoP.
 
+软件开发的核心依然是遵从架构设计与业务流的匹配, 没有最好只有更合适, 不能本末倒置.  
+但本文仅限于Springboot, 所以就只讨论这个framework之内的设计和实现
 
-Transactional传播生效的设置与Bean和代理有关
-
-@DS()源于Mybatis-Plus
 
 
 
 ## PROJECT ARCHITECTURE
 
-{{< alert info >}}
-Controller层  
-VO: Value Object. 表现对象. 目前主要由前端负责, 给终端用户传递信息.
-- 简单分流前端业务, 因地制宜地回复错误信息
-{{< /alert >}}
+{{< alert danger >}}
+DB / Domain层
 
-{{< alert success >}}
-Service层  
-DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象.  
-BO: Business Object. 业务对象(BO和DO很像, 是一个综合多个PO的复合抽象对象, 而且小项目无需BO).
-- 只管业务流的处理, 不负责数据库查询
-- 可以调用其它Service, 也可以调用其它Repository
-- DTO的数据转换(暂且)也在Service层处理
+PO: Persistant Object. 持久层对象. 类似数据库内的一条记录
+
+DO: Domain Object. 领域对象
+
+- 核心要考虑和设计的内容, 优先考虑架构, 模型和业务流, 其余的展现和逻辑组合, 在其它层考虑
+- 淡化PO的概念, 因为每一个Domain类都能对应一个数据库表
+- 一对多的关联关系, 通过List/Set类型的字段关联, 通过增加以该Domain为主语的行为方法来表达输入输出的行为
+- 一对一的关联关系, 还是仿照数据库, 设计一个xxxID的字段
 {{< /alert >}}
 
 {{< alert warning >}}
-DAO / Repository层  
+DAO / Repository层
+
 DAO: Data Access Object. 数据访问层
+
 - MyBatis 接口与XML查询
-- 能通过数据库查询的尽量通过数据库直接查询
+- 能通过数据库查询的尽量通过数据库直接查询, 一对一和一对多的关联关系也通过MyBatis的resultMap来展示
+- 这一层比较薄, 只做数据库的访问, 做好通用抽象即可
 {{< /alert >}}
 
-{{< alert danger >}}
-DB / Domain层  
-PO: Persistant Object. 持久层对象. 类似数据库内的一条记录  
-DO: Domain Object. 领域对象
-- 数据库表关联关系设计, 与DO联动. 小项目也无需PO层
-- 一个DO可能是多个PO关联组成的
+{{< alert success >}}
+Service层
+
+DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象. 小型项目用DTO交付给前端即可
+
+BO: Business Object. 业务对象(BO和DO很像, 是一个综合多个PO的复合抽象对象, 而且小项目无需BO).
+
+- Domain Design Drive下的Service层也比较薄, 一般是复杂业务对多个Domain的封装
+- 可以调用其它Service(推荐), 也可以调用其它Repository
+- 如果Repository输出的Domain数据不符合前端要求, 则DTO的数据转换也在这一层处理
 {{< /alert >}}
+
+{{< alert info >}}
+Controller层
+
+VO: Value Object. 表现对象. 小型项目可以没有VO, 或由前端负责展示, 给终端用户传递信息
+
+- 校验前端数据
+- 简单分流前端业务, 因地制宜地回复错误信息
+{{< /alert >}}
+
 
 PS: 
 - [项目开发中，真的有必要定义VO，BO，PO，DO，DTO这些吗？](https://blog.51cto.com/u_12302929/4811425)
