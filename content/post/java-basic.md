@@ -84,6 +84,32 @@ public static List<A> asList(A... a);
 {{< /alert >}}
 
 
+### 判断类实例中的各个属性是否有null
+{{< codeblock "a.java" >}}
+private boolean hasNull(Object obj) {
+    if (obj == null) {
+        return true;
+    }
+    final Field[] fields = ClassUtil.getDeclaredFields(obj.getClass());
+    Object fieldValue = null;
+    for (Field field : fields) {
+        field.setAccessible(true);
+        try {
+            fieldValue = field.get(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (null == fieldValue) {
+            return true;
+        }
+    }
+    return false;
+}
+{{< /codeblock >}}
+
+
+
+
 ## JDBC
 
 Once a connection is obtained we can interact with the database. 

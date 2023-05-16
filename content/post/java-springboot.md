@@ -30,31 +30,23 @@ showSocial: true
 showDate: true
 ---
 
+The tec core are architecture, IoC and AoP.
 
-It could be a productional framework to make a software project stronger.
+But just let's focus on the architecture design for business workflow in the SpringBoot framework.
 
+No best, only better.
 
 <!--more-->
 
 {{< toc >}}
-
-## CORE
-Architecture, IoC and AoP.
-
-软件开发的核心依然是遵从架构设计与业务流的匹配, 没有最好只有更合适, 不能本末倒置.  
-但本文仅限于Springboot, 所以就只讨论这个framework之内的设计和实现
-
-
-
 
 ## PROJECT ARCHITECTURE
 
 {{< alert danger >}}
 DB / Domain层
 
-PO: Persistant Object. 持久层对象. 类似数据库内的一条记录
-
-DO: Domain Object. 领域对象
+PO: Persistant Object. 持久层对象. 类似数据库内的一条记录  
+DO: Domain Object. 领域对象  
 
 - 核心要考虑和设计的内容, 优先考虑架构, 模型和业务流, 其余的展现和逻辑组合, 在其它层考虑
 - 淡化PO的概念, 因为每一个Domain类都能对应一个数据库表
@@ -65,29 +57,30 @@ DO: Domain Object. 领域对象
 {{< alert warning >}}
 DAO / Repository层
 
-DAO: Data Access Object. 数据访问层
+DAO: Data Access Object. 数据访问层  
 
 - MyBatis 接口与XML查询
 - 能通过数据库查询的尽量通过数据库直接查询, 一对一和一对多的关联关系也通过MyBatis的resultMap来展示
 - 这一层比较薄, 只做数据库的访问, 做好通用抽象即可
+- 善用MyBatis的数据校验来最好查询/更新/插入的冗余, 解放service层
 {{< /alert >}}
 
 {{< alert success >}}
 Service层
 
-DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象. 小型项目用DTO交付给前端即可
-
-BO: Business Object. 业务对象(BO和DO很像, 是一个综合多个PO的复合抽象对象, 而且小项目无需BO).
+DTO: Data Transfer Object. 通常是在OpenApi. 即此项目与其他外界项目交互时使用的对象. 小型项目用DTO交付给前端即可  
+BO: Business Object. 业务对象(BO和DO很像, 是一个综合多个PO的复合抽象对象, 而且小项目无需BO)  
 
 - Domain Design Drive下的Service层也比较薄, 一般是复杂业务对多个Domain的封装
 - 可以调用其它Service(推荐), 也可以调用其它Repository
 - 如果Repository输出的Domain数据不符合前端要求, 则DTO的数据转换也在这一层处理
+- 尽量少的数据规范性校验, 更多的业务数据校验
 {{< /alert >}}
 
 {{< alert info >}}
 Controller层
 
-VO: Value Object. 表现对象. 小型项目可以没有VO, 或由前端负责展示, 给终端用户传递信息
+VO: Value Object. 表现对象. 小型项目可以没有VO, 或由前端负责展示, 给终端用户传递信息  
 
 - 校验前端数据
 - 简单分流前端业务, 因地制宜地回复错误信息
@@ -209,6 +202,7 @@ https://blog.csdn.net/gdkyxy2013/article/details/104769897
     + Mysql 中的默认级别
     + Oracle 不支持 REPEATABLE_READ
   - SERIALIZABLE, 最高级别的隔离
+- 注意事务传播, 需要时则加入传播的扩散要求
 
 {{< alert info >}}
 @DS 必须加在 @Transactional 对应的类或者方法上  
@@ -391,9 +385,6 @@ However, it is always difficult to prefer one between the two.
 
 ### 软件开发规范
 
-#### 设计规范
-参考[PROJECT ARCHITECTURE](# PROJECT ARCHITECTURE)
-
 
 #### 命名规范
 - Service/DAO层方法命名规约
@@ -402,7 +393,7 @@ However, it is always difficult to prefer one between the two.
   + 获取统计值的方法用count做前缀
   + 插入的方法用save/insert做前缀
   + 删除的方法用remove/delete做前缀
-  + 修改的方法用update做前缀
+  + 修改的方法用edit/update做前缀
 - 领域模型命名规约
   + 数据对象: xxxDO, xxx即表名
   + 数据传输对象: xxxDTO, xxx即业务领域相关的名称
@@ -413,3 +404,66 @@ However, it is always difficult to prefer one between the two.
   + 复杂对象的交互必须封装成Request 和 Response与前端进行交互
 
 
+
+
+## 杂
+### 数据库及多数据源
+**非**分布式数据库, 不使用雪花算法, 使用数据库自增ID
+
+
+#### 多数据源切换, 且实现事务原子性
+- 使用多数据源时, ~~application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法,~~ 配置PageHelper时要注意(只有在使用application.yml格式的配置文件时会有问题):  
+  ```yml
+  ...
+  pagehelper:
+    autoRuntimeDialect: true  # 此处的配置项是驼峰, 不是IDEA自动提示的`auto-runtime-dialect: true`
+  ...
+  ```
+  因为如果驼峰被自动转译为横线分隔符, 会导致PageHelper切换多数据源时失效
+- ~~跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源~~
+- ~~事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换~~  
+  *注意：@DS 必须加在 @Transactional 对应的类或者方法上。 如在 mapper中加了@DS，但是 @Transactional 加在 service 方法中，此时获取为默认的datasource。（因为在事务中已经获取了一次datasource的connection，而此时无DS注解）*
+- 后续不使用MyBatis-Plus, 使用MyBatis并手动配置数据源的类以及SqlSessionFactory
+
+
+
+
+#### 数据库映射
+- 取消MyBatis-Plus
+  + IService和BaseMapper中"充分利用"了Java新规定中Interface可以有default的用法, 很不符合Java精神
+  + MybatisPlus的QueryWrapper越看越像SQLAlchemy的ORM, 学习成本高, 且忽略了SQL的实质
+  + 性能和稳定性等不稳定因素越来越多, 比如一旦手动干预, 很多所谓的"便利"瞬间全无, 还是得依靠MyBatis
+  + 按照MyBatis写SQL更像原生SQL
+- 全面投入MyBatis怀抱
+
+
+
+
+
+### 连接池选型
+Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
+
+Druid是淘宝选用的, 高并发的情况会适用一些
+
+
+
+
+### 缓存
+- MyBatis缓存
+- Redis缓存
+
+
+### Domain设计原则
+Domain Design Drive 的理解:
+- 淡化PO的概念, 没有关联关系的每一个domain类都能对应一个数据库表
+- domain类中无论是一对一还是一对多的关联关系, 都能找到另外一个domain类与之对应
+
+
+### 数据转换(DTO)位置
+- DTO or VO在哪里转换比较合适? service层?
+  - 以PearAdminPro的理解, 该项目是DDD模型, domain即DTO层, 已经是从数据库获取数据后经过转换后需要输出的内容
+  - 但domain只是单表, 多表组合数据需要在XML中通过ResultMap来组装数据
+  - 一对多关联中, "一"的domain表中写入一个不存在的字段, 用以关联"多"的表数据列表
+
+
+### 拦截器

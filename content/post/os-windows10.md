@@ -1,5 +1,5 @@
 ---
-title: "What to Do after Init Windows10"
+title: "What to Do after Init Windows"
 date: 2023-02-15T15:16:59+08:00
 categories:
 - OS
@@ -67,6 +67,7 @@ WeChat
 
 ## R&D
 npm
+
 
 ### VisualStudioPro
 
