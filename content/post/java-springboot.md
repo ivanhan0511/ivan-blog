@@ -1,6 +1,6 @@
 ---
 title: "SpringBoot"
-date: 2023-04-06T14:10:22+08:00
+date: 2023-05-16T14:10:22+08:00
 categories:
 - Java
 - WebFramework
@@ -82,7 +82,7 @@ Controller层
 
 VO: Value Object. 表现对象. 小型项目可以没有VO, 或由前端负责展示, 给终端用户传递信息  
 
-- 校验前端数据
+- 校验前端数据, 注意校验分组
 - 简单分流前端业务, 因地制宜地回复错误信息
 {{< /alert >}}
 

@@ -42,56 +42,31 @@ Logitech OptionPlus
 
 Fiio driver
 
-
-
-
-## PROXY
 v2ray
 
+坚果云
 
-
-
-## GAME
-Steam
-
-EPIC
-
-
-
-
-## LIFE
 WeChat
 
+腾讯会议
+
+亿图
 
 
+
+<br>
 
 ## R&D
-npm
 
-
-### VisualStudioPro
-
-- 切换enter还是tab自动补全
-
-代码补全功能很实用，当你码代码是输入一个常见的关键字时它会自动出现常见的关键字列表。在默认情况下，visual studio 2017是使用Tab进行代码补全的,但一般习惯回车补全的时候就需要重新设置.
-具体路径如下：
-工具–>选项–>文本编辑器–>C/C++ -->高级–>主动提交成员列表
-————————————————
-版权声明：本文为CSDN博主「Jimmy_jimi」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/weixin_42269472/article/details/110565797
-
-方法如上, 但(Mar03, 2023)想尝试一下使用tab, 原因如下
-
-我一直用tab，原因是bash默认的补全键是tab，linux下tab是通用补全键，建议你改用tab。
-
-如果你实在是习惯了enter，可以在回车换行前加个空格嘛，话说我很久以前也是用enter的
-
-
-### IDEA
+CLion or VisualStudioPro ?
 
 PyCharm
 
-HBuilder
+IDEA
+- git?
+
+HBuilder or WebStorm or VS Code ?  
+npm?
 
 Postman
 
@@ -101,16 +76,46 @@ Notepad++
 
 Typora
 
-XShell
+XShell/XFtp
+
+WSL: Windows Subsystem for Linux
 
 VMWare
+- 切换安装路径
+- 纯净Win10最新版, 快照
+- Office365
+- 银行软件
+- 各种Linux
+- 折腾环境/演示环境
+
+MSYS2 or Cygwin?  
+~~MinGW32, MinGW64~~
 
 MySQL Server
 
 SQL Server
 
-Office365
-
-git
-
 Sunlogin
+
+WireShark
+
+微信开发者工具
+
+
+
+自动补全: Enter or Tab?
+
+个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
+
+Visual Studio 2019是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置.  
+具体路径如下:  
+工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表
+
+
+<br>
+
+## GAME
+Steam
+
+EPIC
+
