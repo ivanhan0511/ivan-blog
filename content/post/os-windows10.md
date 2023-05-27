@@ -34,66 +34,92 @@ This is a custom summary and does *NOT* appear in the post.
 {{< toc >}}
 
 ## BASIC
-Input method, ctrl+space to switch
+跨平台常用工具, 兼容手机, macOS, Windows
 
-Chrome as default browser
+- Input method, ctrl+space to switch
+- Chrome as default browser
+- HHKB
+- Logitech OptionPlus
+- v2ray
+- 坚果云
+- Office365
+- WeChat
+- 腾讯会议
+- 亿图
+- Fiio driver
+- EMail客户端
 
-Logitech OptionPlus
-
-Fiio driver
-
-v2ray
-
-坚果云
-
-WeChat
-
-腾讯会议
-
-亿图
 
 
 
 <br>
 
 ## R&D
+按先后顺序排序
 
-CLion or VisualStudioPro ?
 
-PyCharm
+VMWare  
+规划好哪些工具安装在裸机, 哪些安装在VMWare
+
+- 切换安装路径到D:\盘
+- 纯净Win10最新版, 快照
+- 银行软件
+- 各种Linux
+  - PHP
+  - Redis
+  - ...
+- 折腾环境/演示环境
+
+
+VisualStudioPro  
+最大化使用, C, Python, JavaScript, Vim
+
+- Install VsVim extension
+- Both English and Chinese, prefer English
+- 可能会提供git环境
+- 负责ivan-blog的编辑
+- 使用其Python环境, 不安装Python在裸机
+- 使用其npm环境? 不安装npm在裸机可以吗?
+
+
+~~CLion or VisualStudioPro ?~~  
+目前有点倾向VisualStudioPro, 可以写C/C++, 还可以写Python, JavaScript, 何乐而不为呢?
+Java就交给JetBrains IDEA就可以了
+
+
+~~PyCharm or VisualStudioPro ?~~
+
 
 IDEA
-- git?
+- git? 验证VisualStudioPro是否会安装git
+- git? 验证MSYS2是否会安装git
+- 使用其Java环境, 不安装Java在裸机
 
-HBuilder or WebStorm or VS Code ?  
-npm?
 
-Postman
+MSYS2 or Cygwin?  
+先安装VisualStudioPro, 看看是否会提供git环境  
+不行再试试MSYS2, 而不用安装Git For Bash  
+~~MinGW32, MinGW64, WSL~~
 
-Navicat and crash.exe
+~~HBuilder or WebStorm or VS Code ?~~  
+~~npm?~~
 
-Notepad++
+~~Notepad++~~
+- 可以使用VisualStudioPro代替
 
 Typora
+- 需要看目录时, 例如接口文档中上来来回滚动, 还是需要Typora的目录
+- 所见即所得的格式校验, PDF输出, 还是需要Typora
 
 XShell/XFtp
 
-WSL: Windows Subsystem for Linux
+Navicat 还是最终DB的解决方案?  
+MySQL Workbench和SSMS这俩工具太难用了, 还是Navicat吧
 
-VMWare
-- 切换安装路径
-- 纯净Win10最新版, 快照
-- Office365
-- 银行软件
-- 各种Linux
-- 折腾环境/演示环境
+MySQL Server~~ + (MySQL Workbench)~~  
+`MySQL Workbench -> Preferences -> SQL Editor -> QueryEditor -> use UPPERCASE keywords on completion`
 
-MSYS2 or Cygwin?  
-~~MinGW32, MinGW64~~
-
-MySQL Server
-
-SQL Server
+SQL Server~~ + (SSMS)~~
 
 Sunlogin
 
@@ -101,8 +127,14 @@ WireShark
 
 微信开发者工具
 
+hugo创建静态博客
+
+Postman
+
+Inno Setup Compiler
 
 
+*Tips*
 自动补全: Enter or Tab?
 
 个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
@@ -110,6 +142,8 @@ WireShark
 Visual Studio 2019是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置.  
 具体路径如下:  
 工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表
+
+
 
 
 <br>
