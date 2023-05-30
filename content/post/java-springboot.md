@@ -73,7 +73,10 @@ BO: Business Object. 业务对象(BO和DO很像, 是一个综合多个PO的复�
 
 - Domain Design Drive下的Service层也比较薄, 一般是复杂业务对多个Domain的封装
 - 可以调用其它Service(推荐, 如果涉及到多个数据源切换时尤其重要), 也可以调用其它Repository
-- 如果Repository输出的Domain数据不符合前端要求, 则DTO的数据转换也在这一层处理
+- DTO转换:
+  - 如果单一的数据CRUD, 纯对应的Service + Repository + Domain就能满足前端数据呈现需要
+  - 如果是有数据库事务的综合业务, 返回的数据也相对修改的比较多, 才考虑增加DTO来转换Domain
+  - 另外类似一些敏感信息需要屏蔽的Domain, 才考虑增加DTO来转换Domain
 - 尽量少的数据规范性校验, 更多的业务数据校验
 {{< /alert >}}
 
@@ -163,6 +166,8 @@ https://blog.csdn.net/gdkyxy2013/article/details/104769897
 
 
 
+<br>
+
 ## DB MAPPER
 **JUST** use MyBatisPLus maven and use default CRUD methods.  
 But refuse to use QueryWrapper, use MyBatis' XML mapper.
@@ -175,6 +180,23 @@ Reason as below:
 
 **非**分布式数据库, 不使用雪花算法, 使用数据库自增ID int
 
+
+### Mapper Design
+- 因功能不同而查询同一个表, 很可能过滤条件维度和结果维度都不相同, 因此按照功能划分查询列表数据或查询单条数据比较合理(暂时, May 30, 2023)
+  - selectOneForXxxFunction(Integer param)
+  - selectListForYyyFunction(YyyRequest request)
+    - request中通过分组校验参数来整合不同的请求参数, 以便Mapper层可以一条语句应对多个controller层不同条件的查询
+- 复用<sql/>仅涉及columns字段
+  - 为了在<select/>中看得更清晰
+  - 为了MyBatisCodeHelperPro这个插件能关联<sql/>和<resultMap/>对应的字段
+- 不使用联合查询, 会导致PageHelper无法正确分页
+- 因为<resultMap/>的功能, SQL语句中可以/也不能 用`LEFT JOIN`, 也不用增加太多where条件
+  - MyBatis会做子查询继续调用<collecttion/>中的查询语句
+
+
+
+
+### MultiDB & Transactional
 
 #### Settings
 - application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
@@ -189,7 +211,7 @@ Reason as below:
   因为如果驼峰被自动转译为横线分隔符, 会导致PageHelper切换多数据源时失效
 
 
-#### MultiDB & Transactional
+#### 数据隔离&事务传播
 - 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
 - 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
 - 事务隔离(更新丢失, 脏读, 不可重复读, 幻读)
