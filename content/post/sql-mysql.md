@@ -69,7 +69,8 @@ FLUSH PRIVILEGES;
 
 
 区别
-| caching_sha2_password |
+
+| caching_sha2_password |  
 |  mysql_native_password |
 
 
@@ -79,7 +80,6 @@ FLUSH PRIVILEGES;
 
 ## DCL
 DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
-
 
 ### GRANT
 ### REVOKE
@@ -99,8 +99,6 @@ DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMM
 {{< codeblock "CREATE DATABASE" >}}
 CREATE DATABASE pear-admin-pro CHARACTER SET UTF8;
 {{< /codeblock >}}
-
-
 
 
 #### CREATE TABLE
@@ -148,9 +146,8 @@ DROP TABLE <table_name>;
 {{< /codeblock >}}
 
 
-
-
 #### DROP INDEX
+
 
 ### TRUNCATE
 
@@ -173,8 +170,6 @@ DML: Data Manipulation Language, like `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `M
 INSERT INTO <table_name>...
 [TODO]: To be continued...
 {{< /codeblock >}}
-
-
 
 
 ### SELECT
@@ -234,8 +229,6 @@ SELECT * FROM 表名 WHERE YEAR(时间字段名) = YEAR(DATE_SUB(NOW(),INTERVAL 
 UPDATE <table_name> SET ...;
 [TODO]: To be continued...
 {{< /codeblock >}}
-
-
 
 
 ### DELETE

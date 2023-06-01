@@ -197,6 +197,8 @@ Reason as below:
 
 
 ### MultiDB & Transactional
+dehai-admin项目是使用MS SQL Server 与 MySQL 两种数据库的典型例子
+
 
 #### Settings
 - application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
