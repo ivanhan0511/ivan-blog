@@ -1,6 +1,6 @@
 ---
-title: "MySQL8.0 perations"
-date: 2023-05-30T15:00:00+08:00
+title: "MySQL8.0 Operations"
+date: 2023-06-02T16:49:00+08:00
 categories:
 - SQL
 - MySQL
