@@ -13,6 +13,7 @@ keywords:
 ---
 
 Which type of Mazzer grinder?
+List my coffee equipments.
 <!--more-->
 
 ## POUR-OVER COFFEE

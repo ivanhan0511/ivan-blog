@@ -290,3 +290,6 @@ TCL: Transaction Control Language, like `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `STAR
 ## VIEW
 Create a SQLView to make query fast
 
+
+## 锁
+行锁, 表锁, 乐观锁, 悲观锁

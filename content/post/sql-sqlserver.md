@@ -1,4 +1,4 @@
----
+ï»¿---
 title: "SQL Server Init Operations"
 date: 2023-01-17T15:41:38+08:00
 categories:
@@ -45,34 +45,34 @@ select * from sysdatabases;
 
 
 
-SQLSERVER ²éÑ¯½ñÌì¡¢×òÌì¡¢±¾ÖÜ¡¢ÉÏÖÜ¡¢±¾ÔÂ¡¢ÉÏÔÂÊı¾İ
+SQLSERVER æŸ¥è¯¢ä»Šå¤©ã€æ˜¨å¤©ã€æœ¬å‘¨ã€ä¸Šå‘¨ã€æœ¬æœˆã€ä¸Šæœˆæ•°æ®
 
-DATEDIFF (datepart, startdate, enddate) ¼ÆËãÊ±¼ä²î
+DATEDIFF (datepart, startdate, enddate) è®¡ç®—æ—¶é—´å·®
 
-datepareÖµ year | quarter | month | week | day | hour | minute | second | millisecond
-startdate ¿ªÊ¼ÈÕÆÚ
-enddate ½áÊøÈÕÆÚ
-GetDate() »ñÈ¡µ±Ç°µÄÏµÍ³ÈÕÆÚ
+datepareå€¼ year | quarter | month | week | day | hour | minute | second | millisecond
+startdate å¼€å§‹æ—¥æœŸ
+enddate ç»“æŸæ—¥æœŸ
+GetDate() è·å–å½“å‰çš„ç³»ç»Ÿæ—¥æœŸ
 
-ÏÂÃæÀı×ÓÖĞ±íÃûÎªtablename,Ìõ¼ş×Ö¶ÎÃûÎªinputdate
-²éÑ¯½ñÌì
+ä¸‹é¢ä¾‹å­ä¸­è¡¨åä¸ºtablename,æ¡ä»¶å­—æ®µåä¸ºinputdate
+æŸ¥è¯¢ä»Šå¤©
 SELECT * FROM tablename where DATEDIFF(day,inputdate,GETDATE())=0
 
-²éÑ¯×òÌì
+æŸ¥è¯¢æ˜¨å¤©
 SELECT * FROM tablename where DATEDIFF(day,inputdate,GETDATE())=1
 
-²éÑ¯±¾ÖÜ
+æŸ¥è¯¢æœ¬å‘¨
 SELECT * FROM tablename where datediff(week,inputdate,getdate())=0
 
-²éÑ¯ÉÏÖÜ
+æŸ¥è¯¢ä¸Šå‘¨
 SELECT * FROM tablename where datediff(week,inputdate,getdate())=1
 
-²éÑ¯±¾ÔÂ
+æŸ¥è¯¢æœ¬æœˆ
 SELECT * FROM tablename where DATEDIFF(month,inputdate,GETDATE())=0
 
-²éÑ¯ÉÏÔÂ
+æŸ¥è¯¢ä¸Šæœˆ
 SELECT * FROM tablename where DATEDIFF(month,inputdate,GETDATE())=1
 
-²éÑ¯±¾Äê
+æŸ¥è¯¢æœ¬å¹´
 select * from Keywords  where datediff(year, Addtime,getdate())=0
 

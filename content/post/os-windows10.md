@@ -28,18 +28,19 @@ showSocial: true
 showDate: true
 ---
 
-This is a custom summary and does *NOT* appear in the post.
+After initialization of Windows, here is the TODO list.
+
 <!--more-->
 
 {{< toc >}}
 
 ## BASIC
-跨平台常用工具, 兼容手机, macOS, Windows
+常用的跨平台工具, 兼容手机 / macOS / Windows
 
 - Input method, ctrl+space to switch
 - Chrome as default browser
 - HHKB
-- Logitech OptionPlus
+- Logitech Anywhere3 and OptionPlus
 - v2ray
 - 坚果云
 - Office365
@@ -131,7 +132,7 @@ hugo创建静态博客
 
 Postman
 
-Inno Setup Compiler
+Inno Setup Compiler(可选)
 
 
 *Tips*
@@ -139,10 +140,12 @@ Inno Setup Compiler
 
 个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
 
-Visual Studio 2019是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置.  
+*Visual Studio 2019是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置.*  
 具体路径如下:  
 工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表
 
+Visual Studio 2019 修改字符集编码  
+https://blog.csdn.net/qq_41868108/article/details/105750175
 
 
 

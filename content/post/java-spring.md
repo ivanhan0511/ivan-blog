@@ -1,15 +1,18 @@
 ﻿---
-title: "Basic Network Knowledge"
-date: 2023-05-31T17:10:07+08:00
+title: "Spring"
+date: 2023-06-08T16:44:52+08:00
 categories:
-- Network
-- Ping
+- Java
+- WebFramework
 tags:
-- ping
+- Java
+- Spring
 keywords:
-- network
-- ping
-- icmp
+- java
+- spring
+- bean
+- ioc
+- aop
 clearReading: true
 #thumbnailImage: //example.com/static/A.png
 thumbnailImage: image-1.png
@@ -33,14 +36,11 @@ This is a custom summary and does *NOT* appear in the post.
 
 {{< toc >}}
 
-## 七层网络模型
 
+## BEAN生命周期
 
-## HTTP
-帧格式图解
+## MVC事务
 
+## IOC
 
-
-## ICMP
-
-
+## AOP

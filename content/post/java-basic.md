@@ -22,15 +22,18 @@ Java basic knowledge.
 
 {{< toc >}}
 
-## BASIC
+## THreadLocal
 
-### 类型对比
-#### String[]
-
-#### ArrayList
+## JVM
 
 
-#### int or Integer
+## 类型对比
+### String[]
+
+### ArrayList
+
+
+### int or Integer
 
 用int还是用Integer?  
 昨天例行code review时大家有讨论到int和Integer的比较和使用。 这里做个整理，发表一下个人的看法。
@@ -111,7 +114,6 @@ private boolean hasNull(Object obj) {
 
 
 ## JDBC
-
 Once a connection is obtained we can interact with the database. 
 The JDBC Statement, CallableStatement, and PreparedStatement interfaces define the methods 
 and properties that enable you to send SQL or PL/SQL commands and receive data from your database.

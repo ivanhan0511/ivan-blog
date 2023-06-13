@@ -1,4 +1,4 @@
----
+﻿---
 title: "SpringBoot"
 date: 2023-05-16T14:10:22+08:00
 categories:
@@ -62,6 +62,7 @@ DAO: Data Access Object. 数据访问层
 - MyBatis 接口与XML查询
 - 能通过数据库查询的尽量通过数据库直接查询, 一对一和一对多的关联关系也通过MyBatis的resultMap来展示
 - 这一层比较薄, 只做数据库的访问, **关键要做好通用抽象**
+- (仅关联DO对象, DTO的转换放在serivce层, 用BeanUtil.copyProperties来快速转换, 以便从repository层拿到的数据都是全数据)
 - 善用MyBatis的数据校验来最好查询/更新/插入的冗余, 解放service层
 {{< /alert >}}
 
@@ -84,7 +85,7 @@ BO: Business Object. 业务对象(BO和DO很像, 是一个综合多个PO的复�
 Controller层
 
 VO: Value Object. 表现对象. 小型项目可以没有VO, 或由前端负责展示, 给终端用户传递信息  
-
+- 从综合业务场景考虑接口设计, 调用综合业务服务
 - 校验前端数据, 使用校验分组
 - 简单判断分流前端业务, 因地制宜地回复错误信息
 {{< /alert >}}
@@ -439,7 +440,7 @@ Maven 3.8.1 blocked http connection
 
 <br>
 
-## Appendix
+## APPENDIX
 
 ### 命名规范
 - Service/DAO层方法命名规约
@@ -458,3 +459,6 @@ Maven 3.8.1 blocked http connection
 - Request和Response对象的约定[参考]
   + 复杂对象的交互必须封装成Request 和 Response与前端进行交互
 
+
+## TODO
+全局日期转换格式兼容
