@@ -44,8 +44,6 @@ No best, only better.
 
 {{< alert danger >}}
 DAO / Repository层
-
-DAO: Data Access Object. 数据访问层  
 - MyBatis 接口与XML查询
 - 能通过数据库查询的尽量通过数据库直接查询, 一对一和一对多的关联关系也通过MyBatis的resultMap来展示
 - 这一层比较薄, 只做数据库的访问, **关键要做好通用抽象**
@@ -55,9 +53,6 @@ DAO: Data Access Object. 数据访问层
 
 {{< alert warning >}}
 Domain层
-
-PO: Persistant Object. 持久层对象. 类似数据库内的一条记录  
-DO: Domain Object. 领域对象  
 - 核心要考虑和设计的内容, 优先考虑架构, 模型和业务流, 其余的展现和逻辑组合, 在其它层考虑
 - 淡化PO的概念, 因为每一个Domain类都能对应一个数据库表
 - 一对多的关联关系, 通过List/Set类型的字段关联, **通过增加以该Domain为主语的行为方法来表达输入输出的行为**
@@ -66,9 +61,6 @@ DO: Domain Object. 领域对象
 
 {{< alert success >}}
 Service层
-
-DTO: Data Transfer Object. 通常在OpenApi返回的对象中使用DTO
-BO: Business Object. 业务对象
 - Domain Design Drive下的Service层也比较薄, 一般是复杂业务对多个Domain的联合封装
 - 可以调用其它Service(推荐, 如果涉及到多个数据源切换时尤其重要), 也可以调用其它Repository
 - 尽量少的数据规范性校验, 更多的业务数据校验
@@ -76,24 +68,28 @@ BO: Business Object. 业务对象
 
 {{< alert info >}}
 Controller层
-
-VO: Value Object. 表现对象.
 - 从综合业务场景考虑接口设计, 调用综合业务服务
 - 校验前端数据, 使用校验分组
 - 简单判断分流前端业务, 因地制宜地回复错误信息
 {{< /alert >}}
 
 
-{{< blockquote "Ivan" "My PS" >}}
 Ivan PS: 
-- POJO: Plain Old Java Object. 是PO/DO/DTO/BO/VO的统称
+{{< blockquote "简称" >}}
+DAO: Data Access Object, 数据访问层  
+PO: Persistant Object, 持久层对象. 类似数据库内的一条记录<br>
+DO: Domain Object, 领域对象<br>
+DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO<br>
+BO: Business Object, 业务对象<br>
+VO: Value Object, 表现对象<br>
+POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
+{{< /blockquote >}}
 - 其实, 如果你的项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要, 相关文章有很多
-- Controller层入参校验, 总要有一层, 叫XxxDTO也行, 叫XxxRequest也行
-- Controller层输出到前端, 也总要有一层, 叫XxxDTO, XxxVO, XxxResponse都行
-- Service层, 无论是否推崇DDD驱动, 厚与薄, 都可以充分利用Domain来传递数据, 但要在返回Controller或前端之前, 做一次数据转换, 尽量不要将DO暴露给Controller
+- Controller入参校验, (特别简单的除外)总要有个类封装, 叫XxxDTO也行, 叫XxxRequest也行
+- Controller层输出到前端, 也总要有个封装类, 叫XxxDTO, XxxVO, XxxResponse都行
+- Service层, 无论是否推崇DDD驱动, 厚与薄, 都可以充分利用Domain来传递数据, 但要在返回Controller或前端之前, 做数据转换, (尽量)不要将DO暴露给Controller
 - Domain层, 无论是否推崇DDD驱动, 贫血与充血, 只要设计得当, 都可以兼容PO
 - DAO层, 也利用Domain来封装SQL查询结果即可
-{{< /blockquote >}}
 
 
 
