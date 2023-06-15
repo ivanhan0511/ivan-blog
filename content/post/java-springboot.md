@@ -84,7 +84,7 @@ VO: Value Object. 表现对象.
 {{< /alert >}}
 
 
-{{< blockquote "Ivan" "My PS">}}
+{{< blockquote "Ivan" "My PS" >}}
 Ivan PS: 
 - POJO: Plain Old Java Object. 是PO/DO/DTO/BO/VO的统称
 - 其实, 如果你的项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要, 相关文章有很多
@@ -123,13 +123,13 @@ Ivan PS:
 
 ### 易混淆注解的对比
 
-- @Component or @Bean
+#### @Component @Bean
 With this annotation, a class can be scaned manually or automaticlly
 
 @Bean一般是调用第三方的
 
 
-- @Resource VS @Autowired
+#### @Resource @Autowired
 
 {{< blockquote "stackoverflow" "https://stackoverflow.com/questions/4093504/resource-vs-autowired" "@Resource vs @Autowired" >}}
 Both @Autowired (or @Inject) and @Resource work equally well. But there is a conceptual difference or a difference in the meaning<br/><br/>
@@ -141,28 +141,24 @@ While this fallback is convenient, IMHO it causes a lot of confusion, because pe
 {{< /blockquote >}}
 
 
-- @Repository or @Mapper
-  - @Mapper 一定要有，否则 Mybatis 找不到 mapper。
-  - @Repository 可有可无，可以消去依赖注入的报错信息。
-  - @MapperScan 可以替代 @Mapper。
+#### @Repository @Mapper
+- @Mapper 一定要有，否则 Mybatis 找不到 mapper。
+- @Repository 可有可无，可以消去依赖注入的报错信息。
+- @MapperScan 可以替代 @Mapper。
 
 
-- SpringBoot中的@EqualsAndHashCode注解与@Data注解
-https://blog.csdn.net/gdkyxy2013/article/details/104769897
+#### @Validate @Valid
+- @Validate是org.springframework.validation.annotation.Validated 导入的
+- @Validate 可以分组
+- @Valid是javax.validation.Valid 导入的
+- @Valid 可以递归
+- controller类上写: @Validated
+  - 如果是Bean的对象xxxRequest类限制参数, 则参数类中各自校验; 在controller类中的方法参数括号内写: @Valid
+  - 如果是属性String number限制, 在controller类中的方法入参前写: @NotBlank(message = "xxx不能为空")
 
-- @Validate @Valid
+PS:
 
-  @Validate是org.springframework.validation.annotation.Validated 导入的
-
-  @Validate 可以分组
-
-  @Valid是javax.validation.Valid 导入的
-
-  @Valid 可以递归
-
-  controller类上写: @Validated
-    - 如果是Bean的对象xxxRequest类限制参数, 则参数类中各自校验; 在controller类中的方法参数括号内写: @Valid
-    - 如果是属性String number限制, 在controller类中的方法入参前写: @NotBlank(message = "xxx不能为空")
+@RequestParam()不那么好用, 返回信息不友好
 
 
 
@@ -174,10 +170,10 @@ https://blog.csdn.net/gdkyxy2013/article/details/104769897
 But refuse to use QueryWrapper, use MyBatis' XML mapper.
 
 Reason as below:
-- (Dissent)IService和BaseMapper中"充分利用"了Java新规定中Interface可以有default的用法, 很不符合Java精神
-- (Dissent)MybatisPlus的QueryWrapper越看越像SQLAlchemy的ORM, 学习成本高, 且忽略了SQL的实质
+- (Consent)IService和BaseMapper中"充分利用"了Java新规定中Interface可以有default的用法, 基本的CRUD确实不用重复写了
+- (Dissent)MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失
 - (Dissent)性能和稳定性等不稳定因素越来越多, 比如一旦手动干预, 很多所谓的"便利"瞬间全无, 还是得依靠MyBatis
-- (Consent)按照MyBatis写SQL更像原生SQL
+- (Consent)按照MyBatis写XML更像原生SQL, 熟练运用SQL是一件愉快的事情
 
 **非**分布式数据库, 不使用雪花算法, 使用数据库自增ID int
 
@@ -205,12 +201,12 @@ dehai-admin项目是使用MS SQL Server 与 MySQL 两种数据库的典型例子
 - application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
 
 - 使用多数据源时, 配置PageHelper时要注意(只有在使用application.yml格式的配置文件时会有问题):  
-  ```yml
+  {{< blockquote "application.yml" >}}
   ...
   pagehelper:
     autoRuntimeDialect: true  # 此处的配置项是驼峰, 不是IDEA自动提示的`auto-runtime-dialect: true`
   ...
-  ```
+  {{< /blockquote >}}
   因为如果驼峰被自动转译为横线分隔符, 会导致PageHelper切换多数据源时失效
 
 
