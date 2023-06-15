@@ -43,58 +43,58 @@ No best, only better.
 ## PROJECT ARCHITECTURE
 
 {{< alert danger >}}
-DB / Domain层
+DAO / Repository层
+
+DAO: Data Access Object. 数据访问层  
+- MyBatis 接口与XML查询
+- 能通过数据库查询的尽量通过数据库直接查询, 一对一和一对多的关联关系也通过MyBatis的resultMap来展示
+- 这一层比较薄, 只做数据库的访问, **关键要做好通用抽象**
+- (仅关联DO对象, DTO的转换放在serivce层, 用BeanUtil.copyProperties来快速转换, 以便从repository层拿到的数据都是全数据)
+- 善用MyBatis的数据校验来做好查询/更新/插入的冗余, 解放service层
+{{< /alert >}}
+
+{{< alert warning >}}
+Domain层
 
 PO: Persistant Object. 持久层对象. 类似数据库内的一条记录  
 DO: Domain Object. 领域对象  
-
 - 核心要考虑和设计的内容, 优先考虑架构, 模型和业务流, 其余的展现和逻辑组合, 在其它层考虑
 - 淡化PO的概念, 因为每一个Domain类都能对应一个数据库表
 - 一对多的关联关系, 通过List/Set类型的字段关联, **通过增加以该Domain为主语的行为方法来表达输入输出的行为**
 - 一对一的关联关系, 还是仿照数据库, 设计一个xxxID的字段, 在XML中的ResultMap进行association的关联
 {{< /alert >}}
 
-{{< alert warning >}}
-DAO / Repository层
-
-DAO: Data Access Object. 数据访问层  
-
-- MyBatis 接口与XML查询
-- 能通过数据库查询的尽量通过数据库直接查询, 一对一和一对多的关联关系也通过MyBatis的resultMap来展示
-- 这一层比较薄, 只做数据库的访问, **关键要做好通用抽象**
-- (仅关联DO对象, DTO的转换放在serivce层, 用BeanUtil.copyProperties来快速转换, 以便从repository层拿到的数据都是全数据)
-- 善用MyBatis的数据校验来最好查询/更新/插入的冗余, 解放service层
-{{< /alert >}}
-
 {{< alert success >}}
 Service层
 
-DTO: Data Transfer Object. 通常在OpenApi返回的对象中使用DTO, 即此项目与其他外界项目交互时使用的对象. 小型项目用DTO交付给前端即可  
-BO: Business Object. 业务对象(BO和DO很像, 是一个综合多个PO的复合抽象对象, 而且小项目无需BO)  
-
-- Domain Design Drive下的Service层也比较薄, 一般是复杂业务对多个Domain的封装
+DTO: Data Transfer Object. 通常在OpenApi返回的对象中使用DTO
+BO: Business Object. 业务对象
+- Domain Design Drive下的Service层也比较薄, 一般是复杂业务对多个Domain的联合封装
 - 可以调用其它Service(推荐, 如果涉及到多个数据源切换时尤其重要), 也可以调用其它Repository
-- DTO转换:
-  - 如果单一的数据CRUD, 纯对应的Service + Repository + Domain就能满足前端数据呈现需要
-  - 如果是有数据库事务的综合业务, 返回的数据也相对修改的比较多, 才考虑增加DTO来转换Domain
-  - 另外类似一些敏感信息需要屏蔽的Domain, 才考虑增加DTO来转换Domain
 - 尽量少的数据规范性校验, 更多的业务数据校验
 {{< /alert >}}
 
 {{< alert info >}}
 Controller层
 
-VO: Value Object. 表现对象. 小型项目可以没有VO, 或由前端负责展示, 给终端用户传递信息  
+VO: Value Object. 表现对象.
 - 从综合业务场景考虑接口设计, 调用综合业务服务
 - 校验前端数据, 使用校验分组
 - 简单判断分流前端业务, 因地制宜地回复错误信息
 {{< /alert >}}
 
 
-PS: 
-- [项目开发中，真的有必要定义VO，BO，PO，DO，DTO这些吗？](https://blog.51cto.com/u_12302929/4811425)
+{{< blockquote "Ivan" "My PS">}}
+Ivan PS: 
 - POJO: Plain Old Java Object. 是PO/DO/DTO/BO/VO的统称
-- 其实, 如果你的项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要.
+- 其实, 如果你的项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要, 相关文章有很多
+- Controller层入参校验, 总要有一层, 叫XxxDTO也行, 叫XxxRequest也行
+- Controller层输出到前端, 也总要有一层, 叫XxxDTO, XxxVO, XxxResponse都行
+- Service层, 无论是否推崇DDD驱动, 厚与薄, 都可以充分利用Domain来传递数据, 但要在返回Controller或前端之前, 做一次数据转换, 尽量不要将DO暴露给Controller
+- Domain层, 无论是否推崇DDD驱动, 贫血与充血, 只要设计得当, 都可以兼容PO
+- DAO层, 也利用Domain来封装SQL查询结果即可
+{{< /blockquote >}}
+
 
 
 
