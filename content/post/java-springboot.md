@@ -73,23 +73,14 @@ Controller层
 - 简单判断分流前端业务, 因地制宜地回复错误信息
 {{< /alert >}}
 
-
-Ivan PS: 
-{{< blockquote "简称" >}}
-DAO: Data Access Object, 数据访问层  
-PO: Persistant Object, 持久层对象. 类似数据库内的一条记录<br>
-DO: Domain Object, 领域对象<br>
-DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO<br>
-BO: Business Object, 业务对象<br>
-VO: Value Object, 表现对象<br>
-POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
+{{< blockquote "分层奥义" "Ivan Han">}}
+其实, 如果项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要, 相关文章有很多<br>
+1. Controller入参校验, (特别简单的除外)总要有个类封装, 叫XxxDTO也行, 叫XxxRequest也行<br>
+2. Controller层输出到前端, 也总要有个封装类, 叫XxxDTO, XxxVO, XxxResponse都行<br>
+3. Service层, 无论是否推崇DDD驱动, 厚与薄, 都可以充分利用Domain来传递数据, 但要在返回Controller或前端之前, 做数据转换, (尽量)不要将DO暴露给Controller<br>
+4. Domain层, 无论是否推崇DDD驱动, 贫血与充血, 只要设计得当, 都可以兼容PO<br>
+5. DAO层, 也利用Domain来封装SQL查询结果即可
 {{< /blockquote >}}
-- 其实, 如果你的项目功能足够简单. 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的“度”, 非常重要, 相关文章有很多
-- Controller入参校验, (特别简单的除外)总要有个类封装, 叫XxxDTO也行, 叫XxxRequest也行
-- Controller层输出到前端, 也总要有个封装类, 叫XxxDTO, XxxVO, XxxResponse都行
-- Service层, 无论是否推崇DDD驱动, 厚与薄, 都可以充分利用Domain来传递数据, 但要在返回Controller或前端之前, 做数据转换, (尽量)不要将DO暴露给Controller
-- Domain层, 无论是否推崇DDD驱动, 贫血与充血, 只要设计得当, 都可以兼容PO
-- DAO层, 也利用Domain来封装SQL查询结果即可
 
 
 
@@ -102,7 +93,7 @@ POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
 - Controller中设置Headers, 指定Content-Type/Accept
   - Springboot中Controller中的comsumes所指定的是HTTP客户端的Content-Type的内容, 默认application/x-www-form-urlencoded
   - Springboot中Controller中的produces所指定的是HTTP客户端的Accept的内容
-{{< blockquote HTTP回顾 来自于网络 >}}
+{{< blockquote "HTTP回顾" "来自于网络" >}}
 常见的http头部Content-Type:<br>
 - application/x-www-form-urlencoded<br>
 - multipart/form-data<br>
@@ -433,6 +424,16 @@ Maven 3.8.1 blocked http connection
 <br>
 
 ## APPENDIX
+
+### 缩写信息
+DAO: Data Access Object, 数据访问层<br>
+PO: Persistant Object, 持久层对象. 类似数据库内的一条记录<br>
+DO: Domain Object, 领域对象<br>
+DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO<br>
+BO: Business Object, 业务对象<br>
+VO: Value Object, 表现对象<br>
+POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
+
 
 ### 命名规范
 - Service/DAO层方法命名规约
