@@ -87,6 +87,7 @@ Controller层
 
 
 ## ANNOTATION
+---
 
 ### 常用注解的深入理解
 - [TODO]: 各种继承关系的注解, 类似RestController, 包含了ResponseBody等, 后续补充
@@ -153,6 +154,7 @@ PS:
 <br>
 
 ## DB MAPPER
+---
 **JUST** use MyBatisPLus maven and use default CRUD methods.  
 But refuse to use QueryWrapper, use MyBatis' XML mapper.
 
@@ -287,6 +289,7 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 <br>
 
 ## SECURITY
+---
 It's a deep track!
 
 Need do really deep reseach for it.
@@ -295,7 +298,7 @@ Need do really deep reseach for it.
 
 
 ## LOGGER
-
+---
 **slf4j.Logger and log4j.Logger**
 {{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
 Comparison SLF4J and Log4j<br/>
@@ -313,6 +316,7 @@ However, it is always difficult to prefer one between the two.
 <br>
 
 ## 连接池选型
+---
 Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
 
 Druid是淘宝选用的, 高并发的情况会适用一些
@@ -323,6 +327,7 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 <br>
 
 ## CACHE
+---
 - MyBatis缓存
 - Redis缓存
 
@@ -332,6 +337,7 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 <br>
 
 ## INTERCEPTER
+---
 
 
 
@@ -339,7 +345,7 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 <br>
 
 ## DEPLOYMENT(集成/构建)
-
+---
 ### Maven or Gradle
 
 The maven pom.xml defines lifecycle goals and the gradle build.gradle defines tasks.
@@ -424,15 +430,15 @@ Maven 3.8.1 blocked http connection
 <br>
 
 ## APPENDIX
-
+---
 ### 缩写信息
-DAO: Data Access Object, 数据访问层<br>
-PO: Persistant Object, 持久层对象. 类似数据库内的一条记录<br>
-DO: Domain Object, 领域对象<br>
-DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO<br>
-BO: Business Object, 业务对象<br>
-VO: Value Object, 表现对象<br>
-POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
+- DAO: Data Access Object, 数据访问层
+- PO: Persistant Object, 持久层对象. 类似数据库内的一条记录<
+- DO: Domain Object, 领域对象
+- DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO
+- BO: Business Object, 业务对象
+- VO: Value Object, 表现对象
+- POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
 
 
 ### 命名规范
@@ -454,4 +460,6 @@ POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
 
 
 ## TODO
+---
 全局日期转换格式兼容
+

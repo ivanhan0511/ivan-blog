@@ -36,6 +36,7 @@ This is a custom summary and does *NOT* appear in the post.
 
 {{< toc >}}
 
+JetBrains IDEA 中如果想了解某个注解的实现, `Ctrl + Shift + F`(记得关闭输入法简体/繁体热键), 输入注解名称.java
 
 ## BEAN生命周期
 
