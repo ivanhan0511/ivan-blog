@@ -433,7 +433,7 @@ Maven 3.8.1 blocked http connection
 ---
 ### 缩写信息
 - DAO: Data Access Object, 数据访问层
-- PO: Persistant Object, 持久层对象. 类似数据库内的一条记录<
+- PO: Persistant Object, 持久层对象. 类似数据库内的一条记录
 - DO: Domain Object, 领域对象
 - DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO
 - BO: Business Object, 业务对象

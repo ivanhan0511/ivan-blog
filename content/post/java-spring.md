@@ -38,10 +38,12 @@ This is a custom summary and does *NOT* appear in the post.
 
 JetBrains IDEA 中如果想了解某个注解的实现, `Ctrl + Shift + F`(记得关闭输入法简体/繁体热键), 输入注解名称.java
 
-## BEAN生命周期
-
-## MVC事务
-
 ## IOC
 
+### Bean生命周期
+[TODO]: 插入图片 "备注"
+
+
 ## AOP
+
+## MVC事务
