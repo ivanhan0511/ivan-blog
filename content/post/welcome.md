@@ -1,6 +1,6 @@
 ﻿---
 title: "Welcome to Ivan's Blog"
-date: 2023-06-13T16:11:28+08:00
+date: 2023-06-19T10:29:28+08:00
 categories:
 - Welcome
 tags:
@@ -33,4 +33,5 @@ Some records for software, coffee, music and sports.
 ## BLOG
 - [ ] Take photos for all posts
 - [ ] Write content for all posts
+- [ ] Make my posts can be found on internet
 

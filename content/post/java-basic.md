@@ -88,7 +88,7 @@ public static List<A> asList(A... a);
 
 
 ### 判断类实例中的各个属性是否有null
-{{< codeblock "a.java" >}}
+{{< codeblock "Utils.java" >}}
 private boolean hasNull(Object obj) {
     if (obj == null) {
         return true;

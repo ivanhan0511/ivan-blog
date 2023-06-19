@@ -7,9 +7,11 @@ categories:
 tags:
 - Windows
 - Init
+- myOS
 keywords:
 - windows
 - init
+- config
 clearReading: true
 #thumbnailImage: //example.com/static/A.png
 thumbnailImage: image-1.png
@@ -34,53 +36,24 @@ After initialization of Windows, here is the TODO list.
 
 {{< toc >}}
 
-## BASIC
-常用的跨平台工具, 兼容手机 / macOS / Windows
-
-- Input method, ctrl+space to switch
-- Chrome as default browser
-- HHKB
-- Logitech Anywhere3 and OptionPlus
-- v2ray
-- 坚果云
-- Office365
-- WeChat
-- 腾讯会议
-- 亿图
-- Fiio driver
-- EMail客户端
-
-
-
-
-<br>
-
 ## R&D
 按先后顺序排序
 
 
-VMWare  
-规划好哪些工具安装在裸机, 哪些安装在VMWare
-
-- 切换安装路径到D:\盘
-- 纯净Win10最新版, 快照
-- 银行软件
-- 各种Linux
-  - PHP
-  - Redis
-  - ...
-- 折腾环境/演示环境
-
-
 VisualStudioPro  
 最大化使用, C, Python, JavaScript, Vim
-
-- Install VsVim extension
+- 设置字体? 默认DejaVu Sans Mono? 避免像CMD.exe一样无法分辨小写L与数字1
+- [Visual Studio 2019 修改字符集编码](https://blog.csdn.net/qq_41868108/article/details/105750175)
+- 自动补全: Enter or Tab?
+  - Visual Studio 2019是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置
+  - 个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
+  - 具体路径: 工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表
+- Install VsVim extension -> 超级好用, 可以随插入模式和普通模式的切换而自动切换输入法
 - Both English and Chinese, prefer English
 - 可能会提供git环境
-- 负责ivan-blog的编辑
 - 使用其Python环境, 不安装Python在裸机
-- 使用其npm环境? 不安装npm在裸机可以吗?
+- 使用其npm环境? 不安装npm在裸机可以吗?  -> 貌似不行
+- 是否能兼容调用MSYS2的一些命令而不用安装MSYS2?
 
 
 ~~CLion or VisualStudioPro ?~~  
@@ -108,9 +81,23 @@ MSYS2 or Cygwin?
 ~~Notepad++~~
 - 可以使用VisualStudioPro代替
 
+
+VMWare  
+规划好哪些工具安装在裸机, 哪些安装在VMWare
+
+- 切换安装路径到D:\盘
+- 纯净Win10最新版, 快照
+- 银行软件
+- 各种Linux
+  - PHP
+  - Redis
+  - ...
+- 折腾环境/演示环境
+
+
 Typora
 - 需要看目录时, 例如接口文档中上来来回滚动, 还是需要Typora的目录
-- 所见即所得的格式校验, PDF输出, 还是需要Typora
+- 所见即所得的格式校验, PDF输出, 字体兼容, 还是需要Typora
 
 XShell/XFtp
 
@@ -122,7 +109,7 @@ MySQL Server~~ + (MySQL Workbench)~~
 
 SQL Server~~ + (SSMS)~~
 
-Sunlogin
+向日葵Sunlogin
 
 WireShark
 
@@ -135,17 +122,26 @@ Postman
 Inno Setup Compiler(可选)
 
 
-*Tips*
-自动补全: Enter or Tab?
 
-个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
 
-*Visual Studio 2019是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置.*  
-具体路径如下:  
-工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表
+<br>
 
-Visual Studio 2019 修改字符集编码  
-https://blog.csdn.net/qq_41868108/article/details/105750175
+## BASIC APP
+常用的跨平台工具, 兼容手机 / macOS / Windows
+
+- Input method, ctrl+space to switch
+- Chrome as default browser
+- HHKB
+- Logitech Anywhere3 and OptionPlus
+- v2ray
+- 坚果云
+- Office365
+- WeChat
+- 腾讯会议
+- 亿图
+- Fiio driver
+- EMail客户端
+
 
 
 
