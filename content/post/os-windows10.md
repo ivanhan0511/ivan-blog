@@ -36,12 +36,28 @@ After initialization of Windows, here is the TODO list.
 
 {{< toc >}}
 
+## BACKUP
+主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
+
+- 代码: 基本通过git有同步, 其余少量的通过copy完成
+- [ ] 数据库: 需要全部备份, MySQL所有库, SQL Server所有库
+- [ ] IDE: IDE本身的配置通过云同步; IDE存储的SQL脚本copy到项目文件夹sql中; 记录IDE的插件
+- 坚果云文档: 公司文档, 仅限文档, 其余通过本地文件存储
+- [ ] 本地文档: 密钥, 证书, 安装包, 公司大文件, 私人文件等
+- [ ] 图片
+- [ ] 视频
+- [ ] 虚拟机
+
+
+
+
 ## R&D
 按先后顺序排序
 
 
 VisualStudioPro  
 最大化使用, C, Python, JavaScript, Vim
+- 设置项目存储路径
 - 设置字体? 默认DejaVu Sans Mono? 避免像CMD.exe一样无法分辨小写L与数字1
 - [Visual Studio 2019 修改字符集编码](https://blog.csdn.net/qq_41868108/article/details/105750175)
 - 自动补全: Enter or Tab?
@@ -57,7 +73,7 @@ VisualStudioPro
 
 
 ~~CLion or VisualStudioPro ?~~  
-目前有点倾向VisualStudioPro, 可以写C/C++, 还可以写Python, JavaScript, 何乐而不为呢?
+目前有点倾向VisualStudioPro, 可以写C/C++, 还可以写Python, JavaScript, 何乐而不为呢? 而且Visual Studio的debug无敌
 Java就交给JetBrains IDEA就可以了
 
 
@@ -101,13 +117,18 @@ Typora
 
 XShell/XFtp
 
-Navicat 还是最终DB的解决方案?  
-MySQL Workbench和SSMS这俩工具太难用了, 还是Navicat吧
+~~Navicat 还是最终DB的解决方案?  ~~
+~~MySQL Workbench和SSMS这俩工具太难用了, 还是Navicat吧~~
 
-MySQL Server~~ + (MySQL Workbench)~~  
+MySQL~~ + (MySQL Workbench)~~  
 `MySQL Workbench -> Preferences -> SQL Editor -> QueryEditor -> use UPPERCASE keywords on completion`
+- 设置Data存储路径
 
 SQL Server~~ + (SSMS)~~
+- 设置Data存储路径
+
+Redis
+
 
 向日葵Sunlogin
 
@@ -115,7 +136,9 @@ WireShark
 
 微信开发者工具
 
-hugo创建静态博客
+hugo创建静态博客  
+安装hugo步骤需要补充文档
+
 
 Postman
 
@@ -149,6 +172,10 @@ Inno Setup Compiler(可选)
 
 ## GAME
 Steam
+可以通过内部工具迁移游戏存储目录
+
+
 
 EPIC
+不能迁移, 重新下载
 

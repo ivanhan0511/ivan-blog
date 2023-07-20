@@ -76,3 +76,14 @@ SELECT * FROM tablename where DATEDIFF(month,inputdate,GETDATE())=1
 查询本年
 select * from Keywords  where datediff(year, Addtime,getdate())=0
 
+
+
+
+--返回0-则为纯数字(支持正负数，小数点)
+ SELECT PATINDEX('%[^0-9|.|-|+]%','2.2')--返回0
+
+ --返回0-则为纯整数
+select PATINDEX('%[^0-9]%', '2.2')--返回非0
+
+SELECT TOP 50 PATINDEX('%[^0-9|.|-|+]%', ,FModel)
+FROM t_ICItem;
