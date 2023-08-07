@@ -40,13 +40,13 @@ After initialization of Windows, here is the TODO list.
 主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
 
 - 代码: 基本通过git有同步, 其余少量的通过copy完成
-- [ ] 数据库: 需要全部备份, MySQL所有库, SQL Server所有库
-- [ ] IDE: IDE本身的配置通过云同步; IDE存储的SQL脚本copy到项目文件夹sql中; 记录IDE的插件
+- [x] 数据库: 需要全部备份, MySQL所有库, SQL Server所有库
+- [x] IDE: IDE本身的配置通过云同步; IDE存储的SQL脚本copy到项目文件夹sql中; 记录IDE的插件
 - 坚果云文档: 公司文档, 仅限文档, 其余通过本地文件存储
-- [ ] 本地文档: 密钥, 证书, 安装包, 公司大文件, 私人文件等
-- [ ] 图片
-- [ ] 视频
-- [ ] 虚拟机
+- [x] 本地文档: 各个项目/服务器等的所有密钥, 证书, 安装包, 公司大文件, 私人文件等
+- [x] 图片
+- [x] 视频
+- [x] 虚拟机
 
 
 
@@ -55,8 +55,8 @@ After initialization of Windows, here is the TODO list.
 按先后顺序排序
 
 
-VisualStudioPro  
-最大化使用, C, Python, JavaScript, Vim
+VisualStudioPro2022  
+最大化使用, C/C++, Python, ~~JavaScript~~, Vim, git, cmd
 - 设置项目存储路径
 - 设置字体? 默认DejaVu Sans Mono? 避免像CMD.exe一样无法分辨小写L与数字1
 - [Visual Studio 2019 修改字符集编码](https://blog.csdn.net/qq_41868108/article/details/105750175)
@@ -71,10 +71,6 @@ VisualStudioPro
 - 使用其npm环境? 不安装npm在裸机可以吗?  -> 貌似不行
 - 是否能兼容调用MSYS2的一些命令而不用安装MSYS2?
 
-
-~~CLion or VisualStudioPro ?~~  
-目前有点倾向VisualStudioPro, 可以写C/C++, 还可以写Python, JavaScript, 何乐而不为呢? 而且Visual Studio的debug无敌
-Java就交给JetBrains IDEA就可以了
 
 
 ~~PyCharm or VisualStudioPro ?~~
@@ -91,8 +87,9 @@ MSYS2 or Cygwin?
 不行再试试MSYS2, 而不用安装Git For Bash  
 ~~MinGW32, MinGW64, WSL~~
 
-~~HBuilder or WebStorm or VS Code ?~~  
-~~npm?~~
+HBuilder ~~or WebStorm or VS Code ?~~  
+看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
+npm
 
 ~~Notepad++~~
 - 可以使用VisualStudioPro代替
@@ -128,7 +125,8 @@ SQL Server~~ + (SSMS)~~
 - 设置Data存储路径
 
 Redis
-
+在Windows中开启WSL并安装Redis
+https://redis.io/docs/getting-started/installation/install-redis-on-windows/
 
 向日葵Sunlogin
 
@@ -147,7 +145,6 @@ Inno Setup Compiler(可选)
 
 
 
-<br>
 
 ## BASIC APP
 常用的跨平台工具, 兼容手机 / macOS / Windows
@@ -168,7 +165,6 @@ Inno Setup Compiler(可选)
 
 
 
-<br>
 
 ## GAME
 Steam
