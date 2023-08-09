@@ -5,9 +5,9 @@
 
 ## REPOSITORY ON GITHUB
 
-Create a normal repository, like "ivan-blog" as example
+Create a new repository, like "ivan-blog" as example
 
-Create a respository, must with `<username>.github.io`
+And then create a another new respository, must with `<username>.github.io`
 
 
 

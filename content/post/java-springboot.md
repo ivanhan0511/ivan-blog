@@ -97,6 +97,7 @@ Controller层
 - Controller中设置Headers, 指定Content-Type/Accept
   - Springboot中Controller中的comsumes所指定的是HTTP客户端的Content-Type的内容, 默认application/x-www-form-urlencoded
   - Springboot中Controller中的produces所指定的是HTTP客户端的Accept的内容
+
 {{< blockquote "HTTP回顾" "来自于网络" >}}
 常见的http头部Content-Type:<br>
 - application/x-www-form-urlencoded<br>
@@ -289,10 +290,7 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 
-<br>
-
 ## SECURITY
----
 ### Configure
 这里包含初始化, 注册哪些filter
 
@@ -315,7 +313,6 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 ## LOGGER
----
 **slf4j.Logger and log4j.Logger**
 {{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
 Comparison SLF4J and Log4j<br/>
@@ -330,10 +327,8 @@ However, it is always difficult to prefer one between the two.
 
 
 
-<br>
 
 ## 连接池选型
----
 Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
 
 Druid是淘宝选用的, 高并发的情况会适用一些
@@ -341,113 +336,20 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 
 
-<br>
 
 ## CACHE
----
 - MyBatis缓存
 - Redis缓存
 
 
 
 
-<br>
 
 ## INTERCEPTER
----
 
 
-
-
-<br>
-
-## DEPLOYMENT(集成/构建)
----
-### Maven or Gradle
-
-The maven pom.xml defines lifecycle goals and the gradle build.gradle defines tasks.
-
-"知识体系"中关联的关于Maven的[讲解](https://www.iocoder.cn/Fight/Maven-most-complete-tutorial-read-must-understand/?self)
-
-又看了一篇[文章](https://www.zhihu.com/question/29338218), 对于两者的取舍, 还是暂且倾向于Maven的通用, 稳定, 兼容
-
-
-### Maven 3.8.1
-Maven 3.8.1 blocked http connection
-- Do NOT edit this original IDEA maven settings file
-  `C:\Program Files\JetBrains\IntelliJ IDEA 2022.2.1\plugins\maven\lib\maven3\conf\settings.xml`
-  {{< codeblock "settings.xml" XML >}}
-  ...
-  <mirrors>
-    <!-- mirror
-     | Specifies a repository mirror site to use instead of a given repository. The repository that
-     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
-     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
-     |
-    <mirror>
-      <id>mirrorId</id>
-      <mirrorOf>repositoryId</mirrorOf>
-      <name>Human Readable Name for this Mirror.</name>
-      <url>http://my.repository.com/repo/path</url>
-    </mirror>
-     -->
-    <mirror>
-      <id>maven-default-http-blocker</id>
-      <mirrorOf>external:http:*</mirrorOf>
-      <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
-      <url>http://0.0.0.0/</url>
-      <blocked>true</blocked>
-    </mirror>
-  
-    <mirror>
-      <id>aliyunmaven</id>
-      <mirrorOf>*</mirrorOf>
-      <name>阿里云公共仓库</name>
-      <url>https://maven.aliyun.com/repository/public</url>
-    </mirror>
-  </mirrors>
-  ...
-  {{< /codeblock >}}
-
-- Find personal maven setting path in IDEA settings and DIY it `C:\Users\ivan\.m2\settings.xml`  
-  (If not exists, create this file)
-
-  {{< codeblock "settings.xml" XML >}}
-<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
-  <mirrors>
-    <!-- mirror
-     | Specifies a repository mirror site to use instead of a given repository. The repository that
-     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
-     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
-     |
-    <mirror>
-      <id>mirrorId</id>
-      <mirrorOf>repositoryId</mirrorOf>
-      <name>Human Readable Name for this Mirror.</name>
-      <url>http://my.repository.com/repo/path</url>
-    </mirror>
-    -->
-    <mirror>
-      <id>aliyunmaven</id>
-      <mirrorOf>*</mirrorOf>
-      <name>阿里云公共仓库</name>
-      <url>https://maven.aliyun.com/repository/public</url>
-    </mirror>
-  </mirrors>
-</settings>
-  {{< /codeblock >}}
-
-- Reload pom.xml file in IDEA and automaticlly download the dependencies
-
-
-
-
-<br>
 
 ## APPENDIX
----
 ### 缩写信息
 - DAO: Data Access Object, 数据访问层
 - PO: Persistant Object, 持久层对象. 类似数据库内的一条记录
@@ -477,6 +379,5 @@ Maven 3.8.1 blocked http connection
 
 
 ## TODO
----
 全局日期转换格式兼容
 
