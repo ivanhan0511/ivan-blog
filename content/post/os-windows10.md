@@ -37,6 +37,7 @@ After initialization of Windows, here is the TODO list.
 {{< toc >}}
 
 ## BACKUP
+---
 主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
 
 - 代码: 基本通过git有同步, 其余少量的通过copy完成
@@ -59,11 +60,13 @@ After initialization of Windows, here is the TODO list.
 
 
 ## BOOT DEVICE
+---
 - Create Windows official MediaCreationTool
 - Choose boot device in BIOS 
 
 
 ## BASE
+---
 只要连接互联网, 现有的Windows10会自动联网安装驱动, 只需要等待更新/重启
 
 趁着没有使用网络代理, 先安装基本工具
@@ -79,18 +82,23 @@ After initialization of Windows, here is the TODO list.
 
 
 ## Proxy
+---
 v2rayN(Need DotNet6.0)
 
 注意新安装的Windows, 要确保对时准确, 精准到1分钟以内, 否则代理建立连接失败
 
 
 ## VisualStudioPro2022  
+---
 
 最大化使用, C/C++, Python, Vim, Git, PowerShell
 
 - 设置项目存储路径, Tools -> Options -> Projects and Solutions -> Locations
-- Install VsVim extension -> 超级好用, 可以随插入模式和普通模式的切换而自动切换输入法
-  - 在Vim中, `:set nu` 且 `:set rnu`, 就可以同时开绝对行号和相对行号
+- Install VsVim extension
+  - Check which directories that VsVim looks for this file in by using the command `:set vimrcpaths?`
+  - This is typically the `HOME`, `VIM` or `USERPROFILE` directories
+  - Place your `.vimrc` file in one of these directories, restart Visual Studio and VsVim will load those settings
+  - You can verify which vimrc file is currently loaded in VsVim by using the command `:set vimrc?`
 - ~~设置字体? 默认DejaVu Sans Mono? 避免像CMD.exe一样无法分辨小写L与数字1~~
 - [Visual Studio 增加菜单来修改字符集编码](https://blog.csdn.net/qq_41868108/article/details/105750175)
 - 自动补全: Enter or Tab?
@@ -100,6 +108,7 @@ v2rayN(Need DotNet6.0)
 
 
 ## IDEA
+---
 
 ### Java
 - 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
@@ -108,29 +117,31 @@ v2rayN(Need DotNet6.0)
 ### Plugin
 - IdeaVim
   - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`C:\Users\Ivan\.ideavimrc`)
-  - 增加如下配置
+  - 增加如下配置(暂时不像Visual Studio需要完整的.vimrc, 只需要添加一少部分配置即可)
 
     {{< codeblock ".ideavimrc" "config" >}}
-    set hlsearch
-    set incsearch
+set hlsearch
+set incsearch
 
-    syntax on
+syntax on
+" 不设定在插入状态无法用退格键和 Delete 键删除回车符
+set backspace=indent,eol,start
 
-    " 修改leader键为逗号
-    let mapleader=","
-    set ignorecase  " 设置大小写敏感
+" 修改leader键为逗号
+let mapleader=","
+set ignorecase  " 设置大小写敏感
 
-    " Line number
-    "set ruler
-    set number
-    set relativenumber
+" Line number
+"set ruler
+set number
+set relativenumber
 
-    " 修改vim的正则表达
-    nmap / /\v
-    vmap / /\v
+" 修改vim的正则表达
+nmap / /\v
+vmap / /\v
 
-    " 取消搜索高亮
-    nmap <leader>nh :noh<cr>
+" 取消搜索高亮
+nmap <leader>nh :noh<cr>
     {{< /codeblock >}}
 - MyBatisCodeHelperPro
 - Redis
@@ -177,36 +188,37 @@ Maven 3.8.1 blocked http connection
 - Find personal maven setting path in IDEA settings and DIY it `C:\Users\ivan\.m2\settings.xml` (If not exists, create this file)
 
   {{< codeblock "settings.xml" "XML" >}}
-  <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
-  <mirrors>
-    <!-- mirror
-     | Specifies a repository mirror site to use instead of a given repository. The repository that
-     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
-     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
-     |
-    <mirror>
-      <id>mirrorId</id>
-      <mirrorOf>repositoryId</mirrorOf>
-      <name>Human Readable Name for this Mirror.</name>
-      <url>http://my.repository.com/repo/path</url>
-    </mirror>
-    -->
-    <mirror>
-      <id>aliyunmaven</id>
-      <mirrorOf>*</mirrorOf>
-      <name>阿里云公共仓库</name>
-      <url>https://maven.aliyun.com/repository/public</url>
-    </mirror>
-  </mirrors>
-  </settings>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
+<mirrors>
+  <!-- mirror
+   | Specifies a repository mirror site to use instead of a given repository. The repository that
+   | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+   | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+   |
+  <mirror>
+    <id>mirrorId</id>
+    <mirrorOf>repositoryId</mirrorOf>
+    <name>Human Readable Name for this Mirror.</name>
+    <url>http://my.repository.com/repo/path</url>
+  </mirror>
+  -->
+  <mirror>
+    <id>aliyunmaven</id>
+    <mirrorOf>*</mirrorOf>
+    <name>阿里云公共仓库</name>
+    <url>https://maven.aliyun.com/repository/public</url>
+  </mirror>
+</mirrors>
+</settings>
   {{< /codeblock >}}
 
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
 
 ## Git & SSH
+---
 MINGW64 Git套件
 
 自己添加插件, 来增加额外的的Linux命令
@@ -223,12 +235,14 @@ MINGW64 Git套件
 
 
 ## HBuilderX
+---
 看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
 npm
 - 使用其npm环境? 不安装npm在裸机可以吗?  -> 貌似不行
 
 
 ## VMWare  
+---
 VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMWare
 
 - 切换安装路径到`D:\VirtualMachines\`盘
@@ -250,6 +264,7 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
 
 
 ## Others
+---
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
 
 - XShell/XFtp
@@ -268,6 +283,7 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
 
 
 ## GAME
+---
 - Steam 可以通过内部工具迁移游戏存储目录
 - EPIC 不能迁移, 重新下载
 - Minecraft

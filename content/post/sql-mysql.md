@@ -29,6 +29,7 @@ Some usual operations examples in MySQL 8.1
 {{< toc >}}
 
 ## INIT
+---
 Refer to `https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04`
 
 Ubuntu Server 20.04 LTS as example which is in a Cloud Server
@@ -77,6 +78,7 @@ FLUSH PRIVILEGES;
 
 
 ## DCL
+---
 DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 
 ### GRANT
@@ -87,6 +89,7 @@ DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 
 
 ## DDL
+---
 DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMMENT`, `RENAME`
 
 ### CREATE
@@ -155,6 +158,7 @@ DROP TABLE <table_name>;
 
 
 ## DML
+---
 DML: Data Manipulation Language, like `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `MERGE`, `CALL`, `EXPLAIN PLAN`, `LOCK TABLE`
 
 
@@ -265,6 +269,7 @@ kill 12345;
 
 
 ## TCL
+---
 TCL: Transaction Control Language, like `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `START TRANSACTION`
 
 
@@ -277,16 +282,45 @@ TCL: Transaction Control Language, like `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `STAR
 
 
 ## VIEW
+---
 Create a SQLView to make query fast
 
 
 ## 锁
-行锁, 表锁, 乐观锁, 悲观锁
+---
+### 行锁
+### 表锁
+### 乐观锁
+### 悲观锁
 
 
-## BACKUP
+## EXPORT & IMPORT
+---
+
+### Export
+{{< codeblock "export" "sh" >}}
+# 导出整个数据库结构和数据
+mysqldump -h localhost -P 3306 -uroot -p123456 database > test.sql
+
+# 导出整个数据库结构(不包含数据)
+mysqldump -h localhost -P 3306 -uroot -p123456 -d database > test.sql
+
+# 导出单个数据表结构和数据
+mysqldump -h localhost -P 3306 -uroot -p123456 database table > test.sql
+
+# 导出单个数据表结构(不包含数据)
+mysqldump -h localhost -P 3306 -uroot -p123456 -d database table > test.sql
+
+# 说明:
+# 如果是本机操作，其中 -h localhost -P 3306 可以不需要## -P 参数，是大P，且有空格，不同于后面密码的小P，没有空格
+{{< /codeblock >}}
 
 
-## IMPORT
+### IMPORT
 
-im
+{{< codeblock "import" "sh" >}}
+# 恢复到指定数据库
+mysgl -hhostname -uusername -ppassword databasename < test.sql
+{{< /codeblock >}}
+
+
