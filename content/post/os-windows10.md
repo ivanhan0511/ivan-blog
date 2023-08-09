@@ -266,18 +266,14 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
 按照[文章提示](https://blog.csdn.net/weixin_43862116/article/details/107731631)挂载host主机的文件夹到Ubuntu挂在点, 用于共享
 {{< codeblock "sharedfolder" "sh" >}}
 vmware-hgfsclient
-{{< blockquote "Add bottom" >}}
-WinDownloads
-{{< /blockquote >}}
+# WinDownloads
 
 sudo mkdir /mnt/hgfs/downloads
 sudo mount -t fuse.vmhgfs-fuse .host:WinDownloads /mnt/hgfs/downloads/ -o allow_other
 #sudo umount -a fuse.vmhgfs-fuse .host:WinDownloads /mnt/hgfs/downloads/
 sudo vi /etc/fstab
 {{< /codeblock >}}
-{{< blockquote "Add bottom" >}}
-.host:WinDownloads /mnt/hgfs/downloads/ fuse.vmhgfs-fuse allow_other 0 0
-{{< /blockquote >}}
+`.host:WinDownloads /mnt/hgfs/downloads/ fuse.vmhgfs-fuse allow_other 0 0`
 
 
 ## Others
