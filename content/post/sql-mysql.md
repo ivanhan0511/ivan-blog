@@ -1,6 +1,6 @@
 ---
 title: "MySQL8.0 Operations"
-date: 2023-06-02T16:49:00+08:00
+date: 2023-08-09T09:49:00+08:00
 categories:
 - SQL
 - MySQL
@@ -22,7 +22,7 @@ keywords:
 - view
 ---
 
-Some usual operations examples in MySQL 8.0
+Some usual operations examples in MySQL 8.1
 
 <!--more-->
 
@@ -76,8 +76,6 @@ FLUSH PRIVILEGES;
 
 
 
-<br>
-
 ## DCL
 DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 
@@ -87,8 +85,6 @@ DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 
 
 
-
-<br>
 
 ## DDL
 DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMMENT`, `RENAME`
@@ -157,8 +153,6 @@ DROP TABLE <table_name>;
 
 
 
-
-<br>
 
 ## DML
 DML: Data Manipulation Language, like `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `MERGE`, `CALL`, `EXPLAIN PLAN`, `LOCK TABLE`
@@ -270,12 +264,9 @@ kill 12345;
 
 
 
-<br>
-
 ## TCL
 TCL: Transaction Control Language, like `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `START TRANSACTION`
 
-{{< toc >}}
 
 ### COMMIT
 ### ROLLBACK
@@ -284,8 +275,6 @@ TCL: Transaction Control Language, like `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `STAR
 
 
 
-
-<br>
 
 ## VIEW
 Create a SQLView to make query fast
