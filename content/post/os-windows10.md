@@ -263,6 +263,21 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
       导出导入数据的命令参见[MySQL Opertaions](https://ivanhan0511.github.io/post/sql-mysql/)
 
 
+按照[文章提示](https://blog.csdn.net/weixin_43862116/article/details/107731631)挂载host主机的文件夹到Ubuntu挂在点, 用于共享
+{{< codeblock "sharedfolder" "sh" >}}
+vmware-hgfsclient
+# WinDownloads
+
+sudo mkdir /mnt/hgfs/downloads
+sudo mount -t fuse.vmhgfs-fuse .host:WinDownloads /mnt/hgfs/downloads/ -o allow_other
+#sudo umount -a fuse.vmhgfs-fuse .host:WinDownloads /mnt/hgfs/downloads/
+sudo vi /etc/fstab
+{{< /codeblock >}}
+{{< quoteblock "Add bottom" >}}
+.host:WinDownloads /mnt/hgfs/downloads/ fuse.vmhgfs-fuse allow_other 0 0
+{{< /quoteblock >}}
+
+
 ## Others
 ---
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
