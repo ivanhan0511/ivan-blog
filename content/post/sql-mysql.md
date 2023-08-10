@@ -1,6 +1,6 @@
 ---
 title: "MySQL8.0 Operations"
-date: 2023-08-09T09:49:00+08:00
+date: 2023-08-10T13:36:00+08:00
 categories:
 - SQL
 - MySQL
@@ -12,6 +12,7 @@ tags:
 - DML
 - TCL
 - VIEW
+- backup
 keywords:
 - mysql
 - init
@@ -20,9 +21,10 @@ keywords:
 - dml
 - tcl
 - view
+- backup
 ---
 
-Some usual operations examples in MySQL 8.1
+Some usual operations examples in MySQL 8.0
 
 <!--more-->
 
@@ -32,41 +34,36 @@ Some usual operations examples in MySQL 8.1
 ---
 Refer to `https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04`
 
-Ubuntu Server 20.04 LTS as example which is in a Cloud Server
+Ubuntu Server 22.04 LTS as example
 
 {{< tabbed-codeblock examples >}}
-<!-- tab ServerShell -->
+<!-- tab shell -->
 sudo apt update
 sudo apt install mysql-server-8.0 -y
-#sudo apt install mysql-server -y
 sudo systemctl status mysql.service
 
 sudo mysql
-# or
-#mysql -u root -p  # Use the system user-password
-<!-- endtab -->
-<!-- tab DockerShell -->
-docker run -p 3306:3306 --name mysql-rd -e MYSQL_ROOT_PASSWORD=XXXXXX -d mysql:8.0
-mysql -h 127.0.0.1 -u root -p
 <!-- endtab -->
 <!--tab SQL -->
 # Collect infomation
 show databases;
 
-SELECT host, user FROM mysql.user;
-
-SET GLOBAL validate_password.policy=LOW;
+SELECT host, user, authentication_string FROM mysql.user;
 
 CREATE DATABASE `some-db` CHARACTER SET UTF8;
 CREATE USER 'rd'@'%' IDENTIFIED BY 'your_password';
-#CREATE USER 'rd'@'localhost' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES on `some-db`.* TO 'rd'@'%';
-#GRANT ALL PRIVILEGES ON *.* TO 'rd'@'%' WITH GRANT OPTION;  # This is deprecated!
-#GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'rd'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON `some-db`.* TO 'rd'@'%';
 FLUSH PRIVILEGES;
 <!-- endtab -->
+<!--tab shell -->
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+# ...
+# Comment this line
+#bind-address = 127.0.0.1
+# ...
+sudo systemctl restart mysql.service
+<!-- endtab -->
 {{< /tabbed-codeblock >}}
-
 
 
 区别
@@ -95,13 +92,13 @@ DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMM
 ### CREATE
 
 #### CREATE DATABASE
-{{< codeblock "CREATE DATABASE" >}}
+{{< codeblock "CREATE DATABASE" SQL >}}
 CREATE DATABASE pear-admin-pro CHARACTER SET UTF8;
 {{< /codeblock >}}
 
 
 #### CREATE TABLE
-{{< codeblock "CREATE TABLE" >}}
+{{< codeblock "CREATE TABLE" SQL >}}
 CREATE TABLE student (
         id INT,
         name VARCHAR(32)
@@ -112,24 +109,25 @@ CREATE TABLE student (
 #### CREATE INDEX
 
 #### COPY with data
-```sql
+{{< codeblock "copy with data" SQL >}}
 create table  table_name
 as   
 select * from  Source_table
 where   1=1;
-```
+{{< /codeblock >}}
+
 #### COPY without data
-```sql
+{{< codeblock "copy without data" SQL >}}
 create table  table_name
 as
 select  * from
 Source_table where   1 <> 1;
-```
+{{< /codeblock >}}
 
 
 ### ALTER
 
-{{< codeblock "ALTER TABLE" >}}
+{{< codeblock "ALTER TABLE" SQL >}}
 ALTER TABLE ...
 [TODO]: To be continued...
 {{< /codeblock >}}
@@ -140,7 +138,7 @@ ALTER TABLE ...
 
 #### DROP TABLE
 
-{{< codeblock "DROP TABLE" >}}
+{{< codeblock "DROP TABLE" SQL >}}
 DROP TABLE <table_name>;
 {{< /codeblock >}}
 
@@ -318,9 +316,18 @@ mysqldump -h localhost -P 3306 -uroot -p123456 -d database table > test.sql
 
 ### IMPORT
 
-{{< codeblock "import" "sh" >}}
+{{< tabbed-codeblock "import" >}}
+<!-- tab shell -->
 # 恢复到指定数据库
 mysgl -hhostname -uusername -ppassword databasename < test.sql
-{{< /codeblock >}}
+
+# 恢复到指定数据库中的表
+mysgl -hhostname -uusername -ppassword databasename tablename < test.sql
+<!-- endtab -->
+<!-- tab sql -->
+use some_db;
+source /data/test.sql;
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
 
 

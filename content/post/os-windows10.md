@@ -49,12 +49,11 @@ After initialization of Windows, here is the TODO list.
   - SSH密钥, 私人文件等
 - 虚拟机
   - 数据库: 转储数据和数据结构, MySQL和SQLServer的所有库
-
-    以修改MySQL/SqlServer存储路径的方式并不稳妥, 重装操作系统后, 版本/路径/库等可能会发生变化, 定时备份数据再导入才靠谱  
-
   - SSH密钥
   - 证书
-- IDE: IDE本身的配置通过云同步; IDE存储的SQL脚本copy到项目文件夹sql中
+- IDEA
+  - IDEA本身的配置通过云同步
+  - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 随Git上传
 - 图片
 - 视频
 
@@ -191,26 +190,26 @@ Maven 3.8.1 blocked http connection
 <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
-<mirrors>
-  <!-- mirror
-   | Specifies a repository mirror site to use instead of a given repository. The repository that
-   | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
-   | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
-   |
-  <mirror>
-    <id>mirrorId</id>
-    <mirrorOf>repositoryId</mirrorOf>
-    <name>Human Readable Name for this Mirror.</name>
-    <url>http://my.repository.com/repo/path</url>
-  </mirror>
-  -->
-  <mirror>
-    <id>aliyunmaven</id>
-    <mirrorOf>*</mirrorOf>
-    <name>阿里云公共仓库</name>
-    <url>https://maven.aliyun.com/repository/public</url>
-  </mirror>
-</mirrors>
+  <mirrors>
+    <!-- mirror
+     | Specifies a repository mirror site to use instead of a given repository. The repository that
+     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+     |
+    <mirror>
+      <id>mirrorId</id>
+      <mirrorOf>repositoryId</mirrorOf>
+      <name>Human Readable Name for this Mirror.</name>
+      <url>http://my.repository.com/repo/path</url>
+    </mirror>
+    -->
+    <mirror>
+      <id>aliyunmaven</id>
+      <mirrorOf>*</mirrorOf>
+      <name>阿里云公共仓库</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+  </mirrors>
 </settings>
   {{< /codeblock >}}
 
@@ -246,24 +245,28 @@ npm
 VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMWare
 
 - 切换安装路径到`D:\VirtualMachines\`盘
-- 纯净Win10, 快照
-  - 银行软件
-  - Windows开发环境
-    + 微信开发者工具
-    + 抖音开发者工具
-    + MS SQL Server + SSMS
+- 编辑 -> 首选项 -> 内存 -> 额外内存 "调整所有虚拟机内存使其适应预留的主机RAM"
 
-      导出导入数据的命令参见[MS SQL Server Opertaions](https://ivanhan0511.github.io/post/sql-sqlserver/)
-- Ubuntu Desktop, 快照
-  - Linux演示环境
-  - Linux开发环境
-    + Redis
-    + MySQL
 
-      导出导入数据的命令参见[MySQL Opertaions](https://ivanhan0511.github.io/post/sql-mysql/)
+### Windows
+- 微信开发者工具
+- 抖音开发者工具
+- MS SQL Server + SSMS
 
+  初始化, 导出, 导入的命令参见[MS SQL Server Opertaions](https://ivanhan0511.github.io/post/sql-sqlserver/)
+
+
+### Ubuntu Server
+- Redis
+- MySQL
+
+  初始化, 导出, 导入的命令参见[MySQL Opertaions](https://ivanhan0511.github.io/post/sql-mysql/)
+
+
+### Ubuntu Desktop(暂时弃用)
 
 按照[文章提示](https://blog.csdn.net/weixin_43862116/article/details/107731631)挂载host主机的文件夹到Ubuntu挂在点, 用于共享
+
 {{< codeblock "sharedfolder" "sh" >}}
 vmware-hgfsclient
 # WinDownloads
@@ -273,6 +276,7 @@ sudo mount -t fuse.vmhgfs-fuse .host:WinDownloads /mnt/hgfs/downloads/ -o allow_
 #sudo umount -a fuse.vmhgfs-fuse .host:WinDownloads /mnt/hgfs/downloads/
 sudo vi /etc/fstab
 {{< /codeblock >}}
+
 `.host:WinDownloads /mnt/hgfs/downloads/ fuse.vmhgfs-fuse allow_other 0 0`
 
 
