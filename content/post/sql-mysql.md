@@ -1,6 +1,6 @@
 ---
 title: "MySQL8.0 Operations"
-date: 2023-08-10T13:36:00+08:00
+date: 2023-08-10T17:52:00+08:00
 categories:
 - SQL
 - MySQL
@@ -173,8 +173,7 @@ INSERT INTO <table_name>...
 SELECT * FROM <table_name>;
 {{< /codeblock >}}
 
-#### The Time Filter
-{{< codeblock "Periods" sql >}}
+{{< codeblock "Periods Filter" "sql" >}}
 -- 今天
 SELECT * FROM 表名 WHERE TO_DAYS(时间字段名) = TO_DAYS(NOW());
 
@@ -209,7 +208,7 @@ SELECT * FROM 表名 WHERE 时间字段名 BETWEEN DATE_SUB(NOW(),INTERVAL 6 MON
 -- 本季度
 SELECT * FROM 表名 WHERE QUARTER(时间字段名) = QUARTER(NOW());
 
---- 上季度
+-- 上季度
 SELECT * FROM 表名 WHERE QUARTER(时间字段名) = QUARTER(DATE_SUB(NOW(),INTERVAL 1 QUARTER));
 
 -- 本年
@@ -296,21 +295,20 @@ Create a SQLView to make query fast
 ---
 
 ### Export
-{{< codeblock "export" "sh" >}}
-# 导出整个数据库结构和数据
-mysqldump -h localhost -P 3306 -uroot -p123456 database > test.sql
 
+{{< codeblock "export" "shell" >}}
+# 导出整个数据库结构和数据
+mysqldump -h localhost -P 3306 -urd -p123456 database > test.sql
 # 导出整个数据库结构(不包含数据)
-mysqldump -h localhost -P 3306 -uroot -p123456 -d database > test.sql
+mysqldump -h localhost -P 3306 -urd -p123456 -d database > test.sql
 
 # 导出单个数据表结构和数据
-mysqldump -h localhost -P 3306 -uroot -p123456 database table > test.sql
-
+mysqldump -h localhost -P 3306 -urd -p123456 database table > test.sql
 # 导出单个数据表结构(不包含数据)
-mysqldump -h localhost -P 3306 -uroot -p123456 -d database table > test.sql
+mysqldump -h localhost -P 3306 -urd -p123456 -d database table > test.sql
 
 # 说明:
-# 如果是本机操作，其中 -h localhost -P 3306 可以不需要## -P 参数，是大P，且有空格，不同于后面密码的小P，没有空格
+# -P参数, 是大P, 且有空格, 不同于后面密码的小P，没有空格
 {{< /codeblock >}}
 
 

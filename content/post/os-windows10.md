@@ -1,6 +1,6 @@
 ---
 title: "What to Do after Init Windows"
-date: 2023-02-15T15:16:59+08:00
+date: 2023-08-10T17:33:59+08:00
 categories:
 - OS
 - Windows
@@ -109,8 +109,9 @@ v2rayN(Need DotNet6.0)
 ## IDEA
 ---
 
-### Java
+### Configuration
 - 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
+- settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> 将keywords设置为大写(To upper), and then`ctrl + alt + L`
 
 
 ### Plugin
@@ -249,23 +250,24 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
 
 
 ### Windows
+- 电源管理, 从不休眠
 - 微信开发者工具
 - 抖音开发者工具
 - MS SQL Server + SSMS
 
-  初始化, 导出, 导入的命令参见[MS SQL Server Opertaions](https://ivanhan0511.github.io/post/sql-sqlserver/)
+  Init, export, import refer to[MS SQL Server Opertaions](https://ivanhan0511.github.io/post/sql-sqlserver/)
 
 
 ### Ubuntu Server
 - Redis
 - MySQL
 
-  初始化, 导出, 导入的命令参见[MySQL Opertaions](https://ivanhan0511.github.io/post/sql-mysql/)
+  Init, export, import refer to[MySQL Opertaions](https://ivanhan0511.github.io/post/sql-mysql/)
 
 
 ### Ubuntu Desktop(暂时弃用)
 
-按照[文章提示](https://blog.csdn.net/weixin_43862116/article/details/107731631)挂载host主机的文件夹到Ubuntu挂在点, 用于共享
+Refer to [this post](https://blog.csdn.net/weixin_43862116/article/details/107731631)挂载host主机的文件夹到Ubuntu挂在点, 用于共享
 
 {{< codeblock "sharedfolder" "sh" >}}
 vmware-hgfsclient
