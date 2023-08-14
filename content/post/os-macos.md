@@ -1,6 +1,6 @@
 ---
 title: "CONFIGURATION IN macOS"
-date: 2023-02-15T15:17:20+08:00
+date: 2023-08-11T11:05:20+08:00
 categories:
 - OS
 - macOS
@@ -34,145 +34,108 @@ Some record for configuring macOS
 
 
 ## BACKUP
-主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
+macOS作为次要操作系统很多文件都是云存储的, 只要备份好本地的一些文件即可
 
 - 代码: 基本通过git有同步, 其余少量的通过copy完成
-- [ ] 数据库: 需要全部备份, MySQL所有库, SQL Server所有库
-- [ ] IDE: IDE本身的配置通过云同步; IDE存储的SQL脚本copy到项目文件夹sql中; 记录IDE的插件
-- 坚果云文档: 公司文档, 仅限文档, 其余通过本地文件存储
-- [ ] 本地文档: 密钥, 证书, 安装包, 公司大文件, 私人文件等
-- [ ] 图片
-- [ ] 视频
-- [ ] 虚拟机
+- 坚果云文档: 负责与Windows同步
+- iCloud: 从Windows同步过来的文档在上传到iCloud
+- 本地文档
+  - 各个项目的密钥 / 证书
+  - SSH密钥, 私人文件等
+- 图片
+- 视频
 
 
+## BASE
+---
+只要连接互联网, 现有的Windows10会自动联网安装驱动, 只需要等待更新/重启
 
-
-## R&D
-按先后顺序排序
-
-
-VisualStudioPro  
-最大化使用, C, Python, JavaScript, Vim
-- 设置项目存储路径
-- 设置字体? 默认DejaVu Sans Mono? 避免像CMD.exe一样无法分辨小写L与数字1
-- [Visual Studio 2019 修改字符集编码](https://blog.csdn.net/qq_41868108/article/details/105750175)
-- 自动补全: Enter or Tab?
-  - Visual Studio 2019是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置
-  - 个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
-  - 具体路径: 工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表
-- Install VsVim extension -> 超级好用, 可以随插入模式和普通模式的切换而自动切换输入法
-- Both English and Chinese, prefer English
-- 可能会提供git环境
-- 使用其Python环境, 不安装Python在裸机
-- 使用其npm环境? 不安装npm在裸机可以吗?  -> 貌似不行
-- 是否能兼容调用MSYS2的一些命令而不用安装MSYS2?
-
-
-~~CLion or VisualStudioPro ?~~  
-目前有点倾向VisualStudioPro, 可以写C/C++, 还可以写Python, JavaScript, 何乐而不为呢? 而且Visual Studio的debug无敌
-Java就交给JetBrains IDEA就可以了
-
-
-~~PyCharm or VisualStudioPro ?~~
-
-
-IDEA
-- git? 验证VisualStudioPro是否会安装git
-- git? 验证MSYS2是否会安装git
-- 使用其Java环境, 不安装Java在裸机
-
-
-MSYS2 or Cygwin?  
-先安装VisualStudioPro, 看看是否会提供git环境  
-不行再试试MSYS2, 而不用安装Git For Bash  
-~~MinGW32, MinGW64, WSL~~
-
-~~HBuilder or WebStorm or VS Code ?~~  
-~~npm?~~
-
-~~Notepad++~~
-- 可以使用VisualStudioPro代替
-
-
-VMWare  
-规划好哪些工具安装在裸机, 哪些安装在VMWare
-
-- 切换安装路径到D:\盘
-- 纯净Win10最新版, 快照
-- 银行软件
-- 各种Linux
-  - PHP
-  - Redis
-  - ...
-- 折腾环境/演示环境
-
-
-Typora
-- 需要看目录时, 例如接口文档中上来来回滚动, 还是需要Typora的目录
-- 所见即所得的格式校验, PDF输出, 字体兼容, 还是需要Typora
-
-XShell/XFtp
-
-~~Navicat 还是最终DB的解决方案?  ~~
-~~MySQL Workbench和SSMS这俩工具太难用了, 还是Navicat吧~~
-
-MySQL~~ + (MySQL Workbench)~~  
-`MySQL Workbench -> Preferences -> SQL Editor -> QueryEditor -> use UPPERCASE keywords on completion`
-- 设置Data存储路径
-
-SQL Server~~ + (SSMS)~~
-- 设置Data存储路径
-
-Redis
-
-
-向日葵Sunlogin
-
-WireShark
-
-微信开发者工具
-
-hugo创建静态博客  
-安装hugo步骤需要补充文档
-
-
-Postman
-
-Inno Setup Compiler(可选)
-
-
-
-
-<br>
-
-## BASIC APP
-常用的跨平台工具, 兼容手机 / macOS / Windows
-
-- Input method, ctrl+space to switch
-- Chrome as default browser
 - HHKB
 - Logitech Anywhere3 and OptionPlus
-- v2ray
+- iTerm
+- Chrome as default browser
+
+
+## Proxy
+---
+v2rayN or ClashX
+
+注意对时准确, 精准到1分钟以内, 否则代理建立连接失败
+
+
+## IDEA
+---
+
+### Configuration
+- 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
+- settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> 将keywords设置为大写(To upper), and then`ctrl + alt + L`
+
+
+### Plugin
+- IdeaVim
+  - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`~/.ideavimrc`)
+  - 增加如下配置(暂时不像Visual Studio需要完整的.vimrc, 只需要添加一少部分配置即可)
+
+    {{< codeblock ".ideavimrc" "config" >}}
+set hlsearch
+set incsearch
+
+syntax on
+" 不设定在插入状态无法用退格键和 Delete 键删除回车符
+set backspace=indent,eol,start
+
+" 修改leader键为逗号
+let mapleader=","
+set ignorecase  " 设置大小写敏感
+
+" Line number
+"set ruler
+set number
+set relativenumber
+
+" 修改vim的正则表达
+nmap / /\v
+vmap / /\v
+
+" 取消搜索高亮
+nmap <leader>nh :noh<cr>
+    {{< /codeblock >}}
+- MyBatisCodeHelperPro
+- Redis
+
+
+## HBuilderX
+---
+看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
+npm
+- 使用其npm环境? 不安装npm在裸机可以吗?  -> 貌似不行
+
+
+## DB
+---
+### MySQL
+
+
+### Redis
+
+
+## Others
+---
+常用的跨平台工具, 兼容iOS / macOS / Windows / Android
+
+- Chrome
+- Postman
+- 向日葵Sunlogin
+- WireShark
+- Typora
 - 坚果云
-- Office365
+- Office365(Outlook, Excel, Word, PowerPoint)
 - WeChat
 - 腾讯会议
 - 亿图
-- Fiio driver
-- EMail客户端
+- Axure
 
-
-
-
-<br>
 
 ## GAME
-Steam
-可以通过内部工具迁移游戏存储目录
-
-
-
-EPIC
-不能迁移, 重新下载
-
+---
+- Minecraft Java Edition

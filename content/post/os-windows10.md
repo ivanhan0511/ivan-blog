@@ -305,5 +305,5 @@ sudo vi /etc/fstab
 ---
 - Steam 可以通过内部工具迁移游戏存储目录
 - EPIC 不能迁移, 重新下载
-- Minecraft
+- Minecraft Bedrock Edition
 
