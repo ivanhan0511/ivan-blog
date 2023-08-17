@@ -317,10 +317,10 @@ mysqldump -h localhost -P 3306 -urd -p123456 -d database table > test.sql
 {{< tabbed-codeblock "import" >}}
 <!-- tab shell -->
 # 恢复到指定数据库
-mysgl -hhostname -uusername -ppassword databasename < test.sql
+mysql -hhostname -uusername -ppassword databasename < test.sql
 
 # 恢复到指定数据库中的表
-mysgl -hhostname -uusername -ppassword databasename tablename < test.sql
+mysql -hhostname -uusername -ppassword databasename tablename < test.sql
 <!-- endtab -->
 <!-- tab sql -->
 use some_db;

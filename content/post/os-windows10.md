@@ -112,7 +112,8 @@ v2rayN(Need DotNet6.0)
 ### Configuration
 - 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
 - settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> 将keywords设置为大写(To upper), and then`ctrl + alt + L`
-
+- 数据库导入时, 右键某个数据库 -> Import/Export -> Restore with 'mysql' -> Path to mysql -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysql.exe`
+- 数据库导出时, 右键某个数据库 -> Import/Export -> Export with 'mysqldump' -> Path to mysqldump -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysqldump.exe`
 
 ### Plugin
 - IdeaVim
@@ -241,6 +242,16 @@ npm
 - 使用其npm环境? 不安装npm在裸机可以吗?  -> 貌似不行
 
 
+## DB
+---
+MySQL安装在Windows中也行, 安装在VMWare中也行
+
+毕竟MySQL常年在用, 每次都开VMWare虚拟机很麻烦
+
+如果安装在真机, 现有的安装包+配置工具已经很傻瓜式了, 安装好之后只用`MySQL 8.1 Command Line Clien`登录用于管理  
+然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出
+
+
 ## VMWare  
 ---
 VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMWare
@@ -295,7 +306,7 @@ sudo vi /etc/fstab
 - Office365(Outlook, Excel, Word, PowerPoint)
 - WeChat
 - 腾讯会议
-- 亿图
+- 亿图Edraw
 - Fiio driver
 - Notepad++
 - Axure
