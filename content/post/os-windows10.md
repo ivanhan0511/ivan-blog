@@ -1,13 +1,17 @@
 ---
 title: "What to Do after Init Windows"
-date: 2023-08-10T17:33:59+08:00
+date: 2023-08-18T14:24:00+08:00
 categories:
 - OS
 - Windows
 tags:
 - Windows
 - Init
-- myOS
+- IDEA
+- Configure
+- Proxy
+- VisualStudio
+- HBuildX
 keywords:
 - windows
 - init
@@ -36,6 +40,7 @@ After initialization of Windows, here is the TODO list.
 
 {{< toc >}}
 
+
 ## BACKUP
 ---
 主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
@@ -58,10 +63,14 @@ After initialization of Windows, here is the TODO list.
 - 视频
 
 
+
+
 ## BOOT DEVICE
 ---
 - Create Windows official MediaCreationTool
 - Choose boot device in BIOS 
+
+
 
 
 ## BASE
@@ -78,6 +87,8 @@ After initialization of Windows, here is the TODO list.
 - Chrome as default browser
 - HHKB
 - Logitech Anywhere3 and OptionPlus
+
+
 
 
 ## Proxy
@@ -104,6 +115,8 @@ v2rayN(Need DotNet6.0)
   - Visual Studio 2022是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置
   - 个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
   - 具体路径: 工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表
+
+
 
 
 ## IDEA
@@ -218,6 +231,8 @@ Maven 3.8.1 blocked http connection
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
 
+
+
 ## Git & SSH
 ---
 MINGW64 Git套件
@@ -235,11 +250,52 @@ MINGW64 Git套件
 - ss
 
 
+
+
 ## HBuilderX
 ---
 看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
-npm
-- 使用其npm环境? 不安装npm在裸机可以吗?  -> 貌似不行
+
+层层递进
+
+### nvm
+Make 2 directories: `D:\\nvm` and `D:\\nodejs`
+
+Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
+
+When installing, use these 2 direcotories above.
+
+And use it in CMD:
+{{< codeblock cmd >}}
+nvm install 16.14.0 -g
+nvm list
+nvm use 16.17.1
+#nvm uninstall 16.17.1
+{{< /codeblock >}}
+
+
+### npm
+{{< codeblock cmd >}}
+# 遇到npm无法调用的问题, 网上有记录, 但重启解决问题
+npm install yarn -g
+{{< /codeblock >}}
+
+
+### yarn
+{{< tabbed-codeblock cmd >}}
+<!-- tab serve -->
+yarn install
+yarn run serve-dev
+<!-- endtab -->
+
+<!-- tab build -->
+yarn install
+yarn run build-pro
+<!-- endtab -->
+
+{{< /tabbed-codeblock >}}
+
+
 
 
 ## DB
@@ -248,8 +304,10 @@ MySQL安装在Windows中也行, 安装在VMWare中也行
 
 毕竟MySQL常年在用, 每次都开VMWare虚拟机很麻烦
 
-如果安装在真机, 现有的安装包+配置工具已经很傻瓜式了, 安装好之后只用`MySQL 8.1 Command Line Clien`登录用于管理  
-然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出
+如果安装在真机, 现有的安装包+配置工具已经很傻瓜式了, 安装好之后只用`MySQL 8.1 Command Line Clien`登录用于DCL(Data Control Language)管理  
+然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出, 各种DDL(Data Definition Language), DML(Data Manipulation Language)都可以在IDEA中完成
+
+
 
 
 ## VMWare  
@@ -293,6 +351,8 @@ sudo vi /etc/fstab
 `.host:WinDownloads /mnt/hgfs/downloads/ fuse.vmhgfs-fuse allow_other 0 0`
 
 
+
+
 ## Others
 ---
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
@@ -309,7 +369,9 @@ sudo vi /etc/fstab
 - 亿图Edraw
 - Fiio driver
 - Notepad++
-- Axure
+- Axure RP 9 (Axure Rapid Prototyping)
+
+
 
 
 ## GAME

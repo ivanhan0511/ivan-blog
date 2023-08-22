@@ -256,8 +256,6 @@ kill 12345;
 {{< /codeblock >}}
 
 
-
-
 ### JOIN
 
 ![Joins](https://upload.wikimedia.org/wikipedia/commons/9/9d/SQL_Joins.svg)
