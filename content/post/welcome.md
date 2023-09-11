@@ -1,6 +1,6 @@
 ﻿---
 title: "Welcome to Ivan's Blog"
-date: 2023-09-06T12:41:00+08:00
+date: 2023-09-11T14:37:00+08:00
 categories:
 - Welcome
 tags:
@@ -28,9 +28,9 @@ showDate: true
 Some records for software, coffee, music and sports.
 <!--more-->
 
-<<{ blockquote "稻盛和夫" >}}
+{{< blockquote "稻盛和夫" >}}
 "总有一天你会明白, 答非所问就是回答, 敬而远之就是不喜欢， 沉默不语就是拒绝， 闪烁不定就是撒谎， 冷战就是不怕失去. 有些事情真的没必要追问, 回头看看， 所有的细节都是答案."
-<<{ /blockquote >}}
+{{< /blockquote >}}
 
 
 
@@ -49,9 +49,7 @@ Some records for software, coffee, music and sports.
 
 - 个人订阅号 + 小程序 + 运营
 
-  *临时记录在这里, 这只是一个个人项目, 一举多得而已, 属于具体问题, 不属于指导思维*
-
-  - 订阅号, 可以让Ting熟悉内容的编辑/发布, 练就写作, 提高排版/拍照等后期技能
+  - 订阅号, 熟悉内容的编辑/发布, 练就写作, 提高排版/拍照等后期技能
   - 小程序, 自主完成小程序的认证开发, 熟练全栈开发
   - 运营, 结合开源的复式记账法工具, 分享给几个内部使用复式记账法的人用
 
