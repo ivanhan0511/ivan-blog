@@ -18,14 +18,15 @@ List my coffee equipments.
 
 ## POUR-OVER COFFEE
 ### Grinder
-Helor
+- Helor
+- FujiRoyal
 
 
 ## ESPRESSO
 ### Grinder
 - ~~Mazzer Super Jolly~~
-
 - 迈拓600AE(仿Mazzer SJ)
 
+### 迈拓EM-18
 
 

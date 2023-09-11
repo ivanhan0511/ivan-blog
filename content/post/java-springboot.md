@@ -1,6 +1,6 @@
 ﻿---
 title: "SpringBoot"
-date: 2023-06-19T10:10:22+08:00
+date: 2023-09-04T15:10:00+08:00
 categories:
 - Java
 - WebFramework
@@ -30,9 +30,7 @@ showSocial: true
 showDate: true
 ---
 
-The tec core are architecture, IoC and AoP.
-
-But just let's focus on the architecture design for business workflow in the SpringBoot framework.
+The most important tec core are design and architecture, and the second are IoC and AoP.
 
 No best, only better.
 
@@ -113,12 +111,20 @@ Controller层
 {{< /blockquote >}}
 
 
+
+
 ### 易混淆注解的对比
 
-#### @Component @Bean
+#### @Component @Bean @Service @Configurable
 With this annotation, a class can be scaned manually or automaticlly
 
-@Bean一般是调用第三方的
+`@Bean`一般是调用第三方的
+
+`@Component`与`@Service`没有区别, `@Service`还没想好, 是一个预留的注解定义
+
+`@Configurable`是单例模式, 在启动时加载
+
+
 
 
 #### @Resource @Autowired
