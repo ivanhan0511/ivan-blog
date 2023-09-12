@@ -50,18 +50,26 @@ Some records for software, coffee, music and sports.
 - 公司公众号, 提供营地预定功能, 先以PearAdmin上线一个Demo
 - 个人小程序, 以mall上线一个Demo
 - 个人小程序, 再以mall模拟一个简化的德海项目/帐篷预定项目
-  - [ ] Users与Security的数据结构
-  - [ ] Security的拦截, 不同客户端的拦截过滤, 动态权限?
-  - [ ] 与微信的具体认证
-  - [ ] Controller输入校验, Service处理, Redis缓存, DAO读写, DTO输出转换, Exception捕捉
-  - [ ] 物理分页
-  - [ ] 自动化的接口文档
-  - [ ] DockerCompose部署?
-- 最后把mall研究透彻, 并改造为可用的BtoB平台, 以及BtoC商城
-- 订阅号, 熟悉内容的编辑/发布, 练就写作, 提高排版/拍照等后期技能
-- 运营, 结合开源的复式记账法工具, 分享给几个内部使用复式记账法的人用
-
-
-
-
+  - [ ] Controller validation
+  - [ ] Redis cache
+  - [ ] Authentication
+    + [ ] 确认admin与portal应对两种客户端时, 是如何区分Users与Security的数据结构?
+    + [ ] Security的拦截, 不同客户端的拦截过滤, 动态权限?
+    + [ ] Redis缓存认证? UserPassword认证? Token认证? 动态权限? 在SecurityConfig中是如何体现的?
+    + [ ] 是component文件中的几个Filter吗?
+    + [ ] 与微信的具体认证
+  - [ ] Service
+  - [ ] DAO mapper
+    + [ ] MyBatis PageHelper
+  - [ ] DTO transfer
+  - [ ] Response structure
+  - [ ] Exception catch
+  - [ ] SwaggerUI
+  - [ ] DockerCompose deployment?
+  - [ ] ElasticSearch NativeSearchQueryBuilder
+- 完成以上考察, 大范围API测试
+- 最后把mall研究透彻, 并制定商城需求, 改造为可用的BtoB平台, 以及BtoC商城
+- 个人订阅号, 熟悉内容的编辑/发布, 练习写作, 提高排版/拍照等后期技能
+- 运营, 尝试推送文章
+- (额外)结合开源的复式记账法工具, 分享给几个内部使用复式记账法的人用
 
