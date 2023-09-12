@@ -1,6 +1,6 @@
 ---
-title: "What to Do after Init Windows"
-date: 2023-08-18T14:24:00+08:00
+title: "What to do after init Windows"
+date: 2023-09-12T14:24:00+08:00
 categories:
 - OS
 - Windows
@@ -305,7 +305,8 @@ MySQL安装在Windows中也行, 安装在VMWare中也行
 毕竟MySQL常年在用, 每次都开VMWare虚拟机很麻烦
 
 如果安装在真机, 现有的安装包+配置工具已经很傻瓜式了, 安装好之后只用`MySQL 8.1 Command Line Clien`登录用于DCL(Data Control Language)管理  
-然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出, 各种DDL(Data Definition Language), DML(Data Manipulation Language)都可以在IDEA中完成
+然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出, [各种DDL(Data Definition Language), DML(Data Manipulation Language)](https://ivanhan0511.github.io/post/sql-mysql/)都可以在IDEA中完成
+
 
 
 
