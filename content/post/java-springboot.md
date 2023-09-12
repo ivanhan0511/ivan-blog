@@ -1,6 +1,6 @@
 ﻿---
 title: "SpringBoot"
-date: 2023-09-04T15:10:00+08:00
+date: 2023-09-12T11:28:00+08:00
 categories:
 - Java
 - WebFramework
@@ -170,7 +170,7 @@ Reason as below:
 - (Dissent)性能和稳定性等不稳定因素越来越多, 比如一旦手动干预, 很多所谓的"便利"瞬间全无, 还是得依靠MyBatis
 - (Consent)按照MyBatis写XML更像原生SQL, 熟练运用SQL是一件愉快的事情
 
-**非**分布式数据库, 不使用雪花算法, 使用数据库自增ID int
+**非**分布式数据库, 不推荐使用雪花算法, 使用数据库自增ID int
 
 
 ### Mapper Design
@@ -178,12 +178,10 @@ Reason as below:
   - selectOneForXxxFunction(Integer param)
   - selectListForYyyFunction(YyyRequest request)
     - request中通过分组校验参数来整合不同的请求参数, 以便Mapper层可以一条语句应对多个controller层不同条件的查询
-- 复用<sql/>仅涉及columns字段
-  - 为了在<select/>中看得更清晰
-  - 为了MyBatisCodeHelperPro这个插件能关联<sql/>和<resultMap/>对应的字段
-- 不使用联合查询, 会导致PageHelper无法正确分页
-- 因为<resultMap/>的功能, SQL语句中可以/也不能 用`LEFT JOIN`, 也不用增加太多where条件
-  - MyBatis会做子查询继续调用<collecttion/>中的查询语句
+- 复用`<sql/>`仅限于数据库表的columns字段
+  - 为了在`<select/>`中看得更清晰
+  - 为了MyBatisCodeHelperPro这个插件能关联`<sql/>`和`<resultMap/>`对应的字段
+- 不使用联合查询, 会导致PageHelper无法正确分页, 而使用子查询
 
 
 
@@ -293,6 +291,7 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 ## SECURITY
+---
 ### Configure
 这里包含初始化, 注册哪些filter
 
@@ -315,6 +314,7 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 ## LOGGER
+---
 **slf4j.Logger and log4j.Logger**
 {{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
 Comparison SLF4J and Log4j<br/>
@@ -331,6 +331,7 @@ However, it is always difficult to prefer one between the two.
 
 
 ## 连接池选型
+---
 Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
 
 Druid是淘宝选用的, 高并发的情况会适用一些
@@ -340,6 +341,7 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 
 ## CACHE
+---
 - MyBatis缓存
 - Redis缓存
 
@@ -348,10 +350,12 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 
 ## INTERCEPTER
+---
 
 
 
 ## APPENDIX
+---
 摘抄自网络, 不一定合理, 仅保存一些文字, 以便以后少写一些文字
 
 ### 缩写信息
