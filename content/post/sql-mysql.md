@@ -79,6 +79,12 @@ sudo systemctl restart mysql.service
 DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 
 ### GRANT
+{{< codeblock "GRANT" "SQL" >}}
+GRANT ALL PRIVILEGES ON `some-db`.* TO 'rd'@'%';
+FLUSH PRIVILEGES;
+{{< /codeblock >}}
+
+
 ### REVOKE
 ### DENY
 
@@ -169,10 +175,6 @@ INSERT INTO <table_name>...
 
 
 ### SELECT
-{{< codeblock "SELECT" "sql" >}}
-SELECT * FROM <table_name>;
-{{< /codeblock >}}
-
 {{< codeblock "Periods Filter" "sql" >}}
 -- 今天
 SELECT * FROM 表名 WHERE TO_DAYS(时间字段名) = TO_DAYS(NOW());

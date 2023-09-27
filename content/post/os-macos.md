@@ -108,7 +108,7 @@ nmap <leader>nh :noh<cr>
 ---
 看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
 npm
-- 使用其npm环境? 不安装npm在裸机可以吗?  -> 貌似不行
+- 使用其npm环境? 不安装npm在裸机可以吗?  -> HBuilderX自带node.js环境, 待研究
 
 
 ## DB

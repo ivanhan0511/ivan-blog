@@ -244,26 +244,34 @@ MINGW64 Git套件
 - 解压到`C:\Program Files\Git\usr\bin\`目录中
 - 再打开GitBash即可使用hugo命令创建静态Blog了
 
-### Tools
-[TODO]: To be continued...
-- nc
-- ss
+### VimBundle
+{{< codeblock "Install VimBundle" "shell" >}}
+# It's alse suitable for both Linux and Windows
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim
+#:PluginInstall
+{{< /codeblock >}}
+
+
+### nc
+### ss
 
 
 
 
 ## HBuilderX
 ---
+- 使用其npm环境? 不安装npm在裸机可以吗?  -> HBuilderX自带node.js环境, 待研究
+
 看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
 
 层层递进
 
 ### nvm
-Make 2 directories: `D:\\nvm` and `D:\\nodejs`
+真机系统中不再安装node.js环境, 采用HBuilderX中的node环境, Updated at Sep 25, 2023
 
 Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
 
-When installing, use these 2 direcotories above.
 
 And use it in CMD:
 {{< codeblock cmd >}}
@@ -381,3 +389,11 @@ sudo vi /etc/fstab
 - EPIC 不能迁移, 重新下载
 - Minecraft Bedrock Edition
 
+
+
+
+## BITCOIN
+---
+Download Bitcoin wallet from [here](https://bitcoin.org/en/choose-your-wallet) and choose `Bitcoin Core`
+
+Login [this website](https://www.huobi.com/en-us/login/) to trans BTC

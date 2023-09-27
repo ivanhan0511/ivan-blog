@@ -22,12 +22,8 @@ Java basic knowledge.
 
 {{< toc >}}
 
-## THreadLocal
-
-## JVM
-
-
 ## 类型对比
+---
 ### String[]
 
 ### ArrayList
@@ -64,7 +60,7 @@ Integer提供了一系列数据的成员和操作，如Integer.MAX_VALUE，Integ
 
 
 ## 泛型
-
+---
 {{< codeblock "A.java" "https://www.163.com" >}}
 public class A {}
 
@@ -113,7 +109,21 @@ private boolean hasNull(Object obj) {
 
 
 
+## NO `Hutool`
+---
+### Sort
+{{< codeblock "sort list" "java" >}}
+# import cn.hutool.core.collection.ListUtil;
+ListUtil.sortByProperty(testBeanList, "date");
+
+testBeanList.sort(Comparator.comparing(LocalDriver::getName));
+{{< /codeblock >}}
+
+
+
+
 ## JDBC
+---
 Once a connection is obtained we can interact with the database. 
 The JDBC Statement, CallableStatement, and PreparedStatement interfaces define the methods 
 and properties that enable you to send SQL or PL/SQL commands and receive data from your database.
@@ -128,4 +138,13 @@ The following table provides a summary of each interface's purpose to decide on 
 | PreparedStatement	| Use this when you plan to use the SQL statements many times. The PreparedStatement interface accepts input parameters at runtime. |
 | CallableStatement	| Use this when you want to access the database stored procedures. The CallableStatement interface can also accept runtime input parameters. |
 
+
+
+
+## THreadLocal
+---
+
+
+## JVM
+---
 
