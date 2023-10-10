@@ -367,7 +367,7 @@ sudo vi /etc/fstab
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
 
 - XShell/XFtp
-- Postman
+- ~~Postman~~ 去Postman化, 采用IDEA内置的`Scratches and Consoles`编写SQL和HTTP测试用例
 - 向日葵Sunlogin
 - WireShark
 - Typora
