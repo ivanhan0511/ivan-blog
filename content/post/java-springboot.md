@@ -1,6 +1,6 @@
 ﻿---
 title: "SpringBoot"
-date: 2023-10-10T15:25:00+08:00
+date: 2023-10-24T15:15:00+08:00
 categories:
 - Java
 - WebFramework
@@ -43,32 +43,37 @@ No best, only better.
 
 ## PROJECT ARCHITECTURE (Deprecated)
 
-其实, 如果项目功能足够简单, 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的"度", 非常重要!
+1. 如果项目功能足够简单, 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的"度", 非常重要!!!
+2. 不参与DDD(领域驱动设计)!!!
+
+TODO: 明确DTO作为服务内部传输完整数据的用处, 出处, 全部还是部分?
+
 
 {{< alert danger >}}
-DAO / Repository层
-- ~~(仅关联DO对象, DTO的转换放在serivce层, 用BeanUtil.copyProperties来快速转换, 以便从repository层拿到的数据都是全数据)~~
-- 能通过数据库查询的尽量通过数据库直接查询, **关键要做好通用抽象**
-- 一对一 / 一对多 通过MyBatis的resultMap子表查询, 合理使用子表查询, eager/lazy, 或者接口上分开查询数据详情等
+DAO层
+- Java代码的PO, 纯粹应对数据库结构
+- 优先使用数据库关联查询, 减少连接次数
+  - 做好通用抽象
+  - 划分简单数据输出, 与复杂关联表格的整体输出, 都是为了服务内部传输数据
+- 一对一 / 一对多 通过MyBatis的resultMap子表查询(需要DTO封装), 合理使用子表查询, eager/lazy
 {{< /alert >}}
 
 
 {{< alert warning >}}
-Domain层
-- 不研究不参与DDD(领域驱动设计) ! ! !
-- 核心要考虑和设计的内容, 优先考虑架构, 模型和业务流, 其余的展现和逻辑组合, 在其它层考虑
-- 淡化PO的概念, 因为每一个Domain类都能对应一个数据库表
-- 一对多的关联关系, 通过List/Set类型的字段关联, ~~通过增加以该Domain为主语的行为方法来表达输入输出的行为~~
-- 一对一的关联关系, 还是仿照数据库, 设计一个xxxID的字段, 在XML中的ResultMap进行association的关联
+DTO层
+- 核心要考虑和设计的内容
+  - 从业务接口着手, 脑图中列举出所有相关字段, 结合原型图, 设计前后端接口(未完)
+  - 通过业务流接口, 分解模块结构, 形成数据结构
+  - 以架构的合理性, 业务流的闭环, 评审业务流与数据结构是否合理
 {{< /alert >}}
 
 
 {{< alert success >}}
 Service层
-- 不研究不参与DDD(领域驱动设计) ! ! !
-- 从模块角度考虑服务所应该提供的功能
-- ~~Domain Design Drive下的Service层也比较薄, 一般是复杂业务对多个Domain的联合封装~~
-- 服务端要兼容多种客户端的数据交互行为, 涉及userContext的区分等
+- 面对DAO, 结合MyBatisPlus(适度使用), 提供很多小而单一的服务, 以便解耦
+- 面对Controller, 从模块角度考虑综合服务所应该提供的综合服务, 调用多个小服务
+- 服务端要兼容多种客户端的数据交互行为, 涉及UserContext的区分等
+- 服务层使用DTO通信
 {{< /alert >}}
 
 
@@ -77,10 +82,10 @@ Controller层
 - 从业务场景考虑接口设计
 - 分流: 简单判断分流前端业务, 因地制宜地回复错误信息
 - 输入:
-  - 校验前端数据, 使用requestDTO配合`@Validate`分组校验
+  - 校验前端数据, 结合`@Validate`进行分组校验
 - 输出:
-  - 简单业务, *恰当地*在Domain类中依靠`@JsonView` / `@JsonIgnore`来进行简单的过滤
-  - 综合业务, 需要重新组装responseDTO数据
+  - 简单业务, *恰当地*在DTO类中依靠`@JsonView` / `@JsonIgnore`来进行简单的过滤
+  - 综合业务, 根据不同的客户端的访问, 需要重新组装VO, 以便返回给前端
 {{< /alert >}}
 
 
@@ -89,15 +94,15 @@ Controller层
 ## DB MAPPER
 ---
 **JUST** use MyBatisPLus maven and use default CRUD methods.  
-But refuse to use QueryWrapper, use MyBatis' XML mapper.
+But **REFUSE** to use `QueryWrapper`, use MyBatis' XML mapper.
 
 Reason as below:
-- (Consent)IService和BaseMapper中"充分利用"了Java新规定中Interface可以有default的用法, 基本的CRUD确实不用重复写了
-- (Dissent)MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失
-- (Dissent)性能和稳定性等不稳定因素越来越多, 比如一旦手动干预, 很多所谓的"便利"瞬间全无, 还是得依靠MyBatis
-- (Consent)按照MyBatis写XML更像原生SQL, 熟练运用SQL是一件愉快的事情
+- IService和BaseMapper中"充分利用"了Java新规定中Interface可以有default的用法, 基本的CRUD确实不用重复写了
+- MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失
+- 性能和稳定性等不稳定因素越来越多, 比如一旦手动干预, 很多所谓的"便利"瞬间全无, 还是得依靠MyBatis
+- 按照MyBatis写XML更像原生SQL, 熟练运用SQL是一件愉快的事情
 
-**非**分布式数据库, 不推荐使用雪花算法, 使用数据库自增ID int
+**非**分布式数据库, 不推荐使用雪花算法, 使用数据库自增ID即可
 
 
 ### Mapper Design
@@ -346,7 +351,7 @@ MySQL + Redis + Springboot + Java Security + Vue3 + UniApp + WeChat Authenticati
 
 
 ### DAO Mapper
-- [x] Pure MyBatis
+- [x] Pure MyBatis / MyBatisPlus
 - [ ] MyBatis PageHelper
 - [ ] org.springframework.data.domain.PageRequest? Or PearAdmin? Or mall?
 
