@@ -1,6 +1,6 @@
 ﻿---
 title: "SpringBoot"
-date: 2023-10-26T10:15:00+08:00
+date: 2023-10-26T14:14:00+08:00
 categories:
 - Java
 - WebFramework
@@ -33,15 +33,13 @@ The most important TECH cores are design and architecture which service for busi
 
 NO BEST, ONLY BETTER.
 
-<!--more-->
-
-{{< toc >}}
-
+TODO:  
 - 个人小程序, 以mall上线一个测试版
 - 个人小程序, 再自己创建一个项目, 模拟一个真是项目
 
+<!--more-->
 
-
+{{< toc >}}
 
 ## PROJECT ARCHITECTURE
 ---
@@ -115,7 +113,7 @@ Controller层
 - 还涉及到与微信服务器交换opencode, 交换session, 再让用户授权手机号并最终拿到OpenId 等一系列动作
 - 还要设置缓存, 清空与微信服务器交换时中间状态的cache
 
-### UserDetails还是个坑, 不适合目前这个项目
+UserDetails还是个坑, 不适合目前这个项目
 
 
 
@@ -273,7 +271,7 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 
-## Output Convert (No BeanUtil.copy)
+## OUTPUT CONVERT
 ---
 - [ ] If simple, use DTO to response directly
 - [ ] If complicated, transfer DTO to VO
@@ -289,8 +287,13 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 - [ ] Intercepter
 
 
+### CommonResult
 
-### LOGGER
+
+### Exception
+
+
+### Logger
 **slf4j.Logger and log4j.Logger**
 {{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
 Comparison SLF4J and Log4j<br/>
@@ -314,7 +317,6 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 
 
-
 ## CACHE
 ---
 - [ ] Redis
@@ -329,6 +331,14 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 
 
+
+## TESTING
+---
+- 完成以上考察, 大范围API测试
+
+
+
+
 ## API DOCUMENT
 ---
 - [ ] Swagger UI category, description and list
@@ -339,7 +349,11 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 ## DEPLOYMENT
 ---
+### Docker
 - [ ] DockerCompose deployment in single server?
+
+
+### JAR
 
 
 
@@ -347,13 +361,6 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 ## OTHERS
 ---
 - [ ] ElasticSearch NativeSearchQueryBuilder
-
-
-
-
-## TESTING
----
-- 完成以上考察, 大范围API测试
 
 
 
