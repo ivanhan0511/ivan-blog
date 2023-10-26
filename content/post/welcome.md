@@ -1,6 +1,6 @@
 ﻿---
 title: "Welcome to Ivan's Blog"
-date: 2023-10-24T15:15:20+08:00
+date: 2023-10-26T11:22:00+08:00
 categories:
 - Welcome
 tags:
@@ -28,7 +28,7 @@ showDate: true
 Some records for software, coffee, music and sports.
 <!--more-->
 
-{{< blockquote "MacTalk" "https://mp.weixin.qq.com/s/RL-OsrFhzmJ0SkMeZ93c1Q" >}}
+{{< blockquote "MacTalk" "微信公众号" "https://mp.weixin.qq.com/s/RL-OsrFhzmJ0SkMeZ93c1Q" >}}
 到一定的阶段，我们必须思考另外一个问题：剥离环境的因素，我到底是一个什么样的人，我想干什么。我把它称之为寻找内核的过程。<br>
 这一点，尤其重要。我同事小盖曾经写过一段话：<br>
 当一个人想清楚自己是个什么样的人，以及大致这辈子想做什么事情时，他的内心便会安定下来。要不然，就会有种漂着，没有准心和定力的感觉。<br>
@@ -39,7 +39,7 @@ Some records for software, coffee, music and sports.
 
 
 
-## BLOG
+## BLOG TODO
 - [ ] Take photos for all posts
 - [ ] Write content for all posts
 - [ ] Make my posts can be found on internet

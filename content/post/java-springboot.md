@@ -1,17 +1,16 @@
 ﻿---
 title: "SpringBoot"
-date: 2023-10-24T15:15:00+08:00
+date: 2023-10-26T10:15:00+08:00
 categories:
 - Java
 - WebFramework
 tags:
 - SpringBoot
-- DomainDesignDrive
+- TraditionalDesign
 keywords:
 - java
 - springboot
 - framework
-- domain
 clearReading: true
 #thumbnailImage: //example.com/static/A.png
 thumbnailImage: image-1.png
@@ -30,24 +29,24 @@ showSocial: true
 showDate: true
 ---
 
-The most important tec core are design and architecture, and the second are IoC and AoP.
+The most important TECH cores are design and architecture which service for business, and then the second are IoC and AoP.
 
-No best, only better.
+NO BEST, ONLY BETTER.
 
 <!--more-->
 
 {{< toc >}}
 
-## HISTORY
-1. Finished a production project which is forked from "pear-admin-pro"
+- 个人小程序, 以mall上线一个测试版
+- 个人小程序, 再自己创建一个项目, 模拟一个真是项目
 
-## PROJECT ARCHITECTURE (Deprecated)
 
+
+
+## PROJECT ARCHITECTURE
+---
 1. 如果项目功能足够简单, 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的"度", 非常重要!!!
 2. 不参与DDD(领域驱动设计)!!!
-
-TODO: 明确DTO作为服务内部传输完整数据的用处, 出处, 全部还是部分?
-
 
 {{< alert danger >}}
 DAO层
@@ -91,8 +90,62 @@ Controller层
 
 
 
-## DB MAPPER
+## SECURITY
 ---
+### mall
+- [ ] admin与security解耦, 不同客户端的认证拦截过滤
+  - [ ] 用户名密码新登录, 与token登录 都用一个`jwtAuthenticationTokenFilter`, 通过`UserDetailsService`获取用户数据
+    + [ ] 通过获取username最终实现定位user
+    + [ ] 该token体系与微信认证是否能兼容, 如何兼容?
+  - [ ] 动态权限过滤, 使用`dynamicSecurityFilter`, 通过`DynamicSecurityMetadataService`获取用户权限
+
+### Configure
+这里包含初始化, 注册哪些filter
+
+### Filter
+具体拦截, 并把相对应的且support()的provider传进去
+
+### Provider
+提供自己的认证比对实现方法, 并且实现`support()`满足filter查找
+
+### Handler
+增加成功与失败的handler
+
+### Miscellaneous
+- 还涉及到与微信服务器交换opencode, 交换session, 再让用户授权手机号并最终拿到OpenId 等一系列动作
+- 还要设置缓存, 清空与微信服务器交换时中间状态的cache
+
+### UserDetails还是个坑, 不适合目前这个项目
+
+
+
+
+## CONTROLLER AND INPUT VALIDATION
+---
+- [ ] Web admin
+- [ ] App portal
+- [x] Normal `@Valid` and `@Validated`
+- [x] DIY `@FlagValidator`
+
+
+
+
+## SERVICE
+---
+- [ ] Use MaBatisPlus? How does `mall` use pure MaBatis easily to implement?
+- [ ] Simple service, call mapper function directly?
+- [ ] Complicate service, call multiple mapper functions?
+- [ ] What is the data structure(DTO?) in nternal service?
+
+
+
+
+## DAO MAPPER
+---
+- [ ] Pure MyBatis or MyBatisPlus?
+- [ ] MyBatis PageHelper detail
+- [ ] org.springframework.data.domain.PageRequest? Or PearAdmin? Or mall?
+
 **JUST** use MyBatisPLus maven and use default CRUD methods.  
 But **REFUSE** to use `QueryWrapper`, use MyBatis' XML mapper.
 
@@ -114,8 +167,6 @@ Reason as below:
   - 为了在`<select/>`中看得更清晰
   - 为了MyBatisCodeHelperPro这个插件能关联`<sql/>`和`<resultMap/>`对应的字段
 - 不使用联合查询, 会导致PageHelper无法正确分页, 而使用子查询
-
-
 
 
 ### MultiDB & Transactional
@@ -222,31 +273,24 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 
-## SECURITY
+## Output Convert (No BeanUtil.copy)
 ---
-### Configure
-这里包含初始化, 注册哪些filter
-
-### Filter
-具体拦截, 并把相对应的且support()的provider传进去
-
-### Provider
-提供自己的认证比对实现方法, 并且实现`support()`满足filter查找
-
-### Handler
-增加成功与失败的handler
-
-### Miscellaneous
-- 还涉及到与微信服务器交换opencode, 交换session, 再让用户授权手机号并最终拿到OpenId 等一系列动作
-- 还要设置缓存, 清空与微信服务器交换时中间状态的cache
-
-### UserDetails还是个坑, 不适合目前这个项目
+- [ ] If simple, use DTO to response directly
+- [ ] If complicated, transfer DTO to VO
 
 
 
 
-## LOGGER
+## GLOBAL COMMON MODULE
 ---
+- [x] CommonResult
+- [ ] Exception
+- [ ] Log
+- [ ] Intercepter
+
+
+
+### LOGGER
 **slf4j.Logger and log4j.Logger**
 {{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
 Comparison SLF4J and Log4j<br/>
@@ -261,8 +305,7 @@ However, it is always difficult to prefer one between the two.
 
 
 
-
-## 连接池选型
+## CONNECTION POOL
 ---
 Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
 
@@ -274,21 +317,59 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 ## CACHE
 ---
+- [ ] Redis
+- [ ] `@CacheException`
 - MyBatis缓存
-- Redis缓存
 
 
 
 
-
-## INTERCEPTER
+## BACKGROUND JOB
 ---
+
+
+
+## API DOCUMENT
+---
+- [ ] Swagger UI category, description and list
+- [ ] With session token
+
+
+
+
+## DEPLOYMENT
+---
+- [ ] DockerCompose deployment in single server?
+
+
+
+
+## OTHERS
+---
+- [ ] ElasticSearch NativeSearchQueryBuilder
+
+
+
+
+## TESTING
+---
+- 完成以上考察, 大范围API测试
+
+
+
+
+## OPERATION
+---
+- 个人订阅号, 熟悉内容的编辑/发布, 练习写作, 提高排版/拍照等后期技能
+- 运营, 尝试推送文章
+
 
 
 
 ## APPENDIX
 ---
 摘抄自网络, 不一定合理, 仅保存一些文字, 以便以后少写一些文字
+
 
 ### 缩写信息
 - DAO: Data Access Object, 数据访问层
@@ -316,78 +397,3 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 - Request和Response对象的约定[参考]
   + 复杂对象的交互必须封装成Request 和 Response与前端进行交互
-
-
-## TODO
-
-DOMAIN AND PROJECTS
-
-MySQL + Redis + Springboot + Java Security + Vue3 + UniApp + WeChat Authentication一套框架
-
-- 个人小程序, 以mall上线一个Demo
-- 个人小程序, 再以mall模拟一个简化的德海项目/帐篷预定项目
-
-### Input Validation
-- [x] Normal `@Valid` and `@Validated`
-- [x] DIY `@FlagValidator`
-
-
-### Spring Security
-- [ ] admin与security解耦, 不同客户端的认证拦截过滤
-  - [ ] 用户名密码新登录, 与token登录 都用一个`jwtAuthenticationTokenFilter`, 通过`UserDetailsService`获取用户数据
-    + [ ] 通过获取username最终实现定位user
-    + [ ] 该token体系与微信认证是否能兼容, 如何兼容?
-  - [ ] 动态权限过滤, 使用`dynamicSecurityFilter`, 通过`DynamicSecurityMetadataService`获取用户权限
-
-
-### Controller
-- [ ] Web admin
-- [ ] App portal
-
-
-### Service
-- [ ] Simple service, call mapper function directly?
-- [ ] Complicate service, call multiple mapper functions?
-
-
-### DAO Mapper
-- [x] Pure MyBatis / MyBatisPlus
-- [ ] MyBatis PageHelper
-- [ ] org.springframework.data.domain.PageRequest? Or PearAdmin? Or mall?
-
-
-### Output Convert (No BeanUtil.copy)
-- [ ] Response structure
-
-
-### Global exception catch
-- [ ] Exception
-- [ ] Log
-
-
-### Cache
-- [ ] Redis
-- [ ] `@CacheException`
-
-
-### Background Job
-
-
-
-### API Document
-- [ ] SwaggerUI
-
-
-### Deployment
-- [ ] DockerCompose deployment?
-
-
-### Others
-- [ ] ElasticSearch NativeSearchQueryBuilder
-
-
-- 完成以上考察, 大范围API测试
-- 最后把mall研究透彻, 并制定商城需求, 改造为可用的BtoB平台, 以及BtoC商城
-- 个人订阅号, 熟悉内容的编辑/发布, 练习写作, 提高排版/拍照等后期技能
-- 运营, 尝试推送文章
-
