@@ -319,22 +319,31 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 ## CACHE
 ---
-- [ ] Redis
+### Redis
+[参考该文章](https://javaguide.cn/database/redis/redis-data-structures-01.html#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1)
+
+
+### Annotation
 - [ ] `@CacheException`
-- MyBatis缓存
+
+
+### MyBatis Cache
 
 
 
 
 ## BACKGROUND JOB
 ---
+Quartz
 
 
 
 
 ## TESTING
 ---
-- 完成以上考察, 大范围API测试
+### Java Unit Test
+
+### PostMan
 
 
 

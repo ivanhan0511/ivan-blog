@@ -1,6 +1,6 @@
 ---
 title: "Java Basic"
-date: 2022-09-27T15:05:15+08:00
+date: 2022-10-26T14:05:15+08:00
 categories:
 - Java
 - Basic
@@ -22,7 +22,7 @@ Java basic knowledge.
 
 {{< toc >}}
 
-## 类型对比
+## TYPE
 ---
 ### String[]
 
@@ -83,6 +83,81 @@ public static List<A> asList(A... a);
 {{< /alert >}}
 
 
+
+
+
+
+## THREAD
+---
+### ThreadLocal
+
+
+### Thread Lock
+一、ReentrantLock是用来做什么的？
+二、ReentrantLock的实现原理是什么？
+三、ReentrantLock对比于Synchronized有哪些优缺点？
+四、ReentrantLock的简单使用
+
+
+一、ReentrantLock是用来做什么的？
+这个类是JUC工具包中对线程安全问题提供的一种解决方案，它主要是用来给对象上锁，保证同一时间这能有一个线程在访问当前对象。这样处理是为了防止如果一个线程对某个公共变量进行了改变，而其它线程读取时读出来的是原有数据导致脏读的问题。
+
+二、ReentrantLock的实现原理是什么？
+ReentrantLock主要是通过同步队列和CAS机制来实现的，它实现的过程中主要包含下面几个属性：
+
+status：锁状态，0表示没有线程获取锁，1表示已有线程获取锁
+exclusiveOwnerThread：当前持有锁的线程
+Node：节点，是ReentrantLock内部维持的一个双向链表（同步阻塞队列）的基本构成
+具体流程
+
+1、上锁更新锁状态：当A线程持有锁时，会通过CAS将status状态置为1，并将A线程自身存入exclusiveOwnerThread属性当中；
+2、线程入队：而后线程B通过CAS获取锁时发现无法获取锁，此时就会获取node信息，但是由于node双向链表是null所以会通过CAS来创建一个双向链表的head对象，之后再把线程B封装成的Node节点通过尾插法接入双向链表的尾部；
+3、线程阻塞：入队完成后再调用park方法进行阻塞；
+4、释放锁并更新锁状态：当A线程释放锁时会将status属性重置为0，且把exclusiveOwnerThread置为null；
+5、唤醒线程：A线程释放锁完毕后会调用unpark方法来唤醒双向链表中下一节点的线程B;
+
+三、ReentrantLock对比于Synchronized有哪些优缺点？
+1、ReentrantLock的锁状态是可见的，而Synchronized的锁状态是不可见的；
+2、ReentrantLock是JDK层面的实现，而Synchronized是JVM层面的实现；
+3、ReentrantLock需要手动释放锁，而Synchronized不需要手动释放锁；
+4、ReentrantLock可以是非公平锁也可以是公平锁，而Synchronized只能是非公平锁；
+5、ReentrantLock是可被中断的，而Synchronized是不可悲中断的；
+6、Synchronized在特定条件下是后来的线程先获取锁，而ReentrantLock是先来的线程先获取锁；
+四、ReentrantLock的简单使用
+
+
+[另一篇](https://blog.csdn.net/sqL520lT/article/details/122096431)
+
+
+
+
+## JDBC
+---
+Once a connection is obtained we can interact with the database. 
+The JDBC Statement, CallableStatement, and PreparedStatement interfaces define the methods 
+and properties that enable you to send SQL or PL/SQL commands and receive data from your database.
+
+They also define methods that help bridge data type differences between Java and SQL data types used in a database.
+
+The following table provides a summary of each interface's purpose to decide on the interface to use.
+
+| Interfaces | Recommended Use |
+| :---       | :---            |
+| Statement  | Use this for general-purpose access to your database. Useful when you are using static SQL statements at runtime. The Statement interface cannot accept parameters. |
+| PreparedStatement	| Use this when you plan to use the SQL statements many times. The PreparedStatement interface accepts input parameters at runtime. |
+| CallableStatement	| Use this when you want to access the database stored procedures. The CallableStatement interface can also accept runtime input parameters. |
+
+
+
+
+## JVM
+---
+
+
+
+
+## TOOLS
+---
 ### 判断类实例中的各个属性是否有null
 {{< codeblock "Utils.java" >}}
 private boolean hasNull(Object obj) {
@@ -106,81 +181,83 @@ private boolean hasNull(Object obj) {
 }
 {{< /codeblock >}}
 
+### 兼容多种时间格式的输入
+{{< tabbed-codeblock "DateForamtUtil" "java" >}}
+<!-- tab Util -->
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.regex.Pattern;
 
+/**
+ * author : toby
+ * e-mail : 13128826083@163.com
+ * time : 2018/2/2
+ * desc :
+ */
+public class DateFormatUtil {
 
+    /**
+     * 格式化时间
+     *
+     * @param dateStr
+     * @return
+     */
+    public static String dateRegFormat(String dateStr) {
+        HashMap<String, String> dateRegFormat = new HashMap<>();
+        // 2014年3月12日 13时5分34秒，2014-03-12 12:05:34，2014/3/12 12:5:34
+        dateRegFormat.put("^\\d{4}\\D+\\d{1,2}\\D+\\d{1,2}\\D+\\d{1,2}\\D+\\d{1,2}\\D+\\d{1,2}\\D*$", "yyyy-MM-dd-HH-mm-ss");
 
-## TRY TO BE WITHOUT `Hutool`
----
-### Sort
-{{< codeblock "sort list" "java" >}}
-# import cn.hutool.core.collection.ListUtil;
-ListUtil.sortByProperty(testBeanList, "date");
+        // 2014-03-12 12:05，2014-3-12 12:5
+        dateRegFormat.put("^\\d{4}\\D+\\d{1,2}\\D+\\d{1,2}\\D+\\d{1,2}\\D+\\d{1,2}\\D*$", "yyyy-MM-dd-HH-mm");
 
-testBeanList.sort(Comparator.comparing(LocalDriver::getName));
-{{< /codeblock >}}
+        // 2014-03-12
+        dateRegFormat.put("^\\d{4}\\D+\\d{1,2}\\D+\\d{1,2}$", "yyyy-MM-dd");
 
+        DateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat formatter2;
+        String dateReplace;
+        String strSuccess = "";
+        try {
+            for (String key : dateRegFormat.keySet()) {
+                if (Pattern.compile(key).matcher(dateStr).matches()) {
+                    formatter2 = new SimpleDateFormat(dateRegFormat.get(key));
+                    dateReplace = dateStr.replaceAll("\\D+", "-");
+                    strSuccess = formatter1.format(formatter2.parse(dateReplace));
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("---------日期格式无效-----------" + dateStr);
+            throw new Exception("日期格式无效");
+        } finally {
+            return strSuccess;
+        }
+    }
+}
+<!-- endtab -->
 
-### Date and Time
-{{< codeblock "LocalDateTime" "java" >}}
-{{< /codeblock >}}
-
-
-
-
-
-## JDBC
----
-Once a connection is obtained we can interact with the database. 
-The JDBC Statement, CallableStatement, and PreparedStatement interfaces define the methods 
-and properties that enable you to send SQL or PL/SQL commands and receive data from your database.
-
-They also define methods that help bridge data type differences between Java and SQL data types used in a database.
-
-The following table provides a summary of each interface's purpose to decide on the interface to use.
-
-| Interfaces | Recommended Use |
-| :---       | :---            |
-| Statement  | Use this for general-purpose access to your database. Useful when you are using static SQL statements at runtime. The Statement interface cannot accept parameters. |
-| PreparedStatement	| Use this when you plan to use the SQL statements many times. The PreparedStatement interface accepts input parameters at runtime. |
-| CallableStatement	| Use this when you want to access the database stored procedures. The CallableStatement interface can also accept runtime input parameters. |
-
-
-
-
-## THreadLocal
----
-
-
-## JVM
----
-
-
-
-
-
-## JDBC
----
-Once a connection is obtained we can interact with the database. 
-The JDBC Statement, CallableStatement, and PreparedStatement interfaces define the methods 
-and properties that enable you to send SQL or PL/SQL commands and receive data from your database.
-
-They also define methods that help bridge data type differences between Java and SQL data types used in a database.
-
-The following table provides a summary of each interface's purpose to decide on the interface to use.
-
-| Interfaces | Recommended Use |
-| :---       | :---            |
-| Statement  | Use this for general-purpose access to your database. Useful when you are using static SQL statements at runtime. The Statement interface cannot accept parameters. |
-| PreparedStatement	| Use this when you plan to use the SQL statements many times. The PreparedStatement interface accepts input parameters at runtime. |
-| CallableStatement	| Use this when you want to access the database stored procedures. The CallableStatement interface can also accept runtime input parameters. |
-
-
-
-
-## THreadLocal
----
-
-
-## JVM
----
-
+<!-- tab call -->
+private void testDateFormat() {
+    String[] dateStrArray = new String[]{
+        "2018-03-12 12:05:34",
+        "2018-03-12 12:05",
+        "2018-3-12 12:5:34",
+        "2018-3-12 12:5",
+        "2018-3-12",
+        "2018-03-12",
+        "2018/03/12 12:05:34",
+        "2018/3/12 12:5:34",
+        "2018/03/12 12:05",
+        "2018/3/12 12:5",
+        "2018/03/12",
+        "2018年3月12日 13时5分34秒",
+        "2018年3月12日 13时5分",
+        "2018年03月12日 13时05分34秒"
+    };
+    for (int i = 0; i < dateStrArray.length; i++) {
+        Log.d("----index---->" + i, DateFormatUtil.dateRegFormat(dateStrArray[i]));
+    }
+}
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
