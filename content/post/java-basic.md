@@ -182,7 +182,7 @@ private boolean hasNull(Object obj) {
 {{< /codeblock >}}
 
 ### 兼容多种时间格式的输入
-{{< tabbed-codeblock "DateForamtUtil" "java" >}}
+{{< tabbed-codeblock "DateForamtUtil" >}}
 <!-- tab Util -->
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -237,7 +237,7 @@ public class DateFormatUtil {
 }
 <!-- endtab -->
 
-<!-- tab call -->
+<!-- tab Invoke -->
 private void testDateFormat() {
     String[] dateStrArray = new String[]{
         "2018-03-12 12:05:34",

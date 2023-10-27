@@ -231,6 +231,12 @@ Maven 3.8.1 blocked http connection
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
 
+### RemoteDeploy
+{{< codeblock "cli" >}}
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar
+{{< /codeblock >}}
+
+
 
 
 ## Git & SSH

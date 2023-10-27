@@ -58,6 +58,7 @@ DAO层
 
 {{< alert warning >}}
 DTO层
+- 忠于原始数据
 - 核心要考虑和设计的内容
   - 从业务接口着手, 脑图中列举出所有相关字段, 结合原型图, 设计前后端接口(未完)
   - 通过业务流接口, 分解模块结构, 形成数据结构
@@ -97,17 +98,22 @@ Controller层
     + [ ] 该token体系与微信认证是否能兼容, 如何兼容?
   - [ ] 动态权限过滤, 使用`dynamicSecurityFilter`, 通过`DynamicSecurityMetadataService`获取用户权限
 
+
 ### Configure
 这里包含初始化, 注册哪些filter
+
 
 ### Filter
 具体拦截, 并把相对应的且support()的provider传进去
 
+
 ### Provider
 提供自己的认证比对实现方法, 并且实现`support()`满足filter查找
 
+
 ### Handler
 增加成功与失败的handler
+
 
 ### Miscellaneous
 - 还涉及到与微信服务器交换opencode, 交换session, 再让用户授权手机号并最终拿到OpenId 等一系列动作
