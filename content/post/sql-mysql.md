@@ -97,38 +97,41 @@ DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMM
 
 ### CREATE
 
-#### CREATE DATABASE
-{{< codeblock "CREATE DATABASE" SQL >}}
+{{< tabbed-codeblock "CREATE" >}}
+<!-- tab CREATE DATABASE -->
 CREATE DATABASE pear-admin-pro CHARACTER SET UTF8;
-{{< /codeblock >}}
+<!-- endtab -->
 
-
-#### CREATE TABLE
-{{< codeblock "CREATE TABLE" SQL >}}
+<!-- tab CREATE TABLE -->
 CREATE TABLE student (
         id INT,
         name VARCHAR(32)
         );
-{{< /codeblock >}}
+<!-- endtab -->
+
+<!-- tab CREATE INDEX -->
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
 
 
-#### CREATE INDEX
-
-#### COPY with data
-{{< codeblock "copy with data" SQL >}}
-create table  table_name
+*COPY with data*
+{{< tabbed-codeblock "copy with CREATE" >}}
+<!-- tab with_data -->
+create table table_name
 as   
-select * from  Source_table
-where   1=1;
-{{< /codeblock >}}
+select * from Source_table
+where 1=1;
+<!-- endtab -->
 
-#### COPY without data
-{{< codeblock "copy without data" SQL >}}
-create table  table_name
+<!-- tab without_data -->
+create table table_name
 as
-select  * from
-Source_table where   1 <> 1;
-{{< /codeblock >}}
+select * from
+Source_table where 1 <> 1;
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
+
+
 
 
 ### ALTER
@@ -142,14 +145,21 @@ ALTER TABLE ...
 
 ### DROP
 
-#### DROP TABLE
+{{< tabbed-codeblock "DROP" >}}
+<!-- tab DATABASE -->
+DROP DATABASE <db_name>;
+<!-- endtab -->
 
-{{< codeblock "DROP TABLE" SQL >}}
+<!-- tab TABLE -->
 DROP TABLE <table_name>;
-{{< /codeblock >}}
+<!-- endtab -->
+
+<!-- tab INDEX -->
+DROP ;
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
 
 
-#### DROP INDEX
 
 
 ### TRUNCATE
@@ -168,10 +178,16 @@ DML: Data Manipulation Language, like `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `M
 
 ### INSERT
 
-{{< codeblock "INSERT" "sql" >}}
+{{< tabbed-codeblock "INSERT" >}}
+<!-- tab single -->
 INSERT INTO <table_name>...
-[TODO]: To be continued...
-{{< /codeblock >}}
+<!-- endtab -->
+<!-- tab single -->
+INSERT INTO <table_name> (
+    'c1', 'c2')
+VALUES (1, 2), (3, 4)
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
 
 
 ### SELECT

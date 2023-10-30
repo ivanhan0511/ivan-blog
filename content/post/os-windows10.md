@@ -1,5 +1,5 @@
 ---
-title: "What to do after init Windows"
+title: "What To Do After Init Windows"
 date: 2023-09-12T14:24:00+08:00
 categories:
 - OS
@@ -34,7 +34,7 @@ showSocial: true
 showDate: true
 ---
 
-After initialization of Windows, here is the TODO list.
+After initialization of Windows 10, here is the TODO list.
 
 <!--more-->
 
@@ -128,7 +128,7 @@ v2rayN(Need DotNet6.0)
 - 数据库导入时, 右键某个数据库 -> Import/Export -> Restore with 'mysql' -> Path to mysql -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysql.exe`
 - 数据库导出时, 右键某个数据库 -> Import/Export -> Export with 'mysqldump' -> Path to mysqldump -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysqldump.exe`
 
-### Plugin
+### Plugins
 - IdeaVim
   - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`C:\Users\Ivan\.ideavimrc`)
   - 增加如下配置(暂时不像Visual Studio需要完整的.vimrc, 只需要添加一少部分配置即可)
@@ -161,7 +161,7 @@ nmap <leader>nh :noh<cr>
 - Redis
 
 
-### Maven 3.8.1
+### Maven
 Maven 3.8.1 blocked http connection
 
 - Do {{< hl-text red >}}NOT{{< /hl-text >}} edit this original IDEA maven settings file
@@ -231,10 +231,12 @@ Maven 3.8.1 blocked http connection
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
 
-### RemoteDeploy
+### RemoteHost
+Remote deploy and remote debug
 {{< codeblock "cli" >}}
 java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar
 {{< /codeblock >}}
+
 
 
 
@@ -274,7 +276,7 @@ vim
 层层递进
 
 ### nvm
-真机系统中不再安装node.js环境, 采用HBuilderX中的node环境, Updated at Sep 25, 2023
+真机系统中不再安装node.js环境, 采用HBuilderX中的node环境`& 'C:\Program Files\HBuilderX\plugins\npm\npm.cmd' ...`, Updated at Oct 30, 2023
 
 Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
 
