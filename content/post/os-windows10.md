@@ -128,6 +128,7 @@ v2rayN(Need DotNet6.0)
 - 数据库导入时, 右键某个数据库 -> Import/Export -> Restore with 'mysql' -> Path to mysql -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysql.exe`
 - 数据库导出时, 右键某个数据库 -> Import/Export -> Export with 'mysqldump' -> Path to mysqldump -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysqldump.exe`
 
+
 ### Plugins
 - IdeaVim
   - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`C:\Users\Ivan\.ideavimrc`)
@@ -157,6 +158,7 @@ vmap / /\v
 " 取消搜索高亮
 nmap <leader>nh :noh<cr>
     {{< /codeblock >}}
+
 - MyBatisCodeHelperPro
 - Redis
 
@@ -345,8 +347,8 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
 
 
 ### Ubuntu Server
-- Redis
-- MySQL
+- ~~Redis~~
+- ~~MySQL~~
 
   Init, export, import refer to[MySQL Opertaions](https://ivanhan0511.github.io/post/sql-mysql/)
 
@@ -374,6 +376,7 @@ sudo vi /etc/fstab
 ---
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
 
+- Chrome
 - XShell/XFtp
 - ~~Postman~~ 去Postman化, 采用IDEA内置的`Scratches and Consoles`编写SQL和HTTP测试用例
 - 向日葵Sunlogin

@@ -98,18 +98,18 @@ DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMM
 ### CREATE
 
 {{< tabbed-codeblock "CREATE" >}}
-<!-- tab CREATE DATABASE -->
+<!-- tab database -->
 CREATE DATABASE pear-admin-pro CHARACTER SET UTF8;
 <!-- endtab -->
 
-<!-- tab CREATE TABLE -->
+<!-- tab table -->
 CREATE TABLE student (
         id INT,
         name VARCHAR(32)
         );
 <!-- endtab -->
 
-<!-- tab CREATE INDEX -->
+<!-- tab index -->
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
@@ -146,16 +146,16 @@ ALTER TABLE ...
 ### DROP
 
 {{< tabbed-codeblock "DROP" >}}
-<!-- tab DATABASE -->
+<!-- tab database -->
 DROP DATABASE <db_name>;
 <!-- endtab -->
 
-<!-- tab TABLE -->
+<!-- tab table -->
 DROP TABLE <table_name>;
 <!-- endtab -->
 
-<!-- tab INDEX -->
-DROP ;
+<!-- tab index -->
+DROP ...;
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 

@@ -69,6 +69,8 @@ v2rayN or ClashX
 ### Configuration
 - 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
 - settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> 将keywords设置为大写(To upper), and then`ctrl + alt + L`
+- 数据库导入时, 右键某个数据库 -> Import/Export -> Restore with 'mysql' -> Path to mysql -> `/usr/local/Cellar/mysql@8.0/bin/mysql`
+- 数据库导出时, 右键某个数据库 -> Import/Export -> Export with 'mysqldump' -> Path to mysqldump -> `/usr/local/Cellar/mysql-client8.0/bin/mysqldump`
 
 
 ### Plugin
@@ -100,20 +102,69 @@ vmap / /\v
 " 取消搜索高亮
 nmap <leader>nh :noh<cr>
     {{< /codeblock >}}
+
 - MyBatisCodeHelperPro
 - Redis
 
 
+### Maven
+todo?
+
+
+### RemoteHost
+Remote deploy and remote debug
+{{< codeblock "cli" >}}
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar
+{{< /codeblock >}}
+
+
+
+
+## Git & SSH
+---
+MINGW64 Git套件
+
+自己添加插件, 来增加额外的的Linux命令
+
+### HUGO
+- 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
+- 解压到`C:\Program Files\Git\usr\bin\`目录中
+- 再打开GitBash即可使用hugo命令创建静态Blog了
+
+### VimBundle
+{{< codeblock "Install VimBundle" "shell" >}}
+# It's alse suitable for both Linux and Windows
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim
+#:PluginInstall
+{{< /codeblock >}}
+
+
+
+
 ## HBuilderX
 ---
-看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
-npm
 - 使用其npm环境? 不安装npm在裸机可以吗?  -> HBuilderX自带node.js环境, 待研究
+
+看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
+
+
 
 
 ## DB
 ---
 ### MySQL
+{{< codeblock "Install" "shell" >}}
+brew install mysql@8.0
+{{< /codeblock >}}
+
+If forget root password:
+
+{{< tabbed-codeblock "Install" "shell1" >}}
+<!-- tab skip-grant-privileges -->
+/usr/local/Cellar/mysql@8.0/bin/mysqld_safe --skip-grant-privileges &
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
 
 
 ### Redis
@@ -134,6 +185,10 @@ npm
 - 腾讯会议
 - 亿图
 - Axure
+- OmniPlan
+- SwiftPlan
+
+
 
 
 ## GAME

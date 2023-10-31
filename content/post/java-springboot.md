@@ -1,6 +1,6 @@
 ﻿---
 title: "SpringBoot"
-date: 2023-10-26T14:14:00+08:00
+date: 2023-10-31T09:37:00+08:00
 categories:
 - Java
 - WebFramework
@@ -396,10 +396,10 @@ Quartz
 ### 缩写信息
 - DAO: Data Access Object, 数据访问层
 - PO: Persistant Object, 持久层对象. 类似数据库内的一条记录
-- DO: Domain Object, 领域对象
-- DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO
-- BO: Business Object, 业务对象
-- VO: Value Object, 表现对象
+- DO: Domain Object, 领域对象 (不参与)
+- DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO, 忠于表结构原始数值{"age":40}
+- BO: Business Object, 业务对象(暂且不用)
+- VO: Value Object, 表现对象 (如果需要, 则转换为具体表现的内容, 例如{"age":40, "desc":"不惑之年"})
 - POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
 
 
@@ -411,7 +411,7 @@ Quartz
   + 插入的方法用save/insert做前缀
   + 删除的方法用remove/delete做前缀
   + 修改的方法用edit/update做前缀
-- 领域模型命名规约
+- ~~领域模型命名规约~~
   + 数据对象: xxxDO, xxx即表名
   + 数据传输对象: xxxDTO, xxx即业务领域相关的名称
   + 展示对象: xxxVO, xxx一般为网页名称

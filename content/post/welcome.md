@@ -1,6 +1,6 @@
 ﻿---
 title: "Welcome to Ivan's Blog"
-date: 2023-10-26T14:15:20+08:00
+date: 2023-10-31T09:38:00+08:00
 categories:
 - Welcome
 tags:
@@ -43,5 +43,12 @@ Some records for software, coffee, music and sports.
 - [ ] Take photos for all posts
 - [ ] Write content for all posts
 - [ ] Make my posts can be found on internet
-
-
+- [ ] Java Security
+- [ ] 测试环境与开发环境分离
+- [ ] 测试工具的选择
+- [ ] Vue3.0上手(不求甚解)
+- [ ] Electric Bass
+- [ ] mall
+- [ ] springboot test
+- [ ] 集成化部署测试
+- [ ] 
