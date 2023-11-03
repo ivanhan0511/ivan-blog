@@ -93,7 +93,7 @@ vim ~/.vim/bundle/smartim/plugin/smartim.vim
 > 
 > 解决方法是在 smartim.vim 文件中添加 set timeoutlen=0
 > 
-> 在 smartim.vim 文件的最后，添加 set timeoutlen=0：
+> 在 smartim.vim 文件的最后，添加 set timeoutlen=0
 > 
 > augroup smartim
 >   autocmd!
@@ -133,34 +133,9 @@ v2rayN or ClashX
 
 ### Plugin
 - IdeaVim
-  - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`~/.ideavimrc`)
-  - 增加如下配置(暂时不像Visual Studio需要完整的.vimrc, 只需要添加一少部分配置即可)
-
-    {{< codeblock ".ideavimrc" "config" >}}
-set hlsearch
-set incsearch
-
-syntax on
-" 不设定在插入状态无法用退格键和 Delete 键删除回车符
-set backspace=indent,eol,start
-
-" 修改leader键为逗号
-let mapleader=","
-set ignorecase  " 设置大小写敏感
-
-" Line number
-"set ruler
-set number
-set relativenumber
-
-" 修改vim的正则表达
-nmap / /\v
-vmap / /\v
-
-" 取消搜索高亮
-nmap <leader>nh :noh<cr>
-    {{< /codeblock >}}
-
+  - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`???.ideavimrc`)
+  - 只需在最后一行增加配置引用即可`source ~/.vimrc`
+  - [TODO]: "IDEA中自动切换输入法暂时没搞定" "macOS iTerm2倒是通过smartim搞定了, 有的用"
 - MyBatisCodeHelperPro
 - Redis
 

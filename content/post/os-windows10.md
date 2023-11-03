@@ -132,34 +132,9 @@ v2rayN(Need DotNet6.0)
 ### Plugins
 - IdeaVim
   - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`C:\Users\Ivan\.ideavimrc`)
-  - 增加如下配置(暂时不像Visual Studio需要完整的.vimrc, 只需要添加一少部分配置即可)
-
-    {{< codeblock ".ideavimrc" "config" >}}
-set hlsearch
-set incsearch
-
-syntax on
-" 不设定在插入状态无法用退格键和 Delete 键删除回车符
-set backspace=indent,eol,start
-
-" 修改leader键为逗号
-let mapleader=","
-set ignorecase  " 设置大小写敏感
-
-" Line number
-"set ruler
-set number
-set relativenumber
-
-" 修改vim的正则表达
-nmap / /\v
-vmap / /\v
-
-" 取消搜索高亮
-nmap <leader>nh :noh<cr>
-    {{< /codeblock >}}
-
-- MyBatisCodeHelperPro
+  - 只需在最后一行增加配置引用即可`source ~/.vimrc`
+  - [TODO]: "IDEA中自动切换输入法暂时没搞定" "Windows VisualStudio的VsVim插件倒是自动有这个配置, 没琢磨明白, 有的用"
+- MyBatisCodeHelperPro(貌似有官方版, 下次试试)
 - Redis
 
 
@@ -254,18 +229,21 @@ MINGW64 Git套件
 - 解压到`C:\Program Files\Git\usr\bin\`目录中
 - 再打开GitBash即可使用hugo命令创建静态Blog了
 
-### VimBundle
-{{< codeblock "Install VimBundle" "shell" >}}
+### VimBundle(smartim)
+{{< codeblock "VimBundle" "shell" >}}
 # It's alse suitable for both Linux and Windows
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim
 #:PluginInstall
 {{< /codeblock >}}
 
+Download [im-select.exe](https://github.com/daipeihust/im-select?tab=readme-ov-file#linux-1) and put it into `C:\Users\auser\.vim\bundle\smartim\plugin\'  
+And set this into system env PATH
+
 
 ### nc
-### ss
 
+### ss
 
 
 
