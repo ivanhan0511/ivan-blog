@@ -59,55 +59,46 @@ macOS作为次要操作系统很多文件都是云存储的, 只要备份好本�
 - vim
   {{< tabbed-codeblock "configure" >}}
 # 除了安装云存储的`.vimrc`中的Vundle, 还需要手动配置一下smartim
-<!-- tab .vimrc -->
+<!-- tab vimrc -->
 # 查看macOS默认的输入法是什么, 以决定如下的配置文件中`let g:smartim_default = ''`中的内容
 vim ~/.vim/bundle/smartim/plugin/im-select
-# com.apple.keylayout.ABC
-> "
-> " Vundle.vim Config
-> " -------------------------
-> set nocompatible              " be iMproved, required
-> filetype off                  " required
-> 
-> " set the runtime path to include Vundle and initialize
-> set rtp+=~/.vim/bundle/Vundle.vim
-> call vundle#begin()
-> " alternatively, pass a path where Vundle should install plugins
+
+> com.apple.keylayout.ABC
+
+vim ~/.vimrc
+
+> ...
 > "call vundle#begin('~/some/path/here')
-> 
-> " let Vundle manage Vundle, required
-> Plugin 'VundleVim/Vundle.vim'
 > 
 > " smart switch input method automaticlly
 > Plugin 'ybian/smartim'
-> "let g:smartim_default = 'com.apple.keylayout.ABC'
+> let g:smartim_default = 'com.apple.keylayout.ABC'
 > 
 > " All of your Plugins must be added before the following line
 > call vundle#end() 
+> ...
 <!-- endtab -->
 
 <!-- tab smartim -->
+# 修改 smartim 的延迟
+# 当你使用的过程中会发现，按下 ESC 之后，短暂的时间内输入法还没有切换为英文，这种卡顿让输入比较快的键盘手无法忍受
+# 解决方法是在 smartim.vim 文件中添加 set timeoutlen=0
 vim ~/.vim/bundle/smartim/plugin/smartim.vim
-> 修改 smartim 的延迟
-> 当你使用的过程中会发现，按下 ESC 之后，短暂的时间内输入法还没有切换为英文，这种卡顿让输入比较快的键盘手无法忍受。
-> 
-> 解决方法是在 smartim.vim 文件中添加 set timeoutlen=0
-> 
-> 在 smartim.vim 文件的最后，添加 set timeoutlen=0
-> 
+ 
 > augroup smartim
 >   autocmd!
->   set timeoutlen=0
+>   ~~set timeoutlen=0~~
 >   autocmd VimLeavePre * call Smartim_SelectDefault()
 >   autocmd InsertLeave * call Smartim_SelectDefault()
 >   autocmd InsertEnter * call Smartim_SelectSaved()
 > augroup end
->
-> 这样问题解决。不过这会产生一个小问题，就是自定义的快捷键会失效，比如你定义了 jj 表示 ESC
-> 
-> 因为没有了延迟，当你输入第二个 j 的时候，Vim 不会把它当做组合。不过不用 jj 也罢。
-> 
-> 如果很纠结这个，可以在函数  Smartim_SelectDefault() 的第一行添加 set timeoutlen=0在函数 Smartim_SelectSaved() 的第一行添加 set timeoutlen=500，不过即使如此，仍会有 500ms 的延迟。
+
+# 这样问题解决。不过这会产生一个小问题，就是自定义的快捷键会失效，比如你定义了 jj 表示 ESC
+# 因为没有了延迟，当你输入第二个 j 的时候，Vim 不会把它当做组合。不过不用 jj 也罢。
+# 如果很纠结这个，
+#   可以在函数  Smartim_SelectDefault() 的第一行添加 set timeoutlen=0
+#   在函数 Smartim_SelectSaved() 的第一行添加 set timeoutlen=500
+# 不过即使如此，仍会有 500ms 的延迟
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
