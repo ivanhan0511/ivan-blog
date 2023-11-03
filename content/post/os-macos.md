@@ -34,72 +34,130 @@ Some record for configuring macOS
 
 
 ## BACKUP
-macOS×÷Îª´ÎÒª²Ù×÷ÏµÍ³ºÜ¶àÎÄ¼ş¶¼ÊÇÔÆ´æ´¢µÄ, Ö»Òª±¸·İºÃ±¾µØµÄÒ»Ğ©ÎÄ¼ş¼´¿É
+macOSä½œä¸ºæ¬¡è¦æ“ä½œç³»ç»Ÿå¾ˆå¤šæ–‡ä»¶éƒ½æ˜¯äº‘å­˜å‚¨çš„, åªè¦å¤‡ä»½å¥½æœ¬åœ°çš„ä¸€äº›æ–‡ä»¶å³å¯
 
-- ´úÂë: »ù±¾Í¨¹ıgitÓĞÍ¬²½, ÆäÓàÉÙÁ¿µÄÍ¨¹ıcopyÍê³É
-- ¼á¹ûÔÆÎÄµµ: ¸ºÔğÓëWindowsÍ¬²½
-- iCloud: ´ÓWindowsÍ¬²½¹ıÀ´µÄÎÄµµÔÚÉÏ´«µ½iCloud
-- ±¾µØÎÄµµ
-  - ¸÷¸öÏîÄ¿µÄÃÜÔ¿ / Ö¤Êé
-  - SSHÃÜÔ¿, Ë½ÈËÎÄ¼şµÈ
-- Í¼Æ¬
-- ÊÓÆµ
+- ä»£ç : åŸºæœ¬é€šè¿‡gitæœ‰åŒæ­¥, å…¶ä½™å°‘é‡çš„é€šè¿‡copyå®Œæˆ
+- åšæœäº‘æ–‡æ¡£: è´Ÿè´£ä¸WindowsåŒæ­¥
+- iCloud: ä»WindowsåŒæ­¥è¿‡æ¥çš„æ–‡æ¡£åœ¨ä¸Šä¼ åˆ°iCloud
+- æœ¬åœ°æ–‡æ¡£
+  - å„ä¸ªé¡¹ç›®çš„å¯†é’¥ / è¯ä¹¦
+  - SSHå¯†é’¥, ç§äººæ–‡ä»¶ç­‰
+- å›¾ç‰‡
+- è§†é¢‘
+
+
 
 
 ## BASE
 ---
-Ö»ÒªÁ¬½Ó»¥ÁªÍø, ÏÖÓĞµÄWindows10»á×Ô¶¯ÁªÍø°²×°Çı¶¯, Ö»ĞèÒªµÈ´ı¸üĞÂ/ÖØÆô
+åªè¦è¿æ¥äº’è”ç½‘, ç°æœ‰çš„Windows10ä¼šè‡ªåŠ¨è”ç½‘å®‰è£…é©±åŠ¨, åªéœ€è¦ç­‰å¾…æ›´æ–°/é‡å¯
 
 - HHKB
 - Logitech Anywhere3 and OptionPlus
 - iTerm
 - Chrome as default browser
+- vim
+  {{< tabbed-codeblock "configure" >}}
+# é™¤äº†å®‰è£…äº‘å­˜å‚¨çš„`.vimrc`ä¸­çš„Vundle, è¿˜éœ€è¦æ‰‹åŠ¨é…ç½®ä¸€ä¸‹smartim
+<!-- tab .vimrc -->
+# æŸ¥çœ‹macOSé»˜è®¤çš„è¾“å…¥æ³•æ˜¯ä»€ä¹ˆ, ä»¥å†³å®šå¦‚ä¸‹çš„é…ç½®æ–‡ä»¶ä¸­`let g:smartim_default = ''`ä¸­çš„å†…å®¹
+vim ~/.vim/bundle/smartim/plugin/im-select
+# com.apple.keylayout.ABC
+> "
+> " Vundle.vim Config
+> " -------------------------
+> set nocompatible              " be iMproved, required
+> filetype off                  " required
+> 
+> " set the runtime path to include Vundle and initialize
+> set rtp+=~/.vim/bundle/Vundle.vim
+> call vundle#begin()
+> " alternatively, pass a path where Vundle should install plugins
+> "call vundle#begin('~/some/path/here')
+> 
+> " let Vundle manage Vundle, required
+> Plugin 'VundleVim/Vundle.vim'
+> 
+> " smart switch input method automaticlly
+> Plugin 'ybian/smartim'
+> "let g:smartim_default = 'com.apple.keylayout.ABC'
+> 
+> " All of your Plugins must be added before the following line
+> call vundle#end() 
+<!-- endtab -->
+
+<!-- tab smartim -->
+vim ~/.vim/bundle/smartim/plugin/smartim.vim
+> ä¿®æ”¹ smartim çš„å»¶è¿Ÿ
+> å½“ä½ ä½¿ç”¨çš„è¿‡ç¨‹ä¸­ä¼šå‘ç°ï¼ŒæŒ‰ä¸‹ ESC ä¹‹åï¼ŒçŸ­æš‚çš„æ—¶é—´å†…è¾“å…¥æ³•è¿˜æ²¡æœ‰åˆ‡æ¢ä¸ºè‹±æ–‡ï¼Œè¿™ç§å¡é¡¿è®©è¾“å…¥æ¯”è¾ƒå¿«çš„é”®ç›˜æ‰‹æ— æ³•å¿å—ã€‚
+> 
+> è§£å†³æ–¹æ³•æ˜¯åœ¨ smartim.vim æ–‡ä»¶ä¸­æ·»åŠ  set timeoutlen=0
+> 
+> åœ¨ smartim.vim æ–‡ä»¶çš„æœ€åï¼Œæ·»åŠ  set timeoutlen=0ï¼š
+> 
+> augroup smartim
+>   autocmd!
+>   set timeoutlen=0
+>   autocmd VimLeavePre * call Smartim_SelectDefault()
+>   autocmd InsertLeave * call Smartim_SelectDefault()
+>   autocmd InsertEnter * call Smartim_SelectSaved()
+> augroup end
+>
+> è¿™æ ·é—®é¢˜è§£å†³ã€‚ä¸è¿‡è¿™ä¼šäº§ç”Ÿä¸€ä¸ªå°é—®é¢˜ï¼Œå°±æ˜¯è‡ªå®šä¹‰çš„å¿«æ·é”®ä¼šå¤±æ•ˆï¼Œæ¯”å¦‚ä½ å®šä¹‰äº† jj è¡¨ç¤º ESC
+> 
+> å› ä¸ºæ²¡æœ‰äº†å»¶è¿Ÿï¼Œå½“ä½ è¾“å…¥ç¬¬äºŒä¸ª j çš„æ—¶å€™ï¼ŒVim ä¸ä¼šæŠŠå®ƒå½“åšç»„åˆã€‚ä¸è¿‡ä¸ç”¨ jj ä¹Ÿç½¢ã€‚
+> 
+> å¦‚æœå¾ˆçº ç»“è¿™ä¸ªï¼Œå¯ä»¥åœ¨å‡½æ•° Â Smartim_SelectDefault() çš„ç¬¬ä¸€è¡Œæ·»åŠ  set timeoutlen=0åœ¨å‡½æ•° Smartim_SelectSaved() çš„ç¬¬ä¸€è¡Œæ·»åŠ  set timeoutlen=500ï¼Œä¸è¿‡å³ä½¿å¦‚æ­¤ï¼Œä»ä¼šæœ‰ 500ms çš„å»¶è¿Ÿã€‚
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
+
+
 
 
 ## Proxy
 ---
 v2rayN or ClashX
 
-×¢Òâ¶ÔÊ±×¼È·, ¾«×¼µ½1·ÖÖÓÒÔÄÚ, ·ñÔò´úÀí½¨Á¢Á¬½ÓÊ§°Ü
+æ³¨æ„å¯¹æ—¶å‡†ç¡®, ç²¾å‡†åˆ°1åˆ†é’Ÿä»¥å†…, å¦åˆ™ä»£ç†å»ºç«‹è¿æ¥å¤±è´¥
 
 
 ## IDEA
 ---
 
 ### Configuration
-- ÔÚ¸÷¸öÏîÄ¿ÖĞ·Ö±ğÑ¡ÔñJava JDK»·¾³, ²»°²×°JavaÔÚÂã»ú
-- settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> ½«keywordsÉèÖÃÎª´óĞ´(To upper), and then`ctrl + alt + L`
-- Êı¾İ¿âµ¼ÈëÊ±, ÓÒ¼üÄ³¸öÊı¾İ¿â -> Import/Export -> Restore with 'mysql' -> Path to mysql -> `/usr/local/Cellar/mysql@8.0/bin/mysql`
-- Êı¾İ¿âµ¼³öÊ±, ÓÒ¼üÄ³¸öÊı¾İ¿â -> Import/Export -> Export with 'mysqldump' -> Path to mysqldump -> `/usr/local/Cellar/mysql-client8.0/bin/mysqldump`
+- åœ¨å„ä¸ªé¡¹ç›®ä¸­åˆ†åˆ«é€‰æ‹©Java JDKç¯å¢ƒ, ä¸å®‰è£…Javaåœ¨è£¸æœº
+- settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> å°†keywordsè®¾ç½®ä¸ºå¤§å†™(To upper), and then`ctrl + alt + L`
+- æ•°æ®åº“å¯¼å…¥æ—¶, å³é”®æŸä¸ªæ•°æ®åº“ -> Import/Export -> Restore with 'mysql' -> Path to mysql -> `/usr/local/Cellar/mysql@8.0/bin/mysql`
+- æ•°æ®åº“å¯¼å‡ºæ—¶, å³é”®æŸä¸ªæ•°æ®åº“ -> Import/Export -> Export with 'mysqldump' -> Path to mysqldump -> `/usr/local/Cellar/mysql-client8.0/bin/mysqldump`
 
 
 ### Plugin
 - IdeaVim
-  - ÔÚIDEAÖĞ´´½¨`~/.ideavimrc`ÎÄ¼ş(Êµ¼Ê´´½¨ÔÚ`~/.ideavimrc`)
-  - Ôö¼ÓÈçÏÂÅäÖÃ(ÔİÊ±²»ÏñVisual StudioĞèÒªÍêÕûµÄ.vimrc, Ö»ĞèÒªÌí¼ÓÒ»ÉÙ²¿·ÖÅäÖÃ¼´¿É)
+  - åœ¨IDEAä¸­åˆ›å»º`~/.ideavimrc`æ–‡ä»¶(å®é™…åˆ›å»ºåœ¨`~/.ideavimrc`)
+  - å¢åŠ å¦‚ä¸‹é…ç½®(æš‚æ—¶ä¸åƒVisual Studioéœ€è¦å®Œæ•´çš„.vimrc, åªéœ€è¦æ·»åŠ ä¸€å°‘éƒ¨åˆ†é…ç½®å³å¯)
 
     {{< codeblock ".ideavimrc" "config" >}}
 set hlsearch
 set incsearch
 
 syntax on
-" ²»Éè¶¨ÔÚ²åÈë×´Ì¬ÎŞ·¨ÓÃÍË¸ñ¼üºÍ Delete ¼üÉ¾³ı»Ø³µ·û
+" ä¸è®¾å®šåœ¨æ’å…¥çŠ¶æ€æ— æ³•ç”¨é€€æ ¼é”®å’Œ Delete é”®åˆ é™¤å›è½¦ç¬¦
 set backspace=indent,eol,start
 
-" ĞŞ¸Äleader¼üÎª¶ººÅ
+" ä¿®æ”¹leaderé”®ä¸ºé€—å·
 let mapleader=","
-set ignorecase  " ÉèÖÃ´óĞ¡Ğ´Ãô¸Ğ
+set ignorecase  " è®¾ç½®å¤§å°å†™æ•æ„Ÿ
 
 " Line number
 "set ruler
 set number
 set relativenumber
 
-" ĞŞ¸ÄvimµÄÕıÔò±í´ï
+" ä¿®æ”¹vimçš„æ­£åˆ™è¡¨è¾¾
 nmap / /\v
 vmap / /\v
 
-" È¡ÏûËÑË÷¸ßÁÁ
+" å–æ¶ˆæœç´¢é«˜äº®
 nmap <leader>nh :noh<cr>
     {{< /codeblock >}}
 
@@ -122,14 +180,14 @@ java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pea
 
 ## Git & SSH
 ---
-MINGW64 GitÌ×¼ş
+MINGW64 Gitå¥—ä»¶
 
-×Ô¼ºÌí¼Ó²å¼ş, À´Ôö¼Ó¶îÍâµÄµÄLinuxÃüÁî
+è‡ªå·±æ·»åŠ æ’ä»¶, æ¥å¢åŠ é¢å¤–çš„çš„Linuxå‘½ä»¤
 
 ### HUGO
-- ÔÚ[HUGOµÄGitHub](https://github.com/gohugoio/hugo/releases)µÄreleasesÖĞÏÂÔØÊÊÓÃÓÚWindowsµÄÎÄ¼şÑ¹Ëõ°ü
-- ½âÑ¹µ½`C:\Program Files\Git\usr\bin\`Ä¿Â¼ÖĞ
-- ÔÙ´ò¿ªGitBash¼´¿ÉÊ¹ÓÃhugoÃüÁî´´½¨¾²Ì¬BlogÁË
+- åœ¨[HUGOçš„GitHub](https://github.com/gohugoio/hugo/releases)çš„releasesä¸­ä¸‹è½½é€‚ç”¨äºWindowsçš„æ–‡ä»¶å‹ç¼©åŒ…
+- è§£å‹åˆ°`C:\Program Files\Git\usr\bin\`ç›®å½•ä¸­
+- å†æ‰“å¼€GitBashå³å¯ä½¿ç”¨hugoå‘½ä»¤åˆ›å»ºé™æ€Blogäº†
 
 ### VimBundle
 {{< codeblock "Install VimBundle" "shell" >}}
@@ -144,9 +202,9 @@ vim
 
 ## HBuilderX
 ---
-- Ê¹ÓÃÆänpm»·¾³? ²»°²×°npmÔÚÂã»ú¿ÉÒÔÂğ?  -> HBuilderX×Ô´ønode.js»·¾³, ´ıÑĞ¾¿
+- ä½¿ç”¨å…¶npmç¯å¢ƒ? ä¸å®‰è£…npmåœ¨è£¸æœºå¯ä»¥å—?  -> HBuilderXè‡ªå¸¦node.jsç¯å¢ƒ
 
-¿´ÍÅ¶ÓÓÃÊ²Ã´°É, Ò²²»´òËãÉî¾¿Vue, ÄÜµ÷ÊÔ¸ö±¾µØÇ°¶ËÒ³Ãæ¾ÍĞĞÁË
+çœ‹å›¢é˜Ÿç”¨ä»€ä¹ˆå§, ä¹Ÿä¸æ‰“ç®—æ·±ç©¶Vue, èƒ½è°ƒè¯•ä¸ªæœ¬åœ°å‰ç«¯é¡µé¢å°±è¡Œäº†
 
 
 
@@ -172,18 +230,18 @@ If forget root password:
 
 ## Others
 ---
-³£ÓÃµÄ¿çÆ½Ì¨¹¤¾ß, ¼æÈİiOS / macOS / Windows / Android
+å¸¸ç”¨çš„è·¨å¹³å°å·¥å…·, å…¼å®¹iOS / macOS / Windows / Android
 
 - Chrome
 - Postman
-- ÏòÈÕ¿ûSunlogin
+- å‘æ—¥è‘µSunlogin
 - WireShark
 - Typora
-- ¼á¹ûÔÆ
+- åšæœäº‘
 - Office365(Outlook, Excel, Word, PowerPoint)
 - WeChat
-- ÌÚÑ¶»áÒé
-- ÒÚÍ¼
+- è…¾è®¯ä¼šè®®
+- äº¿å›¾
 - Axure
 - OmniPlan
 - SwiftPlan

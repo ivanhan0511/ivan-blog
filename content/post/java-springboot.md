@@ -33,9 +33,13 @@ The most important TECH cores are design and architecture which service for busi
 
 NO BEST, ONLY BETTER.
 
-TODO:  
-- 个人小程序, 以mall上线一个测试版
-- 个人小程序, 再自己创建一个项目, 模拟一个真是项目
+TODO:
+- [x] mall后台运行
+- [ ] 士大夫
+- [ ] mall-app-web在macOS运行yarn
+- [ ] mall-admin-web在macOS运行yarn
+- [ ] 将redis缓存命中融入到框架中
+- [ ] 算法? 要学, 但往后拖一拖
 
 <!--more-->
 
@@ -49,7 +53,7 @@ TODO:
 {{< alert danger >}}
 DAO层
 - Java代码的PO, 纯粹应对数据库结构
-- 优先使用数据库关联查询, 减少连接次数
+- ~~优先使用数据库关联查询, 减少连接次数~~
   - 做好通用抽象
   - 划分简单数据输出, 与复杂关联表格的整体输出, 都是为了服务内部传输数据
 - 一对一 / 一对多 通过MyBatis的resultMap子表查询(需要DTO封装), 合理使用子表查询, eager/lazy
@@ -334,6 +338,9 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 
 
 ### MyBatis Cache
+MyBatis的一级缓存和二级缓存, 都存在可能脏读的情况, 所以一般惯用Redis做缓存
+
+引入Redis后只需要将MyBatis配置文件中Cache 的类型定义为RedisCache
 
 
 
