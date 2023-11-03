@@ -133,7 +133,7 @@ v2rayN(Need DotNet6.0)
 - IdeaVim
   - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`C:\Users\Ivan\.ideavimrc`)
   - 只需在最后一行增加配置引用即可`source ~/.vimrc`
-  - [TODO]: "IDEA中自动切换输入法暂时没搞定" "Windows VisualStudio的VsVim插件倒是自动有这个配置, 没琢磨明白, 有的用"
+  - "IDEA中自动切换输入法暂时没搞定" "Windows VisualStudio的VsVim插件倒是自动有这个配置, 没琢磨明白, 有的用"
 - MyBatisCodeHelperPro(貌似有官方版, 下次试试)
 - Redis
 
@@ -224,10 +224,11 @@ MINGW64 Git套件
 
 自己添加插件, 来增加额外的的Linux命令
 
-### HUGO
+### Hugo
 - 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
 - 解压到`C:\Program Files\Git\usr\bin\`目录中
 - 再打开GitBash即可使用hugo命令创建静态Blog了
+
 
 ### VimBundle(smartim)
 {{< codeblock "VimBundle" "shell" >}}

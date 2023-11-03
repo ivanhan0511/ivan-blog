@@ -1,6 +1,6 @@
 ---
 title: "CONFIGURATION IN macOS"
-date: 2023-08-11T11:05:20+08:00
+date: 2023-11-03T15:52:00+08:00
 categories:
 - OS
 - macOS
@@ -126,7 +126,7 @@ v2rayN or ClashX
 - IdeaVim
   - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`???.ideavimrc`)
   - 只需在最后一行增加配置引用即可`source ~/.vimrc`
-  - [TODO]: "IDEA中自动切换输入法暂时没搞定" "macOS iTerm2倒是通过smartim搞定了, 有的用"
+  - "IDEA中自动切换输入法暂时没搞定" "macOS iTerm2倒是通过smartim搞定了, 有的用"
 - MyBatisCodeHelperPro
 - Redis
 
@@ -139,28 +139,6 @@ todo?
 Remote deploy and remote debug
 {{< codeblock "cli" >}}
 java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar
-{{< /codeblock >}}
-
-
-
-
-## Git & SSH
----
-MINGW64 Git套件
-
-自己添加插件, 来增加额外的的Linux命令
-
-### HUGO
-- 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
-- 解压到`C:\Program Files\Git\usr\bin\`目录中
-- 再打开GitBash即可使用hugo命令创建静态Blog了
-
-### VimBundle
-{{< codeblock "Install VimBundle" "shell" >}}
-# It's alse suitable for both Linux and Windows
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim
-#:PluginInstall
 {{< /codeblock >}}
 
 
@@ -184,14 +162,20 @@ brew install mysql@8.0
 
 If forget root password:
 
-{{< tabbed-codeblock "Install" "shell1" >}}
+{{< tabbed-codeblock "Reset" >}}
 <!-- tab skip-grant-privileges -->
 /usr/local/Cellar/mysql@8.0/bin/mysqld_safe --skip-grant-privileges &
+<!-- endtab -->
+
+<!-- tab allow-internet -->
+vi /usr/local/etc/my.cnf
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
 
 ### Redis
+
+
 
 
 ## Others
