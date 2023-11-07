@@ -1,6 +1,6 @@
 ---
 title: "MySQL8.0 Operations"
-date: 2023-08-10T17:52:00+08:00
+date: 2023-11-07T15:40:00+08:00
 categories:
 - SQL
 - MySQL
@@ -44,17 +44,19 @@ sudo systemctl status mysql.service
 
 sudo mysql
 <!-- endtab -->
+
 <!--tab SQL -->
 # Collect infomation
 show databases;
 
-SELECT host, user, authentication_string FROM mysql.user;
+SELECT host, user, plugin FROM mysql.user;
 
 CREATE DATABASE `some-db` CHARACTER SET UTF8;
-CREATE USER 'rd'@'%' IDENTIFIED BY 'your_password';
+CREATE USER 'rd'@'%' IDENTIFIED WITH mysql_native_password BY 'your_password';
 GRANT ALL PRIVILEGES ON `some-db`.* TO 'rd'@'%';
 FLUSH PRIVILEGES;
 <!-- endtab -->
+
 <!--tab shell -->
 sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 # ...

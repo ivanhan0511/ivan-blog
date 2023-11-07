@@ -1,5 +1,5 @@
 ---
-title: "What To Do After Init Windows"
+title: "DIY My Windows"
 date: 2023-09-12T14:24:00+08:00
 categories:
 - OS
