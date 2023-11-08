@@ -56,8 +56,15 @@ macOS作为次要操作系统很多文件都是云存储的, 只要备份好本�
 - Logitech Anywhere3 and OptionPlus
 - iTerm
 - Chrome as default browser
-- vim
-  {{< tabbed-codeblock "configure" >}}
+
+
+
+
+## vim
+---
+### Basic configuration
+
+{{< tabbed-codeblock "configure" >}}
 # 除了安装云存储的`.vimrc`中的Vundle, 还需要手动配置一下smartim
 <!-- tab vimrc -->
 # 查看macOS默认的输入法是什么, 以决定如下的配置文件中`let g:smartim_default = ''`中的内容
@@ -78,7 +85,7 @@ vim ~/.vimrc
 > ...
 <!-- endtab -->
 
-<!-- tab smartim -->
+<!-- tab smartim-macOS -->
 # 修改 smartim 的延迟
 # 当你使用的过程中会发现，按下 ESC 之后，短暂的时间内输入法还没有切换为英文，
 # 这种卡顿让输入比较快的键盘手无法忍受
@@ -98,6 +105,11 @@ vim ~/.vim/bundle/smartim/plugin/smartim.vim
 #   在函数 Smartim_SelectDefault() 的第一行添加 set timeoutlen=300
 #   在函数 Smartim_SelectSaved() 的第一行添加 set timeoutlen=300
 # 此时 300ms 的延迟, 对于从INSERT模式退出到NORMAL模式时, 对于人脑下一步思考, 算是来得及的
+<!-- endtab -->
+
+<!-- tab smartim-windows -->
+Download [im-select.exe](https://github.com/daipeihust/im-select?tab=readme-ov-file#linux-1) and put it into `C:\Users\auser\.vim\bundle\smartim\plugin\'  
+And set this into system env PATH
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
@@ -132,13 +144,6 @@ v2rayN or ClashX
 
 ### Maven
 todo?
-
-
-### RemoteHost
-Remote deploy and remote debug
-{{< codeblock "cli" >}}
-java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar
-{{< /codeblock >}}
 
 
 

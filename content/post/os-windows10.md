@@ -48,17 +48,18 @@ After initialization of Windows 10, here is the TODO list.
 - 代码: 基本通过git有同步, 其余少量的通过copy完成
 - 坚果云文档: 公司文档, 仅限文档, 其余通过本地文件存储
 - 本地文档
-  - 公司大文件
+  - 公司超大文件
   - 各个项目的密钥 / 证书
   - 服务器所涉及的登录方式 / 用户名 / 密码 的文档
-  - SSH密钥, 私人文件等
+  - SSH密钥
 - 虚拟机
   - 数据库: 转储数据和数据结构, MySQL和SQLServer的所有库
   - SSH密钥
   - 证书
 - IDEA
   - IDEA本身的配置通过云同步
-  - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 随Git上传
+  - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目中随Git上传
+  - Scratch代码
 - 图片
 - 视频
 
@@ -109,7 +110,7 @@ v2rayN(Need DotNet6.0)
   - This is typically the `HOME`, `VIM` or `USERPROFILE` directories
   - Place your `.vimrc` file in one of these directories, restart Visual Studio and VsVim will load those settings
   - You can verify which vimrc file is currently loaded in VsVim by using the command `:set vimrc?`
-- ~~设置字体? 默认DejaVu Sans Mono? 避免像CMD.exe一样无法分辨小写L与数字1~~
+- 设置字体? 默认DejaVu Sans Mono? 避免像CMD.exe一样无法分辨小写L与数字1
 - [Visual Studio 增加菜单来修改字符集编码](https://blog.csdn.net/qq_41868108/article/details/105750175)
 - 自动补全: Enter or Tab?
   - Visual Studio 2022是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置
@@ -136,6 +137,7 @@ v2rayN(Need DotNet6.0)
   - "IDEA中自动切换输入法暂时没搞定" "Windows VisualStudio的VsVim插件倒是自动有这个配置, 没琢磨明白, 有的用"
 - MyBatisCodeHelperPro(貌似有官方版, 下次试试)
 - Redis
+- RemoteHost `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar`
 
 
 ### Maven
@@ -208,53 +210,12 @@ Maven 3.8.1 blocked http connection
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
 
-### RemoteHost
-Remote deploy and remote debug
-{{< codeblock "cli" >}}
-java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar
-{{< /codeblock >}}
-
-
-
-
-
-## Git & SSH
----
-MINGW64 Git套件
-
-自己添加插件, 来增加额外的的Linux命令
-
-### Hugo
-- 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
-- 解压到`C:\Program Files\Git\usr\bin\`目录中
-- 再打开GitBash即可使用hugo命令创建静态Blog了
-
-
-### VimBundle(smartim)
-{{< codeblock "VimBundle" "shell" >}}
-# It's alse suitable for both Linux and Windows
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim
-#:PluginInstall
-{{< /codeblock >}}
-
-Download [im-select.exe](https://github.com/daipeihust/im-select?tab=readme-ov-file#linux-1) and put it into `C:\Users\auser\.vim\bundle\smartim\plugin\'  
-And set this into system env PATH
-
-
-### nc
-
-### ss
-
 
 
 ## HBuilderX
 ---
-- 使用其npm环境? 不安装npm在裸机可以吗?  -> HBuilderX自带node.js环境, 待研究
+**暂定(Nov 08, 2023), 轻度使用HBuildX, 以免被坑**
 
-看团队用什么吧, 也不打算深究Vue, 能调试个本地前端页面就行了
-
-层层递进
 
 ### nvm
 真机系统中不再安装node.js环境, 采用HBuilderX中的node环境`& 'C:\Program Files\HBuilderX\plugins\npm\npm.cmd' ...`, Updated at Oct 30, 2023
@@ -297,13 +258,10 @@ yarn run build-pro
 
 ## DB
 ---
-MySQL安装在Windows中也行, 安装在VMWare中也行
+MySQL安装在Windows中也行, 安装在VMWare中也行(每次都开VMWare虚拟机很麻烦)
 
-毕竟MySQL常年在用, 每次都开VMWare虚拟机很麻烦
-
-如果安装在真机, 现有的安装包+配置工具已经很傻瓜式了, 安装好之后只用`MySQL 8.1 Command Line Clien`登录用于DCL(Data Control Language)管理  
+真机傻瓜式安装, 之后只用`MySQL 8.1 Command Line Clien`登录用于DCL(Data Control Language)管理  
 然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出, [各种DDL(Data Definition Language), DML(Data Manipulation Language)](https://ivanhan0511.github.io/post/sql-mysql/)都可以在IDEA中完成
-
 
 
 
@@ -318,18 +276,9 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
 
 ### Windows
 - 电源管理, 从不休眠
-- 微信开发者工具
-- 抖音开发者工具
 - MS SQL Server + SSMS
 
   Init, export, import refer to[MS SQL Server Opertaions](https://ivanhan0511.github.io/post/sql-sqlserver/)
-
-
-### Ubuntu Server
-- ~~Redis~~
-- ~~MySQL~~
-
-  Init, export, import refer to[MySQL Opertaions](https://ivanhan0511.github.io/post/sql-mysql/)
 
 
 ### Ubuntu Desktop(暂时弃用)
@@ -356,8 +305,13 @@ sudo vi /etc/fstab
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
 
 - Chrome
+- Postman
 - XShell/XFtp
-- ~~Postman~~ 去Postman化, 采用IDEA内置的`Scratches and Consoles`编写SQL和HTTP测试用例
+  - hugo
+    + 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
+    + 比如放在`C:\Program Files\Git\usr\bin`中, 并添加到环境变量中
+  - telnet <IP> <Port>
+  - netstat -an | findstr "<Port>"
 - 向日葵Sunlogin
 - WireShark
 - Typora
