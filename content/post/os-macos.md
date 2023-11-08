@@ -40,10 +40,17 @@ macOS作为次要操作系统很多文件都是云存储的, 只要备份好本�
 - 坚果云文档: 负责与Windows同步
 - iCloud: 从Windows同步过来的文档在上传到iCloud
 - 本地文档
+  - 公司超大文件
   - 各个项目的密钥 / 证书
-  - SSH密钥, 私人文件等
+  - 服务器所涉及的登录方式 / 用户名 / 密码 的文档
+  - SSH密钥
+- IDEA
+  - IDEA本身的配置通过云同步
+  - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目中随Git上传
+  - Scratch代码
 - 图片
 - 视频
+主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
 
 
 
@@ -54,8 +61,8 @@ macOS作为次要操作系统很多文件都是云存储的, 只要备份好本�
 
 - HHKB
 - Logitech Anywhere3 and OptionPlus
-- iTerm
-- Chrome as default browser
+- iTerm2
+- Chrome
 
 
 
@@ -85,7 +92,7 @@ vim ~/.vimrc
 > ...
 <!-- endtab -->
 
-<!-- tab smartim-macOS -->
+<!-- tab smartim_macOS -->
 # 修改 smartim 的延迟
 # 当你使用的过程中会发现，按下 ESC 之后，短暂的时间内输入法还没有切换为英文，
 # 这种卡顿让输入比较快的键盘手无法忍受
@@ -107,7 +114,7 @@ vim ~/.vim/bundle/smartim/plugin/smartim.vim
 # 此时 300ms 的延迟, 对于从INSERT模式退出到NORMAL模式时, 对于人脑下一步思考, 算是来得及的
 <!-- endtab -->
 
-<!-- tab smartim-windows -->
+<!-- tab smartim_windows -->
 Download [im-select.exe](https://github.com/daipeihust/im-select?tab=readme-ov-file#linux-1) and put it into `C:\Users\auser\.vim\bundle\smartim\plugin\'  
 And set this into system env PATH
 <!-- endtab -->
