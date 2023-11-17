@@ -88,6 +88,7 @@ After initialization of Windows 10, here is the TODO list.
 - Chrome as default browser
 - HHKB
 - Logitech Anywhere3 and OptionPlus
+- 系统一般使用浅色系, 所以修改鼠标指针为黑色(系统方案)
 
 
 

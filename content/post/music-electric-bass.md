@@ -57,3 +57,53 @@ And I think I have enough courage to keep playing with it.
 - [ ] Lots of practice
 - [ ] Open the four fingers of my left hand
 
+
+
+确定高音/低音谱号, 确认大小调
+使用节拍器60速度
+D是F调的六级, 按照音程关系上行, 要求既可以按照唱名唱出La Si Do Re Mi Fa Sol La, 也可以按照音高唱出D Mib ...
+D是F调的六级, 按照音程关系下行, 要求既可以按照唱名唱出La Si Do Re Mi Fa Sol La, 也可以按照音高唱出D Mib ...
+G是降B调的六级, ...
+
+
+
+使用节拍器65速度
+
+某个音高在某个调里是几级音?
+
+减少首调唱法, 多用音高唱法
+
+
+
+## MUSIC THEORY
+---
+### How many keys(调)
+12?
+24?
+It's 30
+
+12 major, 12 minor
+How many #(sharp) ...?
+How many b(?????) ...?
+1 no # nad b
+
+Total 30 keys
+
+
+### Note(音阶)
+12 notes
+
+
+### Space(空间)
+何时弹, 何时不弹
+
+
+### Dynamic(音乐动力学)
+
+
+### Tone(音色)
+How to use it?
+When to use it?
+
+
+### Rhythm(节奏)
