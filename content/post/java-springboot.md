@@ -93,6 +93,10 @@ Controller层
 
 
 
+## MULTI MODULES
+---
+参考[这篇文章](https://www.cnblogs.com/yangyongjie/p/16895043.html)来组织多模块
+
 ## SECURITY
 ---
 ### mall
