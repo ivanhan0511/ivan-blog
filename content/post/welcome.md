@@ -56,10 +56,12 @@ Some records for software, coffee, music and sports.
 ## PROJECTS SCHEDULE
 ---
 德海
+
 统一修改正式表查询方法, 结合中间表, 否则会多出结果
 随后上线测试
 
 紫翔
+
 优先整理所需的字段名称表, 接口表
 其次更新原型图
 找老顾谈妥条件
@@ -67,8 +69,10 @@ Some records for software, coffee, music and sports.
 展开数据库整理更新
 
 VOD
+
 研究前端播放加密的M3U8, 并测试上线
 Vue3系统学习
 
 芋道ruoyi-vue-pro
+
 抽丝剥茧, 兼顾mall, 整理笔记

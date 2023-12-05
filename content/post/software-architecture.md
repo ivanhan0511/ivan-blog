@@ -1,13 +1,15 @@
 ---
-title: "API Design"
-date: 2023-02-23T12:52:00+08:00
+title: "Software Architecture"
+date: 2023-12-05T11:23:00+08:00
 categories:
-- Miscellaneous
+- Architecture
 - API
 tags:
+- Architecture
 - API
 - Design
 keywords:
+- architecture
 - api
 - design
 clearReading: true
