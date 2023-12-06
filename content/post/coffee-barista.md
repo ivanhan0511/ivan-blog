@@ -1,13 +1,16 @@
 ---
 title: "Coffee Beans"
-date: 2022-06-09T21:33:05+08:00
+date: 2022-12-05T14:33:05+08:00
 categories:
 - Coffee
-- Beans
+- Barista
 tags:
+- coffee
 - ethiopia
+- beans
 keywords:
 - coffee
+- barista
 - beans
 ---
 
