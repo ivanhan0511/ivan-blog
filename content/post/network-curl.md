@@ -37,7 +37,7 @@ curl-1.jpg
 
 
 
-以下步骤可以实现curl带CA证书访问对应的HTTPS站点。
+以下步骤可以实现curl带CA证书访问对应的HTTPS站点, 详情参见[证书转换]()
 
 1. 将CA证书转换为pem格式的CA证书
 

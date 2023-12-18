@@ -1,5 +1,5 @@
 ---
-title: "Gaggiuino For Coffee"
+title: "Gaggiuino For Coffee(Stranded)"
 date: 2023-12-05T13:39:32+08:00
 categories:
 - Coffee
@@ -30,7 +30,7 @@ showPagination: true
 showSocial: true
 showDate: true
 ---
-Uino如果从拉丁语翻译过来, 是"葡萄酒"的意思
+If "Uino" is from Ladin, it means wine.
 
 PID temprature controllation can be replaced by Gaggiuino, which is a system based on MCU(STM32)
 
@@ -65,15 +65,27 @@ PID temprature controllation can be replaced by Gaggiuino, which is a system bas
 ## PREPARE
 ---
 
+Read the [doc](https://gaggiuino.github.io/#/?id=home) first
+
 ### Hardware
 - Milesto EM-18
   - 420cc brass boiler
 - PCB modules from Gaggiuino
 - Connection lines
+- Buy all of them, STM32, PCB, lines, LCD, temperature detector
+- Tools like ...
 
 
 ### Software
-[Gaggiuino Project](https://github.com/Zer0-bit/gaggiuino) from github
+[Gaggiuino Project](https://github.com/Zer0-bit/gaggiuino) in github
+
+#### Github Gaggiuino
+- Read the [doc](https://gaggiuino.github.io/#/?id=home)
+- Run the project
+
+
+#### C/C++
+- Known the gramma of C/C++ in Gaggiuino project
 
 
 

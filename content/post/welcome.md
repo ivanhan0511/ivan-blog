@@ -1,6 +1,6 @@
 ﻿---
 title: "Welcome to Ivan's Blog"
-date: 2023-12-05T15:38:00+08:00
+date: 2023-12-18T16:22:00+08:00
 categories:
 - Welcome
 tags:
@@ -43,36 +43,3 @@ Some records for software, coffee, music and sports.
 - [ ] Take photos for all posts
 - [ ] Write content for all posts
 - [ ] Make my posts can be found on internet
-- [ ] Java Security
-- [ ] Vue3.0上手(不求甚解)
-- [ ] Electric Bass
-- [ ] mall
-- [ ] springboot test
-- [ ] 集成化部署测试
-
-
-
-
-## PROJECTS SCHEDULE
----
-德海
-
-统一修改正式表查询方法, 结合中间表, 否则会多出结果
-随后上线测试
-
-紫翔
-
-优先整理所需的字段名称表, 接口表
-其次更新原型图
-找老顾谈妥条件
-上线测试环境, 让丹娜参与并消化
-展开数据库整理更新
-
-VOD
-
-研究前端播放加密的M3U8, 并测试上线
-Vue3系统学习
-
-芋道ruoyi-vue-pro
-
-抽丝剥茧, 兼顾mall, 整理笔记
