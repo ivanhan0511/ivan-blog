@@ -33,20 +33,21 @@ The most important TECH cores are design and architecture which service for busi
 
 NO BEST, ONLY BETTER.
 
-TODO:
-- [x] mall后台运行
-- [ ] 士大夫
-- [ ] mall-app-web在macOS运行yarn
-- [ ] mall-admin-web在macOS运行yarn
-- [ ] 将redis缓存命中融入到框架中
-- [ ] 算法? 要学, 但往后拖一拖
-
 <!--more-->
 
 {{< toc >}}
+## 目录
 
-## PROJECT ARCHITECTURE
+- [PROJECT ARCHITECTURE](#chapter-1)
+- [MULTI MODULES](#chapter-2)
+
+
+
+
+## I. PROJECT ARCHITECTURE {#chapter-1}
 ---
+So far, I think it's funny, Dec 22, 2023.
+
 1. 如果项目功能足够简单, 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的"度", 非常重要!!!
 2. 不参与DDD(领域驱动设计)!!!
 
@@ -96,6 +97,9 @@ Controller层
 ## MULTI MODULES
 ---
 参考[这篇文章](https://www.cnblogs.com/yangyongjie/p/16895043.html)来组织多模块
+
+
+
 
 ## SECURITY
 ---
@@ -356,11 +360,13 @@ Quartz
 
 
 
-## TESTING
+## DEV & OPS
 ---
 ### Java Unit Test
 
 ### PostMan
+
+### CI
 
 
 
