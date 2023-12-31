@@ -436,3 +436,24 @@ Quartz
 
 - Request和Response对象的约定[参考]
   + 复杂对象的交互必须封装成Request 和 Response与前端进行交互
+
+
+
+
+
+
+## MiSCELLANEOUS
+---
+
+**1**
+/admin-api/demo/test/get
+
+/app-api/demo/test/get
+
+这两个接口, 最前面的路径`/admin-api/`和`/app-api/`是如何插入的?
+
+
+**2**
+比如自动根据数据生成DO, DTO, VO等, service的调用, 是没有返回的void, 如果有问题直接抛exception, 在哪里自定义拦截?
+
+
