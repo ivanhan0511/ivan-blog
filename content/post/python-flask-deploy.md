@@ -114,16 +114,23 @@ Please refer to [this post](sql-mysql-init.md)
   ```
 
 - 进入screen环境
+  {{< tabbed-codeblock "activate" >}}
+<!-- tab Ubuntu -->
+source venv/bin/activate
+<!-- endtab -->
 
-  ```shell
-  screen -S run  # 或screen -dr run
-  # screen环境
-  source venv/bin/activate
-  ## venv环境
-  python -m pip install -r requirement/requirement-dev.txt
-  #flask init  # 初始化数据库, 如果需要
-  flask run
-  ```
+<!-- tab Windows -->
+cd venv/Scripts
+activate
+<!-- endtab -->
+
+<!-- tab venv -->
+# venv环境
+python -m pip install -r requirements.txt
+#flask init  # 初始化数据库, 如果需要
+flask run
+<!-- endtab -->
+  {{< /tabbed-codeblock >}}
 
 - 安装Nginx并配置
 

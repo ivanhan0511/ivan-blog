@@ -1,16 +1,16 @@
 ---
 title: "DIY My Windows"
-date: 2023-09-12T14:24:00+08:00
+date: 2024-01-17T10:19:00+08:00
 categories:
 - OS
 - Windows
 tags:
 - Windows
 - Init
-- IDEA
-- Configure
-- Proxy
 - VisualStudio
+- IDEA
+- Configuration
+- Proxy
 - HBuildX
 keywords:
 - windows
@@ -45,21 +45,24 @@ After initialization of Windows 10, here is the TODO list.
 ---
 主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
 
-- 代码: 基本通过git有同步, 其余少量的通过copy完成
+- IDEA
+  - git commit and push
+  - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目sql文件夹中随Git上传
+  - Scratch代码
+- VisualStudio
+  - TODO
+- HBuildX
+  - TODO
 - 坚果云文档: 公司文档, 仅限文档, 其余通过本地文件存储
 - 本地文档
   - 公司超大文件
   - 各个项目的密钥 / 证书
   - 服务器所涉及的登录方式 / 用户名 / 密码 的文档
-  - SSH密钥
+  - SSH密钥对
 - 虚拟机
   - 数据库: 转储数据和数据结构, MySQL和SQLServer的所有库
   - SSH密钥
   - 证书
-- IDEA
-  - IDEA本身的配置通过云同步
-  - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目中随Git上传
-  - Scratch代码
 - 图片
 - 视频
 
@@ -93,6 +96,13 @@ After initialization of Windows 10, here is the TODO list.
 
 
 
+## WSL?
+---
+TODO
+
+
+
+
 ## Proxy
 ---
 v2rayN(Need DotNet6.0)
@@ -100,10 +110,14 @@ v2rayN(Need DotNet6.0)
 注意新安装的Windows, 要确保对时准确, 精准到1分钟以内, 否则代理建立连接失败
 
 
+
+
 ## VisualStudioPro2022  
 ---
 
-最大化使用, C/C++, Python, Vim, Git, PowerShell
+最大化使用, C/C++, ~~Python~~, Vim, Git, PowerShell
+
+使用Visual Studio开发Python, 还是感觉怪怪的, 还得回归PyCharm
 
 - 设置项目存储路径, Tools -> Options -> Projects and Solutions -> Locations
 - Install VsVim extension
@@ -125,6 +139,7 @@ v2rayN(Need DotNet6.0)
 ---
 
 ### Configuration
+- Enable `Settings Sync`
 - 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
 - settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> 将keywords设置为大写(To upper), and then`ctrl + alt + L`
 - 数据库导入时, 右键某个数据库 -> Import/Export -> Restore with 'mysql' -> Path to mysql -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysql.exe`
