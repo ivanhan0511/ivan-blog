@@ -1,6 +1,6 @@
 ---
-title: "Deploy Pear Admin"
-date: 2022-05-25T15:39:32+08:00
+title: "Deploy Pear Admin Flask"
+date: 2024-01-19T11:52:32+08:00
 categories:
 - Python
 - Deploy
