@@ -1,6 +1,6 @@
 ﻿---
 title: "SpringBoot"
-date: 2023-10-31T09:37:00+08:00
+date: 2024-01-23T10:18:00+08:00
 categories:
 - Java
 - WebFramework
@@ -38,14 +38,20 @@ NO BEST, ONLY BETTER.
 {{< toc >}}
 ## 目录
 
-- [PROJECT ARCHITECTURE](#chapter-1)
-- [MULTI MODULES](#chapter-2)
+- [I. PROJECT ARCHITECTURE](#chapter-1)
+- [II. BOOT LOADER](#chapter-2)
+- [III. IMPORTANT SUPPORT](#chapter-3)
+- [IV. YOUR DESIGN](#chapter-4)
+- [V. OPERATION](#chapter-5)
+- [VI. APPENDIX](#chapter-6)
 
 
 
 
 ## I. PROJECT ARCHITECTURE {#chapter-1}
 ---
+借鉴yudao-boot-mini
+
 So far, I think it's funny, Dec 22, 2023.
 
 1. 如果项目功能足够简单, 项目比较小的话, 其实没有必要分的那么细致. 掌握设计的"度", 非常重要!!!
@@ -94,15 +100,54 @@ Controller层
 
 
 
-## MULTI MODULES
+## II. BOOT LOADER {#chapter-2}
 ---
+弄懂maven加载,
+IoC
+AoP
+Exception
+### Connection Pool
+Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
+Druid是淘宝选用的, 高并发的情况会适用一些
+### Cache
+### Redis
+[参考该文章](https://javaguide.cn/database/redis/redis-data-structures-01.html#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1)
+### Annotation
+- [ ] `@CacheException`
+### MyBatis Cache
+MyBatis的一级缓存和二级缓存, 都存在可能脏读的情况, 所以一般惯用Redis做缓存
+引入Redis后只需要将MyBatis配置文件中Cache 的类型定义为RedisCache
+Log
+### Logger
+**slf4j.Logger and log4j.Logger**
+{{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
+Comparison SLF4J and Log4j<br/>
+
+Unlike log4j, SLF4J (Simple Logging Facade for Java) is not an implementation of logging framework, 
+it is an abstraction for all those logging frameworks in Java similar to log4J. Therefore, you cannot compare both. 
+However, it is always difficult to prefer one between the two.
+{{< /blockquote >}}
+
+{{< image classes="fancybox fig-100" src="https://www.tutorialspoint.com/slf4j/images/application.jpg" thumbnail="https://www.tutorialspoint.com/slf4j/images/application.jpg" >}}
+CommonResult
+Redis
+cache
+
+
+### Multiple modules
 参考[这篇文章](https://www.cnblogs.com/yangyongjie/p/16895043.html)来组织多模块
 
 
+### Beans注册, 启动顺序等
 
 
-## SECURITY
+
+
+## III. IMPORTANT SUPPORT {#chapter-3}
 ---
+
+### Security
+TODO
 ### mall
 - [ ] admin与security解耦, 不同客户端的认证拦截过滤
   - [ ] 用户名密码新登录, 与token登录 都用一个`jwtAuthenticationTokenFilter`, 通过`UserDetailsService`获取用户数据
@@ -136,8 +181,17 @@ UserDetails还是个坑, 不适合目前这个项目
 
 
 
-## CONTROLLER AND INPUT VALIDATION
+## IV. YOUR DESIGN {#chapter-4}
 ---
+@RequestBody MultipartFile[] submissions
+should be
+
+@RequestParam("file") MultipartFile[] submissions
+The files are not the request body, they are part of it and there is no built-in HttpMessageConverter that can convert the request to an array of MultiPartFile.
+
+You can also replace HttpServletRequest with MultipartHttpServletRequest, which gives you access to the headers of the individual parts.
+
+### Controller and input validation
 - [ ] Web admin
 - [ ] App portal
 - [x] Normal `@Valid` and `@Validated`
@@ -146,8 +200,7 @@ UserDetails还是个坑, 不适合目前这个项目
 
 
 
-## SERVICE
----
+### Service
 - [ ] Use MaBatisPlus? How does `mall` use pure MaBatis easily to implement?
 - [ ] Simple service, call mapper function directly?
 - [ ] Complicate service, call multiple mapper functions?
@@ -156,8 +209,7 @@ UserDetails还是个坑, 不适合目前这个项目
 
 
 
-## DAO MAPPER
----
+### DAO Mapper
 - [ ] Pure MyBatis or MyBatisPlus?
 - [ ] MyBatis PageHelper detail
 - [ ] org.springframework.data.domain.PageRequest? Or PearAdmin? Or mall?
@@ -174,7 +226,7 @@ Reason as below:
 **非**分布式数据库, 不推荐使用雪花算法, 使用数据库自增ID即可
 
 
-### Mapper Design
+#### Mapper Design
 - 因功能不同而查询同一个表, 很可能过滤条件维度和结果维度都不相同, 因此按照功能划分查询列表数据或查询单条数据比较合理(暂时, May 30, 2023)
   - selectOneForXxxFunction(Integer param)
   - selectListForYyyFunction(YyyRequest request)
@@ -185,7 +237,7 @@ Reason as below:
 - 不使用联合查询, 会导致PageHelper无法正确分页, 而使用子查询
 
 
-### MultiDB & Transactional
+### Multiple DB
 dehai-admin项目是使用MS SQL Server 与 MySQL 两种数据库的典型例子
 
 
@@ -202,22 +254,33 @@ dehai-admin项目是使用MS SQL Server 与 MySQL 两种数据库的典型例子
   因为如果驼峰被自动转译为横线分隔符, 会导致PageHelper切换多数据源时失效
 
 
-#### 数据隔离&事务传播
+### Transactional
 - 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
 - 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
-- 事务隔离(更新丢失, 脏读, 不可重复读, 幻读)
-  - READ_UNCOMMITTED,它受到所有三个提到的并发副作用的影响
-    + Postgres 不支持 READ_UNCOMMITTED 隔离，而是会退到 READ_COMMITED
-    + Oracle 不 支持或允许 READ_UNCOMMITTED
-  - READ_COMMITTED, 可防止脏读
-    + Postgres、SQL Server 和 Oracle 的默认级别
-  - REPEATABLE_READ, 可防止脏读和不可重复读
-    + Mysql 中的默认级别
-    + Oracle 不支持 REPEATABLE_READ
-  - SERIALIZABLE, 最高级别的隔离
+
+#### Propagation
+TODO
+
 - 事务传播, 需要时则加入传播的扩散要求  
   @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
 
+
+#### Isolation
+不同于"传播规则"是Spring提到的概念, 隔离级别这个概念是数据库事务自带的
+
+| Isolation Level  | 脏读(Dirty Read) | 不可重复读(Non Repeatable Read) | 幻读(Phantom Read) |
+| :---             | :---            | :---                           | :---              |
+| Read Uncommitted | Yes             | Yes                            | Yes               |
+| Read Committed   | -               | Yes                            | Yes               |
+| Repeatable Read  | -               | -                              | Yes               |
+| Serializable     | -               | -                              | -                 |
+
+很多人容易搞混不可重复读和幻读，确实这两者有些相似. 但不可重复读重点在于update和delete, 而幻读的重点在于insert.
+
+总的来说幻读就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读，表现形式很多，就不列举了。
+
+
+**TIPs**
 {{< alert info >}}
 @DS 必须加在 @Transactional 对应的类或者方法上  
 如在 mapper中加了@DS，但是 @Transactional 加在 service 方法中，此时则会获取默认的datasource
@@ -289,79 +352,17 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 
-## OUTPUT CONVERT
+### Background Job
+#### Quartz
+
+
+
+
+
+## V. OPERATION {#chapter-5}
 ---
-- [ ] If simple, use DTO to response directly
-- [ ] If complicated, transfer DTO to VO
+运营, 软文推广, 运维, 部署, 自动化测试, 自动化接口文档等
 
-
-
-
-## GLOBAL COMMON MODULE
----
-- [x] CommonResult
-- [ ] Exception
-- [ ] Log
-- [ ] Intercepter
-
-
-### CommonResult
-
-
-### Exception
-
-
-### Logger
-**slf4j.Logger and log4j.Logger**
-{{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
-Comparison SLF4J and Log4j<br/>
-
-Unlike log4j, SLF4J (Simple Logging Facade for Java) is not an implementation of logging framework, 
-it is an abstraction for all those logging frameworks in Java similar to log4J. Therefore, you cannot compare both. 
-However, it is always difficult to prefer one between the two.
-{{< /blockquote >}}
-
-{{< image classes="fancybox fig-100" src="https://www.tutorialspoint.com/slf4j/images/application.jpg" thumbnail="https://www.tutorialspoint.com/slf4j/images/application.jpg" >}}
-
-
-
-
-## CONNECTION POOL
----
-Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
-
-Druid是淘宝选用的, 高并发的情况会适用一些
-
-
-
-
-## CACHE
----
-### Redis
-[参考该文章](https://javaguide.cn/database/redis/redis-data-structures-01.html#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1)
-
-
-### Annotation
-- [ ] `@CacheException`
-
-
-### MyBatis Cache
-MyBatis的一级缓存和二级缓存, 都存在可能脏读的情况, 所以一般惯用Redis做缓存
-
-引入Redis后只需要将MyBatis配置文件中Cache 的类型定义为RedisCache
-
-
-
-
-## BACKGROUND JOB
----
-Quartz
-
-
-
-
-## DEV & OPS
----
 ### Java Unit Test
 
 ### PostMan
@@ -371,41 +372,31 @@ Quartz
 
 
 
-## API DOCUMENT
----
+### API DOCUMENT
 - [ ] Swagger UI category, description and list
 - [ ] With session token
 
 
 
 
-## DEPLOYMENT
----
-### Docker
+### DEPLOYMENT
+#### Docker
 - [ ] DockerCompose deployment in single server?
 
 
-### JAR
+#### JAR
 
 
 
 
-## OTHERS
----
-- [ ] ElasticSearch NativeSearchQueryBuilder
-
-
-
-
-## OPERATION
----
+### Others
 - 个人订阅号, 熟悉内容的编辑/发布, 练习写作, 提高排版/拍照等后期技能
 - 运营, 尝试推送文章
 
 
 
 
-## APPENDIX
+## VI. APPENDIX {#chapter-6}
 ---
 摘抄自网络, 不一定合理, 仅保存一些文字, 以便以后少写一些文字
 
@@ -433,27 +424,5 @@ Quartz
   + 数据传输对象: xxxDTO, xxx即业务领域相关的名称
   + 展示对象: xxxVO, xxx一般为网页名称
   + POJO是DO/DTO/BO/VO的统称, 禁止命名成xxxPOJO
-
-- Request和Response对象的约定[参考]
-  + 复杂对象的交互必须封装成Request 和 Response与前端进行交互
-
-
-
-
-
-
-## MiSCELLANEOUS
----
-
-**1**
-/admin-api/demo/test/get
-
-/app-api/demo/test/get
-
-这两个接口, 最前面的路径`/admin-api/`和`/app-api/`是如何插入的?
-
-
-**2**
-比如自动根据数据生成DO, DTO, VO等, service的调用, 是没有返回的void, 如果有问题直接抛exception, 在哪里自定义拦截?
 
 

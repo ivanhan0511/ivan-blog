@@ -36,12 +36,19 @@ This is a custom summary and does *NOT* appear in the post.
 
 {{< toc >}}
 
+站在巨人的肩膀上, 多看看[廖雪峰手写Sping](https://www.liaoxuefeng.com/wiki/1539348902182944)以便了解Spring的核心逻辑思想
+
+自己只记录一些自己觉得有用的小Tip
+
 JetBrains IDEA 中如果想了解某个注解的实现, `Ctrl + Shift + F`(记得关闭输入法简体/繁体热键), 输入注解名称.java
+
+
+
 
 ## IOC
 ---
 ### Bean生命周期
-[TODO]: 插入图片 "备注"
+[TODO]: 插入图片 "备注", 用自己的域名及云服务器做图床
 
 
 

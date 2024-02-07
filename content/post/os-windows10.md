@@ -115,10 +115,6 @@ v2rayN(Need DotNet6.0)
 ## VisualStudioPro2022  
 ---
 
-最大化使用, C/C++, ~~Python~~, Vim, Git, PowerShell
-
-使用Visual Studio开发Python, 还是感觉怪怪的, 还得回归PyCharm
-
 - 设置项目存储路径, Tools -> Options -> Projects and Solutions -> Locations
 - Install VsVim extension
   - Check which directories that VsVim looks for this file in by using the command `:set vimrcpaths?`
@@ -323,11 +319,11 @@ sudo vi /etc/fstab
 - Chrome
 - Postman
 - XShell/XFtp
-  - hugo
+  - `telnet <IP> <Port>`
+- hugo
     + 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
     + 比如放在`C:\Program Files\Git\usr\bin`中, 并添加到环境变量中
-  - `telnet <IP> <Port>`
-  - `netstat -an | findstr "<Port>"`
+- `netstat -an | findstr "<Port>"`
 - 向日葵Sunlogin
 - WireShark
 - Typora
