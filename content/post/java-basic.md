@@ -182,7 +182,7 @@ private boolean hasNull(Object obj) {
 {{< /codeblock >}}
 
 ### 兼容多种时间格式的输入
-{{< tabbed-codeblock "DateForamtUtil" >}}
+{{< tabbed-codeblock "DateForamtUtil" "java" >}}
 <!-- tab Util -->
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -331,7 +331,7 @@ leaf-snowflake方案
 
 
 {{< codeblock "snowflake" "java" >}}
-java复制代码public class SnowFlake {
+public class SnowFlake {
 
     // 数据中心(机房) id
     private long datacenterId;
