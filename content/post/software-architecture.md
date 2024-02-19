@@ -100,7 +100,7 @@ void newService(A,B,C);
 
 所以使用完IO流，可以使用finally关闭哈
 
-{{< tabbed-codeblock java >}}
+{{< tabbed-codeblock "close IO" >}}
 <!-- tab try_with_resource -->
 // JDK 7 之后还有更帅的关闭流写法，「try-with-resource」。
 try (FileInputStream inputStream = new FileInputStream(new File("jay.txt")) {
@@ -112,7 +112,7 @@ try (FileInputStream inputStream = new FileInputStream(new File("jay.txt")) {
 }
 <!-- endtab -->
 
-<!-- tab "try catch" -->
+<!-- tab try_catch -->
 FileInputStream fdIn = null;
 try {
     fdIn = new FileInputStream(new File("/jay.txt"));
