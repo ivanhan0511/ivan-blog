@@ -82,6 +82,7 @@ void oldService(A,B);{
   //兼容新接口，传个null代替C
   newService(A,B,null);
 }
+
 //新接口，暂时不能删掉老接口，需要做兼容。
 void newService(A,B,C);
 {{< /codeblock >}}
@@ -97,7 +98,7 @@ void newService(A,B,C);
 所以使用完IO流，可以使用finally关闭哈
 
 {{< tabbed-codeblock "java" >}}
-<!-- tab try-with-resource -->
+<!-- tab "try-with-resource" -->
 // JDK 7 之后还有更帅的关闭流写法，「try-with-resource」。
 try (FileInputStream inputStream = new FileInputStream(new File("jay.txt")) {
     // use resources   
@@ -108,7 +109,7 @@ try (FileInputStream inputStream = new FileInputStream(new File("jay.txt")) {
 }
 <!-- endtab -->
 
-<!-- tab try-catch -->
+<!-- tab "try-catch" -->
 FileInputStream fdIn = null;
 try {
     fdIn = new FileInputStream(new File("/jay.txt"));
