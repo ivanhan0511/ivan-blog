@@ -91,8 +91,10 @@ After initialization of Windows 10, here is the TODO list.
 - Chrome as default browser
 - HHKB
 - Logitech Anywhere3 and OptionPlus
-- 系统一般使用浅色系, 所以修改鼠标指针为黑色(系统方案)
-
+- 文件夹选项 -> 隐私
+  - 取消勾选"显示最近使用的文件"
+  - 取消勾选"显示常用文件夹"
+- Change the color of Mouse from white to black
 
 
 
@@ -226,44 +228,9 @@ Maven 3.8.1 blocked http connection
 
 ## HBuilderX
 ---
-**暂定(Nov 08, 2023), 轻度使用HBuildX, 以免被坑**
+暂定(Nov 08, 2023), 轻度使用HBuildX, 以免被坑
 
-
-### nvm
-真机系统中不再安装node.js环境, 采用HBuilderX中的node环境`& 'C:\Program Files\HBuilderX\plugins\npm\npm.cmd' ...`, Updated at Oct 30, 2023
-
-Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
-
-
-And use it in CMD:
-{{< codeblock cmd >}}
-nvm install 16.14.0 -g
-nvm list
-nvm use 16.17.1
-#nvm uninstall 16.17.1
-{{< /codeblock >}}
-
-
-### npm
-{{< codeblock cmd >}}
-# 遇到npm无法调用的问题, 网上有记录, 但重启解决问题
-npm install yarn -g
-{{< /codeblock >}}
-
-
-### yarn
-{{< tabbed-codeblock cmd >}}
-<!-- tab serve -->
-yarn install
-yarn run serve-dev
-<!-- endtab -->
-
-<!-- tab build -->
-yarn install
-yarn run build-pro
-<!-- endtab -->
-
-{{< /tabbed-codeblock >}}
+开发环境部署, 参照js-vue3.md
 
 
 

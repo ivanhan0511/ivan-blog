@@ -37,20 +37,39 @@ HAVE TO study some knowlege about frontend
 {{< toc >}}
 
 ## ENV
-C:\Users\Ivan\AppData\Roaming\JetBrains\IntelliJIdea2023.2\node\node-v18.15.0-win-x64\npx.cmd --yes create-vue vue3project --default
 
-Vue.js - The Progressive JavaScript Framework
+### nvm
+真机系统中不再安装node.js环境, 采用HBuilderX中的node环境`& 'C:\Program Files\HBuilderX\plugins\npm\npm.cmd' ...`, Updated at Oct 30, 2023
+
+Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
 
 
-正在构建项目 C:\Users\Ivan\AppData\Local\Temp\1698940057223-0\vue3project...
+And use it in CMD:
+{{< codeblock cmd >}}
+nvm install 16.14.0 -g
+nvm list
+nvm use 16.17.1
+#nvm uninstall 16.17.1
+{{< /codeblock >}}
 
-项目构建完成，可执行以下命令：
 
-  cd vue3project
-  npm install   
-  npm run dev
+### npm and yarn
+{{< tabbed-codeblock cli >}}
+<!-- tab npm -->
+npm run dev
+<!-- endtab -->
 
-Done
+<!-- tab yarn -->
+# 遇到npm无法调用的问题, 网上有记录, 但重启解决问题
+npm install yarn -g
 
-## DEMO
+yarn install
+yarn run serve-dev
+
+#yarn install
+#yarn run build-pro
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
+
+
 
