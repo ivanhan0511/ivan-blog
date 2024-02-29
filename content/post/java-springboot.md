@@ -38,27 +38,29 @@ NO BEST, ONLY BETTER.
 {{< toc >}}
 ## 目录
 
-- [I. PROJECT ARCHITECTURE](#chapter-1)
+- [I. ARCHITECTURE PRINCIPLE](#chapter-1)
 - [II. BOOT LOADER](#chapter-2)
 - [III. IMPORTANT SUPPORT](#chapter-3)
-- [IV. YOUR DESIGN](#chapter-4)
+- [IV. BUSINESS DESIGN](#chapter-4)
 - [V. OPERATION](#chapter-5)
 - [VI. APPENDIX](#chapter-6)
 
 
 
 
-## I. PROJECT ARCHITECTURE {#chapter-1}
+## I. ARCHITECTURE PRINCIPLE {#chapter-1}
 ---
+So far, Feb 23, 2024
+
 1. 借鉴[ruoyi-vue-pro](https://github.com/YunaiV/ruoyi-vue-pro)
 
 2. 如果团队比较小, 达不到上百人, 那么就不拆服务直接单体运行, 掌握设计的"度", 非常重要!!!
 
-   除非有动态扩缩，不同的模块由不同的团队单独维护，模块单独卖之类的需求，否则拆服务弊大于利
+   除非有动态扩缩，不同的模块由不同的团队单独维护，或者模块单独卖之类的需求，否则拆服务弊大于利
 
-3. 单仓多项目，大厂很多项目也在用这种方式. 有些人说会发展为分布式单体的，是对maven打包不大熟吧。运维角度来看，方案一二打包产物都一样的，只是管理方式不一样
+3. 单仓多项目，大厂很多项目也在用这种方式. 有些人说会发展为分布式单体的，是对maven打包不大熟吧。运维角度来看，单仓和多仓git管理的打包产物都一样的，只是管理方式不一样
 
-   有些"伪微服务"项目，想跑起来就得clone一堆仓库，动不动出问题就是某个仓库更新了，关联模块的仓库没更新……
+   有些"伪微服务"项目，想跑起来就得clone一堆仓库，动不动出问题就是某个仓库更新了而关联模块的仓库没更新……
 
 3. 另外, git自带子模块, 建一个总的仓库, 各个服务作为子模块版本各自管理, 也是一种兼容方案
 
@@ -148,7 +150,7 @@ UserDetails还是个坑, 不适合目前这个项目
 
 
 
-## IV. YOUR DESIGN {#chapter-4}
+## IV. BUSINESS DESIGN {#chapter-4}
 ---
 @RequestBody MultipartFile[] submissions
 should be
@@ -330,13 +332,9 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 ---
 运营, 软文推广, 运维, 部署, 自动化测试, 自动化接口文档等
 
-### Java Unit Test
-
-### PostMan
-
 ### CI
 
-
+### Monitor
 
 
 ### API DOCUMENT

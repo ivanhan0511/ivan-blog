@@ -39,18 +39,31 @@ HAVE TO study some knowlege about frontend
 ## ENV
 
 ### nvm
-真机系统中不再安装node.js环境, 采用HBuilderX中的node环境`& 'C:\Program Files\HBuilderX\plugins\npm\npm.cmd' ...`, Updated at Oct 30, 2023
+Node Version Manager
+
+nvm管理的是node, 但会同时把npm也安装好, node的版本和npm的版本是不一样的
 
 Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
 
 
 And use it in CMD:
 {{< codeblock cmd >}}
-nvm install 16.14.0 -g
-nvm list
-nvm use 16.17.1
+#nvm install 16.14.0 -g
+nvm install 20.11.1 -g
 #nvm uninstall 16.17.1
 {{< /codeblock >}}
+
+{{< blockquote >}}
+Downloading node.js version 20.11.1 (64-bit)...
+Extracting node and npm...
+Complete
+npm v10.2.4 installed successfully.
+
+
+Installation complete. If you want to use this version, type
+
+nvm use 20.11.1
+{{< /blockquote >}}
 
 
 ### npm and yarn
