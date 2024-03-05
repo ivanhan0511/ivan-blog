@@ -53,8 +53,11 @@ select * from sysdatabases;
 {{< /tabbed-codeblock >}}
 
 
-## Tips
+
+
+## TIPs
 ---
+### Datetime
 {{< codeblock "Periods Filter" "sql" >}}
 -- SQLSERVER 查询今天、昨天、本周、上周、本月、上月数据
 
@@ -88,7 +91,19 @@ select * from Keywords  where datediff(year, Addtime,getdate())=0
 {{< /codeblock >}}
 
 
+### 查询哪些表包含某个字段
+{{< codeblock TableCollum sql >}}
+SELECT
+    a.name AS 表名,
+    b.name AS 列名
+FROM sys.objects a, sys.columns b
+WHERE object_name(b.object_id)=a.name
+    AND b.name = 'fpre'  -- 自定义搜索列名
+    AND type='u'
+{{< /codeblock >}}
 
+
+### Others
 {{< codeblock "Regex" "sql" >}}
 --返回0-则为纯数字(支持正负数，小数点)
  SELECT PATINDEX('%[^0-9|.|-|+]%','2.2')--返回0
@@ -101,5 +116,8 @@ FROM t_ICItem;
 {{< /codeblock >}}
 
 
+
+
 ## EXPORT & IMPORT
+---
 [TODO]: a

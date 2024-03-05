@@ -92,52 +92,53 @@ public static List<A> asList(A... a);
 
 首先看个例子：
 
-{{< tabbed-codeblock tryCatch >}}
+{{< tabbed-codeblock tryCatchFinally >}}
 <!-- tab return2 -->
 public class TestReturn {
-    public int test(){
+    public int test() {
         int x  = 1;
-        try{
+        try {
             return ++x;
-        }
-        catch(Exception e){
+        } catch(Exception e) {
 
-        }finally{
+        } finally {
             ++x;
         }
+
         return x;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         TestReturn t = new TestReturn();
         int result = t.test();
         System.out.println(result);
     }
 }
-//输出结果是2
+
+// 输出结果是2
 <!-- endtab -->
 
 <!-- tab return3 -->
 public class TestReturn {
-    public int test(){
+    public int test() {
         int x  = 1;
-        try{
+        try {
+            return ++x;
+        } catch(Exception e) {
+
+        } finally {
             return ++x;
         }
-        catch(Exception e){
-
-        }finally{
-            return ++x;
-        }
-
-        //return x;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         TestReturn t = new TestReturn();
         int result = t.test();
         System.out.println(result);
     }
 }
-//输出结果是3
+
+// 输出结果是3
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
@@ -147,21 +148,20 @@ public class TestReturn {
 但是finally的用处不仅是用来处理异常——它可以让程序员不会因为return、continue、或者break语句而忽略了清理代码。
 把清理代码放在finally语句块里是一个很好的做法，即便可能不会有异常发生也要这样做。
 
-> [!NOTE]
-> 注意，当try或者catch的代码在运行的时候，JVM退出了。那么finally语句块就不会执行。同样，如果线程在运行try或者catch的代码时被中断了或者被杀死了(killed)，那么finally语句可能也不会执行了，即使整个运用还会继续执行。
+{{< alert warning >}}
+注意，当try或者catch的代码在运行的时候，JVM退出了。那么finally语句块就不会执行。同样，如果线程在运行try或者catch的代码时被中断了或者被杀死了(killed)，那么finally语句可能也不会执行了，即使整个运用还会继续执行。
+{{< /alert >}}
 
 说明：如果在try语句里有return语句，finally语句还是会执行。它会在把控制权转移到该方法的调用者或者构造器前执行finally语句。也就是说，使用return语句把控制权转移给其他的方法前会执行finally语句。
 
 
-{{< alert warning >}}
-那么结果为什么是3不是2呢？
+**那么结果为什么是3不是2呢?**
 
 当执行到`return ++x;`时，jvm在执行完 ++x 后会在局部变量表里另外分配一个空间来保存当前x的值。  
-注意，现在还没把值返回给y，而是继续执行finally语句里的语句。等执行完后再把之前保存的值（是2, 不是x）返回给y。所以就有了y是2不是3的情况。
+现在还没把值返回给y，而是继续执行finally语句里的语句。等执行完后再把之前保存的值**(是2, 不是x)**返回给y。所以就有了y是2不是3的情况。
 
 其实这里还有一点要注意的是，如果你在finally里也用了return语句，比如`return +xx;`, 那么y会是3。  
 因为规范规定了，当try和finally里都有return时，会忽略try的return，而使用finally的return。
-{{< /alert >}}
 
 原文链接：https://blog.csdn.net/wujingjing_crystal/article/details/52495189
 

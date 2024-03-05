@@ -80,7 +80,7 @@ sudo systemctl restart mysql.service
 ---
 DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 
-### GRANT
+### `GRANT`
 {{< codeblock "GRANT" "SQL" >}}
 GRANT ALL PRIVILEGES ON `some-db`.* TO 'rd'@'%';
 FLUSH PRIVILEGES;
@@ -184,7 +184,7 @@ DML: Data Manipulation Language, like `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `M
 <!-- tab single -->
 INSERT INTO <table_name>...
 <!-- endtab -->
-<!-- tab single -->
+<!-- tab multiple -->
 INSERT INTO <table_name> (
     'c1', 'c2')
 VALUES (1, 2), (3, 4)
