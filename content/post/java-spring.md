@@ -44,6 +44,50 @@ JetBrains IDEA 中如果想了解某个注解的实现, `Ctrl + Shift + F`(记�
 
 
 
+[TODO]: 整理
+### Connection Pool
+Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
+Druid是淘宝选用的, 高并发的情况会适用一些
+### Cache
+### Redis
+[参考该文章](https://javaguide.cn/database/redis/redis-data-structures-01.html#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1)
+### Annotation
+- [ ] `@CacheException`
+### MyBatis Cache
+MyBatis的一级缓存和二级缓存, 都存在可能脏读的情况, 所以一般惯用Redis做缓存
+引入Redis后只需要将MyBatis配置文件中Cache 的类型定义为RedisCache
+Log
+### Logger
+**slf4j.Logger and log4j.Logger**
+{{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
+Comparison SLF4J and Log4j<br/>
+
+Unlike log4j, SLF4J (Simple Logging Facade for Java) is not an implementation of logging framework, 
+it is an abstraction for all those logging frameworks in Java similar to log4J. Therefore, you cannot compare both. 
+However, it is always difficult to prefer one between the two.
+{{< /blockquote >}}
+
+{{< image classes="fancybox fig-100" src="https://www.tutorialspoint.com/slf4j/images/application.jpg" thumbnail="https://www.tutorialspoint.com/slf4j/images/application.jpg" >}}
+CommonResult
+Redis
+cache
+
+### Beans注册, 启动顺序等
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## IOC
 ---

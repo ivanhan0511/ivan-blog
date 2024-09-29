@@ -7,14 +7,18 @@
 
 Create a new repository, like "ivan-blog" as example
 
-And then create a another new respository, must with `<username>.github.io`
+And then create another new respository, which name must be with `<username>.github.io`
 
 
 
 
 ## DEPLOYMENT WITH HUGO
+My example env is Windows11 installed GitBash(or WSL2)
+
+Download hugo.exe from official site
 
 ```shell
+cd /d/some_apth/
 git clone git@github.com:ivanhan0511/ivan-blog.git
 
 # Create local Hugo site
@@ -33,6 +37,7 @@ hugo new post/testpage.md
 # Locoal testing
 hugo server -D
 ```
+
 ```shell
 git submodule add -b master git@github.com:ivanhan0511/ivanhan0511.github.io.git public
 vi deploy.sh
@@ -93,8 +98,7 @@ vi config.toml
 
 ### Configure Disqus
 
-To enable discuss under the content, to register an account on Disqus website, 
-   and get a "Short Name".  
+To enable discuss under the content, to register an account on Disqus website, and get a "Short Name".  
 Set the `disqusShortname` in the `config.toml`
 
 

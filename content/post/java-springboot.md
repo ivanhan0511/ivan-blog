@@ -39,7 +39,7 @@ NO BEST, ONLY BETTER.
 ## 目录
 
 - [I. ARCHITECTURE PRINCIPLE](#chapter-1)
-- [II. BOOT LOADER](#chapter-2)
+- [II. LIFE CYCLE](#chapter-2)
 - [III. IMPORTANT SUPPORT](#chapter-3)
 - [IV. BUSINESS DESIGN](#chapter-4)
 - [V. OPERATION](#chapter-5)
@@ -64,50 +64,16 @@ So far, Feb 23, 2024
 
 3. 另外, git自带子模块, 建一个总的仓库, 各个服务作为子模块版本各自管理, 也是一种兼容方案
 
-5. 不参与DDD(领域驱动设计)!!!
+5. 尽管代码中有DO, 但并不采用DDD(领域驱动设计)!!!
 
 
 
 
-## II. BOOT LOADER {#chapter-2}
+## II. LIFE CYCLE {#chapter-2}
 ---
-弄懂maven加载,
-IoC
-AoP
-Exception
-### Connection Pool
-Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
-Druid是淘宝选用的, 高并发的情况会适用一些
-### Cache
-### Redis
-[参考该文章](https://javaguide.cn/database/redis/redis-data-structures-01.html#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1)
-### Annotation
-- [ ] `@CacheException`
-### MyBatis Cache
-MyBatis的一级缓存和二级缓存, 都存在可能脏读的情况, 所以一般惯用Redis做缓存
-引入Redis后只需要将MyBatis配置文件中Cache 的类型定义为RedisCache
-Log
-### Logger
-**slf4j.Logger and log4j.Logger**
-{{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
-Comparison SLF4J and Log4j<br/>
+无论基于SpringBoot的框架再怎么变化, 了解Spring的生命周期, 以及核心IoC是如何启动的,才是重点
 
-Unlike log4j, SLF4J (Simple Logging Facade for Java) is not an implementation of logging framework, 
-it is an abstraction for all those logging frameworks in Java similar to log4J. Therefore, you cannot compare both. 
-However, it is always difficult to prefer one between the two.
-{{< /blockquote >}}
-
-{{< image classes="fancybox fig-100" src="https://www.tutorialspoint.com/slf4j/images/application.jpg" thumbnail="https://www.tutorialspoint.com/slf4j/images/application.jpg" >}}
-CommonResult
-Redis
-cache
-
-
-### Multiple modules
-参考[这篇文章](https://www.cnblogs.com/yangyongjie/p/16895043.html)来组织多模块
-
-
-### Beans注册, 启动顺序等
+此处引用[Java Spring](https://ivanhan0511.github.io/post/java-spring/)
 
 
 
@@ -115,37 +81,47 @@ cache
 ## III. IMPORTANT SUPPORT {#chapter-3}
 ---
 
-### Security
-TODO
-### mall
-- [ ] admin与security解耦, 不同客户端的认证拦截过滤
-  - [ ] 用户名密码新登录, 与token登录 都用一个`jwtAuthenticationTokenFilter`, 通过`UserDetailsService`获取用户数据
-    + [ ] 通过获取username最终实现定位user
-    + [ ] 该token体系与微信认证是否能兼容, 如何兼容?
-  - [ ] 动态权限过滤, 使用`dynamicSecurityFilter`, 通过`DynamicSecurityMetadataService`获取用户权限
-
-
-### Configure
+### A. Security
+**Configure**
 这里包含初始化, 注册哪些filter
 
 
-### Filter
+**Filter**
 具体拦截, 并把相对应的且support()的provider传进去
 
 
-### Provider
+**Provider**
 提供自己的认证比对实现方法, 并且实现`support()`满足filter查找
 
 
-### Handler
+**Handler**
 增加成功与失败的handler
 
+#### Permission
 
-### Miscellaneous
-- 还涉及到与微信服务器交换opencode, 交换session, 再让用户授权手机号并最终拿到OpenId 等一系列动作
-- 还要设置缓存, 清空与微信服务器交换时中间状态的cache
+#### Protection
 
-UserDetails还是个坑, 不适合目前这个项目
+
+
+### B. Input
+
+
+### C. Output
+
+
+### D. Exception
+
+
+### E. API
+
+
+### F. Log
+
+### G. Background Job
+
+### H. Cache
+
+
 
 
 
@@ -369,9 +345,9 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 ### 缩写信息
 - DAO: Data Access Object, 数据访问层
 - PO: Persistant Object, 持久层对象. 类似数据库内的一条记录
-- DO: Domain Object, 领域对象 (不参与)
+- DO: Domain Object, 领域对象
 - DTO: Data Transfer Object, 通常在OpenApi返回的对象中使用DTO, 忠于表结构原始数值{"age":40}
-- BO: Business Object, 业务对象(暂且不用)
+- BO: Business Object, 业务对象
 - VO: Value Object, 表现对象 (如果需要, 则转换为具体表现的内容, 例如{"age":40, "desc":"不惑之年"})
 - POJO: Plain Old Java Object, 是PO/DO/DTO/BO/VO的统称
 
