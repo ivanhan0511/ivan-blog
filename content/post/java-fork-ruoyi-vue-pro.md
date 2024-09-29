@@ -46,4 +46,3 @@ Reading the docs of ruoyi-vue-pro is the best way.
 
 ## DETAILS
 ---
-
