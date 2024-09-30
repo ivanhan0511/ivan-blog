@@ -59,7 +59,8 @@ NO BEST, ONLY BETTER.
 ## I. ARCHITECTURE PRINCIPLE {#chapter-1}
 ---
 So far, Sep 24, 2024
-1. Reading the [docs](https://github.com/YunaiV/ruoyi-vue-pro) of ruoyi-vue-pro is the best way
+1. Reading the [docs](https://github.com/YunaiV/ruoyi-vue-pro) of ruoyi-vue-pro is the best way  
+   中文测试
 
 2. 如果团队比较小, 达不到上百人, 那么就不拆服务直接单体运行, 掌握设计的"度", 非常重要!!!  
    除非有动态扩缩，不同的模块由不同的团队单独维护，或者模块单独卖之类的需求，否则拆服务弊大于利
