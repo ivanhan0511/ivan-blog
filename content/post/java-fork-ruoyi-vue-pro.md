@@ -47,9 +47,9 @@ NO BEST, ONLY BETTER.
 ## 目录
 
 - [I. ARCHITECTURE PRINCIPLE](#chapter-1)
+- [II. BUSINESS DESIGN](#chapter-2)
 - [II. LIFE CYCLE](#chapter-2)
 - [III. IMPORTANT SUPPORT](#chapter-3)
-- [IV. BUSINESS DESIGN](#chapter-4)
 - [V. OPERATION](#chapter-5)
 - [VI. APPENDIX](#chapter-6)
 
@@ -75,79 +75,17 @@ So far, Sep 24, 2024
 
 
 
-## II. LIFE CYCLE {#chapter-2}
+## II. BUSINESS DESIGN {#chapter-2}
 ---
-无论基于SpringBoot的框架再怎么变化, 了解Spring的生命周期, 以及核心IoC是如何启动的,才是重点
+Designing the data structure is the most important thing! Record the SQL into the `./sql/mysql/`, of course, my choice
 
-此处引用[Java Spring](https://ivanhan0511.github.io/post/java-spring/)
+With the infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy.
 
-
-
-
-## III. IMPORTANT SUPPORT {#chapter-3}
----
-
-### A. Security
-**Configure**
-这里包含初始化, 注册哪些filter
-
-
-**Filter**
-具体拦截, 并把相对应的且support()的provider传进去
-
-
-**Provider**
-提供自己的认证比对实现方法, 并且实现`support()`满足filter查找
-
-
-**Handler**
-增加成功与失败的handler
-
-#### Permission
-
-#### Protection
-
-
-
-### B. Input
-
-
-### C. Output
-
-
-### D. Exception
-
-
-### E. API
-
-
-### F. Log
-
-### G. Background Job
-
-### H. Cache
-
-
-
-
-
-
-## IV. BUSINESS DESIGN {#chapter-4}
----
-@RequestBody MultipartFile[] submissions
-should be
-
-@RequestParam("file") MultipartFile[] submissions
-The files are not the request body, they are part of it and there is no built-in HttpMessageConverter that can convert the request to an array of MultiPartFile.
-
-You can also replace HttpServletRequest with MultipartHttpServletRequest, which gives you access to the headers of the individual parts.
 
 ### Controller and input validation
-- [ ] Web admin
-- [ ] App portal
-- [x] Normal `@Valid` and `@Validated`
-- [x] DIY `@FlagValidator`
+**NOT** the REST style
 
+Good place to convert DO/DTO to VO. Especially with java.stream
 
 
 
@@ -343,6 +281,54 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 
+## III. IMPORTANT SUPPORT {#chapter-3}
+---
+
+### A. Security
+**Configure**
+这里包含初始化, 注册哪些filter
+
+
+**Filter**
+具体拦截, 并把相对应的且support()的provider传进去
+
+
+**Provider**
+提供自己的认证比对实现方法, 并且实现`support()`满足filter查找
+
+
+**Handler**
+增加成功与失败的handler
+
+#### Permission
+
+#### Protection
+
+
+
+### B. Input
+@RequestParam("file") MultipartFile[] submissions
+The files are not the request body, they are part of it and there is no built-in HttpMessageConverter that can convert the request to an array of MultiPartFile.
+
+You can also replace HttpServletRequest with MultipartHttpServletRequest, which gives you access to the headers of the individual parts.
+
+
+### C. Output
+
+
+### D. Exception
+
+
+### E. API
+
+
+### F. Log
+
+### G. Background Job
+
+### H. Cache
+
+
 ## VI. APPENDIX {#chapter-6}
 ---
 摘抄自网络, 不一定合理, 仅保存一些文字, 以便以后少写一些文字
@@ -371,5 +357,13 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
   + 数据传输对象: xxxDTO, xxx即业务领域相关的名称
   + 展示对象: xxxVO, xxx一般为网页名称
   + POJO是DO/DTO/BO/VO的统称, 禁止命名成xxxPOJO
+
+
+
+## 笔记
+
+Sep 29, 2024
+
+有点理解, 为啥代码中Enum中有各种状态, 而Dict中又有. 其实有一部分字典数据, 是为了前端而提供的, 这样前端后端就不用各自存储各个字段数值代表什么意思了
 
 
