@@ -1,6 +1,6 @@
 ---
 title: "DIY My Windows"
-date: 2024-01-17T10:19:00+08:00
+date: 2024-09-30T10:39:00+08:00
 categories:
 - OS
 - Windows
@@ -34,7 +34,7 @@ showSocial: true
 showDate: true
 ---
 
-After initialization of Windows 10, here is the TODO list.
+After initialization of Windows 11, here is the TODO list.
 
 <!--more-->
 
@@ -45,26 +45,29 @@ After initialization of Windows 10, here is the TODO list.
 ---
 主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
 
+- VisualStudio
+  - TODO
+- PyCharm
+  - TODO
 - IDEA
   - git commit and push
   - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目sql文件夹中随Git上传
   - Scratch代码
-- VisualStudio
-  - TODO
 - HBuildX
-  - TODO
+  - No local file, all in git
 - 坚果云文档: 公司文档, 仅限文档, 其余通过本地文件存储
 - 本地文档
   - 公司超大文件
-  - 各个项目的密钥 / 证书
-  - 服务器所涉及的登录方式 / 用户名 / 密码 的文档
+  - 各个项目的 密钥/证书
+  - 服务器所涉及的 登录方式/用户名/密码 的文档
   - SSH密钥对
 - 虚拟机
   - 数据库: 转储数据和数据结构, MySQL和SQLServer的所有库
   - SSH密钥
   - 证书
-- 图片
-- 视频
+- Image
+- Video
+- Music
 
 
 
@@ -79,28 +82,24 @@ After initialization of Windows 10, here is the TODO list.
 
 ## BASE
 ---
-只要连接互联网, 现有的Windows10会自动联网安装驱动, 只需要等待更新/重启
+只要连接互联网, 现有的Windows11会自动联网安装驱动, 只需要等待更新/重启
 
 趁着没有使用网络代理, 先安装基本工具
 
 - VisualStudioPro2022  
   - Prefer English language 
   - Libs
-  - Git(Will install MINGW64 env into Widnows system)
+  - Git?
 - Input method, config only `ctrl + space` to switch
 - Chrome as default browser
 - HHKB
-- Logitech Anywhere3 and OptionPlus
+- Logitech
+  - Anywhere3 and OptionPlus
+  - G309 and G Hub
 - 文件夹选项 -> 隐私
   - 取消勾选"显示最近使用的文件"
   - 取消勾选"显示常用文件夹"
-- Change the color of Mouse from white to black
-
-
-
-## WSL?
----
-TODO
+- Active WSL2
 
 
 
@@ -114,12 +113,20 @@ v2rayN(Need DotNet6.0)
 
 
 
+## DB
+---
+真机傻瓜式安装, 之后只用`MySQL 8.1 Command Line Clien`登录用于DCL(Data Control Language)管理  
+然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出, [各种DDL(Data Definition Language), DML(Data Manipulation Language)](https://ivanhan0511.github.io/post/sql-mysql/)都可以在IDEA中完成
+
+
+
+
 ## VisualStudioPro2022  
 ---
 
 - 设置项目存储路径, Tools -> Options -> Projects and Solutions -> Locations
 - Install VsVim extension
-  - Check which directories that VsVim looks for this file in by using the command `:set vimrcpaths?`
+  - Check which directories the VsVim searchs for config files by using the command `:set vimrcpaths?`
   - This is typically the `HOME`, `VIM` or `USERPROFILE` directories
   - Place your `.vimrc` file in one of these directories, restart Visual Studio and VsVim will load those settings
   - You can verify which vimrc file is currently loaded in VsVim by using the command `:set vimrc?`
@@ -129,6 +136,13 @@ v2rayN(Need DotNet6.0)
   - Visual Studio 2022是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置
   - 个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
   - 具体路径: 工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表
+
+
+
+
+## PyCharm
+---
+TODO
 
 
 
@@ -181,13 +195,6 @@ Maven 3.8.1 blocked http connection
       <url>http://0.0.0.0/</url>
       <blocked>true</blocked>
     </mirror>
-  
-    <mirror>
-      <id>aliyunmaven</id>
-      <mirrorOf>*</mirrorOf>
-      <name>阿里云公共仓库</name>
-      <url>https://maven.aliyun.com/repository/public</url>
-    </mirror>
   </mirrors>
   ...
   {{< /codeblock >}}
@@ -228,19 +235,7 @@ Maven 3.8.1 blocked http connection
 
 ## HBuilderX
 ---
-暂定(Nov 08, 2023), 轻度使用HBuildX, 以免被坑
-
-开发环境部署, 参照js-vue3.md
-
-
-
-
-## DB
----
-MySQL安装在Windows中也行, 安装在VMWare中也行(每次都开VMWare虚拟机很麻烦)
-
-真机傻瓜式安装, 之后只用`MySQL 8.1 Command Line Clien`登录用于DCL(Data Control Language)管理  
-然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出, [各种DDL(Data Definition Language), DML(Data Manipulation Language)](https://ivanhan0511.github.io/post/sql-mysql/)都可以在IDEA中完成
+开发环境部署, 参照[js-vue3.md](https://ivanhan0511.github.io/post/js-vue3/)
 
 
 
@@ -260,7 +255,7 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
   Init, export, import refer to[MS SQL Server Opertaions](https://ivanhan0511.github.io/post/sql-sqlserver/)
 
 
-### Ubuntu Desktop(暂时弃用)
+### Ubuntu Desktop(Deprecated)
 
 Refer to [this post](https://blog.csdn.net/weixin_43862116/article/details/107731631)挂载host主机的文件夹到Ubuntu挂在点, 用于共享
 
@@ -284,10 +279,10 @@ sudo vi /etc/fstab
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
 
 - Chrome
-- Postman
-- XShell/XFtp
+- Postman(Deprecated)
+- XShell/XFtp(转用WSL2)
   - `telnet <IP> <Port>`
-- hugo
+- hugo(转用WSL2)
     + 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
     + 比如放在`C:\Program Files\Git\usr\bin`中, 并添加到环境变量中
 - `netstat -an | findstr "<Port>"`
@@ -301,16 +296,7 @@ sudo vi /etc/fstab
 - 亿图Edraw
 - Fiio driver
 - Notepad++
-- Axure RP 9 (Axure Rapid Prototyping)
-
-
-
-
-## GAME
----
-- Steam 可以通过内部工具迁移游戏存储目录
-- EPIC 不能迁移, 重新下载
-- Minecraft Bedrock Edition
+- Axure RP 9 (Axure Rapid Prototyping)(Deprecated, use Mock in iPad)
 
 
 
