@@ -39,7 +39,7 @@ But the stronger, the more complex. This post is the annotation for this project
 
 {{< toc >}}
 
-The most important TECH cores are design and architecture which service for business, and then the second are IoC and AoP.
+The most important TECH cores are design and architecture which service for business, and then the second is tech like IoC, AoP and so on.
 
 NO BEST, ONLY BETTER.
 

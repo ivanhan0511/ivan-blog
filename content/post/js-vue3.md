@@ -36,12 +36,12 @@ HAVE TO study some knowlege about frontend
 
 {{< toc >}}
 
-## ENV
-
-### nvm
+## I. ENV
+---
+### A. nvm
 Node Version Manager
 
-nvm��������node, ����ͬʱ��npmҲ��װ��, node�İ汾��npm�İ汾�ǲ�һ����
+nvm管理的是node, 但会同时把npm也安装好, node的版本和npm的版本是不一样的
 
 Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
 
@@ -66,14 +66,14 @@ nvm use 20.11.1
 {{< /blockquote >}}
 
 
-### npm and yarn
+### B. npm and yarn
 {{< tabbed-codeblock cli >}}
 <!-- tab npm -->
 npm run dev
 <!-- endtab -->
 
 <!-- tab yarn -->
-# ����npm�޷����õ�����, �����м�¼, �������������
+# 遇到npm无法调用的问题, 网上有记录, 但重启解决问题
 npm install yarn -g
 
 yarn install
@@ -85,4 +85,51 @@ yarn run serve-dev
 {{< /tabbed-codeblock >}}
 
 
+
+
+## II. GRAMMAR
+---
+### A. 杂记
+**var、let、const 区别**
+
+var定义的变量，没有块的概念，可以跨块访问, 不能跨函数访问。
+
+let定义的变量，只能在块作用域里访问，不能跨块访问，也不能跨函数访问。
+
+const用来定义常量，使用时必须初始化(即必须赋值)，只能在块作用域里访问，而且不能修改。
+
+
+{{< codeblock vue >}}
+// 块作用域
+{
+    var a = 1;
+    let b = 2;
+    const c = 3;
+    // c = 4; // 报错
+    var aa;
+    let bb;
+    // const cc; // 报错
+    console.log(a); // 1
+    console.log(b); // 2
+    console.log(c); // 3
+    console.log(aa); // undefined
+    console.log(bb); // undefined
+}
+console.log(a); // 1
+// console.log(b); // 报错
+// console.log(c); // 报错
+
+// 函数作用域
+(function A() {
+    var d = 5;
+    let e = 6;
+    const f = 7;
+    console.log(d); // 5
+    console.log(e); // 6  
+    console.log(f); // 7 
+})();
+// console.log(d); // 报错
+// console.log(e); // 报错
+// console.log(f); // 报错
+{{< /codeblock >}}
 

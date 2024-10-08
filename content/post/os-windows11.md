@@ -285,7 +285,6 @@ sudo vi /etc/fstab
 - hugo(转用WSL2)
     + 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
     + 比如放在`C:\Program Files\Git\usr\bin`中, 并添加到环境变量中
-- `netstat -an | findstr "<Port>"`
 - 向日葵Sunlogin
 - WireShark
 - Typora
