@@ -17,7 +17,8 @@ showSocial: true
 showDate: true
 ---
 
-Java basic knowledge.
+This post is not aboud Java knowledge, it just a handy TIP
+
 <!--more-->
 
 {{< toc >}}
@@ -348,7 +349,10 @@ private void testDateFormat() {
 
 ## SNOWFLAKE
 ---
+
 Tmp record
+
+自己的项目中已经不再使用, 但作为算法案例, 临时记录于此
 
 前面文章在谈论分布式唯一ID生成的时候，有提到雪花算法，这一次，我们详细点讲解，只讲它。
 SnowFlake算法

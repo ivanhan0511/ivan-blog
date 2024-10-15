@@ -40,7 +40,9 @@ This is a custom summary and does *NOT* appear in the post.
 
 自己只记录一些自己觉得有用的小Tip
 
-JetBrains IDEA 中如果想了解某个注解的实现, `Ctrl + Shift + F`(记得关闭输入法简体/繁体热键), 输入注解名称.java
+JetBrains IDEA 中如果想了解某个注解的实现, 没有太好的办法, 就像想查找一个类在哪里被反射并调用了, 试行的办法:
+- 阅读大厂的源码, 文档, 了解该注解的内部实现逻辑
+- 小厂的代码, 只能是全文查找类似这样的`getAnnotation(DictFormat.class)`代码
 
 
 

@@ -77,23 +77,53 @@ So far, Sep 24, 2024
 
 ## II. BUSINESS DESIGN {#chapter-2}
 ---
-Designing the data structure is the most important thing! Record the SQL into the `./sql/mysql/`, of course, my choice
+1. Write down all the details of requirement seriously
 
-With the infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy.
+2. Draw UML(work flow)
+
+3. Designing the data structure and its relationship on the paper / iPad is the most important thing!
+
+4. Record the SQL into the `./sql/mysql/`, of course, my personal choice
+
+With the infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
 
 
-### Controller and input validation
-**NOT** the REST style
 
+
+## III. Controller
+---
+### A. Input validation
+
+**NOT** the RESTful style
+
+Btw, considering for the conveniece of frontend, some
 Good place to convert DO/DTO to VO. Especially with java.stream
 
 
+### B. Outnput convertor
+Like xxxPageRespVO, output the userId and userName at the same time, because it's bad to fetch each userName in the frontend table
 
-### Service
-- [ ] Use MaBatisPlus? How does `mall` use pure MaBatis easily to implement?
-- [ ] Simple service, call mapper function directly?
-- [ ] Complicate service, call multiple mapper functions?
-- [ ] What is the data structure(DTO?) in nternal service?
+Like xxxRespVO, whether to output either the userId or userName at the same time, depends on the business. For this single object line data, frontend could fetch 
+its detail by id easily
+
+{{< codeblock java >}}
+@Schema(description = "管理后台 - 商品 SPU Response VO")
+@Data
+@ExcelIgnoreUnannotated
+public class ProductSpuRespVO {
+    @Schema(description = "商品状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    @ExcelProperty(value = "商品状态", converter = DictConvert.class)
+    @DictFormat(DictTypeConstants.PRODUCT_SPU_STATUS)
+    private Integer status;
+}
+{{< /codeblock >}}
+TODO: 这段注解的机制, 参考java-spring.md文章
+
+
+
+## III. SERVICE
+---
+Just work for **BUSINESS** only
 
 
 
@@ -127,7 +157,6 @@ Reason as below:
 
 
 ### Multiple DB
-dehai-admin项目是使用MS SQL Server 与 MySQL 两种数据库的典型例子
 
 
 #### Settings
@@ -241,8 +270,8 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 
-### Background Job
-#### Quartz
+### Job
+Quartz
 
 
 
