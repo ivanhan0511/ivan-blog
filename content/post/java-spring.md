@@ -40,58 +40,25 @@ This is a custom summary and does *NOT* appear in the post.
 
 自己只记录一些自己觉得有用的小Tip
 
-JetBrains IDEA 中如果想了解某个注解的实现, 没有太好的办法, 就像想查找一个类在哪里被反射并调用了, 试行的办法:
-- 阅读大厂的源码, 文档, 了解该注解的内部实现逻辑
-- 小厂的代码, 只能是全文查找类似这样的`getAnnotation(DictFormat.class)`代码
 
+## 目录
 
-
-[TODO]: 整理
-### Connection Pool
-Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
-Druid是淘宝选用的, 高并发的情况会适用一些
-### Cache
-### Redis
-[参考该文章](https://javaguide.cn/database/redis/redis-data-structures-01.html#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1)
-### Annotation
-- [ ] `@CacheException`
-### MyBatis Cache
-MyBatis的一级缓存和二级缓存, 都存在可能脏读的情况, 所以一般惯用Redis做缓存
-引入Redis后只需要将MyBatis配置文件中Cache 的类型定义为RedisCache
-Log
-### Logger
-**slf4j.Logger and log4j.Logger**
-{{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
-Comparison SLF4J and Log4j<br/>
-
-Unlike log4j, SLF4J (Simple Logging Facade for Java) is not an implementation of logging framework, 
-it is an abstraction for all those logging frameworks in Java similar to log4J. Therefore, you cannot compare both. 
-However, it is always difficult to prefer one between the two.
-{{< /blockquote >}}
-
-{{< image classes="fancybox fig-100" src="https://www.tutorialspoint.com/slf4j/images/application.jpg" thumbnail="https://www.tutorialspoint.com/slf4j/images/application.jpg" >}}
-CommonResult
-Redis
-cache
-
-### Beans注册, 启动顺序等
+- [I. IOC](#chapter-1)
+- [II. AOP](#chapter-2)
+- [III. SERVLET](#chapter-3)
+- [IV. SECURITY](#chapter-4)
+- [V. TRANSACTIONAL](#chapter-5)
+- [VI. JOB](#chapter-6)
+- [VII. THIRD-PART HTTP API](#chapter-7)
+- [VIII. EVENT MONITOR](#chapter-8)
+- [IX. DAO MAPPER](#chapter-9)
+- [X. UTILS](#chapter-10)
+- [XI. MISCELLANEOUS](#chapter-11)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-## IOC
+## I. IOC {#chapter-1}
 ---
 ### Bean生命周期
 [TODO]: 插入图片 "备注", 用自己的域名及云服务器做图床
@@ -99,8 +66,13 @@ cache
 
 
 
-## AOP
+## II. AOP {#chapter-2}
 ---
+JetBrains IDEA 中如果想了解某个注解的实现, 没有太好的办法, 就像想查找一个类在哪里被反射并调用了, 试行的办法:
+- 阅读大厂的源码, 文档, 了解该注解的内部实现逻辑
+- 小厂的代码, 只能是全文查找类似这样的`getAnnotation(DictFormat.class)`代码
+
+
 ### 常用注解的深入理解
 - [TODO]: 各种继承关系的注解, 类似RestController, 包含了ResponseBody等, 后续补充
 - Controller中设置Headers, 指定Content-Type/Accept
@@ -172,11 +144,173 @@ PS:
 
 
 
-## SERVLET
+## III. SERVLET {#chapter-3}
+---
+
+
+
+## IV. SECURITY {#chapter-4}
+---
+**Configure**
+这里包含初始化, 注册哪些filter
+
+
+**Filter**
+具体拦截, 并把相对应的且support()的provider传进去
+
+
+**Provider**
+提供自己的认证比对实现方法, 并且实现`support()`满足filter查找
+
+
+**Handler**
+增加成功与失败的handler
+
+
+
+
+## V. TRANSACTIONAL {#chapter-5}
+---
+[TODO]: 继续整理
+- 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
+- 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
+
+**Propagation**
+TODO
+
+- 事务传播, 需要时则加入传播的扩散要求  
+  @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
+
+
+**Isolation**
+不同于"传播规则"是Spring提到的概念, 隔离级别这个概念是数据库事务自带的
+
+| Isolation Level  | 脏读(Dirty Read) | 不可重复读(Non Repeatable Read) | 幻读(Phantom Read) |
+| :---             | :---            | :---                           | :---              |
+| Read Uncommitted | Yes             | Yes                            | Yes               |
+| Read Committed   | -               | Yes                            | Yes               |
+| Repeatable Read  | -               | -                              | Yes               |
+| Serializable     | -               | -                              | -                 |
+
+很多人容易搞混不可重复读和幻读，确实这两者有些相似. 但不可重复读重点在于update和delete, 而幻读的重点在于insert.
+
+总的来说幻读就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读，表现形式很多，就不列举了。
+
+
+**TIPs**
+{{< alert info >}}
+@DS 必须加在 @Transactional 对应的类或者方法上  
+如在 mapper中加了@DS，但是 @Transactional 加在 service 方法中，此时则会获取默认的datasource
+(因为在事务中已经获取了一次datasource的connection，而此时无DS注解)
+{{< /alert >}}
+
+{{< tabbed-codeblock MultiDSTransactional >}}
+<!-- tab sInterface -->
+public interface SomeService extends IService<Some> {}
+<!-- endtab -->
+
+<!-- tab "sImpl" -->
+@Service
+public class SomeServiceImpl extends ServiceImpl<SomeRepository, Some> implements SomeService {}
+<!-- endtab -->
+
+<!-- tab oInterface -->
+public interface OtherService extends IService<Other> {}
+<!-- endtab -->
+
+<!-- tab oImpl -->
+@Service
+@DS("db2")
+public class OtherServiceImpl extends ServiceImpl<OtherRepository, Other> implements OtherService {}
+<!-- endtab -->
+
+<!-- tab combo -->
+public interface CombineService {
+    Boolean save(CombineRequest request);
+}
+<!-- endtab -->
+
+<!-- tab comboImpl -->
+@Service
+public class CombineServiceImpl implements CombineService {
+    @Resource
+    private SomeService someService;
+
+    @Resource
+    private OtherService otherService;
+
+    @Override
+    @DSTransactional
+    public Boolean save(CombineRequest request) {
+        Boolean r1 = saveSome(request);
+        Boolean r2 = saveOthers(request);
+        return r1 && r2;
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
+    protected Boolean saveOthers(CombineRequest request) {
+        List<Other> others = methodToGetOthers(request);
+        return otherService.saveBatch(others);
+    }
+
+    private Boolean saveSome(CombineRequest request) {
+        Some some = methodToGetSome(request);
+        return someService.save(some);
+    }
+}
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
+
+
+[TODO]:
+MyBatis的手动切换, 后续再深入学习  
+And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContextHolder.poll()`?
+
+
+
+## VI. JOB {#chapter-6}
+---
+Quartz
+
+
+
+## VII. THIRD-PART HTTP API {#chapter-7}
+---
+RestTemplate 是从Spring3.0开始支持的一个远程HTTP请求工具，RestTemplate提供了常见的Rest服务(Rest风格、Rest架构)的客户端请求的模版，能够大大提高客户端的编写效率
+
+多年来，Spring框架的RestTemplate一直是客户端HTTP访问的首选解决方案，它提供了同步、阻塞API以简洁的方式处理HTTP请求。然而，随着对非阻塞、反应式编程以更少的资源处理并发的需求不断增加，特别是在微服务架构中，RestTemplate已经显露出其局限性。
+从Spring Framework 5开始，RestTemplate已被标记为已弃用，Spring团队推荐WebClient作为其继任者。在这篇文章中，我们将通过实际示例深入探讨RestTemplate被弃用的原因、采用WebClient的优势以及如何有效过渡。
+
+{{< blockquote >}}
+Synchronous client to perform HTTP requests, exposing a simple, template method API over underlying HTTP client libraries such as the JDK HttpURLConnection.
+
+NOTE: As of 6.1, RestClient offers a more modern API for synchronous HTTP access. For asynchronous and streaming scenarios, consider the reactive org. springframework. web. reactive. function. client. WebClient.
+{{< /blockquote >}}
+
+
+
+
+## VIII. EVENT MONITOR {#chapter-8}
+---
+ApplicationEvent Monitor
+module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库存就依靠这个监听者观察客户定制的BOM原料是否满足, 满足即可生产
+[TODO]:
+
+
+
+
+## IX. DAO MAPPER {#chapter-9}
 ---
 
 
 
 
-## MVC事务
+## X. UTILS {#chapter-10}
 ---
+
+
+
+
+## XI. MISCELLANEOUS {#chapter-11}
+---
+

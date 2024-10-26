@@ -48,11 +48,40 @@ NO BEST, ONLY BETTER.
 
 - [I. ARCHITECTURE PRINCIPLE](#chapter-1)
 - [II. BUSINESS DESIGN](#chapter-2)
-- [II. LIFE CYCLE](#chapter-2)
 - [III. IMPORTANT SUPPORT](#chapter-3)
 - [V. OPERATION](#chapter-5)
 - [VI. APPENDIX](#chapter-6)
 
+
+[TODO]: 整理
+### Connection Pool
+Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
+Druid是淘宝选用的, 高并发的情况会适用一些
+### Cache
+### Redis
+[参考该文章](https://javaguide.cn/database/redis/redis-data-structures-01.html#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1)
+### Annotation
+- [ ] `@CacheException`
+### MyBatis Cache
+MyBatis的一级缓存和二级缓存, 都存在可能脏读的情况, 所以一般惯用Redis做缓存
+引入Redis后只需要将MyBatis配置文件中Cache 的类型定义为RedisCache
+Log
+### Logger
+**slf4j.Logger and log4j.Logger**
+{{< blockquote "LEARN SLF4J" "https://www.tutorialspoint.com/slf4j/slf4j_vs_log4j.htm#:~:text=Comparison%20SLF4J%20and%20Log4j,prefer%20one%20between%20the%20two." "SLF4J Vs Log4j">}}
+Comparison SLF4J and Log4j<br/>
+
+Unlike log4j, SLF4J (Simple Logging Facade for Java) is not an implementation of logging framework, 
+it is an abstraction for all those logging frameworks in Java similar to log4J. Therefore, you cannot compare both. 
+However, it is always difficult to prefer one between the two.
+{{< /blockquote >}}
+
+{{< image classes="fancybox fig-100" src="https://www.tutorialspoint.com/slf4j/images/application.jpg" thumbnail="https://www.tutorialspoint.com/slf4j/images/application.jpg" >}}
+CommonResult
+Redis
+cache
+
+### Beans注册, 启动顺序等
 
 
 
@@ -90,9 +119,10 @@ With the infra code-auto-generation, most backend and frontend codes can be gene
 
 
 
-## III. Controller
----
-### A. Input validation
+放在第2章节, 这主要是关于日常开发的中一些业务结构该如何设计才最优雅, 没有底层知识
+### A. Controller
+
+#### 1. Input validation
 
 **NOT** the RESTful style
 
@@ -100,7 +130,7 @@ Btw, considering for the conveniece of frontend, some
 Good place to convert DO/DTO to VO. Especially with java.stream
 
 
-### B. Outnput convertor
+#### 2. Outnput convertor
 Like xxxPageRespVO, output the userId and userName at the same time, because it's bad to fetch each userName in the frontend table
 
 Like xxxRespVO, whether to output either the userId or userName at the same time, depends on the business. For this single object line data, frontend could fetch 
@@ -121,69 +151,25 @@ TODO: 这段注解的机制, 参考java-spring.md文章
 
 
 
-## III. SERVICE
----
+### B. Service
 Just work for **BUSINESS** only
 
+基本遵循源码自动生成的代码, 在良好的数据结构设计的基础上, 很多问题都能迎刃而解. 需要额外定制的几个参考用例, 如后文
 
 
-
-### DAO Mapper
-- [ ] Pure MyBatis or MyBatisPlus?
-- [ ] MyBatis PageHelper detail
-- [ ] org.springframework.data.domain.PageRequest? Or PearAdmin? Or mall?
-
-**JUST** use MyBatisPLus maven and use default CRUD methods.  
-But **REFUSE** to use `QueryWrapper`, use MyBatis' XML mapper.
-
-Reason as below:
-- IService和BaseMapper中"充分利用"了Java新规定中Interface可以有default的用法, 基本的CRUD确实不用重复写了
-- MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失
-- 性能和稳定性等不稳定因素越来越多, 比如一旦手动干预, 很多所谓的"便利"瞬间全无, 还是得依靠MyBatis
-- 按照MyBatis写XML更像原生SQL, 熟练运用SQL是一件愉快的事情
-
-**非**分布式数据库, 不推荐使用雪花算法, 使用数据库自增ID即可
-
-
-#### Mapper Design
-- 因功能不同而查询同一个表, 很可能过滤条件维度和结果维度都不相同, 因此按照功能划分查询列表数据或查询单条数据比较合理(暂时, May 30, 2023)
-  - selectOneForXxxFunction(Integer param)
-  - selectListForYyyFunction(YyyRequest request)
-    - request中通过分组校验参数来整合不同的请求参数, 以便Mapper层可以一条语句应对多个controller层不同条件的查询
-- 复用`<sql/>`仅限于数据库表的columns字段
-  - 为了在`<select/>`中看得更清晰
-  - 为了MyBatisCodeHelperPro这个插件能关联`<sql/>`和`<resultMap/>`对应的字段
-- 不使用联合查询, 会导致PageHelper无法正确分页, 而使用子查询
-
-
-### Multiple DB
-
-
-#### Settings
-- application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
-
-- 使用多数据源时, 配置PageHelper时要注意(只有在使用application.yml格式的配置文件时会有问题):  
-  {{< blockquote "application.yml" >}}
-  ...
-  pagehelper:
-    autoRuntimeDialect: true  # 此处的配置项是驼峰, 不是IDEA自动提示的`auto-runtime-dialect: true`
-  ...
-  {{< /blockquote >}}
-  因为如果驼峰被自动转译为横线分隔符, 会导致PageHelper切换多数据源时失效
-
-
-### Transactional
+#### 1. Transactional
+[TODO]: 继续整理
 - 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
 - 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
 
-#### Propagation
+**Propagation**
 TODO
 
 - 事务传播, 需要时则加入传播的扩散要求  
   @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
 
 
-#### Isolation
+**Isolation**
 不同于"传播规则"是Spring提到的概念, 隔离级别这个概念是数据库事务自带的
 
 | Isolation Level  | 脏读(Dirty Read) | 不可重复读(Non Repeatable Read) | 幻读(Phantom Read) |
@@ -270,8 +256,50 @@ And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContext
 
 
 
-### Job
+#### 2. Job
 Quartz
+
+
+
+#### 3. Third-part API
+
+- RestTemplate: Sync
+- WebClient: Async, since Sping 5.0
+
+
+### C. DAO Mapper
+
+{{< blockquote >}}
+**JUST** use MyBatisPLus maven and use default CRUD methods.  
+But **REFUSE** to use `QueryWrapper`, use MyBatis' XML mapper.
+
+Reason as below:
+- IService和BaseMapper中"充分利用"了Java新规定中Interface可以有default的用法, 基本的CRUD确实不用重复写了
+- MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失
+- 性能和稳定性等不稳定因素越来越多, 比如一旦手动干预, 很多所谓的"便利"瞬间全无, 还是得依靠MyBatis
+- 按照MyBatis写XML更像原生SQL, 熟练运用SQL是一件愉快的事情
+{{< /blockquote >}}
+
+**非**分布式数据库, 不推荐使用雪花算法, 使用数据库自增ID即可, 涉及到分布式了再说
+
+
+
+#### Multiple DB
+
+
+**Settings**
+- application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
+
+- 使用多数据源时, 配置PageHelper时要注意(只有在使用application.yml格式的配置文件时会有问题):  
+  {{< blockquote "application.yml" >}}
+  ...
+  pagehelper:
+    autoRuntimeDialect: true  # 此处的配置项是驼峰, 不是IDEA自动提示的`auto-runtime-dialect: true`
+  ...
+  {{< /blockquote >}}
+  因为如果驼峰被自动转译为横线分隔符, 会导致PageHelper切换多数据源时失效
+
+
 
 
 
