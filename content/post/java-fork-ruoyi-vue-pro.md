@@ -48,9 +48,9 @@ NO BEST, ONLY BETTER.
 
 - [I. ARCHITECTURE PRINCIPLE](#chapter-1)
 - [II. BUSINESS DESIGN](#chapter-2)
-- [III. IMPORTANT SUPPORT](#chapter-3)
-- [V. OPERATION](#chapter-5)
-- [VI. APPENDIX](#chapter-6)
+- [III. TESTING](#chapter-3)
+- [IV. OPERATION](#chapter-4)
+- [V. COMMON](#chapter-5)
 
 
 [TODO]: 整理
@@ -119,8 +119,9 @@ With the infra code-auto-generation, most backend and frontend codes can be gene
 
 
 
-放在第2章节, 这主要是关于日常开发的中一些业务结构该如何设计才最优雅, 没有底层知识
 ### A. Controller
+
+[TODO]: 继续描述源码在前后端结合时, 互相传递的参数以及显示字段的设计思路
 
 #### 1. Input validation
 
@@ -129,13 +130,25 @@ With the infra code-auto-generation, most backend and frontend codes can be gene
 Btw, considering for the conveniece of frontend, some
 Good place to convert DO/DTO to VO. Especially with java.stream
 
+前后端传递的都是字典值, 方便服务和数据库直接存储使用
+
+删除? 
+@RequestParam("file") MultipartFile[] submissions
+The files are not the request body, they are part of it and there is no built-in HttpMessageConverter that can convert the request to an array of MultiPartFile.
+
+You can also replace HttpServletRequest with MultipartHttpServletRequest, which gives you access to the headers of the individual parts.
+
 
 #### 2. Outnput convertor
-Like xxxPageRespVO, output the userId and userName at the same time, because it's bad to fetch each userName in the frontend table
+前后端传递的都是字典值, 方便服务和数据库直接存储使用
 
-Like xxxRespVO, whether to output either the userId or userName at the same time, depends on the business. For this single object line data, frontend could fetch 
+前端如何显示? 如下:
+- Like xxxPageRespVO, output the userId and userName at the same time, because it's bad to fetch each userName in the frontend table
+
+- Like xxxRespVO, whether to output either the userId or userName at the same time, depends on the business. For this single object line data, frontend could fetch 
 its detail by id easily
 
+TODO: 以下这段注解主要是为了Excel导出服务的, 参考java-spring.md文章
 {{< codeblock java >}}
 @Schema(description = "管理后台 - 商品 SPU Response VO")
 @Data
@@ -147,7 +160,7 @@ public class ProductSpuRespVO {
     private Integer status;
 }
 {{< /codeblock >}}
-TODO: 这段注解的机制, 参考java-spring.md文章
+
 
 
 
@@ -158,100 +171,8 @@ Just work for **BUSINESS** only
 
 
 #### 1. Transactional
-[TODO]: 继续整理
-- 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
-- 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
+这里不会讲原理, 只讲注意点, 设计思路, 详细文章见java-spring.md
 
-**Propagation**
-TODO
-
-- 事务传播, 需要时则加入传播的扩散要求  
-  @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
-
-
-**Isolation**
-不同于"传播规则"是Spring提到的概念, 隔离级别这个概念是数据库事务自带的
-
-| Isolation Level  | 脏读(Dirty Read) | 不可重复读(Non Repeatable Read) | 幻读(Phantom Read) |
-| :---             | :---            | :---                           | :---              |
-| Read Uncommitted | Yes             | Yes                            | Yes               |
-| Read Committed   | -               | Yes                            | Yes               |
-| Repeatable Read  | -               | -                              | Yes               |
-| Serializable     | -               | -                              | -                 |
-
-很多人容易搞混不可重复读和幻读，确实这两者有些相似. 但不可重复读重点在于update和delete, 而幻读的重点在于insert.
-
-总的来说幻读就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读，表现形式很多，就不列举了。
-
-
-**TIPs**
-{{< alert info >}}
-@DS 必须加在 @Transactional 对应的类或者方法上  
-如在 mapper中加了@DS，但是 @Transactional 加在 service 方法中，此时则会获取默认的datasource
-(因为在事务中已经获取了一次datasource的connection，而此时无DS注解)
-{{< /alert >}}
-
-{{< tabbed-codeblock MultiDSTransactional >}}
-<!-- tab sInterface -->
-public interface SomeService extends IService<Some> {}
-<!-- endtab -->
-
-<!-- tab "sImpl" -->
-@Service
-public class SomeServiceImpl extends ServiceImpl<SomeRepository, Some> implements SomeService {}
-<!-- endtab -->
-
-<!-- tab oInterface -->
-public interface OtherService extends IService<Other> {}
-<!-- endtab -->
-
-<!-- tab oImpl -->
-@Service
-@DS("db2")
-public class OtherServiceImpl extends ServiceImpl<OtherRepository, Other> implements OtherService {}
-<!-- endtab -->
-
-<!-- tab combo -->
-public interface CombineService {
-    Boolean save(CombineRequest request);
-}
-<!-- endtab -->
-
-<!-- tab comboImpl -->
-@Service
-public class CombineServiceImpl implements CombineService {
-    @Resource
-    private SomeService someService;
-
-    @Resource
-    private OtherService otherService;
-
-    @Override
-    @DSTransactional
-    public Boolean save(CombineRequest request) {
-        Boolean r1 = saveSome(request);
-        Boolean r2 = saveOthers(request);
-        return r1 && r2;
-    }
-
-    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
-    protected Boolean saveOthers(CombineRequest request) {
-        List<Other> others = methodToGetOthers(request);
-        return otherService.saveBatch(others);
-    }
-
-    private Boolean saveSome(CombineRequest request) {
-        Some some = methodToGetSome(request);
-        return someService.save(some);
-    }
-}
-<!-- endtab -->
-{{< /tabbed-codeblock >}}
-
-
-[TODO]:
-MyBatis的手动切换, 后续再深入学习  
-And how to `DynamicDataSourceContextHolder.push()` and `DynamicDataSourceContextHolder.poll()`?
 
 
 
@@ -262,13 +183,21 @@ Quartz
 
 
 #### 3. Third-part API
+以下2种都是Spring官方推荐的, 都是对HttpClient的封装, 简化使用, 提高效率
 
 - RestTemplate: Sync
 - WebClient: Async, since Sping 5.0
 
 
-### C. DAO Mapper
+#### 4. ApplicationEvent Monitor
+module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库存就依靠这个监听者观察客户定制的BOM原料是否满足, 满足即可生产
+[TODO]:
 
+
+
+
+### C. DAO Mapper
+以下记录暂且留存, 是SpringBoot框架一路走来的思路变化
 {{< blockquote >}}
 **JUST** use MyBatisPLus maven and use default CRUD methods.  
 But **REFUSE** to use `QueryWrapper`, use MyBatis' XML mapper.
@@ -278,13 +207,13 @@ Reason as below:
 - MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失
 - 性能和稳定性等不稳定因素越来越多, 比如一旦手动干预, 很多所谓的"便利"瞬间全无, 还是得依靠MyBatis
 - 按照MyBatis写XML更像原生SQL, 熟练运用SQL是一件愉快的事情
-{{< /blockquote >}}
 
 **非**分布式数据库, 不推荐使用雪花算法, 使用数据库自增ID即可, 涉及到分布式了再说
+{{< /blockquote >}}
 
 
 
-#### Multiple DB
+#### 1. Multiple DB
 
 
 **Settings**
@@ -303,25 +232,29 @@ Reason as below:
 
 
 
+## III. TESTING {#chapter-3}
+---
 
 
-## V. OPERATION {#chapter-5}
+
+## IV. OPERATION {#chapter-4}
 ---
 运营, 软文推广, 运维, 部署, 自动化测试, 自动化接口文档等
 
+
 ### CI
 
-### Monitor
 
 
-### API DOCUMENT
+### API Document
 - [ ] Swagger UI category, description and list
 - [ ] With session token
 
 
 
 
-### DEPLOYMENT
+### Deployment
+
 #### Docker
 - [ ] DockerCompose deployment in single server?
 
@@ -331,59 +264,40 @@ Reason as below:
 
 
 
-### Others
-- 个人订阅号, 熟悉内容的编辑/发布, 练习写作, 提高排版/拍照等后期技能
-- 运营, 尝试推送文章
-
-
-
-
-## III. IMPORTANT SUPPORT {#chapter-3}
----
-
-### A. Security
-**Configure**
-这里包含初始化, 注册哪些filter
-
-
-**Filter**
-具体拦截, 并把相对应的且support()的provider传进去
-
-
-**Provider**
-提供自己的认证比对实现方法, 并且实现`support()`满足filter查找
-
-
-**Handler**
-增加成功与失败的handler
-
-#### Permission
-
-#### Protection
-
 
 
 ### B. Input
-@RequestParam("file") MultipartFile[] submissions
-The files are not the request body, they are part of it and there is no built-in HttpMessageConverter that can convert the request to an array of MultiPartFile.
-
-You can also replace HttpServletRequest with MultipartHttpServletRequest, which gives you access to the headers of the individual parts.
 
 
 ### C. Output
 
 
-### D. Exception
 
 
-### E. API
+## V. COMMON {#chapter-5}
+---
+理解源码的核心设计思路, 具体技术知识见java-spring.md
+
+### A. Exception
 
 
-### F. Log
 
-### G. Background Job
+### B. Log
 
-### H. Cache
+
+### C. Cache
+
+
+### D. StreamUtils
+
+
+### E.PayLock
+
+
+### F.Tenant
+MyBatisPlusX
+
+
 
 
 ## VI. APPENDIX {#chapter-6}
@@ -417,11 +331,3 @@ You can also replace HttpServletRequest with MultipartHttpServletRequest, which 
 
 
 
-## 笔记
-
-Sep 29, 2024
-
-有点理解, 为啥代码中Enum中有各种状态, 而Dict中又有. 其实有一部分字典数据, 是为了前端而提供的, 这样前端后端就不用各自存储各个字段数值代表什么意思了
-
-
-test utf-8
