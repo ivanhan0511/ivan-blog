@@ -60,8 +60,10 @@ This is a custom summary and does *NOT* appear in the post.
 
 ## I. IOC {#chapter-1}
 ---
-### Bean生命周期
-[TODO]: 插入图片 "备注", 用自己的域名及云服务器做图床
+
+### A. LifeCircle-@Configuration
+
+https://www.cnblogs.com/java-chen-hao/p/11640177.html
 
 
 
@@ -110,7 +112,7 @@ With this annotation, a class can be scaned manually or automaticlly
 
 
 
-#### @Resource @Autowired
+**@Resource @Autowired**
 
 {{< blockquote "stackoverflow" "https://stackoverflow.com/questions/4093504/resource-vs-autowired" "@Resource vs @Autowired" >}}
 Both @Autowired (or @Inject) and @Resource work equally well. But there is a conceptual difference or a difference in the meaning<br/><br/>
@@ -122,13 +124,13 @@ While this fallback is convenient, IMHO it causes a lot of confusion, because pe
 {{< /blockquote >}}
 
 
-#### @Repository @Mapper
+**@Repository @Mapper**
 - @Mapper 一定要有，否则 Mybatis 找不到 mapper。
 - @Repository 可有可无，可以消去依赖注入的报错信息。
 - @MapperScan 可以替代 @Mapper。
 
 
-#### @Validate @Valid
+**@Validate @Valid**
 - @Validate是org.springframework.validation.annotation.Validated 导入的
 - @Validate 可以分组
 - @Valid是javax.validation.Valid 导入的

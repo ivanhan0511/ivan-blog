@@ -86,7 +86,22 @@ So far, Sep 24, 2024
 
 With the infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
 
-
+**可能需要大改ERP**, 原因如下:
+- 定义的产品没有原料和成品之分
+- 产品的barCode给Mall使用是比较恰当的(Tip: barCode可以帮助Mall区分一部手机的颜色/内存等). 而对外的商品SPU/SKU由Mall定义
+- 注意, BtoC的Mall没有客户的概念, 只有C端用户而已
+- 而对于BtoB的ERP, 有客户的概念, 但却缺少商品Code的定义, 比如`hf001`, `盛趣点券`等
+- 另外, 结合现有业务产品线
+  - 背景:
+    1. 门票类, BtoC, 不依赖上游, 平台在ERP生产入库, 供Mall使用. 而Mall中因为需要绑定虚拟身份的事情, 在Mall中做旁路
+    2. 手办类, BtoC, 依赖实体上游, 却(暂时)不用在系统中体现, 优先用Mall满足需求, 有进一步需求时再启用ERP支持
+    3. 充值类, BtoB, 依赖上游, 对下游提供接口, 其中比如`hf001`, `盛趣点券`等自定义码, 需要DIY
+  - 统筹:
+    - ERP的销售订单入口, 可以专供背景`3.`, 其余两项的入口在小程序Mall
+    - ERP的销售订单入口, (暂时)不太需要在Controller中抽象通用的业务订单入口(指: 通过前端传递业务类别, 以区分调用哪种业务服务)
+    - ERP的产品定义, 只需旁路增加`productNo`即可, 供下游使用, 与Mall无关
+    - ERP的产品(严重)依赖其`categoryId`进行区分"原料"or"成品", 供"生产监听服务"生产/组装
+    - 
 
 
 ### A. Controller
@@ -155,7 +170,11 @@ Quartz
 #### 3. Third-part API
 以下2种都是Spring官方推荐的, 都是对HttpClient的封装, 简化使用, 提高效率
 
-- RestTemplate: Sync
+- RestTemplate: Sync, 
+  {{< codeblock doc java >}}
+  @Deprecated(since = "6.0", forRemoval = true)
+  public void setReadTimeout(int timeout) {}
+  {{< /codeblock >}}
 - WebClient: Async, since Sping 5.0
 
 
