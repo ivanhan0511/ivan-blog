@@ -82,7 +82,7 @@ So far, Sep 24, 2024
 
 3. Designing the data structure and its relationship on the paper / iPad is the most important thing!
 
-4. Record the SQL into the `./sql/mysql/`, of course, my personal choice
+4. Record the SQL into the `./sql/mysql/`. If need ER, export from MySQL, of course, my personal choice
 
 With the infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
 
@@ -97,11 +97,13 @@ With the infra code-auto-generation, most backend and frontend codes can be gene
     2. 手办类, BtoC, 依赖实体上游, 却(暂时)不用在系统中体现, 优先用Mall满足需求, 有进一步需求时再启用ERP支持
     3. 充值类, BtoB, 依赖上游, 对下游提供接口, 其中比如`hf001`, `盛趣点券`等自定义码, 需要DIY
   - 统筹:
-    - ERP的销售订单入口, 可以专供背景`3.`, 其余两项的入口在小程序Mall
-    - ERP的销售订单入口, (暂时)不太需要在Controller中抽象通用的业务订单入口(指: 通过前端传递业务类别, 以区分调用哪种业务服务)
-    - ERP的产品定义, 只需旁路增加`productNo`即可, 供下游使用, 与Mall无关
-    - ERP的产品(严重)依赖其`categoryId`进行区分"原料"or"成品", 供"生产监听服务"生产/组装
-    - 
+    - ERP的销售订单入口
+      - 可以专供背景`3.`, 其余两项的入口在小程序Mall
+      - (暂时)不太需要在Controller中抽象通用的业务订单入口(指: 通过前端传递业务类别, 以区分调用哪种业务服务)
+      - 盛趣/网龙/话费, 多种ToB产品, **是否能通用抽象?**
+    - ERP的产品定义
+      - ~~ERP的产品定义, 只需旁路增加`productNo`即可, 供下游使用, 与Mall无关~~ 偷懒使用`barCode`了, **待定**
+      - (严重)依赖其`categoryId`进行区分"原料"or"成品", 供"生产监听服务"生产/组装
 
 
 ### A. Controller
@@ -154,10 +156,40 @@ Just work for **BUSINESS** only
 
 基本遵循源码自动生成的代码, 在良好的数据结构设计的基础上, 很多问题都能迎刃而解. 需要额外定制的几个参考用例, 如后文
 
+业务流主方法中, 尽量只描述几个清晰的动作, 通用大部分业务流程, 有差异的处理流程, 放在前置or后置的`handler`中
+{{< codeblock handler java >}}
+@Resource
+private List<XxxModuleFunctionHandler> saleOrderHandlers;
+
+@Override
+@Transactional(rollbackFor = Exception.class)
+public Long createSaleOrder(ErpSaleOrderSaveReqVO createReqVO) {
+    // 1.1 校验订单项的有效性
+    // 1.2 校验客户
+    // 1.3 校验结算账户
+    // 1.4 校验销售人员
+    // 1.5 生成订单号，并校验唯一性
+    // 1.6 计算价格
+
+    // 2.0 前置处理(定制化处理)
+    saleOrderHandlers.forEach(handler -> handler.beforeCreate(customerDO, saleOrder));
+
+    // 3.1 插入订单
+    // 3.2 插入订单项
+
+    // 4.0 后置处理(定制化处理)
+    saleOrderHandlers.forEach(handler -> handler.afterCreate(customerDO, saleOrder));
+
+    return saleOrder;
+{{< /codeblock >}}
+
+
+
 
 #### 1. Transactional
 这里不会讲原理, 只讲注意点, 设计思路, 详细文章见java-spring.md
 
+TODO: 生命周期, 事务传播, 事务隔离
 
 
 
@@ -286,6 +318,17 @@ MyBatis的一级缓存和二级缓存, 都存在可能脏读的情况, 所以一
 
 
 ### D. StreamUtils
+用得越来越多了, 有时间的话, 需要系统性学习一下
+
+convertSet
+
+convertMultiMap
+
+convertMap
+
+MapUtils.findAndThen
+
+
 
 
 ### E.PayLock
@@ -298,6 +341,21 @@ MyBatisPlusX
 ### G. Connection Pool
 Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
 Druid是淘宝选用的, 高并发的情况会适用一些
+
+
+
+
+### H. Security
+只记录配置, 新的, 技术链接看java-spring.md
+
+#### 1. 免登录改哪里
+路径
+
+#### 2. 登录方式有哪些
+
+
+#### 3. permission权限设置, 部门数据隔离
+PermissionServiceImpl
 
 
 
