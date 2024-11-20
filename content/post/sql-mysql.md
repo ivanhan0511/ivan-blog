@@ -80,7 +80,7 @@ sudo systemctl restart mysql.service
 ---
 DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 
-### `GRANT`
+### GRANT
 {{< codeblock "GRANT" "SQL" >}}
 GRANT ALL PRIVILEGES ON `some-db`.* TO 'rd'@'%';
 FLUSH PRIVILEGES;

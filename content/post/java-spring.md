@@ -89,10 +89,10 @@ JetBrains IDEA 中如果想了解某个注解的实现, 没有太好的办法, �
 - application/xml<br>
 <br>
 前后组合如下:<br>
-- 服务端使用Content-Type:"application/json"编码http响应body内容返回给前端；前端使用Content-Type:"application/json"解码http响应body内容。<br>
-- 服务端返回Response Content-Type:application/json，前端dataType不指定值。此时，解码http响应body内容，data类型是Object。<br>
-- 服务端不返回Response Content-Type:application/json，前端dataType指定值json。些时，解码http响应body内容，data类型是Object。<br>
-- 服务端不返回Response Content-Type:application/json，前端dataType不指定值"json"。此时，不能解码http响应body的json字符串，data类型是String。<br>
+- 服务端使用   Content-Type:"application/json"编码http响应body内容返回给前端；前端使用Content-Type:"application/json"解码http响应body内容。<br>
+- 服务端返回   Response Content-Type:application/json，前端dataType 不指定值 "json". 此时，解码http响应body内容，   data类型是Object。<br>
+- 服务端不返回 Response Content-Type:application/json，前端dataType 指定值   "json". 些时，解码http响应body内容，   data类型是Object。<br>
+- 服务端不返回 Response Content-Type:application/json，前端dataType 不指定值 "json". 此时，不能解码http响应body内容，data类型是String。<br>
 {{< /blockquote >}}
 
 
@@ -103,7 +103,7 @@ JetBrains IDEA 中如果想了解某个注解的实现, 没有太好的办法, �
 #### @Component @Bean @Service @Configurable
 With this annotation, a class can be scaned manually or automaticlly
 
-`@Bean`一般是调用第三方的
+`@Bean`, 
 
 `@Component`与`@Service`没有区别, `@Service`还没想好, 是一个预留的注解定义
 
@@ -173,33 +173,68 @@ PS:
 
 ## V. TRANSACTIONAL {#chapter-5}
 ---
-[TODO]: 继续整理
-- 跨多数据源, 调用各个资源服务, 各个Service的实现类有@DS("customer")注解指定数据源
-- 事务管理, 通过@DSTransactional 根据各个服务所指定的数据源进行切换
 
-**Propagation**
-TODO
+### A. Propagation
 
 - 事务传播, 需要时则加入传播的扩散要求  
   @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
 
 
-**Isolation**
-不同于"传播规则"是Spring提到的概念, 隔离级别这个概念是数据库事务自带的
+### B. Isolation
+
+以下是 MySQL 事务隔离级别的简要场景及效果区别：
+
+#### 1. Read Uncommitted
+**场景**: 允许读取未提交的数据。  
+**效果**:  
+- **脏读**: 可能发生，读取其他事务未提交的数据。  
+- **不可重复读**: 可能发生，因为事务间可能修改已读取数据。  
+- **幻读**: 可能发生，因为可能插入新数据。  
+
+### 2. Read Committed  
+**场景**: 只读取已提交的数据，避免读取未提交事务的内容。  
+**效果**:  
+- **脏读**: 不会发生，保证读取的是已提交数据。  
+- **不可重复读**: 可能发生，因为同一事务中重复读取时，数据可能被其他事务修改。  
+- **幻读**: 可能发生，因为其他事务可能插入新记录。  
+
+**Tips**
+
+不可重复读重点在于update和delete
+
+
+#### 3. Repeatable Read (MySQL默认)
+**场景**: 保证同一事务中，读取的结果是固定的，即便其他事务修改了数据。  
+**效果**:  
+- **脏读**: 不会发生。  
+- **不可重复读**: 不会发生，事务中数据一致。  
+- **幻读**: 通过**间隙锁**避免，查询范围内的数据是固定的。  
+
+**Tips**
+
+该级别产生幻读的重点场景在于insert, 总的来说就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读，表现形式很多
+TODO: MySQL的间隙锁在开源代码中是否已经默认被应用
+
+
+#### 4. Serializable
+**场景**: 强制事务串行化，确保事务间完全隔离。  
+**效果**:  
+- **脏读**: 不会发生。  
+- **不可重复读**: 不会发生。  
+- **幻读**: 不会发生，因为会对范围内的操作加锁，阻止插入或修改。  
+
+#### 总结表格
 
 | Isolation Level  | 脏读(Dirty Read) | 不可重复读(Non Repeatable Read) | 幻读(Phantom Read) |
-| :---             | :---            | :---                           | :---              |
-| Read Uncommitted | Yes             | Yes                            | Yes               |
-| Read Committed   | -               | Yes                            | Yes               |
-| Repeatable Read  | -               | -                              | Yes               |
-| Serializable     | -               | -                              | -                 |
-
-很多人容易搞混不可重复读和幻读，确实这两者有些相似. 但不可重复读重点在于update和delete, 而幻读的重点在于insert.
-
-总的来说幻读就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读，表现形式很多，就不列举了。
+|------------------|------|------------|-------|
+| Read Uncommitted | ✅   | ✅         | ✅    |
+| Read Committed   | ❌   | ✅         | ✅    |
+| Repeatable Read  | ❌   | ❌         | ❌    |
+| Serializable     | ❌   | ❌         | ❌    |
 
 
-**TIPs**
+### C. 多数据源
+
 {{< alert info >}}
 @DS 必须加在 @Transactional 对应的类或者方法上  
 如在 mapper中加了@DS，但是 @Transactional 加在 service 方法中，此时则会获取默认的datasource

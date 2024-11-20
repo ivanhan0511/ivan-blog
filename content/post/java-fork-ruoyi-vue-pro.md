@@ -86,6 +86,27 @@ So far, Sep 24, 2024
 
 With the infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
 
+基于现役SpringBoot业务流层面的全栈开发的经验, 制定出更优雅的代码设计规范
+
+- 设计初期, 后端概要/前端原型图 均不要太正式, 需要不断试错, 兼容前端表现(*基于源码尽可能少量修改*)与后端数据结构(*尽可能解耦*)的合理性
+- Controller入参VO中的字段, 基本遵从DO中的设计, 直接传输ID即可
+  - 因为前端加载页面时, 就已经通过多个接口的simple-list获取了各种下拉框的数据
+  - 提交时也就不需要`name`之类的input字符串数据, 后台再通过字符串查询blablabla. 而是直接提交其ID即可, 后端直接用
+  - 本着创建与更新都采用同一套xxxSaveReqVO的原则
+- Service中, 只体现业务. 而需要CRUD的时候, 调用Mapper的方法
+  - service中的数据流转, 视情况而定, VO / DTO / DO 均可以
+  - SQL事务, 需要做好规划
+    - 通用事务方法的抽象
+    - 哪里添加事务注解
+    - 获取数据时是否已经提交事务
+    - 事务的隔离与传播, 是否运用得当
+    - 事务调用的生命周期/context
+- Mapper中, 做统一抽象, 例如`selectPage`, `selectByMobile`(而不是直接暴露`selectOne`), `deleteByIds`等
+  - 但需要控制mapper中的SQL join
+  - 复杂查询都放在service中解耦, 分别简单查询
+- Controller返回的VO数据, 通过在controller中的private xxxBuilder方法, 使用stream流, 返回对应的字符串
+
+
 **可能需要大改ERP**, 原因如下:
 - 定义的产品没有原料和成品之分
 - 产品的barCode给Mall使用是比较恰当的(Tip: barCode可以帮助Mall区分一部手机的颜色/内存等). 而对外的商品SPU/SKU由Mall定义
@@ -110,32 +131,36 @@ With the infra code-auto-generation, most backend and frontend codes can be gene
 
 [TODO]: 继续描述源码在前后端结合时, 互相传递的参数以及显示字段的设计思路
 
+**NOT** the RESTful style, the **tridi
+
+
 #### 1. Input validation
 
-**NOT** the RESTful style
+**@InEnum & @DictFormat**
 
-Btw, considering for the conveniece of frontend, some
-Good place to convert DO/DTO to VO. Especially with java.stream
+`@InEnum`, 是程序枚举类约定好的, 不受普通用户在Admin Web管理的  
+`@DictFormat`, 是在Excel导入/导出时自动转化用的
 
+{{< codeblock validInput java >}}
+@Schema(description = "管理后台 - Measure 图像绑定 Request VO")
+@Data
+public class MeasureBindPicReqVO {
+    @Schema(description = "放大倍率", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
+    @NotNull(message = "放大倍率不能为空")
+    @InEnum(value = XxxEnum.class, message = "xxx必须是 {value}")
+    private Integer magnification;
+}
+{{< /codeblock >}}
 前后端传递的都是字典值, 方便服务和数据库直接存储使用
 
-删除? 
-@RequestParam("file") MultipartFile[] submissions
-The files are not the request body, they are part of it and there is no built-in HttpMessageConverter that can convert the request to an array of MultiPartFile.
 
-You can also replace HttpServletRequest with MultipartHttpServletRequest, which gives you access to the headers of the individual parts.
+#### 2. Output convertor
+**getPage**
+- 如果是姓名 / 产品名 等, 无论是分页查询还是通过ID单体查询, 各个字段都是字典数字的话, 前端二次轮询其字典对应的名称, 就消耗太大, 所以需要后端通过Java stream复杂组装
+- 如果是性别等通用字段, 输出也仍然是字典数值, 前端代码指定其字典类型, 通过字典接口从后端获取, 并转换为带有标签(成功/失败等)颜色标签文字
 
 
-#### 2. Outnput convertor
-前后端传递的都是字典值, 方便服务和数据库直接存储使用
-
-前端如何显示? 如下:
-- Like xxxPageRespVO, output the userId and userName at the same time, because it's bad to fetch each userName in the frontend table
-
-- Like xxxRespVO, whether to output either the userId or userName at the same time, depends on the business. For this single object line data, frontend could fetch 
-its detail by id easily
-
-TODO: 以下这段注解主要是为了Excel导出服务的, 参考java-spring.md文章
+**Excel导出**
 {{< codeblock java >}}
 @Schema(description = "管理后台 - 商品 SPU Response VO")
 @Data
@@ -264,7 +289,7 @@ Reason as below:
 
 
 ### CI
-
+TODO
 
 
 ### API Document
@@ -275,13 +300,16 @@ Reason as below:
 
 
 ### Deployment
+Temp use jar
 
 #### Docker
 - [ ] DockerCompose deployment in single server?
 
 
 #### JAR
-
+.env.local
+.env.dev
+.env.pro
 
 
 
