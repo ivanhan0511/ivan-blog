@@ -63,3 +63,22 @@ principal和principle在词源学上是相关的。principal主要源于拉丁�
 
 
 文章来源：https://read01.com/ezR07gM.html
+
+
+
+
+
+
+
+"Magnification" and "zoom" are related terms often used in the context of optics, photography, and microscopy. While they are related, they refer to slightly different concepts:
+
+1. Magnification:
+   \- Magnification refers to the process of enlarging an object or an image to make it appear larger than its actual size.
+   \- In optics or microscopy, magnification is typically a fixed value that indicates how much larger an object appears through a lens or an optical system compared to its actual size.
+   \- Magnification is often expressed as a ratio or a factor (e.g., 2x magnification means the object appears twice as large as its actual size).
+2. Zoom:
+   \- Zoom refers to the ability to change the focal length of a lens or adjust the field of view of an optical system to make an object appear larger or smaller.
+   \- In photography or videography, zooming involves adjusting the focal length of a zoom lens to bring the subject closer (zoom in) or move it further away (zoom out).
+   \- Zoom lenses have a variable focal length, allowing users to adjust the magnification level by changing the zoom setting.
+
+In summary, magnification is a measure of how much larger an object appears compared to its actual size, often a fixed value, while zoom refers to the ability to adjust the magnification level by changing the focal length of a lens or adjusting the field of view of an optical system.
