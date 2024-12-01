@@ -41,15 +41,13 @@ After initialization of Windows 11, here is the TODO list.
 {{< toc >}}
 
 
-## BACKUP
+## I. BACKUP
 ---
 主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
 
 - VisualStudio
   - TODO
-- PyCharm
-  - TODO
-- IDEA
+- PyCharm/IDEA
   - git commit and push
   - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目sql文件夹中随Git上传
   - Scratch代码
@@ -72,7 +70,7 @@ After initialization of Windows 11, here is the TODO list.
 
 
 
-## BOOT DEVICE
+## II. PREPARE BOOT DEVICE
 ---
 - Create Windows official MediaCreationTool
 - Choose boot device in BIOS 
@@ -80,7 +78,7 @@ After initialization of Windows 11, here is the TODO list.
 
 
 
-## BASE
+## III. BASE
 ---
 只要连接互联网, 现有的Windows11会自动联网安装驱动, 只需要等待更新/重启
 
@@ -89,13 +87,13 @@ After initialization of Windows 11, here is the TODO list.
 - VisualStudioPro2022  
   - Prefer English language 
   - Libs
-  - Git?
+  - ~~Git~~
 - Input method, config only `ctrl + space` to switch
 - Chrome as default browser
 - HHKB
 - Logitech
-  - Anywhere3 and OptionPlus
-  - G309 and G Hub
+  - ~~Anywhere3 and OptionPlus~~
+  - G70r and G Hub
 - 文件夹选项 -> 隐私
   - 取消勾选"显示最近使用的文件"
   - 取消勾选"显示常用文件夹"
@@ -104,7 +102,7 @@ After initialization of Windows 11, here is the TODO list.
 
 
 
-## Proxy
+## IV. Proxy
 ---
 v2rayN(Need DotNet6.0)
 
@@ -113,7 +111,7 @@ v2rayN(Need DotNet6.0)
 
 
 
-## DB
+## V. DB
 ---
 真机傻瓜式安装, 之后只用`MySQL 8.1 Command Line Clien`登录用于DCL(Data Control Language)管理  
 然后用IDEA(Ultimate)的Import/Export 工具进行数据到导入/导出, ER图也可以导出, [各种DDL(Data Definition Language), DML(Data Manipulation Language)](https://ivanhan0511.github.io/post/sql-mysql/)都可以在IDEA中完成
@@ -121,7 +119,7 @@ v2rayN(Need DotNet6.0)
 
 
 
-## VisualStudioPro2022  
+## VI. VisualStudioPro2022  
 ---
 
 - 设置项目存储路径, Tools -> Options -> Projects and Solutions -> Locations
@@ -140,17 +138,24 @@ v2rayN(Need DotNet6.0)
 
 
 
-## PyCharm
----
-TODO
-
-
-
-
-## IDEA
+## VII. PyCharm
 ---
 
-### Configuration
+### A. Configuration
+
+
+### B. Plugins
+
+
+### A. Anaconda
+
+
+
+
+## VIII. IDEA
+---
+
+### A. Configuration
 - Enable `Settings Sync`
 - 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
 - settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> 将keywords设置为大写(To upper), and then`ctrl + alt + L`
@@ -158,7 +163,7 @@ TODO
 - 数据库导出时, 右键某个数据库 -> Import/Export -> Export with 'mysqldump' -> Path to mysqldump -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysqldump.exe`
 
 
-### Plugins
+### B. Plugins
 - IdeaVim
   - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`C:\Users\Ivan\.ideavimrc`)
   - 只需在最后一行增加配置引用即可`source ~/.vimrc`
@@ -168,7 +173,7 @@ TODO
 - RemoteHost `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar`
 
 
-### Maven
+### C. Maven
 Maven 3.8.1 blocked http connection
 
 - Do {{< hl-text red >}}NOT{{< /hl-text >}} edit this original IDEA maven settings file
@@ -233,14 +238,14 @@ Maven 3.8.1 blocked http connection
 
 
 
-## HBuilderX
+## IX. HBuilderX
 ---
 开发环境部署, 参照[js-vue3.md](https://ivanhan0511.github.io/post/js-vue3/)
 
 
 
 
-## VMWare  
+## X. VMWare  
 ---
 VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMWare
 
@@ -248,14 +253,19 @@ VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMW
 - 编辑 -> 首选项 -> 内存 -> 额外内存 "调整所有虚拟机内存使其适应预留的主机RAM"
 
 
-### Windows
-- 电源管理, 从不休眠
+### A. Windows
+- Base镜像: 电源管理, 从不休眠
 - MS SQL Server + SSMS
 
   Init, export, import refer to[MS SQL Server Opertaions](https://ivanhan0511.github.io/post/sql-sqlserver/)
 
+- RD镜像: 开发试验用, 或安装垃圾软件等
+- Finance镜像: Download Bitcoin wallet from [here](https://bitcoin.org/en/choose-your-wallet) and choose `Bitcoin Core`
 
-### Ubuntu Desktop(Deprecated)
+Login [this website](https://www.huobi.com/en-us/login/) to trans BTC
+
+
+### B. Ubuntu Desktop(Deprecated)
 
 Refer to [this post](https://blog.csdn.net/weixin_43862116/article/details/107731631)挂载host主机的文件夹到Ubuntu挂在点, 用于共享
 
@@ -274,15 +284,15 @@ sudo vi /etc/fstab
 
 
 
-## Others
+## XI. Others
 ---
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
 
 - Chrome
-- Postman(Deprecated)
+- ~~Postman~~
 - XShell/XFtp(转用WSL2)
   - `telnet <IP> <Port>`
-- hugo(转用WSL2)
+- ~~hugo~~(转用WSL2)
     + 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
     + 比如放在`C:\Program Files\Git\usr\bin`中, 并添加到环境变量中
 - 向日葵Sunlogin
@@ -295,13 +305,5 @@ sudo vi /etc/fstab
 - 亿图Edraw
 - Fiio driver
 - Notepad++
-- Axure RP 9 (Axure Rapid Prototyping)(Deprecated, use Mock in iPad)
+- ~~Axure RP 9(Axure Rapid Prototyping)~~(Deprecated, use Mock in iPad)
 
-
-
-
-## BITCOIN
----
-Download Bitcoin wallet from [here](https://bitcoin.org/en/choose-your-wallet) and choose `Bitcoin Core`
-
-Login [this website](https://www.huobi.com/en-us/login/) to trans BTC

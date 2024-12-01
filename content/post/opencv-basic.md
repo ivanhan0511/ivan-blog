@@ -117,3 +117,12 @@ print(f"The distance between keypoints is: {distance} pixels.")
    \- Zoom lenses have a variable focal length, allowing users to adjust the magnification level by changing the zoom setting.
 
 In summary, magnification is a measure of how much larger an object appears compared to its actual size, often a fixed value, while zoom refers to the ability to adjust the magnification level by changing the focal length of a lens or adjusting the field of view of an optical system.
+
+
+
+
+
+开源调色软件
+
+https://www.music4x.com/post/7489
+
