@@ -344,16 +344,146 @@ TODO
 
 
 ### Deployment
-Temp use jar
+No best, only better! We **DON'T** want to use Docker.
 
-#### Docker
-- [ ] DockerCompose deployment in single server?
+**个人开发**
+- 前端:
+  - 使用`.env.local`配置文件, 指向`http://127.0.0.1:48080`
+  - 调试命令`npm run dev`
+- 后端:
+  - 使用`application-local.yaml`配置文件, 数据源指向localhost
+  - IDE调试即可
 
+**开发联调**
+- 前端:
+  - 使用`.env.dev`配置文件, 指向`https://mall-srv.xxx.com`
+  - 调试命令`npm run dev-server`
+  - 打包命令`npm run build:dev`
+- 后端:
+  - 使用`application-dev.yaml`配置文件, 数据源指向localhost (服务器本地)
+  - 配置`https://mall.xxx.com`和`https://mall-srv.xxx.com`, 域名解析, 开放端口及备案, SSL证书
+  - 使用`screen`运行在云服务器即可, 供前端调试用
+  - Nginx采用独立域名访问的方式, 配置如下
 
-#### JAR
-.env.local
-.env.dev
-.env.pro
+**生产环境**
+- 前端:
+  - 使用`.env.prod`配置文件, 指向`http://127.0.0.1:48080`
+  - 打包命令`npm run build:prod`
+- 后端:
+  - 使用`application-prod.yaml`配置文件, 数据源指向localhost (服务器本地)
+  - 配置`https://mall.xxx.com`, 域名解析, 开放端口及备案, SSL证书
+  - 使用`screen`运行在云服务器即可, 供前端调试用
+  - Nginx采用服务器局域网IP访问的方式, 配置如下
+
+{{< tabbed-codeblock nginx >}}
+<!--tab dev -->
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+
+    gzip on;
+    gzip_min_length 1k;     # 设置允许压缩的页面最小字节数
+    gzip_buffers 4 16k;     # 用来存储 gzip 的压缩结果
+    gzip_http_version 1.1;  # 识别 HTTP 协议版本
+    gzip_comp_level 2;      # 设置 gzip 的压缩比 1-9。1 压缩比最小但最快，而 9 相反
+    gzip_types text/plain application/x-javascript text/css application/xml application/javascript; # 指定压缩类型
+    gzip_proxied any;       # 无论后端服务器的 headers 头返回什么信息，都无条件启用压缩
+
+    server { ## 前端项目
+        listen       80;
+        server_name  mall.xxx.com; ## 重要！！！修改成你的前端域名
+
+        location / { ## 前端项目
+            root   /work/projects/yudao-ui-admin;
+            index  index.html index.htm;
+            try_files $uri $uri/ /index.html;
+        }
+    }
+
+    server { ## 后端项目
+        listen       80;
+        server_name  api.iocoder.cn; ## 重要！！！修改成你的外网 IP/域名
+
+        ## 不要使用 location / 转发到后端项目，因为 druid、admin 等监控，不需要外网可访问。或者增加 Nginx IP 白名单限制也可以。
+
+        location /admin-api/ { ## 后端项目 - 管理后台
+            proxy_pass http://localhost:48080/admin-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header REMOTE-HOST $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+        location /app-api/ { ## 后端项目 - 用户 App
+            proxy_pass http://localhost:48080/app-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header REMOTE-HOST $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+    }
+}
+<!-- endtab -->
+
+<!--tab prod -->
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+
+    gzip on;
+    gzip_min_length 1k;     # 设置允许压缩的页面最小字节数
+    gzip_buffers 4 16k;     # 用来存储 gzip 的压缩结果
+    gzip_http_version 1.1;  # 识别 HTTP 协议版本
+    gzip_comp_level 2;      # 设置 gzip 的压缩比 1-9。1 压缩比最小但最快，而 9 相反
+    gzip_types gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript; # 指定压缩类型
+    gzip_proxied any;       # 无论后端服务器的 headers 头返回什么信息，都无条件启用压缩
+
+    server {
+        listen       80;
+        server_name  192.168.225.2; ## 重要！！！修改成你的外网 IP/域名
+
+        location / { ## 前端项目
+            root   /work/projects/yudao-ui-admin;
+            index  index.html index.htm;
+            try_files $uri $uri/ /index.html;
+        }
+
+        location /admin-api/ { ## 后端项目 - 管理后台
+            proxy_pass http://localhost:48080/admin-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header REMOTE-HOST $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+        location /app-api/ { ## 后端项目 - 用户 App
+            proxy_pass http://localhost:48080/app-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header REMOTE-HOST $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+    }
+}
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
+
 
 
 
