@@ -51,7 +51,7 @@ After initialization of Windows 11, here is the TODO list.
   - git commit and push
   - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目sql文件夹中随Git上传
   - Scratch代码
-- HBuildX
+- ~~HBuildX~~改用VSCode
   - No local file, all in git
 - 坚果云文档: 公司文档, 仅限文档, 其余通过本地文件存储
 - 本地文档
@@ -82,22 +82,18 @@ After initialization of Windows 11, here is the TODO list.
 ---
 只要连接互联网, 现有的Windows11会自动联网安装驱动, 只需要等待更新/重启
 
-趁着没有使用网络代理, 先安装基本工具
 
-- VisualStudioPro2022  
-  - Prefer English language 
-  - Libs
-  - ~~Git~~
 - Input method, config only `ctrl + space` to switch
 - Chrome as default browser
 - HHKB
 - Logitech
   - ~~Anywhere3 and OptionPlus~~
-  - G70r and G Hub
+  - G703 and G Hub
 - 文件夹选项 -> 隐私
   - 取消勾选"显示最近使用的文件"
   - 取消勾选"显示常用文件夹"
-- Active WSL2
+- Active WSL2, install Ubuntu and configure Ubuntu as default
+- Chrome, 下载工具, 查询密码, 都需要它
 
 
 
@@ -121,6 +117,8 @@ v2rayN(Need DotNet6.0)
 
 ## VI. VisualStudioPro2022  
 ---
+Try V-box this time(Dec 03, 2024)
+
 
 - 设置项目存储路径, Tools -> Options -> Projects and Solutions -> Locations
 - Install VsVim extension
@@ -288,7 +286,6 @@ sudo vi /etc/fstab
 ---
 常用的跨平台工具, 兼容iOS / macOS / Windows / Android
 
-- Chrome
 - ~~Postman~~
 - XShell/XFtp(转用WSL2)
   - `telnet <IP> <Port>`

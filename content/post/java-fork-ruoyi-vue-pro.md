@@ -375,7 +375,7 @@ No best, only better! We **DON'T** want to use Docker.
   - 使用`screen`运行在云服务器即可, 供前端调试用
   - Nginx采用服务器局域网IP访问的方式, 配置如下
 
-{{< tabbed-codeblock nginx >}}
+{{< tabbed-codeblock nginx.conf >}}
 <!--tab dev -->
 worker_processes  1;
 
