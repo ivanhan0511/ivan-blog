@@ -46,19 +46,25 @@ After initialization of Windows 11, here is the TODO list.
 主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
 
 - VisualStudio
-  - TODO
+  - git commit and push
 - PyCharm/IDEA
   - git commit and push
   - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目sql文件夹中随Git上传
   - Scratch代码
+  - .ideavimrc
 - ~~HBuildX~~改用VSCode
   - No local file, all in git
-- 坚果云文档: 公司文档, 仅限文档, 其余通过本地文件存储
+  - 据说可以通过vue-cli创建uni-app工程? 不太喜欢uni-app
+- 坚果云文档: 仅限文档, 其余通过本地文件存储
 - 本地文档
   - 公司超大文件
   - 各个项目的 密钥/证书
   - 服务器所涉及的 登录方式/用户名/密码 的文档
+- Terminal
   - SSH密钥对
+  - SSH config
+  - .vimrc, vim bundle
+  - 
 - 虚拟机
   - 数据库: 转储数据和数据结构, MySQL和SQLServer的所有库
   - SSH密钥
@@ -117,11 +123,11 @@ v2rayN(Need DotNet6.0)
 
 ## VI. VisualStudioPro2022  
 ---
-Try V-box this time(Dec 03, 2024)
+
 
 
 - 设置项目存储路径, Tools -> Options -> Projects and Solutions -> Locations
-- Install VsVim extension
+- Install `VsVim` extension
   - Check which directories the VsVim searchs for config files by using the command `:set vimrcpaths?`
   - This is typically the `HOME`, `VIM` or `USERPROFILE` directories
   - Place your `.vimrc` file in one of these directories, restart Visual Studio and VsVim will load those settings
@@ -157,8 +163,6 @@ Try V-box this time(Dec 03, 2024)
 - Enable `Settings Sync`
 - 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
 - settsings(Ctrl+Alt+S) -> Editor -> Code Style -> SQL -> 将keywords设置为大写(To upper), and then`ctrl + alt + L`
-- 数据库导入时, 右键某个数据库 -> Import/Export -> Restore with 'mysql' -> Path to mysql -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysql.exe`
-- 数据库导出时, 右键某个数据库 -> Import/Export -> Export with 'mysqldump' -> Path to mysqldump -> `C:/Program Files/MySQL/MySQL Server 8.1/bin/mysqldump.exe`
 
 
 ### B. Plugins
@@ -245,6 +249,8 @@ Maven 3.8.1 blocked http connection
 
 ## X. VMWare  
 ---
+Try V-box this time(Dec 03, 2024) ?
+
 VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMWare
 
 - 切换安装路径到`D:\VirtualMachines\`盘
