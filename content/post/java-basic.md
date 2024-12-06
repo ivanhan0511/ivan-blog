@@ -23,6 +23,95 @@ This post is not aboud Java knowledge, it just a handy TIP
 
 {{< toc >}}
 
+## I. ENVIRONMENT
+---
+Use IDE of "InteliJ IDEA", and **download JDK wihin IDEA**
+
+### A. Backup and Sync
+同步之后, 大部分的配置和插件都可以同步下来, 以下仅作备考
+
+#### 1. Configuration
+- Enable Backup and Sync -> `Enable Backup and Sync`
+- 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
+- Settsings -> Editor -> Code Style -> SQL -> General, 将`keywords` 和 `Built-in types`设置为大写(To upper)
+
+
+#### 2. Plugins
+- IdeaVim
+  - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`C:\Users\Ivan\.ideavimrc`)
+  - 只需在最后一行增加配置引用即可`source //wsl.localhost/Ubuntu/root/.vimrc`, 已经可以使用WSL中的配置文件了
+  - 配置完, 需要退出并重新打开IDEA
+  - IDEA的vim插件, 从插入模式退出到普通模式后, 自动切换为英文输入法, 暂时没搞定, Windows VisualStudio的VsVim插件倒是自动有这个配置, 暂时没琢磨明白
+- MyBatisCodeHelperPro(貌似有官方版, 下次试试)
+- Redis
+- RemoteHost `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar`
+
+
+### B. Maven
+Maven 3.8.1 blocked http connection
+
+- Do {{< hl-text red >}}NOT{{< /hl-text >}} edit this original IDEA maven settings file
+  `C:\Program Files\JetBrains\IntelliJ IDEA 2022.2.1\plugins\maven\lib\maven3\conf\settings.xml`
+  {{< codeblock "settings.xml" "XML" >}}
+  ...
+  <mirrors>
+    <!-- mirror
+     | Specifies a repository mirror site to use instead of a given repository. The repository that
+     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+     |
+    <mirror>
+      <id>mirrorId</id>
+      <mirrorOf>repositoryId</mirrorOf>
+      <name>Human Readable Name for this Mirror.</name>
+      <url>http://my.repository.com/repo/path</url>
+    </mirror>
+     -->
+    <mirror>
+      <id>maven-default-http-blocker</id>
+      <mirrorOf>external:http:*</mirrorOf>
+      <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+      <url>http://0.0.0.0/</url>
+      <blocked>true</blocked>
+    </mirror>
+  </mirrors>
+  ...
+  {{< /codeblock >}}
+
+- Find personal maven setting path in IDEA settings and DIY it `C:\Users\ivan\.m2\settings.xml` (If not exists, create this file)
+
+  {{< codeblock "settings.xml" "XML" >}}
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
+  <mirrors>
+    <!-- mirror
+     | Specifies a repository mirror site to use instead of a given repository. The repository that
+     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+     |
+    <mirror>
+      <id>mirrorId</id>
+      <mirrorOf>repositoryId</mirrorOf>
+      <name>Human Readable Name for this Mirror.</name>
+      <url>http://my.repository.com/repo/path</url>
+    </mirror>
+    -->
+    <mirror>
+      <id>aliyunmaven</id>
+      <mirrorOf>*</mirrorOf>
+      <name>阿里云公共仓库</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+  </mirrors>
+</settings>
+  {{< /codeblock >}}
+
+- Reload pom.xml file in IDEA and automaticlly download the dependencies
+
+
+
+
 ## TYPE
 ---
 ### String[]

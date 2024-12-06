@@ -37,19 +37,24 @@ HAVE TO study some knowlege about frontend
 {{< toc >}}
 
 ## I. ENV
+
 ---
-### A. nvm
+### A. nvm / nodejs / npm
 Node Version Manager
 
 nvm管理的是node, 但会同时把npm也安装好, node的版本和npm的版本是不一样的
 
 Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
 
+安装在C:\Users\Ivan\AppData\Roaming\nvm中
 
-And use it in CMD:
-{{< codeblock cmd >}}
-#nvm install 16.14.0 -g
-nvm install 20.11.1 -g
+执行`nvm use 20.11.1`之后会在C:\Program File\nodejs中创建当前版本的nodejs
+
+
+And use it in PowerShell:
+{{< codeblock powershell >}}
+nvm list available
+nvm install 22.12.0 -g
 #nvm uninstall 16.17.1
 {{< /codeblock >}}
 
@@ -73,6 +78,7 @@ npm run dev
 <!-- endtab -->
 
 <!-- tab yarn -->
+# 目前(Dec 04, 2024), 没有大量使用yarn
 # 遇到npm无法调用的问题, 网上有记录, 但重启解决问题
 npm install yarn -g
 
@@ -84,7 +90,13 @@ yarn run serve-dev
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
+### B. VS Code
 
+在WSL中输入了一个`code`, 安装VS Code Server, 不知道啥作用
+
+#### 1. Git
+
+#### 2. npm env
 
 
 ## II. GRAMMAR

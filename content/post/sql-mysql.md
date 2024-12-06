@@ -34,15 +34,16 @@ Some usual operations examples in MySQL 8.0
 ---
 Refer to `https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04`
 
-Ubuntu Server 22.04 LTS as example
+Ubuntu 24.04 as example in Win11 WSL2
 
 {{< tabbed-codeblock examples >}}
 <!-- tab shell -->
-sudo apt update
-sudo apt install mysql-server-8.0 -y
-sudo systemctl status mysql.service
+# root user
+apt update
+apt install mysql-server-8.0 -y
+systemctl status mysql.service
 
-sudo mysql
+mysql
 <!-- endtab -->
 
 <!--tab SQL -->
@@ -58,12 +59,14 @@ FLUSH PRIVILEGES;
 <!-- endtab -->
 
 <!--tab shell -->
-sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+# root user
+vi /etc/mysql/mysql.conf.d/mysqld.cnf
 # ...
 # Comment this line
 #bind-address = 127.0.0.1
 # ...
-sudo systemctl restart mysql.service
+
+systemctl restart mysql.service
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
