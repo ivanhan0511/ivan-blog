@@ -73,7 +73,14 @@ So far, Sep 24, 2024
 
 6. 不使用RESTful style, 因为RESTful仍然有表达不明确的业务场景, 仍然需要使用传统"动词"来描述接口性质/意图, 且对团队要求较高, 一不小心就会破坏掉所谓的RESTful style
 
-[写代码有这16个好习惯，可以减少80%非业务的BUG！](https://mp.weixin.qq.com/s/4QvwyRH6Q1Ut4usYKRKpAA)
+7. 吸取[Unix设计哲学](https://en.wikipedia.org/wiki/Unix_philosophy)
+   {{ blockquote }}
+It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
+
+- Write programs that do one thing and do it well.
+- Write programs to work together.
+- Write programs to handle text streams, because that is a universal interface.
+  {{ /blockquote }}
 
 
 ## II. BUSINESS DESIGN {#chapter-2}

@@ -17,20 +17,20 @@ Some basic records of Python
 ---
 
 ### A. Backup and Sync
-ͬ��֮��, �󲿷ֵ����úͲ��������ͬ������, ���½�������
+同步之后, 大部分的配置和插件都可以同步下来, 以下仅作备考
 
 #### 1. Configuration
 - Enable Backup and Sync -> `Enable Backup and Sync`
-- �ڸ�����Ŀ�зֱ�ѡ��Anaconda�Ļ���, ����װPython�����
-- Settsings -> Editor -> Code Style -> SQL -> General, ��`keywords` �� `Built-in types`����Ϊ��д(To upper)
+- 在各个项目中分别选择Anaconda的环境, 不安装Python在裸机
+- Settsings -> Editor -> Code Style -> SQL -> General, 将`keywords` 和 `Built-in types`设置为大写(To upper)
 
 
 #### 2. Plugins
 - IdeaVim
-  - ��IDEA���ҵ�(���򴴽�)`~/.ideavimrc`�ļ�(��`C:\Users\Ivan\.ideavimrc`�����ҵ�)
-  - ֻ�������һ�������������ü���`source //wsl.localhost/Ubuntu/root/.vimrc`, �Ѿ�����ʹ��WSL�е������ļ���
-  - ������, ��Ҫ�˳������´�PyCharm
-  - IDEA��vim���, �Ӳ���ģʽ�˳�����ͨģʽ��, �Զ��л�ΪӢ�����뷨, ��ʱû�㶨, Windows VisualStudio��VsVim��������Զ����������, ��ʱû��ĥ����
+  - 在IDEA中找到(无则创建)`~/.ideavimrc`文件(在`C:\Users\Ivan\.ideavimrc`可以找到)
+  - 只需在最后一行增加配置引用即可`source //wsl.localhost/Ubuntu/root/.vimrc`, 已经可以使用WSL中的配置文件了
+  - 配置完, 需要退出并重新打开PyCharm
+  - IDEA的vim插件, 从插入模式退出到普通模式后, 自动切换为英文输入法, 暂时没搞定, Windows VisualStudio的VsVim插件倒是自动有这个配置, 暂时没琢磨明白
 - Redis
 
 

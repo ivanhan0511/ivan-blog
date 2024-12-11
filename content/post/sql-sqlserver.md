@@ -1,4 +1,4 @@
-﻿---
+---
 title: "SQL Server Init Operations"
 date: 2023-08-10T17:32:00+08:00
 categories:

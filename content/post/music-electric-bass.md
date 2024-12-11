@@ -41,10 +41,10 @@ And I think I have enough courage to keep playing with it.
 ## TODO LIST
 - [x] Hold it correctly
 - [x] Tune the bass every 1-3 months
-  - ÒÔµ±Ç°ÇÙµÄ±ê×¼Òô×´Ì¬µ÷ÊÔ
-  - ÀýÈçÇÙ¾±Ç°¶ËÇú¶È(°´1ºÍ12Æ·, ²â6Æ·ÏÒ¾à)
-  - ÇÙÇÅ¸ß¶È(°´1Æ·, ²â12Æ·, 0.080in/2mm, EÏÒ¿ÉÒÔÂÔ¸ß)
-  - ÇÙÇÅ°ë¾¶ÒªÓëÇÙ¾±°ë¾¶Ò»ÖÂ
+  - ä»¥å½“å‰ç´çš„æ ‡å‡†éŸ³çŠ¶æ€è°ƒè¯•
+  - ä¾‹å¦‚ç´é¢ˆå‰ç«¯æ›²åº¦(æŒ‰1å’Œ12å“, æµ‹6å“å¼¦è·)
+  - ç´æ¡¥é«˜åº¦(æŒ‰1å“, æµ‹12å“, 0.080in/2mm, Eå¼¦å¯ä»¥ç•¥é«˜)
+  - ç´æ¡¥åŠå¾„è¦ä¸Žç´é¢ˆåŠå¾„ä¸€è‡´
 - [x] Connect it with amplifier correctly and make them noisy, because my env is a little complicated
   - Plugin AC
   - Connect the Bass and the Amp
@@ -59,35 +59,35 @@ And I think I have enough courage to keep playing with it.
 
 
 
-È·¶¨¸ßÒô/µÍÒôÆ×ºÅ, È·ÈÏ´óÐ¡µ÷
-Ê¹ÓÃ½ÚÅÄÆ÷60ËÙ¶È
-DÊÇFµ÷µÄÁù¼¶, °´ÕÕÒô³Ì¹ØÏµÉÏÐÐ, ÒªÇó¼È¿ÉÒÔ°´ÕÕ³ªÃû³ª³öLa Si Do Re Mi Fa Sol La, Ò²¿ÉÒÔ°´ÕÕÒô¸ß³ª³öD Mib ...
-DÊÇFµ÷µÄÁù¼¶, °´ÕÕÒô³Ì¹ØÏµÏÂÐÐ, ÒªÇó¼È¿ÉÒÔ°´ÕÕ³ªÃû³ª³öLa Si Do Re Mi Fa Sol La, Ò²¿ÉÒÔ°´ÕÕÒô¸ß³ª³öD Mib ...
-GÊÇ½µBµ÷µÄÁù¼¶, ...
+ç¡®å®šé«˜éŸ³/ä½ŽéŸ³è°±å·, ç¡®è®¤å¤§å°è°ƒ
+ä½¿ç”¨èŠ‚æ‹å™¨60é€Ÿåº¦
+Dæ˜¯Fè°ƒçš„å…­çº§, æŒ‰ç…§éŸ³ç¨‹å…³ç³»ä¸Šè¡Œ, è¦æ±‚æ—¢å¯ä»¥æŒ‰ç…§å”±åå”±å‡ºLa Si Do Re Mi Fa Sol La, ä¹Ÿå¯ä»¥æŒ‰ç…§éŸ³é«˜å”±å‡ºD Mib ...
+Dæ˜¯Fè°ƒçš„å…­çº§, æŒ‰ç…§éŸ³ç¨‹å…³ç³»ä¸‹è¡Œ, è¦æ±‚æ—¢å¯ä»¥æŒ‰ç…§å”±åå”±å‡ºLa Si Do Re Mi Fa Sol La, ä¹Ÿå¯ä»¥æŒ‰ç…§éŸ³é«˜å”±å‡ºD Mib ...
+Gæ˜¯é™Bè°ƒçš„å…­çº§, ...
 
 
 
-Ê¹ÓÃ½ÚÅÄÆ÷65ËÙ¶È
+ä½¿ç”¨èŠ‚æ‹å™¨65é€Ÿåº¦
 
-Ä³¸öÒô¸ßÔÚÄ³¸öµ÷ÀïÊÇ¼¸¼¶Òô?
+æŸä¸ªéŸ³é«˜åœ¨æŸä¸ªè°ƒé‡Œæ˜¯å‡ çº§éŸ³?
 
-¼õÉÙÊ×µ÷³ª·¨, ¶àÓÃÒô¸ß³ª·¨
+å‡å°‘é¦–è°ƒå”±æ³•, å¤šç”¨éŸ³é«˜å”±æ³•
 
 
-## ËÙ¼Ç
+## é€Ÿè®°
 ---
-Èç¹ûÑ§Ï°ÀÖÀíÀÛÁË, ¿ÉÒÔ½»²æÍæµãÊµÓÃµÄ, [µØ±êÊ¶Æ×·¨](https://www.zhihu.com/question/281318784)
+å¦‚æžœå­¦ä¹ ä¹ç†ç´¯äº†, å¯ä»¥äº¤å‰çŽ©ç‚¹å®žç”¨çš„, [åœ°æ ‡è¯†è°±æ³•](https://www.zhihu.com/question/281318784)
 
-(±´Ë¹)
+(è´æ–¯)
 
-°´ÕÕÒô³Ì¼ôÇÐ¿¨Æ¬, Æ½ÒÆ12Òô½×
+æŒ‰ç…§éŸ³ç¨‹å‰ªåˆ‡å¡ç‰‡, å¹³ç§»12éŸ³é˜¶
 
 
 
 
 ## MUSIC THEORY
 ---
-### How many keys(µ÷)
+### How many keys(è°ƒ)
 12?
 24?
 It's 30
@@ -100,43 +100,43 @@ How many b(?????) ...?
 Total 30 keys
 
 
-### Note(Òô½×)
+### Note(éŸ³é˜¶)
 12 notes
 
 
-### Space(¿Õ¼ä)
-ºÎÊ±µ¯, ºÎÊ±²»µ¯
+### Space(ç©ºé—´)
+ä½•æ—¶å¼¹, ä½•æ—¶ä¸å¼¹
 
 
-### Dynamic(ÒôÀÖ¶¯Á¦Ñ§)
+### Dynamic(éŸ³ä¹åŠ¨åŠ›å­¦)
 
 
-### Tone(ÒôÉ«)
+### Tone(éŸ³è‰²)
 How to use it?
 When to use it?
 
 
-### Rhythm(½Ú×à)
+### Rhythm(èŠ‚å¥)
 
 
-### Chord(ºÍÏÒ)
-
-
-
+### Chord(å’Œå¼¦)
 
 
 
 
 
 
-C´óµ÷
 
 
 
-3ÏÒ D A Bb 
+Cå¤§è°ƒ
 
-4ÏÒ G
 
-3ÏÒ D ...
 
-Ã¿¸öÒôµ¯4ÏÂ
+3å¼¦ D A Bb 
+
+4å¼¦ G
+
+3å¼¦ D ...
+
+æ¯ä¸ªéŸ³å¼¹4ä¸‹

@@ -36,20 +36,18 @@ HAVE TO study some knowlege about frontend
 
 {{< toc >}}
 
-## I. ENV
+## I. ENVIRONMENT
 
----
-### A. nvm / nodejs / npm
+### A. nvm / nodejs / npm / yarn
+
 Node Version Manager
 
 nvm管理的是node, 但会同时把npm也安装好, node的版本和npm的版本是不一样的
 
 Download [nvm-setup.exe](https://github.com/coreybutler/nvm-windows/releases) and install.
 
-安装在C:\Users\Ivan\AppData\Roaming\nvm中
-
-执行`nvm use 20.11.1`之后会在C:\Program File\nodejs中创建当前版本的nodejs
-
+安装在`C:\Users\Ivan\AppData\Roaming\nvm`, 执行`nvm use 20.11.1`之后会将nodejs链接到`C:\Program Files\nodejs\`.
+Windows通过VSCode的`Remote - WSL`插件连接到WSL, 通过命令行操作`npm run dev`等
 
 And use it in PowerShell:
 {{< codeblock powershell >}}
@@ -71,7 +69,8 @@ nvm use 20.11.1
 {{< /blockquote >}}
 
 
-### B. npm and yarn
+npm and yarn
+
 {{< tabbed-codeblock cli >}}
 <!-- tab npm -->
 npm run dev
@@ -90,13 +89,33 @@ yarn run serve-dev
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
-### B. VS Code
 
-在WSL中输入了一个`code`, 安装VS Code Server, 不知道啥作用
+### B. VSCode
 
-#### 1. Git
+#### 1. Configuration
 
-#### 2. npm env
+VSCode通过`Remote - WSL`插件连接到WSL, 反而通过WSL与Windows共用环境变量(可能)识别到了npm命令, 前端项目可以跑起来了
+
+左侧边栏的`Source Control`中的Git要物理机安装Git, 暂时没能共用WSL中git, 暂且隐藏掉, 眼不见心不烦, 反正通过cli可以操作git即可
+
+搜索`end of line`可以找到"Text Editor" 和 扩展"prettier"都有设置"eol", 将行尾结束符统一设置为`LF(\n)`
+
+
+#### 2. Extensions
+
+*VSCode推荐的插件, 并不见得都好用*
+
+- vim, 需要修改Vim.path设置, 此次设置了`$HOME.vscodevimrc`
+{{ codeblock settings.json json }}
+{
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "$HOME/.vscodevimrc",
+}
+{{ /codeblock }}
+
+- prettier
+
+
 
 
 ## II. GRAMMAR

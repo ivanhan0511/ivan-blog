@@ -33,7 +33,9 @@ Use IDE of "InteliJ IDEA", and **download JDK wihin IDEA**
 #### 1. Configuration
 - Enable Backup and Sync -> `Enable Backup and Sync`
 - 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
-- Settsings -> Editor -> Code Style -> SQL -> General, 将`keywords` 和 `Built-in types`设置为大写(To upper)
+- Settsings -> Editor -> Code Style
+  - General tab, 选择 Line separator: Unix and macOS(\n)
+  - SQL -> General, 将`keywords` 和 `Built-in types`设置为大写(To upper)
 
 
 #### 2. Plugins

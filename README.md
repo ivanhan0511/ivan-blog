@@ -13,12 +13,11 @@ And then create another new respository, which name must be with `<username>.git
 
 
 ## DEPLOYMENT WITH HUGO
-My example env is Windows11 installed GitBash(or WSL2)
-
-Download hugo.exe from official site
+My example env is in WSL2 of Windows11
 
 ```shell
-cd /d/some_apth/
+apt install hugo
+cd /mnt/d/some_apth/
 git clone git@github.com:ivanhan0511/ivan-blog.git
 
 # Create local Hugo site

@@ -32,78 +32,22 @@ Hope new chapter opened on OpenCV!
 
 {{< toc >}}
 
-## 1. ±³¾°
----
-ÔÚĞí¶àÍ¼Ïñ´¦ÀíºÍ¼ÆËã»úÊÓ¾õÓ¦ÓÃÖĞ£¬²âÁ¿Í¼ÏñÖĞ¹Ø¼üµãÖ®¼äµÄ¾àÀëÊÇÒ»¸ö³£¼ûµÄĞèÇó¡£ÕâÖÖ²âÁ¿²»½ö¿ÉÒÔÓÃÓÚ¶¨Á¿·ÖÎö£¬»¹¿ÉÒÔÔÚĞí¶àÁìÓò£¬ÈçÒ½Ñ§¡¢¹¤³ÌºÍÒÕÊõ£¬Ìá¹©ÓĞ¼ÛÖµµÄĞÅÏ¢¡£OpenCV×÷ÎªÒ»¸ö¹¦ÄÜÇ¿´óµÄ¼ÆËã»úÊÓ¾õ¿â£¬Ìá¹©ÁËÊµÏÖÕâÖÖ²âÁ¿µÄ¹¤¾ßºÍËã·¨¡£
+## I. ENVIRONMENT
+
+### X. labelme
+
+Download and install anaconda, create a new env within anaconda and activide it
+
+{{ codeblock install shell }}
+conda install pyqt
+conda install pillow
+pip install labelme
+{{ /codeblock }}
 
 
 
 
-## 2. ÊµÏÖ²½Öè
----
-### 2.1 Í¼Ïñ×¼±¸
-Ê×ÏÈ£¬ĞèÒªÈ·±£ÒÑ¾­°²×°ÁËOpenCV¿â¡£È»ºó£¬¼ÓÔØÄ¿±êÍ¼Ïñ²¢¼ì²â¹Ø¼üµã¡£Õâ¿ÉÒÔÍ¨¹ıÊ¹ÓÃOpenCVµÄÌØÕ÷¼ì²âËã·¨£¨ÈçSIFT¡¢SURF»òORB£©À´ÊµÏÖ¡£
-
-{{< codeblock "test1" "python" >}}
-import cv2
-
-# ¼ÓÔØÍ¼Ïñ
-image = cv2.imread('path_to_your_image.jpg', cv2.IMREAD_GRAYSCALE)
-
-# ³õÊ¼»¯¹Ø¼üµã¼ì²âÆ÷£¨ÒÔSIFTÎªÀı£©
-detector = cv2.SIFT_create()
-keypoints = detector.detect(image, None)
-{{< /codeblock >}}
-
-
-### 2.2 ¹Ø¼üµãÆ¥Åä
-ÔÚÈ·¶¨ÁË¹Ø¼üµãÖ®ºó£¬¿ÉÄÜĞèÒª½øĞĞÆ¥Åä£¨Èç¹ûÓĞ¶à·ùÍ¼Ïñ£©¡£ÕâÒ»²½¿ÉÒÔÊ¹ÓÃÌØÕ÷ÃèÊö·û£¨ÈçSIFT»òSURFÃèÊö·û£©À´ÊµÏÖ¡£
-
-{{< codeblock "test2" "python" >}}
-# ¼ÆËã¹Ø¼üµãÃèÊö·û
-keypoints, descriptors = detector.detectAndCompute(image, None)
-{{< /codeblock >}}
-
-
-### 2.3 ¼ÆËã¾àÀë
-Ò»µ©È·¶¨ÁË¹Ø¼üµã£¬¾Í¿ÉÒÔ¼ÆËãËüÃÇÖ®¼äµÄ¾àÀë¡£ÔÚÍ¼ÏñÆ½ÃæÉÏ£¬Õâ¿ÉÒÔÍ¨¹ıÅ·¼¸ÀïµÃ¾àÀë¹«Ê½À´ÊµÏÖ¡£
-
-{{< codeblock "test3" "python" >}}
-import numpy as np
-
-# Ñ¡ÔñÁ½¸ö¹Ø¼üµã½øĞĞÊ¾Àı¼ÆËã
-pt1 = keypoints[0].pt
-pt2 = keypoints[1].pt
-
-
-# ¼ÆËãÁ½µãÖ®¼äµÄÅ·¼¸ÀïµÃ¾àÀë
-distance = np.sqrt((pt1[0] - pt2[0])**2 + (pt1[1] - pt2[1])**2)
-print(f"The distance between keypoints is: {distance} pixels.")
-{{< /codeblock >}}
-
-
-## 3. ½áÂÛ
----
-Í¨¹ıÉÏÊö²½Öè£¬ÎÒÃÇ³É¹¦µØÊ¹ÓÃOpenCV¼¼Êõ²âÁ¿ÁËÍ¼ÏñÖĞ¹Ø¼üµãÖ®¼äµÄ¾àÀë¡£ÕâÎª½øÒ»²½µÄÍ¼Ïñ·ÖÎöºÍÓ¦ÓÃÌá¹©ÁË»ù´¡¡£
-
-Çë×¢Òâ£¬Êµ¼ÊÓ¦ÓÃÖĞ¿ÉÄÜĞèÒª¿¼ÂÇÍ¼ÏñµÄ³ß¶ÈÒò×Ó¡¢»û±äĞ£ÕıµÈÒòËØ£¬ÒÔÈ·±£¾àÀë²âÁ¿µÄ×¼È·ĞÔ¡£
-
-
-
-
-
-
-
-¸ßµÈÊıÑ§ÖªÊ¶£¬Ö»ÓĞÔÚÓÃµ½Ê±£¬²ÅÄÜ×¼È·µØÀí½â¡£
-×î½ü½øĞĞÈË¹¤ÖÇÄÜµÄ±à³ÌÑ§Ï°£¬¸Ğ¾õpython¡¢openCVÕæÊÇºÜºÃÓÃ£¬ÓÈÆäÊÇÔÚÉî¶ÈÑ§Ï°µÄÓĞ¹Ø±à³ÌÖĞ¡£ÔÚÑ§Ï°ÖĞ£¬Éæ¼°ºÜ¶àËã·¨¡£ÈçÏßĞÔ»Ø¹é£¨Linear Regression£©¡¢Âß¼­»Ø¹é£¨Logistic Regression£©¡¢×îĞ¡¶ş³Ë·¨£¬¾í»ıÉñ¾­ÍøÂç£¨Convolutional Neural Network£©¡¢±´Ò¶Ë¹Àà£¨Bayesin£©µÈÀíÂÛ¡£
-
-ÕâĞ©ÀíÂÛ£¬´ó¶àÔÚ´óÑ§µÄ¸ÅÂÊÂÛ¡¢ÊıÀíÍ³¼ÆÖĞÑ§µ½¹ı£¬¿¼ÊÔÒ²Í¨¹ıÁË£¬µ«Ò»Ö±¶ÔÕâĞ©¸ÅÄîºÜÄ£ºı¡£Ö±µ½Õâ´Î±à³ÌÑ§Ï°£¬ÎªÁË¼ÓÉî¼ÇÒä£¬ÓÖ°Ñ¸ÅÂÊÂÛ¡¢ÊıÀíÍ³¼ÆÏà¹ØÕÂ½ÚÏêÏ¸·­¿´ÁËÒ»±é£¬½áºÏpython£¬Àí½âÒª¸üÉî¿Ì¡£
-
-ÈË¹¤ÖÇÄÜ£¬±à³ÌÊÇ¹Ø¼ü¡£Éî¶ÈÑ§Ï°µÄ¾í»ıÉñ¾­ÍøÂçËã·¨£¬Èç¹û²»½øĞĞÓÅ»¯´¦Àí£¬ÊÇÎŞ·¨½øĞĞÑµÁ·¼°Ê¶±ğµÄ£¬×îÖÕÒÔºÃµÄËã·¨È¡Ê¤¡£
-ÊıÑ§Óë±à³Ì¿Î³Ì£¬Ó¦µ±Í¬²½¿ªÉè×îºÃ¡£Ò»±ßÑ§ÊıÑ§ÀíÂÛ£¬Ò»±ß½«ÀíÂÛ×ª»¯³É³ÌĞò°ü£¬²»Ê¶ÎªÒ»ÖÖ¼«ºÃµÄÑ§Ï°·½·¨¡£
-
-
-
+## æ‚
 
 "Magnification" and "zoom" are related terms often used in the context of optics, photography, and microscopy. While they are related, they refer to slightly different concepts:
 
@@ -122,7 +66,8 @@ In summary, magnification is a measure of how much larger an object appears comp
 
 
 
-¿ªÔ´µ÷É«Èí¼ş
 
-https://www.music4x.com/post/7489
+
+
+
 

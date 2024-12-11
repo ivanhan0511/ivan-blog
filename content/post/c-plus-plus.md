@@ -32,7 +32,7 @@ This is a custom summary and does *NOT* appear in the post.
 {{< toc >}}
 
 ## I. EVIRONMENT
----
+
 关于 C++ IDE
 {{ blockquote }}
 同时用 vim 、CLion 、vscode 开发 C++用了挺长一段时间，分享一下自己的经验。
@@ -58,6 +58,8 @@ vim 效率跟 vscode 差不多，由于 vscode 偶尔有些小毛病，vim 甚�
 
 ### A. VisualStudioPro2022
 
+*暂时先不用Visual Studio, 先试试VSCode*
+
 - 设置项目存储路径, Tools -> Options -> Projects and Solutions -> Locations, 指定Project location: `D:\oopt\`
 - Install `VsVim` extension
   - Check which directories the VsVim searchs for config files by using the command `:set vimrcpaths?`
@@ -77,6 +79,11 @@ vim 效率跟 vscode 差不多，由于 vscode 偶尔有些小毛病，vim 甚�
 
 ### B. VS Code
 
-需要安装`Remote - WSL`插件, 反而通过WSL与Windows共用环境变量(可能)识别到了npm命令, 前端项目可以跑起来了
-
 再慢慢摸索吧, 适应一下新工具, 毕竟有长期中等强度使用的打算
+
+VSCode通过`Remote - WSL`插件连接到WSL, 反而通过WSL与Windows共用环境变量(可能)识别到了npm命令, 前端项目可以跑起来了
+
+左侧边栏的`Source Control`中的Git要物理机安装Git, 暂时没能共用WSL中git, 暂且隐藏掉, 眼不见心不烦, 反正通过cli可以操作git即可
+
+VSCode推荐的插件, 并不见得都好用
+- vim, 需要修改Vim.path设置, 此次设置了`$HOME.vscodevimrc`
