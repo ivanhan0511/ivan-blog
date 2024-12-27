@@ -35,3 +35,4 @@ Some basic records of Python
 
 
 ### B. Anaconda
+下载安装包, 傻瓜式安装

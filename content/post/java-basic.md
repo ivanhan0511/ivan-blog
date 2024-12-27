@@ -32,7 +32,7 @@ Use IDE of "InteliJ IDEA", and **download JDK wihin IDEA**
 
 #### 1. Configuration
 - Enable Backup and Sync -> `Enable Backup and Sync`
-- 在各个项目中分别选择Java JDK环境, 不安装Java在裸机
+- **在各个项目中分别选择Java JDK环境, 不安装Java在裸机**
 - Settsings -> Editor -> Code Style
   - General tab, 选择 Line separator: Unix and macOS(\n)
   - SQL -> General, 将`keywords` 和 `Built-in types`设置为大写(To upper)
@@ -44,7 +44,7 @@ Use IDE of "InteliJ IDEA", and **download JDK wihin IDEA**
   - 只需在最后一行增加配置引用即可`source //wsl.localhost/Ubuntu/root/.vimrc`, 已经可以使用WSL中的配置文件了
   - 配置完, 需要退出并重新打开IDEA
   - IDEA的vim插件, 从插入模式退出到普通模式后, 自动切换为英文输入法, 暂时没搞定, Windows VisualStudio的VsVim插件倒是自动有这个配置, 暂时没琢磨明白
-- MyBatisCodeHelperPro(貌似有官方版, 下次试试)
+- ~~MyBatisCodeHelperPro(貌似有官方版, 下次试试)~~
 - Redis
 - RemoteHost `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar`
 
@@ -114,8 +114,12 @@ Maven 3.8.1 blocked http connection
 
 
 
-## TYPE
----
+## KNOWLEDGE
+
+思前想后, 这里的记录只是描述一些个人理解, 更多的是做一个关于<Java编程核心>的人工索引
+
+
+以下内容TODO, 
 ### String[]
 
 ### ArrayList

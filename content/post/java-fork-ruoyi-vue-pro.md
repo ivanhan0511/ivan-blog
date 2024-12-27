@@ -73,7 +73,7 @@ So far, Sep 24, 2024
 
 6. 不使用RESTful style, 因为RESTful仍然有表达不明确的业务场景, 仍然需要使用传统"动词"来描述接口性质/意图, 且对团队要求较高, 一不小心就会破坏掉所谓的RESTful style
 
-7. 吸取[Unix设计哲学](https://en.wikipedia.org/wiki/Unix_philosophy)
+7. 吸取[Unix设计哲学](https://en.wikipedia.org/wiki/Unix_philosophy):
    {{ blockquote }}
 It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
 
@@ -87,17 +87,15 @@ It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
 ---
 基于现役SpringBoot业务流层面的全栈开发的经验, 制定出更优雅的代码设计规范
 
-1. Write down all the details of requirement seriously
+1. Write down all the details of requirement **seriously**
 
-2. Draw UML(work flow)设计初期, 后端概要/前端原型图 均不要太正式, 需要不断试错, 兼容前端表现(*基于源码尽可能少量修改*)与后端数据结构(*尽可能解耦*)的合理性
+2. Draw UML(work flow), 设计初期, 后端概要/前端原型图 均不要太正式, 需要不断修正, 兼容前端表现(*基于源码尽可能少量修改*)与后端数据结构(*尽可能解耦*)的合理性
 
-3. Designing the data structure and its relationship on the paper / iPad is the most important thing!
+3. Designing the data structure and its relationship on the paper / iPad is the most important thing, **with all detail fields**
 
-4. Record the SQL into the `./sql/mysql/`. If need ER, export from MySQL, of course, my personal choice
+4. Record the SQL into the `./sql/mysql/` and its System Manual SQL records. If need ER, export from MySQL, of course, my personal choice
 
-With the infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
-
-
+5. With its Infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
 
 
 
@@ -216,7 +214,7 @@ Quartz
 
 
 #### 3. Third-part API
-以下2种都是Spring官方推荐的, 都是对HttpClient的封装, 简化使用, 提高效率
+~~以下2种都是Spring官方推荐的~~, 都是对HttpClient的封装, 简化使用, 提高效率
 
 - RestTemplate: Sync, 
   {{< codeblock doc java >}}
@@ -639,8 +637,30 @@ PermissionServiceImpl
 
 
 
+## VI. FRONTEND
 
-## VI. APPENDIX {#chapter-6}
+### A. 设计思路理解
+
+对于前端的理解为: 更多地通过多接口异步从后端获取获取多种数据, 组装成页面, 不是一个接口获取N多数据
+
+既降低了后端组装数据的复杂度, 也对于前后端的数据进行解耦
+
+前后端约定好数据库字段`INT`所代表的意义, 前端通过字典接口获取该数值所对应的文字/字符, 并赋予颜色标签的显示, 增加友好度
+
+
+
+
+### B. 菜单配置
+
+- 路由地址: `user`, 与源码前端代码的代码文件夹名称一致
+- 组件地址: `system/user/index`, 与代码同路径index.vue一致
+- 组件名称: `SystemUser`, 与index.vue中`defineOptions({ name: 'SystemUser' })`一致
+- 权限名称: `system:user:list`, 与index.vue中的<template>中的`v-hasPermi="system:user:list"`一致
+
+
+
+
+## VII. APPENDIX {#chapter-6}
 ---
 摘抄自网络, 不一定合理, 仅保存一些文字, 以便以后少写一些文字
 
@@ -671,37 +691,3 @@ PermissionServiceImpl
 
 
 
-
-## VII. TMP
----
-**可能需要大改ERP**, 原因如下:
-- 定义的产品没有原料和成品之分
-- 产品的barCode给Mall使用是比较恰当的(Tip: barCode可以帮助Mall区分一部手机的颜色/内存等). 而对外的商品SPU/SKU由Mall定义
-- 注意, BtoC的Mall没有客户的概念, 只有C端用户而已
-- 而对于BtoB的ERP, 有客户的概念, 但却缺少商品Code的定义, 比如`hf001`, `盛趣点券`等
-- 另外, 结合现有业务产品线
-  - 背景:
-    1. 门票类, BtoC, 不依赖上游, 平台在ERP生产入库, 供Mall使用. 而Mall中因为需要绑定虚拟身份的事情, 在Mall中做旁路(不使用类别作限制, 在产品中添加`needVirtualIdentity`)
-    2. 手办类, BtoC, 依赖实体上游, 却(暂时)不用在系统中体现, 优先用Mall满足需求, 有进一步需求时再启用ERP支持
-    3. 抽赏类, BtoC, 依赖实体上游, 系统管理手办及配赏, 优先用Mall满足需求, 有进一步需求时再启用ERP支持
-    4. 充值类, BtoB, 依赖上游, 对下游提供接口, 其中比如`hf001`, `盛趣点券`等自定义码, 需要DIY
-  - 统筹:
-    - ERP的销售订单入口
-      - 可以专供背景`4.`, 其余三项的入口在小程序Mall
-      - (暂时)不太需要在Controller中抽象通用的业务订单入口(指: 通过前端传递业务类别, 以区分调用哪种业务服务)
-      - 盛趣/网龙/话费, 多种toB产品, 前端分流, 后端
-    - ERP的产品定义
-      - ~~ERP的产品定义, 只需旁路增加`productNo`即可, 供下游使用, 与Mall无关~~ 偷懒使用`barCode`了, **待定**
-      - ~~(严重)依赖其`categoryId`进行区分"原料"or"成品",~~ 产品中增加字段,区分原料还是成品, 供"生产监听服务"生产/组装
-
-
-**源码数据隔离的需求越来越大了**
-
-搞定其原理, 测试数据隔离
-
-- 创展(Mall)
-- 星尚(Mall)
-- 智渔(ERP)
-- 答案(ERP)
-- MMCZ(Measure)
-- 佰娱(Kuji)

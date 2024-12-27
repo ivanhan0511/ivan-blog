@@ -77,8 +77,8 @@ npm run dev
 <!-- endtab -->
 
 <!-- tab yarn -->
-# 目前(Dec 04, 2024), 没有大量使用yarn
-# 遇到npm无法调用的问题, 网上有记录, 但重启解决问题
+#目前(Dec 04, 2024), 没有大量使用yarn
+#遇到npm无法调用的问题, 网上有记录, 但重启解决问题
 npm install yarn -g
 
 yarn install
@@ -105,11 +105,10 @@ VSCode通过`Remote - WSL`插件连接到WSL, 反而通过WSL与Windows共用环
 
 *VSCode推荐的插件, 并不见得都好用*
 
-- vim, 需要修改Vim.path设置, 此次设置了`$HOME.vscodevimrc`
+- vscodevim, 在`settings.json`配置文件中添加以显示相对行号:
 {{ codeblock settings.json json }}
 {
-    "vim.vimrc.enable": true,
-    "vim.vimrc.path": "$HOME/.vscodevimrc",
+    "editor.lineNumbers": "relative",
 }
 {{ /codeblock }}
 
@@ -163,4 +162,5 @@ console.log(a); // 1
 // console.log(e); // 报错
 // console.log(f); // 报错
 {{< /codeblock >}}
+
 

@@ -1,19 +1,14 @@
 ---
-title: "DIY My Windows"
-date: 2024-09-30T10:39:00+08:00
+title: "Customize My OS"
+date: 2024-12-24T10:19:00+08:00
 categories:
 - OS
-- Windows
 tags:
 - Windows
-- Init
-- VisualStudio
-- IDEA
-- Configuration
-- Proxy
-- HBuildX
+- macOS
 keywords:
 - windows
+- macOS
 - init
 - config
 clearReading: true
@@ -34,7 +29,7 @@ showSocial: true
 showDate: true
 ---
 
-After initialization of Windows 11, here is the TODO list.
+After initialization of a Windows 11 or a macOS, here is the TODO list.
 
 <!--more-->
 
@@ -42,23 +37,26 @@ After initialization of Windows 11, here is the TODO list.
 
 ## I. BACKUP
 
-主力开发操作系统是Windows, 如果要重装系统, 需要提前备份好本地文件
+如果要重装系统, 需要提前备份好本地文件
 
 - PyCharm/IDEA
   - git commit and push
-  - IDEA开发用的每一条SQL console, 右键Refactor -> Copy file, 存储到项目sql文件夹中随Git上传
-  - Scratch代码
-- ~~HBuildX~~改用VSCode
+  - Scratch中的每一条SQL console, 右键Refactor -> Copy file, 存储到项目sql文件夹中随Git上传
+  - Scratch中的代码
+- VisualStudioPro2022
   - git commit and push
-  - 据说可以通过vue-cli创建uni-app工程? 不太喜欢uni-app
+- VSCode
+  - git commit and push
+  - 据说可以通过vue-cli创建uni-app工程?
 - 坚果云文档: 仅限文档, 其余通过本地文件存储
 - 本地文档
   - 公司超大文件
   - 各个项目的 密钥/证书
   - 服务器所涉及的 登录方式/用户名/密码 等文档
-- Terminal
-  - SSH密钥对, config
-  - .vimrc(暂时没有必要备份, 重装后, 配置`.ideavimrc`和`.vscodevimrc`即可), vim bundle
+- `C:\Users\ASUS\.vsvimrc`专为VisualStudio配置的(VSCode不需要深入配置和研究)
+- WSL2
+  - `~/.ssh/id_ed25519*`, `~/.ssh/config`
+  - .vimrc(坚果云有备份)
   - .bashrc(暂时没有必要备份, 重装后, 配置`apssh`即可)
   - .gitconfig
 - Proxy文件夹
@@ -87,10 +85,9 @@ After initialization of Windows 11, here is the TODO list.
   - 取消勾选"显示最近使用的文件"
   - 取消勾选"显示常用文件夹"
 - v2rayN(Need DotNet6.0) 注意新安装的Windows, 要确保对时准确, 精准到1分钟以内, 否则代理建立连接失败
-- ~~XShell/XFtp `telnet <IP> <Port>`~~ (转用WSL2)
-- ~~hugo~~(转用WSL2)
-  - 在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包
-  - 比如放在`C:\Program Files\Git\usr\bin`中, 并添加到环境变量中
+- hugo in WSL2
+  - ~~在[HUGO的GitHub](https://github.com/gohugoio/hugo/releases)的releases中下载适用于Windows的文件压缩包~~
+  - ~~比如放在`C:\Program Files\Git\usr\bin`中, 并添加到环境变量中~~
 - 向日葵Sunlogin
 - WireShark
 - Typora
@@ -109,6 +106,11 @@ After initialization of Windows 11, here is the TODO list.
 
 ## III. WSL2
 
+If use Windows11, I like WSL2 so much
+
+If use macOS, natively with terminal
+
+
 ### A. Active WSL2
 
 - Install Ubuntu, configure Ubuntu as default and configure color themes
@@ -121,7 +123,7 @@ After initialization of Windows 11, here is the TODO list.
 ### B. Vim
 
 - Put `.vimrc` into `/root`目录(Dec 04, 2024, 新安装的Ubuntu默认使用的是root用户)
-- Install bundle, which is recorded on the top
+- Install bundle, which is recorded on the top of `.vimr` file
 
 
 ### C. Mysql
@@ -153,53 +155,27 @@ After initialization of Windows 11, here is the TODO list.
 另外, 配置好WSL2之后, PyCharm/IDEA中的git可以自动检测到`Auto-detected: \\wsl.localhost\Ubuntu\usr\bin\git`
 
 
-### B. VisualStudio Pro 2022 / VS Code
+### B. VisualStudio Pro 2022
 
-暂不使用Visual Studio, 多尝试VS Code
+VisualStudio Pro 2022, 64位的IDE
 
 - hugo, 参见README.md
 - C++, 参见c-plus-plus.md
+
+
+### C. VS Code
+
+轻度使用VS Code就好了, 暂时不要过度使用
+
 - Vue3, 参见js-vue3.md
 
 
 
-
-## V. VMWare  ?
+## V. VirtualBox
 
 Try V-box this time(Dec 03, 2024) ?
-网上银行, BitCoin, 百度云盘 安装在哪里?
-
-VMWare WorkStation Pro, 规划好哪些工具安装在裸机, 哪些安装在VMWare
-
-- 切换安装路径到`D:\VirtualMachines\`盘
-- 编辑 -> 首选项 -> 内存 -> 额外内存 "调整所有虚拟机内存使其适应预留的主机RAM"
-
-
-### A. Windows
-
-- Base镜像: 电源管理, 从不休眠
-- MS SQL Server + SSMS
-
-  Init, export, import refer to[MS SQL Server Opertaions](https://ivanhan0511.github.io/post/sql-sqlserver/)
-
-- RD镜像: 开发试验用, 或安装垃圾软件等
 - Finance镜像: Download Bitcoin wallet from [here](https://bitcoin.org/en/choose-your-wallet) and choose `Bitcoin Core`
+- Login [this website](https://www.huobi.com/en-us/login/) to trans BTC
+- 百度云盘
+- 迅雷
 
-Login [this website](https://www.huobi.com/en-us/login/) to trans BTC
-
-
-### B. Ubuntu Desktop(Deprecated)
-
-Refer to [this post](https://blog.csdn.net/weixin_43862116/article/details/107731631)挂载host主机的文件夹到Ubuntu挂在点, 用于共享
-
-{{< codeblock "sharedfolder" "sh" >}}
-vmware-hgfsclient
-# WinDownloads
-
-sudo mkdir /mnt/hgfs/downloads
-sudo mount -t fuse.vmhgfs-fuse .host:WinDownloads /mnt/hgfs/downloads/ -o allow_other
-#sudo umount -a fuse.vmhgfs-fuse .host:WinDownloads /mnt/hgfs/downloads/
-sudo vi /etc/fstab
-{{< /codeblock >}}
-
-`.host:WinDownloads /mnt/hgfs/downloads/ fuse.vmhgfs-fuse allow_other 0 0`
