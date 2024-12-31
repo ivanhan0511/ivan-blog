@@ -98,6 +98,7 @@ After initialization of a Windows 11 or a macOS, here is the TODO list.
 - 亿图Edraw
 - [Fiio driver](https://www.fiio.com/Driver_Download)
 - Notepad++
+  - 确认 字符集/字体/缩进/换行符(Unix LF), 深色模式随系统
 - ~~Axure RP 9(Axure Rapid Prototyping)~~(Deprecated, use Mock in iPad)
 
 
