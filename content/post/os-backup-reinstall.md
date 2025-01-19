@@ -1,6 +1,6 @@
 ---
 title: "Customize My OS"
-date: 2024-12-24T10:19:00+08:00
+date: 2025-01-19T10:54:00+08:00
 categories:
 - OS
 tags:
@@ -54,6 +54,7 @@ After initialization of a Windows 11 or a macOS, here is the TODO list.
   - 各个项目的 密钥/证书
   - 服务器所涉及的 登录方式/用户名/密码 等文档
 - `C:\Users\ASUS\.vsvimrc`专为VisualStudio配置的(VSCode不需要深入配置和研究)
+- Remove Passkey from such as Github or anyelse website
 - WSL2
   - `~/.ssh/id_ed25519*`, `~/.ssh/config`
   - .vimrc(坚果云有备份)
