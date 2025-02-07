@@ -17,20 +17,32 @@ showSocial: true
 showDate: true
 ---
 
-This post is not aboud Java knowledge, it just a handy TIP
+This post is NOT aboud Java knowledge, it just a handy TIP
 
 <!--more-->
 
 {{< toc >}}
 
-## I. ENVIRONMENT
----
+## 目录
+
+- [I. ENVIRONMENT](#chapter-1)
+- [II. PACKAGE MANAGEMENT](#chapter-2)
+- [III. TESTING](#chapter-3)
+- [IV. OPERATION](#chapter-4)
+- [V. COMMON](#chapter-5)
+
+
+
+
+## I. ENVIRONMENT {#chapter-1}
+
+### A. R&D Env
 Use IDE of "InteliJ IDEA", and **download JDK wihin IDEA**
 
-### A. Backup and Sync
+#### 1. Backup and Sync
 同步之后, 大部分的配置和插件都可以同步下来, 以下仅作备考
 
-#### 1. Configuration
+**Configuration**
 - Enable Backup and Sync -> `Enable Backup and Sync`
 - **在各个项目中分别选择Java JDK环境, 不安装Java在裸机**
 - Settsings -> Editor -> Code Style
@@ -38,7 +50,7 @@ Use IDE of "InteliJ IDEA", and **download JDK wihin IDEA**
   - SQL -> General, 将`keywords` 和 `Built-in types`设置为大写(To upper)
 
 
-#### 2. Plugins
+**Plugins**
 - IdeaVim
   - 在IDEA中创建`~/.ideavimrc`文件(实际创建在`C:\Users\Ivan\.ideavimrc`)
   - 只需在最后一行增加配置引用即可`source //wsl.localhost/Ubuntu/root/.vimrc`, 已经可以使用WSL中的配置文件了
@@ -49,7 +61,27 @@ Use IDE of "InteliJ IDEA", and **download JDK wihin IDEA**
 - RemoteHost `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar pear-admin-pro-1.11.9-SNAPSHOT.jar`
 
 
-### B. Maven
+### B. Product Env
+
+Install the `jdk-21_windows-x64_bin.exe` on MicroSoft Windows, or `apt install openjdk-21-jdk` on Ubuntu Service
+
+And make sure the right `$PATH` on any kind of system
+
+**Additionally**, record more Java in MicroSoft Windows 10/11 as below:
+
+- 在系统环境变量中增加一条, 以防止在不同环境下的命令行输入乱码
+  - 变量名称: `JAVA_TOOL_OPTIONS`
+  - 值: `-Duser.language=en`
+
+
+
+
+
+## II. PACKAGE MANAGEMENT {#chapter-2}
+---
+
+### A. First of All
+
 Maven 3.8.1 blocked http connection
 
 - Do {{< hl-text red >}}NOT{{< /hl-text >}} edit this original IDEA maven settings file
@@ -111,51 +143,13 @@ Maven 3.8.1 blocked http connection
 
 - Reload pom.xml file in IDEA and automaticlly download the dependencies
 
-
-
-
-## KNOWLEDGE
-
-思前想后, 这里的记录只是描述一些个人理解, 更多的是做一个关于<Java编程核心>的人工索引
-
-
-以下内容TODO, 
-### String[]
-
-### ArrayList
-
-
-### int or Integer
-
-用int还是用Integer?  
-昨天例行code review时大家有讨论到int和Integer的比较和使用。 这里做个整理，发表一下个人的看法。
-
-【int和Integer的区别】
-
-int是java提供的8种原始类型之一，java为每个原始类型提供了封装类，Integer是int的封装类。int默认值是0，而Integer默认值是null；
-
-int和Integer（无论是否new）比较，都为true， 因为会把Integer自动拆箱为int再去比；
-
-Integer是引用类型，用==比较两个对象，其实比较的是它们的内存地址，所以不同的Integer对象肯定是不同的；
-
-但是对于Integer i=*，java在编译时会将其解释成Integer i=Integer.valueOf(*)；。但是，Integer类缓存了[-128,127]之间的整数， 所以对于Integer i1=127；与Integer i2=127； 来说，i1==i2，因为这二个对象指向同一个内存单元。 而Integer i1=128；与Integer i2=128； 来说，i1==i2为false。
-
-【各自的应用场景】
-
-Integer默认值是null，可以区分未赋值和值为0的情况。比如未参加考试的学生和考试成绩为0的学生
-
-加减乘除和比较运算较多，用int
-
-容器里推荐用Integer。 对于PO实体类，如果db里int型字段允许null，则属性应定义为Integer。————默认也应当定义为包装类型，从而兼容数据为null的情况，规避NPE异常。诸如mybatis这些代码生成器生成的属性就是包装类型，我们从阿里开发规范里也可以找到类似声明———— 当然，如果系统限定db里int字段不允许null值，则也可考虑将属性定义为int。
-
-对于应用程序里定义的枚举类型， 其值如果是整型，则最好定义为int，方便与相关的其他int值或Integer值的比较
-
-Integer提供了一系列数据的成员和操作，如Integer.MAX_VALUE，Integer.valueOf(),Integer.compare(),compareTo(),不过一般用的比较少。建议，一般用int类型，这样一方面省去了拆装箱，另一方面也会规避数据比较时可能带来的bug。
+### B. How to use maven
 
 
 
 
-## 泛型
+
+## 泛型Tips
 ---
 {{< codeblock "A.java" "https://www.163.com" >}}
 public class A {}

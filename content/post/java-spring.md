@@ -153,6 +153,9 @@ PS:
 
 ## IV. SECURITY {#chapter-4}
 ---
+
+以下大概描述的是Java Security的主要组件结构, 即使遗忘了实现细节, 掌握其结构和机制, 就容易理解得多
+
 **Configure**
 这里包含初始化, 注册哪些filter
 
@@ -222,6 +225,7 @@ TODO: MySQL的间隙锁在开源代码中是否已经默认被应用
 - **脏读**: 不会发生。  
 - **不可重复读**: 不会发生。  
 - **幻读**: 不会发生，因为会对范围内的操作加锁，阻止插入或修改。  
+
 
 #### 总结表格
 
@@ -369,6 +373,7 @@ Quartz
 
 
 
+
 ## VII. THIRD-PART HTTP API {#chapter-7}
 ---
 RestTemplate 是从Spring3.0开始支持的一个远程HTTP请求工具，RestTemplate提供了常见的Rest服务(Rest风格、Rest架构)的客户端请求的模版，能够大大提高客户端的编写效率
@@ -382,6 +387,9 @@ Synchronous client to perform HTTP requests, exposing a simple, template method 
 NOTE: As of 6.1, RestClient offers a more modern API for synchronous HTTP access. For asynchronous and streaming scenarios, consider the reactive org. springframework. web. reactive. function. client. WebClient.
 {{< /blockquote >}}
 
+传统应用: 新的RestClient
+
+流式应用: 才考虑WebClient
 
 
 
@@ -402,7 +410,7 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
 ## X. UTILS {#chapter-10}
 ---
-
+很多源码中总结的Utils很好用, 多学习一下
 
 
 
