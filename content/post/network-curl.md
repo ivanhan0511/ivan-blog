@@ -33,8 +33,6 @@ This is a custom summary and does **NOT** appear in the post.
 
 在curl访问HTTPS站点时，如果没有CA证书，会提示访问缺少CA证书而失败，如下图：
 
-curl-1.jpg
-
 
 
 以下步骤可以实现curl带CA证书访问对应的HTTPS站点, 详情参见[证书转换]()
@@ -52,3 +50,13 @@ openssl  x509  -in  a.cer  -out  a.pem
 3. curl用法：
 
 curl  -k  --cert  a.pem https://test.com/
+
+
+
+
+**上传文件**
+
+{{< codeblock "shell" "uploadFile" >}}
+curl -X POST -H 'tenant-id: 123' -H 'Authorization: xxx' -H 'Content-Type: multipart/form-data' -F 'file=@/path/to/Pictures/Dazzle.jpg' http://192.168.50.19:48080/admin-api/infra/file/upload
+{{< /codeblock >}}
+

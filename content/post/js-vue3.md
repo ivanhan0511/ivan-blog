@@ -40,7 +40,7 @@ HAVE TO study some knowlege about frontend
 
 ### A. nvm / nodejs / npm / yarn
 
-Node Version Manager
+#### 1. Node Version Manager
 
 nvm管理的是node, 但会同时把npm也安装好, node的版本和npm的版本是不一样的
 
@@ -69,7 +69,7 @@ nvm use 20.11.1
 {{< /blockquote >}}
 
 
-npm and yarn
+#### 2. npm and yarn
 
 {{< tabbed-codeblock cli >}}
 <!-- tab npm -->

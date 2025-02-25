@@ -146,11 +146,12 @@ If use macOS, natively with terminal
 
 - Java, 使用IDEA管理JDK环境, 存放在`C:\Users\Ivan\.jdks`
 - Python, 使用Anaconda管理Python环境, 安装在`C:\Users\anaconda3`, PyCharm选择并调用
-- C++, TODO @Ivan
+- C++, Microsoft Visual Studio Professional 2022 (64-bit)
+  - 编译器: 目前(Feb 13, 2025)首选MSVC, 不折腾, 能学习, 能运行, 能实战就行
 - JavaScript, 使用nvm管理nodejs环境, 安装在`C:\Users\Ivan\AppData\Roaming\nvm`, VSCode通过`Remote - WSL`插件连接到WSL, 通过命令行操作`npm run dev`等
 
 
-### A. Jetbrains PyCharm/IDEA
+### A. Jetbrains (PyCharm/IDEA)
 
 参见python-basic.md/java-basic.md中步骤
 

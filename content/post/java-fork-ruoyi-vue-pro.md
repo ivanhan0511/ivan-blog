@@ -359,14 +359,14 @@ No best, only better! We **DON'T** want to use Docker.
   - 使用`application-local.yaml`配置文件, 数据源指向localhost
   - IDE调试即可
 
-**开发联调**
+**开发互联网联调**
 - 前端:
   - 使用`.env.dev`配置文件, 指向`https://mall-srv.xxx.com`
   - 调试命令`npm run dev-server`
   - 打包命令`npm run build:dev`
 - 后端:
   - 使用`application-dev.yaml`配置文件, 数据源指向localhost (服务器本地)
-  - 配置`https://mall.xxx.com`和`https://mall-srv.xxx.com`, 域名解析, 开放端口及备案, SSL证书
+  - 云服务配置`https://mall.xxx.com`和`https://mall-srv.xxx.com`, 域名解析, 开放端口及备案, SSL证书
   - 使用`screen`运行在云服务器即可, 供前端调试用
   - Nginx采用独立域名访问的方式, 配置如下
 
@@ -376,10 +376,11 @@ No best, only better! We **DON'T** want to use Docker.
   - 打包命令`npm run build:prod`
 - 后端:
   - 使用`application-prod.yaml`配置文件, 数据源指向localhost (服务器本地)
-  - 配置`https://mall.xxx.com`, 域名解析, 开放端口及备案, SSL证书
-  - 使用`screen`运行在云服务器即可, 供前端调试用
+  - 云服务配置`https://mall.xxx.com`, 域名解析, 开放端口及备案, SSL证书
+  - 使用`screen`运行在云服务器即可, 供前端调试用 -> 后续稍微考虑一下Docker环境
   - Nginx采用服务器局域网IP访问的方式, 配置如下
 
+// TODO: 与network-nginx.md合并, 优化整理
 {{< tabbed-codeblock nginx.conf >}}
 <!--tab dev -->
 worker_processes  1;
