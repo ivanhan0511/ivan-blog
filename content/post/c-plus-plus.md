@@ -32,10 +32,10 @@ This is a custom summary and does *NOT* appear in the post.
 {{< toc >}}
 
 ## I. EVIRONMENT
-
+---
 关于 C++ IDE,
 - VisualStudio is more traditional, but it's a IDE
-- VSCode is more fassion, but it's a editor
+- VSCode is more fassion, but it's only a editor, need more extensions
 - CLion
   - 暂时不想付钱
   - 初期不如VS好, 目前(Feb 13, 2025)不确定
@@ -43,11 +43,14 @@ This is a custom summary and does *NOT* appear in the post.
   - 熟悉流程, 恶补基础知识之后再考虑DIY和跨平台
 
 
-### A. VisualStudioPro2022
+### A. IDE: VisualStudioPro2022
 
 - 设置项目存储路径: Tools -> Options -> Projects and Solutions -> Locations, 指定Project location: `D:\oopt\`
+
 - 将Tabs 改为 Spaces: ???
+
 - 显示行号: Tools -> Options -> Text Editor -> All Languages -> General -> choose "line numbers"
+
 - 安装`VsVim`插件, 并增加`.vsvimrc`专用的配置文件(比自用的`.vimrc`少了`Vundle`等配置)
 {{< blockquote >}}
 The VsVim extension for Visual Studio supports a lot of the Vim commands that are commonly used. A Vim user should feel comfortable navigating and editing in Visual Studio using this extension. 
@@ -57,15 +60,40 @@ VsVim looks for a file named `.vsvimrc`, `_vsvimrc`, `.vimrc` or `_vimrc` to loa
 You can check which directories that VsVim looks for this file in by using the command `:set vimrcpaths?`. This is typically the `HOME`, `VIM` or `USERPROFILE` directories. 
 Place your vimrc file in one of these directories, restart Visual Studio and VsVim will load those settings. You can verify which vimrc file is currently loaded in VsVim by using the command `:set vimrc?`
 {{< /blockquote >}}
+
 - 设置字体? 默认DejaVu Sans Mono? 避免像CMD.exe一样无法分辨小写L与数字1(VisualStudioPro2022没有再设置了)
+
 - [增加菜单来修改字符集编码](https://blog.csdn.net/qq_41868108/article/details/105750175): Tools -> customize... -> Commands tab -> Choose "File" and "Add command..." -> File(新弹窗) -> Advanced Save Options...
+
 - 自动补全: Enter or Tab?
   - Visual Studio 2022是使用Tab进行代码补全的, 但一般习惯回车补全的时候就需要重新设置
+
   - 个人选择用Tab，原因是Linux默认的补全键是Tab, Notpad++ / Nacicat 也都是Tab补全
+
   - 具体路径: 工具 –> 选项 –> 文本编辑器 –> C/C++ -> 高级 –> 主动提交成员列表(Use Tab to commit...)
 
 
-### B. CMake等等
+### B. 编译器
+
+gcc
+组织: GNU
+Windows移植版叫MinGW: mini GUN for Windows
+命令行也是gcc
+
+
+clang
+组织: LLVM
+分前中后3端, 跨平台
+前端是clang
+命令行是clang
+
+
+msvc
+组织: Microsoft
+其余不懂
+VisualStudioPro 2022, 选项Platform Toolset, 如果从Visual Studio 2022 改为后安装的LLVM(clang-cl), 调试都跑不起来, 弹出的提示也不太了解, "保持不变"
+
+
         
 CMake官网下载.msi安装
 
@@ -109,10 +137,9 @@ CMake 根据CMakeLists.txt生成乐谱（makefiles） make工具根据乐谱对�
 
 
 
-<br>
 
 ## GRAMMA STYLE
-
+---
 ### Naming Convention
 
 **Example 1**

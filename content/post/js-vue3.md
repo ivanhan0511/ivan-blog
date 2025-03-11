@@ -37,6 +37,7 @@ HAVE TO study some knowlege about frontend
 {{< toc >}}
 
 ## I. ENVIRONMENT
+---
 
 ### A. nvm / nodejs / npm / yarn
 

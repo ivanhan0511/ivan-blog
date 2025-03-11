@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Ivan's Blog"
-date: 2025-01-19T10:55:07+08:00
+date: 2025-03-11T09:42:07+08:00
 categories:
 - Welcome
 tags:
@@ -40,6 +40,5 @@ Some records for software, coffee, music and sports.
 
 
 ## TODO TASKS
-- [ ] Take photos for all posts
-- [ ] Write content for all posts
-- [ ] Make my posts can be found on internet
+- [ ] Take some photos for most posts
+- [x] Write content for all posts

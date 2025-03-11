@@ -1,6 +1,6 @@
 ---
 title: "How to fork ruoyi-vue-pro"
-date: 2024-10-25T11:22:00+08:00
+date: 2025-03-11T09:42:00+08:00
 categories:
 - Java
 - WebFramework
@@ -35,27 +35,15 @@ To deploy a Springboot web framework, whatever development or production, and wh
 
 But the stronger, the more complex. This post is the annotation for this project, by my personer opinion
 
-<!--more-->
-
-{{< toc >}}
-
 Tip: The most really important TECH cores, like design and architecture, service for BUSINESS.
 
 NO BEST, ONLY BETTER.
 
+<!--more-->
 
-## 目录
+{{< toc >}}
 
-- [I. ARCHITECTURE PRINCIPLE](#chapter-1)
-- [II. BUSINESS DESIGN](#chapter-2)
-- [III. TESTING](#chapter-3)
-- [IV. OPERATION](#chapter-4)
-- [V. COMMON](#chapter-5)
-
-
-
-
-## I. ARCHITECTURE PRINCIPLE {#chapter-1}
+## I. ARCHITECTURE PRINCIPLE
 ---
 So far, Sep 24, 2024
 1. Reading the [docs](https://github.com/YunaiV/ruoyi-vue-pro) of ruoyi-vue-pro is the best way  
@@ -74,16 +62,18 @@ So far, Sep 24, 2024
 6. 不使用RESTful style, 因为RESTful仍然有表达不明确的业务场景, 仍然需要使用传统"动词"来描述接口性质/意图, 且对团队要求较高, 一不小心就会破坏掉所谓的RESTful style
 
 7. 吸取[Unix设计哲学](https://en.wikipedia.org/wiki/Unix_philosophy):
-   {{ blockquote }}
+{{< blockquote >}}
 It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
 
 - Write programs that do one thing and do it well.
 - Write programs to work together.
 - Write programs to handle text streams, because that is a universal interface.
-  {{ /blockquote }}
+{{< /blockquote >}}
 
 
-## II. BUSINESS DESIGN {#chapter-2}
+
+
+## II. BUSINESS DESIGN
 ---
 基于现役SpringBoot业务流层面的全栈开发的经验, 制定出更优雅的代码设计规范
 
@@ -98,9 +88,10 @@ It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
 5. With its Infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
 
 
+TODO: 主要描述前后端联动的设计思路, 不分开写前后端
 
 
-### A. Controller
+### ~~A. Controller~~
 
 [TODO]: 继续描述源码在前后端结合时, 互相传递的参数以及显示字段的设计思路
 
@@ -154,7 +145,7 @@ public class ProductSpuRespVO {
 
 
 
-### B. Service
+### ~~B. Service~~
 Just work for **BUSINESS** only
 
 - Service中, 只体现业务. 而需要CRUD的时候, 调用Mapper的方法
@@ -203,7 +194,30 @@ public Long createSaleOrder(ErpSaleOrderSaveReqVO createReqVO) {
 #### 1. Transactional
 这里不会讲原理, 只讲注意点, 设计思路, 详细文章见java-spring.md
 
-TODO: 生命周期, 事务传播, 事务隔离
+生命周期TODO
+
+事务传播: 业务设计好一点, 代码简约一点, 事务的传播的事情会遇到得很少
+
+事务隔离: MySQL默认是Repeatable Read, 暂且不太需要在代码中显式注明
+
+{{< codeblock java transaction >}}
+// 事务提交之后, 计算已绑定的图片数量, 如果符合, 则修改测量任务状态
+ @Override
+@Transactional(rollbackFor = Exception.class)
+public Boolean uploadImage(String fileName, String path, String fileMd5, Long clientId, byte[] content) {
+    // ...
+    TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+        @Override
+        public void afterCommit() {
+            List<MeasurePicDO> afterCommitPicDOList = getListByTaskId(measureTaskDO.getId());
+            if (afterCommitPicDOList.size() == measureTaskDO.getCount()) {
+                measureTaskMapper.updateById(measureTaskDO.setStatus(MeasureTaskStatusEnum.COLLECTED.getStatus()));
+            }
+        }
+    });
+    // ...
+}
+{{< /codeblock >}}
 
 
 
@@ -231,7 +245,7 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
 
 
-### C. DAO Mapper
+### ~~C. DAO Mapper~~
 曾经我是拒绝的
 {{< blockquote >}}
 - **JUST** use MyBatisPLus maven and use default CRUD methods.  
@@ -242,9 +256,10 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
 真香打脸
 {{< blockquote >}}
-- Mapper中, 做统一抽象, 例如`selectPage`, `selectByMobile`, 而不是直接暴露`selectOne`
+
+- Mapper中, 做统一抽象, 例如`selectPage`, `selectByMobile`, 而不是直接暴露`selectOne` `selectList`
 - 需要控制mapper中的SQL join(如下文)
-- 复杂业务都放在service中解耦, 各个业务尽量减少连接次数, 批量查询, stream / mapper / set 拼接, 批量updateOrInsert
+- 复杂业务都放在service中解耦, 各个业务尽量减少连接次数, 批量查询, 在Java内存中运用 stream / mapper / set 拼接, 批量updateOrInsert
 {{< /blockquote >}}
 
 [MySQL多次单表查询和多表联合查询](https://www.cnblogs.com/youmingDDD/p/11921187.html)
@@ -302,14 +317,12 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 > 5. 可以减少冗余记录的查询。
 > 6. 更进一步，这样做相当于在应用中实现了哈希关联，而不是使用MySQL的嵌套环关联，某些场景哈希关联的效率更高很多。
 
-
-
 [《阿里巴巴JAVA开发手册》里面写超过三张表禁止join 这是为什么？这样的话那sql要怎么写？](https://www.zhihu.com/question/56236190)
 
 [MySQL多表关联查询效率高点还是多次单表查询效率高，为什么？](https://www.zhihu.com/question/68258877)
 
-#### 1. Multiple DB
 
+#### 1. Multiple DB
 
 **Settings**
 - application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
@@ -327,13 +340,17 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
 
 
-## III. TESTING {#chapter-3}
----
+## III. TESTING
+
+TODO: 2025年争取实现, 不再简单调用JetBrains的HTTP client, 而是使用UnitTest进行用例覆盖
+
+不讲具体JavaUnitTest, 而是源码如何设置测试环境
 
 
 
-## IV. OPERATION {#chapter-4}
----
+
+## IV. OPERATION
+
 运营, 软文推广, 运维, 部署, 自动化测试, 自动化接口文档等
 
 
@@ -342,8 +359,8 @@ TODO
 
 
 ### API Document
-- [ ] Swagger UI category, description and list
-- [ ] With session token
+- [x] Swagger UI category, description and list
+- [x] With session token
 
 
 
@@ -380,7 +397,6 @@ No best, only better! We **DON'T** want to use Docker.
   - 使用`screen`运行在云服务器即可, 供前端调试用 -> 后续稍微考虑一下Docker环境
   - Nginx采用服务器局域网IP访问的方式, 配置如下
 
-// TODO: 与network-nginx.md合并, 优化整理
 {{< tabbed-codeblock nginx.conf >}}
 <!--tab dev -->
 worker_processes  1;
@@ -493,7 +509,7 @@ http {
 
 
 
-## V. COMMON {#chapter-5}
+## V. COMMON
 ---
 理解源码的核心设计思路, 具体技术知识见java-spring.md
 
@@ -660,9 +676,24 @@ PermissionServiceImpl
 
 
 
+### C. 常用修改
 
-## VII. APPENDIX {#chapter-6}
----
+#### 1. 首页文字修改
+
+内圈首页: src/views/Home/Index.vue
+
+外圈用户中心: src/components/UserInfo/src/UserInfo.vue
+
+
+#### 2. 修改logo和icon
+
+在目录public/下面
+
+
+
+
+## VII. APPENDIX
+
 摘抄自网络, 不一定合理, 仅保存一些文字, 以便以后少写一些文字
 
 

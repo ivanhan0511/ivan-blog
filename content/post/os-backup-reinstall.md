@@ -36,6 +36,7 @@ After initialization of a Windows 11 or a macOS, here is the TODO list.
 {{< toc >}}
 
 ## I. BACKUP
+---
 
 如果要重装系统, 需要提前备份好本地文件
 
@@ -73,6 +74,7 @@ After initialization of a Windows 11 or a macOS, here is the TODO list.
 
 
 ## II. BASE
+---
 
 只要连接互联网, 现有的Windows11会自动联网安装驱动, 只需要等待更新/重启
 
@@ -107,6 +109,7 @@ After initialization of a Windows 11 or a macOS, here is the TODO list.
 
 
 ## III. WSL2
+---
 
 If use Windows11, I like WSL2 so much
 
@@ -141,6 +144,7 @@ If use macOS, natively with terminal
 
 
 ## IV. IDE
+---
 
 关于开发语言/开发环境, 暂时都在物理机上安装和管理
 
@@ -175,6 +179,7 @@ VisualStudio Pro 2022, 64位的IDE
 
 
 ## V. VirtualBox
+---
 
 Try V-box this time(Dec 03, 2024) ?
 - Finance镜像: Download Bitcoin wallet from [here](https://bitcoin.org/en/choose-your-wallet) and choose `Bitcoin Core`

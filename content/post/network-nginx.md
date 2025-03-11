@@ -34,9 +34,8 @@ Nginx config
 <!--more-->
 
 {{< toc >}}
-## nginx location proxy_pass 后面的url 加于不加 / 的区别
 
-即proxy_pass后的 / 会截掉location后跟的地址.
+字段解析:
 
 {{< codeblock "dev.conf" >}}
 server {
@@ -80,40 +79,46 @@ server {
 }
 {{< /codeblock >}}
 
+### nginx location proxy_pass 后面的url 加于不加 / 的区别
+
 Some examples
 
 {{< tabbed-codeblock "Examples" >}}
 <!-- tab one -->
-#location ^~/api后没有`/`, 转发网站没有`/`
+# `location ^~/api` 后没有`/`, 转发网站没有`/`
+
 location ^~/api {
     proxy_pass http://192.168.1.66:9222;
 }
-#经过nginx转向之后最终的网址是: 192.168.1.66:9292/api/index.html
+# 经过nginx转向之后最终的网址是: 192.168.1.66:9292/api/index.html
 <!-- endtab -->
 
 
 <!-- tab two -->
-#location ^~/api后没有`/`, 转发网站有`/`
+# `location ^~/api` 后没有`/`, 转发网站有`/`
+
 location ^~/api {
     proxy_pass http://192.168.1.66:9292/;
 }
-#经过nginx转向之后最终的网址是: 192.168.1.66:9292/index.html
+# 经过nginx转向之后最终的网址是: 192.168.1.66:9292/index.html
 <!-- endtab -->
 
 <!-- tab three -->
-#location ^~/api/后有`/`, 转发网站没有`/`
+# `location ^~/api/` 后有`/`, 转发网站没有`/`
+
 location ^~/api/ {
     proxy_pass http://192.168.1.66:9292;
 }
-#经过nginx转向之后最终的网址是: 192.168.1.66:9292/api/index.html
+# 经过nginx转向之后最终的网址是: 192.168.1.66:9292/api/index.html
 <!-- endtab -->
 
 <!-- tab four -->
-#location ^~/api/后有`/`, 转发网站有`/`
+# `location ^~/api/` 后有`/`, 转发网站有`/`
+
 location ^~/api/ {
     proxy_pass 192.168.1.66:9292/;
 }
-#经过nginx转向之后最终的网址是: 192.168.1.66:9292/index.html
+# 经过nginx转向之后最终的网址是: 192.168.1.66:9292/index.html
 <!-- endtab -->
 {{< /tabbed-codeblock >}}
 
