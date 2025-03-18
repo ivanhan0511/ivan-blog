@@ -678,16 +678,43 @@ PermissionServiceImpl
 
 ### C. 常用修改
 
-#### 1. 首页文字修改
+新代码clone下来后, 按照目录顺序修改如下内容:
 
-内圈首页: src/views/Home/Index.vue
-
-外圈用户中心: src/components/UserInfo/src/UserInfo.vue
-
-
-#### 2. 修改logo和icon
-
-在目录public/下面
+- public
+  - favicon.ico
+  - logo.gif
+- src
+  - api
+    + erp
+      + sale, 临时增加了订单接口
+    + measure, 增加自定义的接口
+  - assets
+    + imgs
+      + avatar.gif, 替换
+      + logo.png, 替换
+    + svgs
+      + login-box-bg.svg, 替换
+  - layout
+    + components
+      + UserInfo
+        - src
+          - UserInfo.vue, 取消web外圈 用户中心 鼠标悬停时的"项目文档"
+  - router
+    - modules
+      + remaining.ts, 按规则增加ERP模块中下游客户的销售策略, 以及Measure模块的测量结果 的路由设置
+  - views
+    + Home
+      + Index.vue, 首页文字修改
+    + Login
+      + Login.vue, 修改登录页, 取消了LoginForm
+      + components
+        - LoginForm.vue, 修改登录选项等
+    + measure, 增加Measure模块
+    + erp
+      + 临时记录erp修改的订单页
+- .env
+  - .env.dev, local, prod 按需修改即可
+- index.html, 修改文字等
 
 
 

@@ -187,3 +187,26 @@ Try V-box this time(Dec 03, 2024) ?
 - 百度云盘
 - 迅雷
 
+
+修复
+欢迎咨询社区！我是Chen Pondsi。
+
+图上看到可能是Windows11，
+建议打开设置，时间和语言，输入，高级键盘设置，取消勾选“允许我为每个应用窗口使用不同的输入法”。
+
+然后鼠标右键单击开始按钮（微软图标的按钮）→"Windows PowerShell(I)（管理员)(A ）”→输入：
+（WIndows11中可能显示Windows 终端（管理员））
+sfc /SCANNOW
+（按下Enter键）
+Dism /Online /Cleanup-Image /ScanHealth
+（按下Enter键）
+Dism /Online /Cleanup-Image /CheckHealth
+（按下Enter键）
+DISM /Online /Cleanup-image /RestoreHealth
+（按下Enter键）
+完成后重启电脑，再次输入：
+sfc /SCANNOW
+（按下Enter键）
+
+注意！请务必遮挡个人信息（电子邮件/电话/姓名等）。（若是没有，请忽略）
+48小时内没有新的回复，我将无法再收到回复提醒。

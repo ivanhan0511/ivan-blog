@@ -107,11 +107,11 @@ VSCode通过`Remote - WSL`插件连接到WSL, 反而通过WSL与Windows共用环
 *VSCode推荐的插件, 并不见得都好用*
 
 - vscodevim, 在`settings.json`配置文件中添加以显示相对行号:
-{{ codeblock settings.json json }}
+{{< codeblock settings.json json >}}
 {
     "editor.lineNumbers": "relative",
 }
-{{ /codeblock }}
+{{< /codeblock >}}
 
 - prettier
 
