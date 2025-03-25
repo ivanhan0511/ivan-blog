@@ -35,17 +35,38 @@ To deploy a Springboot web framework, whatever development or production, and wh
 
 But the stronger, the more complex. This post is the annotation for this project, by my personer opinion
 
-Tip: The most really important TECH cores, like design and architecture, they all service for BUSINESS.
-
-**NO BEST, ONLY BETTER.**
-
 <!--more-->
 
 {{< toc >}}
 
+Tip: The most really important TECH cores, like design and architecture, they all service for BUSINESS.
+
+**NO BEST, ONLY BETTER.**
+
+
 ## I. ARCHITECTURE PRINCIPLE
 ---
-So far, Sep 24, 2024
+{{< blockquote "Unix philosophy" "https://en.wikipedia.org/wiki/Unix_philosophy" "wikipedia" >}}
+The Unix philosophy is documented by Doug McIlroy[1] in the Bell System Technical Journal from 1978:
+
+Make each program do one thing well. To do a new job, build afresh rather than complicate old programs by adding new "features".<br/>
+Expect the output of every program to become the input to another, as yet unknown, program. Don't clutter output with extraneous information. Avoid stringently columnar or binary input formats. Don't insist on interactive input.<br/>
+Design and build software, even operating systems, to be tried early, ideally within weeks. Don't hesitate to throw away the clumsy parts and rebuild them.<br/>
+Use tools in preference to unskilled help to lighten a programming task, even if you have to detour to build the tools and expect to throw some of them out after you've finished using them.<br/>
+It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
+
+Write programs that do one thing and do it well.
+Write programs to work together.
+Write programs to handle text streams, because that is a universal interface.
+In their Unix paper of 1974, Ritchie and Thompson quote the following design considerations:
+
+Make it easy to write, test, and run programs.
+Interactive use instead of batch processing.
+Economy and elegance of design due to size constraints ("salvation through suffering").
+Self-supporting system: all Unix software is maintained under Unix.
+{{< /blockquote >}}
+
+So far, Mar 25, 2025
 1. Reading the [docs](https://github.com/YunaiV/ruoyi-vue-pro) of ruoyi-vue-pro is the best way  
 
 2. 如果团队比较小, 达不到上百人, 那么就不拆服务直接单体运行, 掌握设计的"度", 非常重要!!!  
@@ -60,15 +81,6 @@ So far, Sep 24, 2024
 5. 尽管代码中有DO, 但并不采用DDD(领域驱动设计)!!!
 
 6. 不使用RESTful style, 因为RESTful仍然有表达不明确的业务场景, 仍然需要使用传统"动词"来描述接口性质/意图, 且对团队要求较高, 一不小心就会破坏掉所谓的RESTful style
-
-7. 吸取[Unix设计哲学](https://en.wikipedia.org/wiki/Unix_philosophy):
-  {{< blockquote >}}
-It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
-
-- Write programs that do one thing and do it well.
-- Write programs to work together.
-- Write programs to handle text streams, because that is a universal interface.
-  {{< /blockquote >}}
 
 
 
