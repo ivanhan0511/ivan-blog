@@ -42,8 +42,9 @@ After initialization of a Windows 11 or a macOS, here is the TODO list.
 
 - PyCharm/IDEA
   - git commit and push
-  - Scratch中的每一条SQL console, 右键Refactor -> Copy file, 存储到项目sql文件夹中随Git上传
-  - Scratch中的代码
+  - resources中的.yaml文件均需要保存, 且用于隔离不同生产环境的已经固化的.yaml谨慎修改
+  - Database Consoles中的SQL代码, 分别右键`Refactor -> Copy File...`, 在开发过后补资料阶段, 梳理后存储到项目sql文件夹中随Git上传
+  - Scratches中的一些pojo代码, 酌情备份
 - VisualStudioPro2022
   - git commit and push
 - VSCode

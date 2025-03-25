@@ -35,51 +35,10 @@ Nginx config
 
 {{< toc >}}
 
-字段解析:
+nginx配置文件的各个字段解析: TODO
 
-{{< codeblock "dev.conf" >}}
-server {
-    listen 80;
-    server_name dev.xxx.com;
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
 
-server {
-    listen       80;
-    server_name  dev.xxx.com;
-
-    location ^~ /api {
-        proxy_pass http://192.168.1.66:9292;
-
-        # proxy_set_header作用：设置发送到后端服务器(上面proxy_pass)的请求头值
-        # 当Host设置为 $http_host 时，则不改变请求头的值;
-        # 当Host设置为 $proxy_host 时，则会重新设置请求头中的Host信息;
-        # 当为$host变量时，它的值在请求包含Host请求头时为Host字段的值，在请求未携带Host请求头时为虚拟主机的主域名;
-        # 当为$host:$proxy_port时，即携带端口发送 ex: $host:8080 
-
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;  # 在web服务器端获得用户的真实ip 需配置条件① $remote_addr值 = 用户ip
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  # 在web服务器端获得用户的真实ip 需配置条件②
-        proxy_set_header REMOTE-HOST $remote_addr;
-        # proxy_set_header X-Forwarded-For $http_x_forwarded_for;  # $http_x_forwarded_for变量 = X-Forwarded-For变量
-    }
-
-    location / {
-        root /var/wwww/dev;
-        try_files $uri $uri/ /index.html;
-        index index.html index.htm;
-    }
-    
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   html;
-    }
-}
-{{< /codeblock >}}
-
-### nginx location proxy_pass 后面的url 加于不加 / 的区别
+### nginx`location proxy_pass`后面的url 加与不加`/`的区别
 
 Some examples
 

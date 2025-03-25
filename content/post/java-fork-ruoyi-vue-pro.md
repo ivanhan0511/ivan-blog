@@ -1,6 +1,6 @@
 ---
 title: "How to fork ruoyi-vue-pro"
-date: 2025-03-11T09:42:00+08:00
+date: 2025-03-25T11:45:00+08:00
 categories:
 - Java
 - WebFramework
@@ -35,9 +35,9 @@ To deploy a Springboot web framework, whatever development or production, and wh
 
 But the stronger, the more complex. This post is the annotation for this project, by my personer opinion
 
-Tip: The most really important TECH cores, like design and architecture, service for BUSINESS.
+Tip: The most really important TECH cores, like design and architecture, they all service for BUSINESS.
 
-NO BEST, ONLY BETTER.
+**NO BEST, ONLY BETTER.**
 
 <!--more-->
 
@@ -62,13 +62,13 @@ So far, Sep 24, 2024
 6. 不使用RESTful style, 因为RESTful仍然有表达不明确的业务场景, 仍然需要使用传统"动词"来描述接口性质/意图, 且对团队要求较高, 一不小心就会破坏掉所谓的RESTful style
 
 7. 吸取[Unix设计哲学](https://en.wikipedia.org/wiki/Unix_philosophy):
-{{< blockquote >}}
+  {{< blockquote >}}
 It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
 
 - Write programs that do one thing and do it well.
 - Write programs to work together.
 - Write programs to handle text streams, because that is a universal interface.
-{{< /blockquote >}}
+  {{< /blockquote >}}
 
 
 
@@ -88,13 +88,9 @@ It was later summarized by Peter H. Salus in A Quarter-Century of Unix (1994):
 5. With its Infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
 
 
-TODO: 主要描述前后端联动的设计思路, 不分开写前后端
-
-
-### ~~A. Controller~~
+### A. Controller
 
 [TODO]: 继续描述源码在前后端结合时, 互相传递的参数以及显示字段的设计思路
-
 
 
 #### 1. Input validation
@@ -105,10 +101,8 @@ TODO: 主要描述前后端联动的设计思路, 不分开写前后端
 - 提交时也就不需要`name`之类的input字符串数据, 后台再通过字符串查询blablabla. 而是直接提交其ID即可, 后端直接用
 - 本着创建与更新都采用同一套xxxSaveReqVO的原则
 
-**@InEnum & @DictFormat**
 
-`@InEnum`, 是程序枚举类约定好的, 不受普通用户在Admin Web管理的  
-`@DictFormat`, 是在Excel导入/导出时自动转化用的
+**@InEnum & @DictFormat**
 
 {{< codeblock validInput java >}}
 @Schema(description = "管理后台 - Measure 图像绑定 Request VO")
@@ -116,8 +110,12 @@ TODO: 主要描述前后端联动的设计思路, 不分开写前后端
 public class MeasureBindPicReqVO {
     @Schema(description = "放大倍率", requiredMode = Schema.RequiredMode.REQUIRED, example = "200")
     @NotNull(message = "放大倍率不能为空")
-    @InEnum(value = XxxEnum.class, message = "xxx必须是 {value}")
+    @InEnum(value = XxxEnum.class, message = "xxx必须是 {value}")  // 是程序枚举类约定好的, 不受web用户在字典页面中修改所变化  
     private Integer magnification;
+
+    @ExcelProperty(value = "交易状态", converter = DictConvert.class)  // 导入时指定Excel某sheet中表头字段名称
+    @DictFormat(DictTypeConstants.TOP_UP_RESULT)  // 将Excel中的文字结果转化为表结构中的数字
+    private Integer result;
 }
 {{< /codeblock >}}
 
@@ -130,22 +128,20 @@ public class MeasureBindPicReqVO {
 
 
 **Excel导出**
-{{< codeblock java >}}
+{{< codeblock Export java >}}
 @Schema(description = "管理后台 - 商品 SPU Response VO")
 @Data
 @ExcelIgnoreUnannotated
 public class ProductSpuRespVO {
     @Schema(description = "商品状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "商品状态", converter = DictConvert.class)
-    @DictFormat(DictTypeConstants.PRODUCT_SPU_STATUS)
+    @DictFormat(DictTypeConstants.PRODUCT_SPU_STATUS)  // 导出时也转换
     private Integer status;
 }
 {{< /codeblock >}}
 
 
-
-
-### ~~B. Service~~
+### B. Service
 Just work for **BUSINESS** only
 
 - Service中, 只体现业务. 而需要CRUD的时候, 调用Mapper的方法
@@ -156,8 +152,6 @@ Just work for **BUSINESS** only
     - 获取数据时是否已经提交事务
     - 事务的隔离与传播, 是否运用得当
     - 事务调用的生命周期/context
-    
-
 
 基本遵循源码自动生成的代码, 在良好的数据结构设计的基础上, 很多问题都能迎刃而解. 需要额外定制的几个参考用例, 如后文
 
@@ -176,19 +170,17 @@ public Long createSaleOrder(ErpSaleOrderSaveReqVO createReqVO) {
     // 1.5 生成订单号，并校验唯一性
     // 1.6 计算价格
 
-    // 2.0 前置处理(定制化处理)
+    // 2.0 前置处理(定制化处理, 动脑思考)
     saleOrderHandlers.forEach(handler -> handler.beforeCreate(customerDO, saleOrder));
 
     // 3.1 插入订单
     // 3.2 插入订单项
 
-    // 4.0 后置处理(定制化处理)
+    // 4.0 后置处理(定制化处理, 动脑思考)
     saleOrderHandlers.forEach(handler -> handler.afterCreate(customerDO, saleOrder));
 
     return saleOrder;
 {{< /codeblock >}}
-
-
 
 
 #### 1. Transactional
@@ -220,17 +212,14 @@ public Boolean uploadImage(String fileName, String path, String fileMd5, Long cl
 {{< /codeblock >}}
 
 
-
-
 #### 2. Job
 Quartz
 
 
-
 #### 3. Third-part API
-~~以下2种都是Spring官方推荐的~~, 都是对HttpClient的封装, 简化使用, 提高效率
+以下2种都是Spring官方推荐的, 都是对HttpClient的封装, 简化使用, 提高效率
 
-- RestTemplate: Sync, 
+- RestTemplate: Sync,  -> RestClient
   {{< codeblock doc java >}}
   @Deprecated(since = "6.0", forRemoval = true)
   public void setReadTimeout(int timeout) {}
@@ -243,9 +232,7 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 [TODO]:
 
 
-
-
-### ~~C. DAO Mapper~~
+### C. DAO Mapper
 曾经我是拒绝的
 {{< blockquote >}}
 - **JUST** use MyBatisPLus maven and use default CRUD methods.  
@@ -322,9 +309,7 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 [MySQL多表关联查询效率高点还是多次单表查询效率高，为什么？](https://www.zhihu.com/question/68258877)
 
 
-#### 1. Multiple DB
-
-**Settings**
+**Multiple DB Settings**
 - application.yml中设置PageHelper的 helperDialect, 兼容"mysql"和"sqlserver"两种数据库的语法
 
 - 使用多数据源时, 配置PageHelper时要注意(只有在使用application.yml格式的配置文件时会有问题):  
@@ -335,7 +320,6 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
   ...
   {{< /blockquote >}}
   因为如果驼峰被自动转译为横线分隔符, 会导致PageHelper切换多数据源时失效
-
 
 
 
@@ -368,6 +352,9 @@ TODO
 ### Deployment
 No best, only better! We **DON'T** want to use Docker.
 
+**最新的决策(Mar 25, 2025): 兄弟公司的相似业务, 采用复制型部署, 向产品商业部署方向转型, 后续考虑自动远程升级+离线手动升级策略**
+
+
 **个人开发**
 - 前端:
   - 使用`.env.local`配置文件, 指向`http://127.0.0.1:48080`
@@ -378,129 +365,86 @@ No best, only better! We **DON'T** want to use Docker.
 
 **开发互联网联调**
 - 前端:
-  - 使用`.env.dev`配置文件, 指向`https://mall-srv.xxx.com`
+  - 使用`.env.dev`配置文件, 后端地址指向`https://mall.xxx.com`
   - 调试命令`npm run dev-server`
   - 打包命令`npm run build:dev`
 - 后端:
-  - 使用`application-dev.yaml`配置文件, 数据源指向localhost (服务器本地)
-  - 云服务配置`https://mall.xxx.com`和`https://mall-srv.xxx.com`, 域名解析, 开放端口及备案, SSL证书
-  - 使用`screen`运行在云服务器即可, 供前端调试用
-  - Nginx采用独立域名访问的方式, 配置如下
+  - 使用`application-dev.yaml`配置文件, 数据源指向开发数据库
+  - 云服务配置`https://mall.dev.xxx.com`, 域名解析, 开放端口及备案, SSL证书
+  - 使用`screen`运行在开发服务器即可, 供前后端远程调试用
+  - Nginx采用服务器局域网IP访问的方式, 目前不太需要采用独立域名的方式
 
 **生产环境**
 - 前端:
-  - 使用`.env.prod`配置文件, 指向`http://127.0.0.1:48080`
+  - 使用`.env.prod`配置文件, 后端地址指向`http://192.168.1.100`
   - 打包命令`npm run build:prod`
 - 后端:
-  - 使用`application-prod.yaml`配置文件, 数据源指向localhost (服务器本地)
-  - 云服务配置`https://mall.xxx.com`, 域名解析, 开放端口及备案, SSL证书
-  - 使用`screen`运行在云服务器即可, 供前端调试用 -> 后续稍微考虑一下Docker环境
-  - Nginx采用服务器局域网IP访问的方式, 配置如下
+  - 使用`application-prod.yaml`配置文件, 数据源大都指向服务器本地
+  - 云服务配置`https://mall.xxx.com`, 域名解析, 开放端口及备案, SSL证书; 或者内网IP地址
+  - 使用Ubuntu系统服务(仍然暂不使用Docker)
+  - Nginx采用服务器局域网IP访问的方式
 
-{{< tabbed-codeblock nginx.conf >}}
-<!--tab dev -->
-worker_processes  1;
+{{< tabbed-codeblock mall.conf >}}
+<!--tab external -->
+server { ## 前端项目
+    listen       80;
+    server_name  mall.dev.xxx.com; ## 重要！！！修改成你的前端域名
 
-events {
-    worker_connections  1024;
+    location / { ## 前端项目
+        root   /work/projects/mall;
+        index  index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
 }
 
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;
+server { ## 后端项目
+    listen       80;
+    server_name  mall.dev.xxx.com; ## 重要！！！修改成你的外网 IP/域名
 
-    gzip on;
-    gzip_min_length 1k;     # 设置允许压缩的页面最小字节数
-    gzip_buffers 4 16k;     # 用来存储 gzip 的压缩结果
-    gzip_http_version 1.1;  # 识别 HTTP 协议版本
-    gzip_comp_level 2;      # 设置 gzip 的压缩比 1-9。1 压缩比最小但最快，而 9 相反
-    gzip_types text/plain application/x-javascript text/css application/xml application/javascript; # 指定压缩类型
-    gzip_proxied any;       # 无论后端服务器的 headers 头返回什么信息，都无条件启用压缩
+    ## 不要使用 location / 转发到后端项目，因为 druid、admin 等监控，不需要外网可访问。或者增加 Nginx IP 白名单限制也可以。
 
-    server { ## 前端项目
-        listen       80;
-        server_name  mall.xxx.com; ## 重要！！！修改成你的前端域名
-
-        location / { ## 前端项目
-            root   /work/projects/yudao-ui-admin;
-            index  index.html index.htm;
-            try_files $uri $uri/ /index.html;
-        }
+    location /admin-api/ { ## 后端项目 - 管理后台
+        proxy_pass http://localhost:48080/admin-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
-    server { ## 后端项目
-        listen       80;
-        server_name  api.iocoder.cn; ## 重要！！！修改成你的外网 IP/域名
-
-        ## 不要使用 location / 转发到后端项目，因为 druid、admin 等监控，不需要外网可访问。或者增加 Nginx IP 白名单限制也可以。
-
-        location /admin-api/ { ## 后端项目 - 管理后台
-            proxy_pass http://localhost:48080/admin-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header REMOTE-HOST $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
-
-        location /app-api/ { ## 后端项目 - 用户 App
-            proxy_pass http://localhost:48080/app-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header REMOTE-HOST $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
+    location /app-api/ { ## 后端项目 - 用户 App
+        proxy_pass http://localhost:48080/app-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
 <!-- endtab -->
+<!--tab internal -->
+server {
+    listen       80;
+    server_name  192.168.225.2; ## 重要！！！修改成你的外网 IP/域名
 
-<!--tab prod -->
-worker_processes  1;
+    location / { ## 前端项目
+        root   /work/projects/mall;
+        index  index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
 
-events {
-    worker_connections  1024;
-}
+    location /admin-api/ { ## 后端项目 - 管理后台
+        proxy_pass http://localhost:48080/admin-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
 
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;
-
-    gzip on;
-    gzip_min_length 1k;     # 设置允许压缩的页面最小字节数
-    gzip_buffers 4 16k;     # 用来存储 gzip 的压缩结果
-    gzip_http_version 1.1;  # 识别 HTTP 协议版本
-    gzip_comp_level 2;      # 设置 gzip 的压缩比 1-9。1 压缩比最小但最快，而 9 相反
-    gzip_types gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript; # 指定压缩类型
-    gzip_proxied any;       # 无论后端服务器的 headers 头返回什么信息，都无条件启用压缩
-
-    server {
-        listen       80;
-        server_name  192.168.225.2; ## 重要！！！修改成你的外网 IP/域名
-
-        location / { ## 前端项目
-            root   /work/projects/yudao-ui-admin;
-            index  index.html index.htm;
-            try_files $uri $uri/ /index.html;
-        }
-
-        location /admin-api/ { ## 后端项目 - 管理后台
-            proxy_pass http://localhost:48080/admin-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header REMOTE-HOST $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
-
-        location /app-api/ { ## 后端项目 - 用户 App
-            proxy_pass http://localhost:48080/app-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header REMOTE-HOST $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
+    location /app-api/ { ## 后端项目 - 用户 App
+        proxy_pass http://localhost:48080/app-api/; ## 重要！！！proxy_pass 需要设置为后端项目所在服务器的 IP
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
 <!-- endtab -->
@@ -554,12 +498,15 @@ MapUtils.findAndThen
 
 
 
-
 ### E.PayLock
 
 
 ### F.Tenant
-MyBatisPlusX
+MyBatisPlusX中有AoP控制
+
+Mar 24, 2025, 源码采用的非数据库隔离的租户机制, 始终觉得有隐患, **弃用**
+
+**宁可采用:兄弟公司相似业务+隔离复制部署+通用部分远程升级 的机制**
 
 
 ### G. Connection Pool
@@ -567,13 +514,12 @@ Druid or Hikari -> PearAdminPro用的是Hikari, 也是Springboot官方选用的
 Druid是淘宝选用的, 高并发的情况会适用一些
 
 
-
-
 ### H. Security
 只记录配置, 新的, 技术链接看java-spring.md
 
 #### 1. 免登录改哪里
-路径
+在.yaml中有设置免登录路径
+
 
 #### 2. 登录方式有哪些
 
@@ -582,103 +528,37 @@ Druid是淘宝选用的, 高并发的情况会适用一些
 PermissionServiceImpl
 
 
-基于RBAC0模型，增加了对角色的一些限制：角色互斥、基数约束、先决条件角色等。
-
-角色互斥：同一用户不能分配到一组互斥角色集合中的多个角色，互斥角色是指权限互相制约的两个角色。
-案例：请款系统中一个用户不能同时被指派给申请角色和审批员角色。
-
-基数约束：一个角色被分配的用户数量受限，它指的是有多少用户能拥有这个角色。
-案例：一个角色专门为公司CEO创建的，那这个角色的数量是有限的。
-
-先决条件角色：指要想获得较高的权限，要首先拥有低一级的权限。
-案例：先有副总经理权限，才能有总经理权限。
-
-运行时互斥：例如，允许一个用户具有两个角色的成员资格，但在运行中不可同时激活这两个角色，
-案例：同一个用户拥有多个角色，角色的权限有重叠，以较大权限为准。
-
-
-
-
-**岗位权限与角色权限有什么不同**
-
-你可能没理解透彻，这里的【灵活】是可以解决实际问题的，从组织架构上来说，岗位>角色（成员）
-
-举个例子：
-
-公司新增【销售经理】这个岗位，计划招20个【销售经理】，
-
-1、第一步，新建岗位【销售经理】，配置该岗位的使用权限
-
-2、开始招人，人员入职，新建员工信息，配置员工（角色）权限，此时就可以直接引用【销售经理】岗的配置权限，入职一个，引用一次，方便快捷
-
-3、当公司想关闭某位【销售经理】的一些系统权限时，那么，单独配置角色权限的优势就显现了出来，可以直接找到该角色，关闭需要关闭的权限即可
-
-
-
-岗位和角色的区别是，岗位是一个被引用者（模版），角色是使用者（应用），单个角色的变动不影响岗位原有的配置，不会影响到其他使用者或者后来使用者；并且权限结构与组织结构保持一致性
-
-
-
-
-
-
-看你描述中的论证逻辑是
-
------------
-
-因为岗位的权限跟角色都是需要在创建的时候配置的
-
-因为角色权限能够跟岗位权限一样去做继承
-
-所以“岗位”跟“角色”的本质是“一样”。
-
------------
-
-这是对三段论的错误应用，因为第二条跟第一条没有逻辑关系。
-
-岗位是这个用户的审批关系以及组织层级关系的体现，对应于物理上的组织架构并且有较严格的上下级关系，公司没有前台小姐姐就不会去设置“前台行政”这个“岗位”，在软件系统的应用中主要体现在OA审批流上，按岗位来判断流程节点的处理人是OA审批流一个常见场景；
-
-角色是体现这个用户能够做什么功能，在软件系统中就是用户可以看到哪些功能按钮跟页面。功能做出来后没有对应的人去使用那你可以不给这个功能设置角色。
-
-能够体现差异的场景：
-
-（1）财务可以没有研发部的角色权限，但是他/她能够在研发部的经费审批流程进行审核。
-
-（2）大多数软件都会内置“系统管理员”“admin”这样的角色，但很少公司会为每一个软件系统设置一个这样的岗位，小公司甚至直接就没有这个岗位没有人拥有这个角色的账号。
-
-（3）用户A要填行政的每日考勤又要填人事的面试登记，但不涉及流程审批，这个可以直接就不设定“岗位”只给用户A设置一个行政角色跟一个人事角色。
-
-
-
-
-
 
 
 ## VI. FRONTEND
 
+此处仅记录前端的一些本地化的修改, 以免忘记
+
 ### A. 设计思路理解
 
-对于前端的理解为: 更多地通过多接口异步从后端获取获取多种数据, 组装成页面, 不是一个接口获取N多数据
+对于前端的理解为: 更多地通过多接口异步从后端获取获取多种数据, 组装成可读的文字页面数据, 不是一个接口从后端获取N多组装后的文字页面数据
 
-既降低了后端组装数据的复杂度, 也对于前后端的数据进行解耦
+既降低了后端组装数据的复杂度, 也利于前后端数据解耦
 
-前后端约定好数据库字段`INT`所代表的意义, 前端通过字典接口获取该数值所对应的文字/字符, 并赋予颜色标签的显示, 增加友好度
+Enumerator只记录固化的业务代码锚定点, 不用于页面颜色标签的体现
 
+前端采用DICT_TYPE_工具通过字典接口从后端获取该数值所对应的文字颜色标签, 用于页面友好度体现
 
+需要额外跳转的, 使用Router配置
 
 
 ### B. 菜单配置
 
+在Web上配置菜单
 - 路由地址: `user`, 与源码前端代码的代码文件夹名称一致
 - 组件地址: `system/user/index`, 与代码同路径index.vue一致
 - 组件名称: `SystemUser`, 与index.vue中`defineOptions({ name: 'SystemUser' })`一致
 - 权限名称: `system:user:list`, 与index.vue中的<template>中的`v-hasPermi="system:user:list"`一致
 
 
+### C. 本地化修改
 
-### C. 常用修改
-
-新代码clone下来后, 按照目录顺序修改如下内容:
+新源码clone下来后, 按照目录顺序修改如下内容:
 
 - public
   - favicon.ico
@@ -702,6 +582,9 @@ PermissionServiceImpl
   - router
     - modules
       + remaining.ts, 按规则增加ERP模块中下游客户的销售策略, 以及Measure模块的测量结果 的路由设置
+  - utils
+    - constants.ts, 增加Measure相关的代码枚举
+    - dict.ts, 增加Measure相关的字典
   - views
     + Home
       + Index.vue, 首页文字修改
@@ -712,7 +595,7 @@ PermissionServiceImpl
     + measure, 增加Measure模块
     + erp
       + 临时记录erp修改的订单页
-- .env
+- .env, 修改标题, 租户, 用户, 密码, 文档开关
   - .env.dev, local, prod 按需修改即可
 - index.html, 修改文字等
 
