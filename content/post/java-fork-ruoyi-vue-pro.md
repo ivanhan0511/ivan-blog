@@ -116,8 +116,6 @@ So far, Mar 25, 2025
 - 本着创建与更新都采用同一套xxxSaveReqVO的原则
 
 
-**@InEnum & @DictFormat**
-
 {{< codeblock validInput java >}}
 @Schema(description = "管理后台 - Measure 图像绑定 Request VO")
 @Data
@@ -127,9 +125,14 @@ public class MeasureBindPicReqVO {
     @InEnum(value = XxxEnum.class, message = "xxx必须是 {value}")  // 是程序枚举类约定好的, 不受web用户在字典页面中修改所变化  
     private Integer magnification;
 
+    @Schema(description = "交易状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "20")
     @ExcelProperty(value = "交易状态", converter = DictConvert.class)  // 导入时指定Excel某sheet中表头字段名称
     @DictFormat(DictTypeConstants.TOP_UP_RESULT)  // 将Excel中的文字结果转化为表结构中的数字
     private Integer result;
+
+    @Schema(description = "创建时间")
+    @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)
+    private LocalDateTime[] createTime;
 }
 {{< /codeblock >}}
 
@@ -156,7 +159,6 @@ public class ProductSpuRespVO {
 
 
 ### B. Service
-Just work for **BUSINESS** only
 
 - Service中, 只体现业务. 而需要CRUD的时候, 调用Mapper的方法
   - service中的数据流转, 视情况而定, VO / DTO / DO 均可以
@@ -199,8 +201,6 @@ public Long createSaleOrder(ErpSaleOrderSaveReqVO createReqVO) {
 
 #### 1. Transactional
 这里不会讲原理, 只讲注意点, 设计思路, 详细文章见java-spring.md
-
-生命周期TODO
 
 事务传播: 业务设计好一点, 代码简约一点, 事务的传播的事情会遇到得很少
 
@@ -249,18 +249,17 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 ### C. DAO Mapper
 曾经我是拒绝的
 {{< blockquote >}}
-- **JUST** use MyBatisPLus maven and use default CRUD methods.  
-- **REFUSE** to use `QueryWrapper`, only use MyBatis' XML mapper.
-- MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失
+- JUST use MyBatisPLus maven and use default CRUD methods</br>
+- REFUSE to use QueryWrapper, only use MyBatis' XML mapper</br>
+- MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失</br>
 - 按照MyBatis写XML更像原生SQL, 熟练运用SQL是一件愉快的事情
 {{< /blockquote >}}
 
 真香打脸
 {{< blockquote >}}
-
-- Mapper中, 做统一抽象, 例如`selectPage`, `selectByMobile`, 而不是直接暴露`selectOne` `selectList`
-- 需要控制mapper中的SQL join(如下文)
-- 复杂业务都放在service中解耦, 各个业务尽量减少连接次数, 批量查询, 在Java内存中运用 stream / mapper / set 拼接, 批量updateOrInsert
+- Mapper中, 做统一抽象, 例如selectPage, selectByMobile... 而不是直接暴露selectOne selectList</br>
+- 需要控制mapper中的SQL join(如下文)</br>
+- 复杂业务都放在service中解耦, 周边模块的数据单独查询, 在Java内存中运用stream各种工具进行拼接
 {{< /blockquote >}}
 
 [MySQL多次单表查询和多表联合查询](https://www.cnblogs.com/youmingDDD/p/11921187.html)
@@ -593,9 +592,16 @@ Enumerator只记录固化的业务代码锚定点, 不用于页面颜色标签�
       + UserInfo
         - src
           - UserInfo.vue, 取消web外圈 用户中心 鼠标悬停时的"项目文档"
+  - locales
+    - en.ts, 修改英文相关的
+    - zh-CN.ts, 修改中文相关的
+    - jp?.ts, 修改日文相关的
   - router
     - modules
       + remaining.ts, 按规则增加ERP模块中下游客户的销售策略, 以及Measure模块的测量结果 的路由设置
+  - store
+    - modules
+      + locales.ts, 增加多语言下拉选项
   - utils
     - constants.ts, 增加Measure相关的代码枚举
     - dict.ts, 增加Measure相关的字典
@@ -609,6 +615,8 @@ Enumerator只记录固化的业务代码锚定点, 不用于页面颜色标签�
     + measure, 增加Measure模块
     + erp
       + 临时记录erp修改的订单页
+- types
+  - global.d.ts, 增加`type LocaleType = 'zh-CN' | 'en'` 日语支持
 - .env, 修改标题, 租户, 用户, 密码, 文档开关
   - .env.dev, local, prod 按需修改即可
 - index.html, 修改文字等

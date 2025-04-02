@@ -16,31 +16,31 @@ showSocial: true
 showDate: true
 ---
 
-ÒÔÄ¿Ç°µÄ¼ÒÍ¥½Ú×à, Ã»°ì·¨Æï³µ, ¶øÇÒÔËÊä/±£¹Ü³µÁ¾Ê¼ÖÕÏÞÖÆÐÐ¶¯Â·Ïß, ²»Èç±³°ü¿Í×ÔÓÉ
+ï¿½ï¿½Ä¿Ç°ï¿½Ä¼ï¿½Í¥ï¿½ï¿½ï¿½ï¿½, Ã»ï¿½ì·¨ï¿½ï³µ, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Â·ï¿½ï¿½, ï¿½ï¿½ï¿½ç±³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 <!--more-->
 
 {{< toc >}}
 
-¼ÇÂ¼Ò»ÏÂÔø¾­¾À½áTCRºÍDefyÊ±ËùÖÐÒâµÄÒ»¸öÂÛÌ³ÁôÑÔ:
+ï¿½ï¿½Â¼Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TCRï¿½ï¿½DefyÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ï¿½:
 {{< blockquote >}}
-ÆäŒÒÔÊæßm¶È¶øÑÔ, Ý†Ì¥µÄÓ°í‘ÔÚÜ‡¼ÜÖ®ÉÏ.  
-Êæßm¶ÈŒ¦Ò»°ãÈËºÜ³éÏóëyÁ¿»¯, Œ¦ÎÒíÕf…sºÜÈÝÒ×…^„e.  
-Ö»ÒªòTÍêÄ_µ×µÄÅf‚û›]°l×÷, ¾ÍÊÇÊæßmµÄÔO¶¨.
-Ì¼ÀwDefyÅä‚€Kenda 925/1092 23CÕÕ˜ÓÅf¼²Í°l.
-Vittoria corsa 25~28C²»¹ÜÅªÉÏÄÄÌ¨Ü‡, ¶¼²»•þÒý°lÅf‚û.
-Œ’Ì¥Ö®ÏÂ, äXÜ‡¸úÌ¼ÀwÜ‡¼ÜµÄ²î„e, ÆäŒÒÔ½›¿sµÃºÜÐ¡.
-×îÊæßmµÄÊÇÌ¥‰º´ò30-40µÄµÇÉ½Ü‡À², Óö¿Ó²»±Ü²»éW, Ö»ÊÇòT²»¿ì.
-TCRÎÒ¶¼ÓÃ-17¶Èýˆî^½µµ½µ×ÁË, Defyî^¹ÜÔOÓ‹¶à¸ßÄÇ2cmŒ¦ÎÒÓ°í‘ºÜ´ó
-¸ßµÍÂä²îÀ­²»³öí, ×Ë„ÝŸo·¨×î¼Ñ»¯, Ò»Ö±ÏëÙuµô, ¶ÌÍÈ±¯¸è...
-µÍî^¹Ü, ¼šÉÏ¹ÜµÄÜ‡, Œ¤Œ¤Ò’Ò’, ÆäŒ×î¼Ñßx“ñ¾ÍÊÇ½üÄêµÄTCR advanced, ¶ÌÍÈƒÈ°ËµÄÊ×ßx.
+ï¿½äŒï¿½ï¿½ï¿½ï¿½ï¿½mï¿½È¶ï¿½ï¿½ï¿½, Ý†Ì¥ï¿½ï¿½Ó°ï¿½ï¿½ï¿½Ü‡ï¿½ï¿½Ö®ï¿½ï¿½.  
+ï¿½ï¿½ï¿½mï¿½ÈŒï¿½Ò»ï¿½ï¿½ï¿½ËºÜ³ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Òï¿½ï¿½fï¿½sï¿½ï¿½ï¿½ï¿½ï¿½×…^ï¿½e.  
+Ö»Òªï¿½Tï¿½ï¿½ï¿½_ï¿½×µï¿½ï¿½fï¿½ï¿½ï¿½]ï¿½lï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½Oï¿½ï¿½.
+Ì¼ï¿½wDefyï¿½ä‚€Kenda 925/1092 23Cï¿½Õ˜ï¿½ï¿½fï¿½ï¿½ï¿½Í°l.
+Vittoria corsa 25~28Cï¿½ï¿½ï¿½ï¿½Åªï¿½ï¿½ï¿½ï¿½Ì¨Ü‡, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½fï¿½ï¿½.
+ï¿½ï¿½Ì¥Ö®ï¿½ï¿½, ï¿½XÜ‡ï¿½ï¿½Ì¼ï¿½wÜ‡ï¿½ÜµÄ²ï¿½e, ï¿½äŒï¿½Ô½ï¿½ï¿½sï¿½Ãºï¿½Ð¡.
+ï¿½ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½ï¿½Ì¥ï¿½ï¿½ï¿½ï¿½30-40ï¿½Äµï¿½É½Ü‡ï¿½ï¿½, ï¿½ï¿½ï¿½Ó²ï¿½ï¿½Ü²ï¿½ï¿½W, Ö»ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½.
+TCRï¿½Ò¶ï¿½ï¿½ï¿½-17ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Defyï¿½^ï¿½ï¿½ï¿½OÓ‹ï¿½ï¿½ï¿½ï¿½ï¿½2cmï¿½ï¿½ï¿½ï¿½Ó°í‘ºÜ´ï¿½
+ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ë„ÝŸoï¿½ï¿½ï¿½ï¿½Ñ»ï¿½, Ò»Ö±ï¿½ï¿½ï¿½uï¿½ï¿½, ï¿½ï¿½ï¿½È±ï¿½ï¿½ï¿½...
+ï¿½ï¿½ï¿½^ï¿½ï¿½, ï¿½ï¿½ï¿½Ï¹Üµï¿½Ü‡, ï¿½ï¿½ï¿½ï¿½Ò’Ò’, ï¿½äŒï¿½ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½TCR advanced, ï¿½ï¿½ï¿½ÈƒÈ°Ëµï¿½ï¿½ï¿½ï¿½x.
 
-TCR advanced PRO DISC + 28C + Zipp303S + Ì¥‰º´ò60psi
-ÍêÃÀ½MºÏ, ¼æî™ÊæßmºÍÐÔÄÜ
+TCR advanced PRO DISC + 28C + Zipp303S + Ì¥ï¿½ï¿½ï¿½ï¿½60psi
+ï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {{< /blockquote >}}
 
 
-## Áã¼þ
+## ï¿½ï¿½ï¿½
 
 ### Front Gear
 
@@ -62,7 +62,7 @@ TCR advanced PRO DISC + 28C + Zipp303S + Ì¥‰º´ò60psi
 
 
 
-## Zone `2`ÑµÁ·
+## Zone `2`Ñµï¿½ï¿½
 
 https://www.youtube.com/watch?v=yC5Hgm5tJ0U
 
