@@ -1,6 +1,6 @@
 ---
 title: "How to fork ruoyi-vue-pro"
-date: 2025-04-02T18:22:00+08:00
+date: 2025-04-02T18:35:00+08:00
 categories:
 - Java
 - WebFramework
