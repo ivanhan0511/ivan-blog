@@ -1,6 +1,6 @@
 ---
 title: "How to fork ruoyi-vue-pro"
-date: 2025-03-25T11:45:00+08:00
+date: 2025-04-02T18:22:00+08:00
 categories:
 - Java
 - WebFramework
@@ -248,7 +248,7 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
 ### C. DAO Mapper
 曾经我是拒绝的
-{{< blockquote >}}
+{{< blockquote "Ivan" "自己总结的" >}}
 - JUST use MyBatisPLus maven and use default CRUD methods</br>
 - REFUSE to use QueryWrapper, only use MyBatis' XML mapper</br>
 - MybatisPlus的QueryWrapper越看越像Python SQLAlchemy这类ORM, 学习成本高, 且一旦语句优化不得当, 会造成性能损失</br>
@@ -256,7 +256,7 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 {{< /blockquote >}}
 
 真香打脸
-{{< blockquote >}}
+{{< blockquote "大神" "来自网络" >}}
 - Mapper中, 做统一抽象, 例如selectPage, selectByMobile... 而不是直接暴露selectOne selectList</br>
 - 需要控制mapper中的SQL join(如下文)</br>
 - 复杂业务都放在service中解耦, 周边模块的数据单独查询, 在Java内存中运用stream各种工具进行拼接
@@ -338,7 +338,7 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
 
 ## III. TESTING
-
+---
 TODO: 2025年争取实现, 不再简单调用JetBrains的HTTP client, 而是使用UnitTest进行用例覆盖
 
 不讲具体JavaUnitTest, 而是源码如何设置测试环境
@@ -347,7 +347,7 @@ TODO: 2025年争取实现, 不再简单调用JetBrains的HTTP client, 而是使�
 
 
 ## IV. OPERATION
-
+---
 运营, 软文推广, 运维, 部署, 自动化测试, 自动化接口文档等
 
 
@@ -544,6 +544,7 @@ PermissionServiceImpl
 
 
 ## VI. FRONTEND
+---
 
 此处仅记录前端的一些本地化的修改, 以免忘记
 
@@ -625,6 +626,7 @@ Enumerator只记录固化的业务代码锚定点, 不用于页面颜色标签�
 
 
 ## VII. APPENDIX
+---
 
 摘抄自网络, 不一定合理, 仅保存一些文字, 以便以后少写一些文字
 
