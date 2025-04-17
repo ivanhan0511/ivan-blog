@@ -30,8 +30,10 @@ Some usual operations examples in MySQL 8.0
 
 {{< toc >}}
 
-## INIT
+## I. BASIC 
 ---
+### A. Init
+
 Refer to `https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04`
 
 Ubuntu 24.04 as example in Win11 WSL2
@@ -55,6 +57,10 @@ SELECT host, user, plugin FROM mysql.user;
 CREATE DATABASE `some-db` CHARACTER SET UTF8;
 CREATE USER 'rd'@'%' IDENTIFIED WITH mysql_native_password BY 'your_password';
 GRANT ALL PRIVILEGES ON `some-db`.* TO 'rd'@'%';
+# 由于 PROCESS 权限可以查看所有连接的线程和运行的 SQL，具有一定的敏感性，建议仅授予信任的内部账号或在备份服务器使用的账号
+#GRANT PROCESS, LOCK TABLES, SHOW VIEW, EVENT, TRIGGER ON *.* TO 'rd'@'%';
+FLUSH PRIVILEGES;
+
 FLUSH PRIVILEGES;
 <!-- endtab -->
 
@@ -71,36 +77,84 @@ systemctl restart mysql.service
 {{< /tabbed-codeblock >}}
 
 
-区别
+*区别*
 
 | caching_sha2_password |  
 |  mysql_native_password |
 
 
+### B. Data
+
+#### 1. Export
+
+{{< codeblock "export" "shell" >}}
+# 导出整个数据库结构和数据
+mysqldump -h localhost -P 3306 -urd -p123456 database > test.sql
+# 导出整个数据库结构(不包含数据)
+mysqldump -h localhost -P 3306 -urd -p123456 -d database > test.sql
+
+# 导出单个数据表结构和数据
+mysqldump -h localhost -P 3306 -urd -p123456 database table > test.sql
+# 导出单个数据表结构(不包含数据)
+mysqldump -h localhost -P 3306 -urd -p123456 -d database table > test.sql
+
+# 说明:
+# -P参数, 是大P, 且有空格, 不同于后面密码的小P，没有空格
+{{< /codeblock >}}
 
 
-## DCL
+#### 2. Import
+
+{{< tabbed-codeblock "import" >}}
+<!-- tab shell -->
+# 恢复到指定数据库
+mysql -hhostname -uusername -ppassword databasename < test.sql
+
+# 恢复到指定数据库中的表
+mysql -hhostname -uusername -ppassword databasename tablename < test.sql
+<!-- endtab -->
+<!-- tab sql -->
+use some_db;
+source /data/test.sql;
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
+
+
+
+
+## II. OPERATIONS
 ---
+|类别	|名称	|常见语句   |	功能说明|
+|---    |---    |---        |---    |
+|DDL	|Data Definition Language	    |CREATE, DROP, ALTER            |定义或修改数据库结构（表、索引、视图等）|
+|DML	|Data Manipulation Language	    |INSERT, UPDATE, DELETE, MERGE	|操作表中的数据（增、改、删）|
+|DQL	|Data Query Language	        |SELECT	                        |只查询数据，不做任何修改|
+|DCL	|Data Control Language	        |GRANT, REVOKE	                |权限控制（授权与回收）|
+|TCL	|Transaction Control Language	|COMMIT, ROLLBACK, SAVEPOINT	|事务管理|
+
+
+### A. DCL
+
 DCL: Data Control Language, like `GRANT`, `REVOKE`, `DENY`
 
-### GRANT
+#### 1. GRANT
 {{< codeblock "GRANT" "SQL" >}}
 GRANT ALL PRIVILEGES ON `some-db`.* TO 'rd'@'%';
 FLUSH PRIVILEGES;
 {{< /codeblock >}}
 
 
-### REVOKE
-### DENY
+#### 2. REVOKE
+#### 3. DENY
 
 
 
 
-## DDL
+### B. DDL
 ---
 DDL: Data Definition Language, like `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `COMMENT`, `RENAME`
 
-### CREATE
+#### 1. CREATE
 
 {{< tabbed-codeblock "CREATE" >}}
 <!-- tab database -->
@@ -139,7 +193,7 @@ Source_table where 1 <> 1;
 
 
 
-### ALTER
+#### 2. ALTER
 
 {{< codeblock "ALTER TABLE" SQL >}}
 ALTER TABLE ...
@@ -148,7 +202,7 @@ ALTER TABLE ...
 
 
 
-### DROP
+#### 3. DROP
 
 {{< tabbed-codeblock "DROP" >}}
 <!-- tab database -->
@@ -167,21 +221,21 @@ DROP ...;
 
 
 
-### TRUNCATE
+#### 4. TRUNCATE
 
-### COMMENT
+#### 5. COMMENT
 
-### RENAME
-
-
+#### 6. RENAME
 
 
-## DML
----
-DML: Data Manipulation Language, like `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `MERGE`, `CALL`, `EXPLAIN PLAN`, `LOCK TABLE`
 
 
-### INSERT
+### C. DML
+
+DML: Data Manipulation Language, like `INSERT`, `UPDATE`, `DELETE`, `MERGE`, `CALL`, `EXPLAIN PLAN`, `LOCK TABLE`
+
+
+#### 1. INSERT
 
 {{< tabbed-codeblock "INSERT" >}}
 <!-- tab single -->
@@ -195,7 +249,60 @@ VALUES (1, 2), (3, 4)
 {{< /tabbed-codeblock >}}
 
 
-### SELECT
+#### 2. UPDATE
+{{< codeblock "UPDATE" "sql" >}}
+UPDATE <table_name> SET ...;
+[TODO]: To be continued...
+{{< /codeblock >}}
+
+
+#### 3. DELETE
+
+{{< codeblock "DELETE" "sql" >}}
+DELETE FROM <table_name> WHERE ...;
+{{< /codeblock >}}
+
+#### 4. MERGE
+#### 5. CALL
+#### 6. EXPLAIN PLAN
+#### 7. LOCK TABLE
+
+
+#### 8. Examples
+
+**Kill**
+数据库锁死的问题解决
+{{< codeblock "Kill lock" "sql" >}}
+select *
+from information_schema.PROCESSLIST;
+
+select *
+from information_schema.INNODB_TRX;
+
+select A.trx_started, B.*
+from information_schema.INNODB_TRX A
+left join (select * from information_schema.PROCESSLIST) B on A.trx_mysql_thread_id = B.ID;
+
+kill 12345;
+{{< /codeblock >}}
+
+
+
+
+### D. DQL
+
+DQL: Data Query Language, like `SELECT`
+
+🤔 那为什么很多人以为 SELECT 是 DML 呢？
+因为 SELECT 也是“对数据的操作”，但它不改变数据，只是“读取”。
+
+在某些旧教材或非标准文档中，有时会把 DQL 归并到 DML 里，但这是不准确的。
+
+✅ 正统 SQL 标准（比如 ANSI SQL）中：
+SELECT = 只读查询语言，属于 DQL，与 DML 的“写操作”分开定义。
+
+
+#### 1. SELECT
 {{< codeblock "Periods Filter" "sql" >}}
 -- 今天
 SELECT * FROM 表名 WHERE TO_DAYS(时间字段名) = TO_DAYS(NOW());
@@ -242,111 +349,57 @@ SELECT * FROM 表名 WHERE YEAR(时间字段名) = YEAR(DATE_SUB(NOW(),INTERVAL 
 {{< /codeblock >}}
 
 
-### UPDATE
-{{< codeblock "UPDATE" "sql" >}}
-UPDATE <table_name> SET ...;
-[TODO]: To be continued...
-{{< /codeblock >}}
-
-
-### DELETE
-
-{{< codeblock "DELETE" "sql" >}}
-DELETE FROM <table_name> WHERE ...;
-{{< /codeblock >}}
-
-### MERGE
-### CALL
-### EXPLAIN PLAN
-### LOCK TABLE
-
-
-### EXAMPLES
-#### Kill
-数据库锁死的问题解决
-{{< codeblock "Kill lock" "sql" >}}
-select *
-from information_schema.PROCESSLIST;
-
-select *
-from information_schema.INNODB_TRX;
-
-select A.trx_started, B.*
-from information_schema.INNODB_TRX A
-left join (select * from information_schema.PROCESSLIST) B on A.trx_mysql_thread_id = B.ID;
-
-kill 12345;
-{{< /codeblock >}}
-
-
-### JOIN
-
-![Joins](https://upload.wikimedia.org/wikipedia/commons/9/9d/SQL_Joins.svg)
+mysql> select table_schema, table_name, column_name, column_default, is_nullable, column_type, column_type, column_key, column_comment from information_schema.COLUMNS
+where table_schema = 'ruoyi-vue-pro' and table_name = 'measure_pic';
++---------------+-------------+-----------------+-------------------+-------------+--------------+--------------+------------+-----------------------------------+
+| TABLE_SCHEMA  | TABLE_NAME  | COLUMN_NAME     | COLUMN_DEFAULT    | IS_NULLABLE | COLUMN_TYPE  | COLUMN_TYPE  | COLUMN_KEY | COLUMN_COMMENT                    |
++---------------+-------------+-----------------+-------------------+-------------+--------------+--------------+------------+-----------------------------------+
+| ruoyi-vue-pro | measure_pic | id              | NULL              | NO          | bigint       | bigint       | PRI        | 编号                              |
+| ruoyi-vue-pro | measure_pic | measure_task_id | 0                 | NO          | bigint       | bigint       |            | 测量任务编号                      |
+| ruoyi-vue-pro | measure_pic | pic_url         |                   | NO          | varchar(512) | varchar(512) |            | 图像地址                          |
+| ruoyi-vue-pro | measure_pic | client_id       | NULL              | NO          | bigint       | bigint       |            | 客户端编号                        |
+| ruoyi-vue-pro | measure_pic | category_id     | NULL              | NO          | bigint       | bigint       |            | 类别编号                          |
+| ruoyi-vue-pro | measure_pic | magnification   | NULL              | NO          | int          | int          |            | 放大倍率, 是否可以删除?           |
+| ruoyi-vue-pro | measure_pic | creator         |                   | YES         | varchar(64)  | varchar(64)  |            | 创建者                            |
+| ruoyi-vue-pro | measure_pic | create_time     | CURRENT_TIMESTAMP | NO          | datetime     | datetime     |            | 创建时间                          |
+| ruoyi-vue-pro | measure_pic | updater         |                   | YES         | varchar(64)  | varchar(64)  |            | 更新者                            |
+| ruoyi-vue-pro | measure_pic | update_time     | CURRENT_TIMESTAMP | NO          | datetime     | datetime     |            | 更新时间                          |
+| ruoyi-vue-pro | measure_pic | deleted         | b'0'              | NO          | bit(1)       | bit(1)       |            | 是否删除                          |
+| ruoyi-vue-pro | measure_pic | tenant_id       | 0                 | NO          | bigint       | bigint       |            | 租户编号                          |
++---------------+-------------+-----------------+-------------------+-------------+--------------+--------------+------------+-----------------------------------+
+12 rows in set (0.00 sec)
 
 
 
 
-## TCL
----
+### E. TCL
+
 TCL: Transaction Control Language, like `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `START TRANSACTION`
 
 
-### COMMIT
-### ROLLBACK
-### SAVEPOINT
-### START TRANSACTION
+#### 1. COMMIT
+#### 2. ROLLBACK
+#### 3. SAVEPOINT
+#### 4. START TRANSACTION
 
 
 
 
-## VIEW
----
+### F. VIEW
+
 Create a SQLView to make query fast
 
 
-## 锁
+## III. 锁
 ---
-### 行锁
-### 表锁
-### 乐观锁
-### 悲观锁
+### A. 行锁
+### B. 表锁
+### C. 乐观锁
+### D. 悲观锁
 
 
-## EXPORT & IMPORT
+
+
+## IV. 驱动
 ---
-
-### Export
-
-{{< codeblock "export" "shell" >}}
-# 导出整个数据库结构和数据
-mysqldump -h localhost -P 3306 -urd -p123456 database > test.sql
-# 导出整个数据库结构(不包含数据)
-mysqldump -h localhost -P 3306 -urd -p123456 -d database > test.sql
-
-# 导出单个数据表结构和数据
-mysqldump -h localhost -P 3306 -urd -p123456 database table > test.sql
-# 导出单个数据表结构(不包含数据)
-mysqldump -h localhost -P 3306 -urd -p123456 -d database table > test.sql
-
-# 说明:
-# -P参数, 是大P, 且有空格, 不同于后面密码的小P，没有空格
-{{< /codeblock >}}
-
-
-### IMPORT
-
-{{< tabbed-codeblock "import" >}}
-<!-- tab shell -->
-# 恢复到指定数据库
-mysql -hhostname -uusername -ppassword databasename < test.sql
-
-# 恢复到指定数据库中的表
-mysql -hhostname -uusername -ppassword databasename tablename < test.sql
-<!-- endtab -->
-<!-- tab sql -->
-use some_db;
-source /data/test.sql;
-<!-- endtab -->
-{{< /tabbed-codeblock >}}
-
-
+TODO

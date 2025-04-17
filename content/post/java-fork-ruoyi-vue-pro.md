@@ -1,6 +1,6 @@
 ---
 title: "How to fork ruoyi-vue-pro"
-date: 2025-04-02T18:35:00+08:00
+date: 2025-04-17T15:30:00+08:00
 categories:
 - Java
 - WebFramework
@@ -466,7 +466,7 @@ server {
 
 
 
-## V. COMMON
+## V. COMMON CORE
 ---
 理解源码的核心设计思路, 具体技术知识见java-spring.md
 

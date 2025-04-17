@@ -41,6 +41,7 @@ This is a custom summary and does *NOT* appear in the post.
 
 
 ## II. 背负系统
+---
 
 - [x] Osprey光线, AirSpeed空速背负系统, 可自立, 可扩展24+8L
 
@@ -58,6 +59,7 @@ This is a custom summary and does *NOT* appear in the post.
 
 
 ## III. 庇护系统
+---
 
 - [x] 牧高迪, 冷山帐篷, 徒步三季帐篷 + 地席
 - [x] 牧高迪, 防潮垫, 188\*55\*2.5, 虽重, 先用着
@@ -70,6 +72,7 @@ This is a custom summary and does *NOT* appear in the post.
 
 
 ## IV. 餐厨系统
+---
 
 ### A. 装备
 
@@ -83,16 +86,14 @@ This is a custom summary and does *NOT* appear in the post.
 
 - [x] 炉头
 
-  - [x] 炉头1: SOTO ST-350(目前没有合适的锅具去收纳它) + CB罐
+  - [x] 炉头1: SOTO ST-350 + CB罐
   - [x] 炉头2:  SOTO SOD-301(日本3脚) / OD-1RXN(美国4脚) + OD罐
   - [x] 柯曼三脚架
 
 - [x] 户外锅具/杯具
 
   - [x] SnowPeak E-104 * 2 钛合金雪拉碗(俩孩子必须一人一个专用)
-
   - [x] SnowPeak E-203 * 1 不锈钢雪拉碗
-
   - [x] SOTO ST-521单人套杯
 
     大铝杯, 中钛杯, 小不锈钢杯, 均可明火加热, 充当煮饭容器/饭碗/咖啡杯, 都满足了
@@ -108,16 +109,15 @@ This is a custom summary and does *NOT* appear in the post.
     方形, 可以收纳SOTO ST-350炉头
 
 
-    - [x] ~~SOTO NRP *VS* SnowPeak SCS-090 + SCS-080 *VS* SnowPeak SCS-020R~~ 都太小了, 四口之家在实际体验几次野餐之后, 决定需要一组大套锅SOTO SOD-501
+  - [x] ~~SOTO NRP *VS* SnowPeak SCS-090 + SCS-080 *VS* SnowPeak SCS-020R~~ 都太小了, 四口之家在实际体验几次野餐之后, 决定需要一组大套锅SOTO SOD-501
 
-    - SOTO ST-952三明治夹, 模仿摇曳露营, 烤包子/烤三明治, ***柯曼平替充当小烤盘? 还是小黑锅?***
+  - ~~SOTO ST-952三明治夹, 模仿摇曳露营, 烤包子/烤三明治~~, 要想煎东西, 还得正经铁锅, 已经物色了一款新锅: juu 铁盘
 
-    - 由于已经购入SOTO ST-3108方锅, 搭配可配套收纳的小桌子SOTO ST-3401(*3401相比老款3107增加了固定片 稳定性强* ) 就显得更合适了(*但需要定制化三脚孔位板*), 优先级低
+  - 由于已经购入SOTO ST-3108方锅, 搭配可配套收纳的小桌子SOTO ST-3401(*3401相比老款3107增加了固定片 稳定性强* ) 就显得更合适了(*但需要定制化三脚孔位板*), 优先级低
 
-    - ~~气罐隔热板("作对", 为ST-350定制)~~ 不再需要
+  - ~~气罐隔热板("作对", 为ST-350定制)~~ 不再需要
 
-
-    - ~~SOTO ST-632小桌子~~ 不再需要
+  - ~~SOTO ST-632小桌子~~ 不再需要
 
 - [x] 周边配套
 
@@ -129,10 +129,8 @@ This is a custom summary and does *NOT* appear in the post.
   - [x] 抹布
   - [x] 垃圾袋
   - [x] 餐布
-
-    - [x] 月亮折叠椅3把(46\*46\*68) + 马扎
-
-    - [x] 桌子暂时用露营车附带的
+  - [x] 月亮折叠椅3把(46\*46\*68) + 马扎
+  - [x] 桌子暂时用露营车附带的
 
 
 
@@ -143,7 +141,6 @@ This is a custom summary and does *NOT* appear in the post.
   - 炖菜, 罗宋汤
   - 寿喜锅
   - 亲子井
-  - 三明治
   - 煎/烤肉
 
 
@@ -180,15 +177,15 @@ Jan 20, 2025
 
 ## V. 绳扣
 
-绳结之王
+绳结之王布林结
 
 活套结
 
-环结
-
-秘鲁渔夫结
+环结 / 挂物结
 
 紧绳结
+
+秘鲁渔夫结
 
 布角结
 
