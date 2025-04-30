@@ -84,22 +84,39 @@ So far, Mar 25, 2025
 
 6. 不使用RESTful style, 因为RESTful仍然有表达不明确的业务场景, 仍然需要使用传统"动词"来描述接口性质/意图, 且对团队要求较高, 一不小心就会破坏掉所谓的RESTful style
 
+7. Write down all the details of requirement **seriously**
+
+8. Draw UML(work flow), 设计初期, 后端概要/前端原型图 均不要太正式, 需要不断修正, 兼容前端表现(*基于源码尽可能少量修改*)与后端数据结构(*尽可能解耦*)的合理性
+
+9. Designing the data structure and its relationship on the paper / iPad is the most important thing, **with all detail fields**
+
+10. Record the SQL into the `./sql/mysql/` and its System Manual SQL records. If need ER, export from MySQL, of course, my personal choice
+
+11. With its Infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
+
 
 
 
 ## II. BUSINESS DESIGN
 ---
-基于现役SpringBoot业务流层面的全栈开发的经验, 制定出更优雅的代码设计规范
+- mall只作为小程序B2C商城的载体
+  - 通过**商品**的SKU的barCode与ERP模块的**产品**建立联系
+  - 通过定时任务与ERP模块同步库存
+  
+- ERP模块作为后台B2B的载体
+  - 产品倒卖
+    遵循源码结构, 产品即"成品", 不需要隐藏/保护上游产品码
+  
+    + 管理mall的**实体手办**的库存(货源来自线下采购, 登记入库)
+    + 管理mall的**虚拟票券**的库存(货源来自本平台, 生成入库)
+    
+  - 产品生产
+    定制化开发, 额外添加"原料", 隐藏/保护上游产品码
+  
+    + 从上游采购回来的原料, 触发"生产"事件, 将原料转换为产品
+    + 增加flow自动化流程链, 完整的源码ERP流程自动化完成
 
-1. Write down all the details of requirement **seriously**
-
-2. Draw UML(work flow), 设计初期, 后端概要/前端原型图 均不要太正式, 需要不断修正, 兼容前端表现(*基于源码尽可能少量修改*)与后端数据结构(*尽可能解耦*)的合理性
-
-3. Designing the data structure and its relationship on the paper / iPad is the most important thing, **with all detail fields**
-
-4. Record the SQL into the `./sql/mysql/` and its System Manual SQL records. If need ER, export from MySQL, of course, my personal choice
-
-5. With its Infra code-auto-generation, most backend and frontend codes can be generated. Very helpful and so handy
+- 其它独立模块分别建立代码仓库, 单独维护
 
 
 ### A. Controller

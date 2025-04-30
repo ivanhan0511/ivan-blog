@@ -396,6 +396,10 @@ Create a SQLView to make query fast
 ### B. 表锁
 ### C. 乐观锁
 ### D. 悲观锁
+二、概念和用法
+通常情况下，select语句是不会对数据加锁，妨碍影响其他的DML和DDL操作。同时，在多版本一致读机制的支持下，select语句也不会被其他类型语句所阻碍。
+而selec... for update 语句是我们经常使用手工加锁语句。在数据库中执行select.for update,大家会发现会对数据库中的表或某些行数据进行锁表，在mysql四中，如果查询条件带有主键，会锁行数据，如果没有，会锁表。
+由于InnoDB预设是Row-LevelLock，所以只有「明确」的指定主键，MySQL才会执行Row lock(只锁住被选取的资料例)，否则MySQL将会执行Table Lock(将整个资料表单给锁住)。
 
 
 

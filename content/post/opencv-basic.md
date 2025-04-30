@@ -66,6 +66,7 @@ In summary, magnification is a measure of how much larger an object appears comp
 
 
 
+restut
 
 
 

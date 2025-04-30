@@ -221,7 +221,7 @@ JetBrains IDEA 中如果想了解某个注解的实现, 没有太好的办法, �
 - 服务端设置`Content-Type:application/json`并返回给前端, 前端dataType不指定"json"<br>
   可以解码HTTP的body内容, data类型是Object<br>
 - 服务端不设置`Content-Type:application/jsonResponse`并返回给前端, 前端dataType指定"json"<br>
-  可以解码HTTP的body内容,data类型是Object<br>
+  可以解码HTTP的body内容, data类型是Object<br>
 - 服务端不设置`Content-Type:application/json`并返回给前端, 前端dataType不指定"json"<br>
   不能解码HTTP的body内容, data类型是String<br>
 {{< /blockquote >}}
@@ -324,7 +324,7 @@ RestTemplate 是从Spring3.0开始支持的一个远程HTTP请求工具，RestTe
 
 {{< blockquote >}}
 Synchronous client to perform HTTP requests, exposing a simple, template method API over underlying HTTP client libraries such as the JDK HttpURLConnection.
-
+<br>
 NOTE: As of 6.1, RestClient offers a more modern API for synchronous HTTP access. For asynchronous and streaming scenarios, consider the reactive org. springframework. web. reactive. function. client. WebClient.
 {{< /blockquote >}}
 
@@ -399,7 +399,12 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
   **Tips**: 该级别产生幻读的重点场景在于insert, 总的来说就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读，表现形式很多
 
-            TODO: MySQL的间隙锁在开源代码中是否已经默认被应用
+            备注: 概念和用法
+{{< blockquote >}}
+通常情况下，select语句是不会对数据加锁，妨碍影响其他的DML和DDL操作。同时，在多版本一致读机制的支持下，select语句也不会被其他类型语句所阻碍。
+而selec... for update 语句是我们经常使用手工加锁语句。在数据库中执行select.for update,大家会发现会对数据库中的表或某些行数据进行锁表，在mysql四中，如果查询条件带有主键，会锁行数据，如果没有，会锁表。
+由于InnoDB预设是Row-LevelLock，所以只有「明确」的指定主键，MySQL才会执行Row lock(只锁住被选取的资料例)，否则MySQL将会执行Table Lock(将整个资料表单给锁住)。
+{{< /blockquote >}}
 
 
 - Serializable
