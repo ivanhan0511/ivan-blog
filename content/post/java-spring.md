@@ -274,10 +274,6 @@ PS:
 @RequestParam()不那么好用, 返回信息不友好
 
 
-### C. @Transactional
-详见 DAO Mapper章节
-
-
 
 
 ## VI. SERVLET
@@ -347,8 +343,6 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 ## XI. DAO MAPPER
 ---
 
-把事务传播放在这里, 主要是借鉴了[ChatGPT的解答](https://chatgpt.com/c/67f53a1e-c224-8006-8be6-47110ff83864)
-
 | 层级        | 技术/概念                | 说明                             |
 | --------- | -------------------- | ------------------------------ |
 | **应用层**   | `@Transactional`     | Spring 提供的注解式事务管理，声明式封装        |
@@ -362,30 +356,30 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
 @Transactional 是 Spring 提供的声明式事务语法糖；
 
-它的本质行为是基于 JDBC 的事务控制（或者 JPA 的 EntityManager，但底层还是 JDBC）；
+它的本质行为是基于 JDBC 的事务控制(或者 JPA 的 EntityManager，但底层还是 JDBC)
 
-它不属于“纯粹的 JDBC API 知识”，但必须理解 JDBC 事务机制，你才能真正理解它怎么起作用。
+它不属于"纯粹的 JDBC API 知识", 但必须理解 JDBC 事务机制，你才能真正理解它怎么起作用
 
 **Spring @Transactional 的执行流程图**
 {{< blockquote flow >}}
-你调用某个标注 @Transactional 的方法
-↓
-Spring AOP 拦截这个方法调用（通过代理）
-↓
-进入事务拦截器 TransactionInterceptor
-↓
-  ├─ 判断当前线程是否已有事务
-  │    ├─ 如果已有事务，则根据传播行为决定是否复用/新建
-  │    └─ 如果没有事务，开始新事务：
-  │         └─ DataSource 获取连接，setAutoCommit(false)
-↓
-执行你的业务方法
-  ├─ 方法正常返回：提交事务（conn.commit）
-  └─ 方法抛出异常：根据规则决定是否 rollback
-↓
-释放连接（交还给连接池）
-↓
-返回控制权给你
+调用某个标注 @Transactional 的方法</br>
+↓</br>
+Spring AOP 拦截这个方法调用（通过代理）</br>
+↓</br>
+进入事务拦截器 TransactionInterceptor</br>
+↓</br>
+  ├─ 判断当前线程是否已有事务</br>
+  │    ├─ 如果已有事务，则根据传播行为决定是否复用/新建</br>
+  │    └─ 如果没有事务，开始新事务：</br>
+  │         └─ DataSource 获取连接，setAutoCommit(false)</br>
+↓</br>
+执行业务方法</br>
+  ├─ 方法正常返回：提交事务（conn.commit）</br>
+  └─ 方法抛出异常：根据规则决定是否 rollback</br>
+↓</br>
+释放连接（交还给连接池）</br>
+↓</br>
+返回控制权
 {{< /blockquote >}}
 
 0. 图解 Spring @Transactional 方法执行的源码栈流程, 从业务代码出发：
@@ -401,8 +395,8 @@ public class UserService {
 }
 {{< /codeblock >}}
 
-1. 你调用 userService.createUser()，其实是代理对象在执行：
-{{< codeblock invoke java >}}
+1. 调用 userService.createUser()，其实是代理对象在执行：
+{{< codeblock infact java >}}
 // 原始调用
 userService.createUser();
 
@@ -411,7 +405,7 @@ proxy.invoke(createUser)
 {{< /codeblock >}}
 
 2. 代理对象内部执行：TransactionInterceptor.invoke(...)
-{{< codeblock proxy java>}}
+{{< codeblock invode java>}}
 public Object invoke(MethodInvocation invocation) throws Throwable {
     // 获取事务属性（来自 @Transactional）
     TransactionAttribute txAttr = getTransactionAttributeSource().getTransactionAttribute(...);
@@ -440,7 +434,7 @@ public Object invoke(MethodInvocation invocation) throws Throwable {
 {{< /codeblock >}}
 
 3. 数据库连接处理（DataSourceTransactionManager）
-{{< codeblock jdbc java>}}
+{{< codeblock manager java>}}
 public TransactionStatus getTransaction(...) {
     // 从当前线程获取 ConnectionHolder，如果没有就新建连接
     Connection con = dataSource.getConnection();
@@ -463,16 +457,16 @@ con.rollback();
 
 5. 小结：完整调用栈路径
 {{< blockquote >}}
-你写的 createUser() 方法
-   ↓
-Spring AOP 代理对象（JDK / CGLIB）
-   ↓
-TransactionInterceptor.invoke()
-   ↓
-DataSourceTransactionManager.getTransaction()
-   ↓
-业务方法执行
-   ↓
+你写的 createUser() 方法</br>
+   ↓</br>
+Spring AOP 代理对象（JDK / CGLIB）</br>
+   ↓</br>
+TransactionInterceptor.invoke()</br>
+   ↓</br>
+DataSourceTransactionManager.getTransaction()</br>
+   ↓</br>
+业务方法执行</br>
+   ↓</br>
 commit 或 rollback
 {{< /blockquote >}}
 
@@ -482,6 +476,8 @@ commit 或 rollback
 事务状态、连接等都存在线程局部变量中，一个线程一个事务上下文。
 
 你用的 @Transactional 其实是调用链的“开关”，底下跑的是一整套 AOP + JDBC 的组合机制。
+
+
 
 
 #### 1. Propagation
@@ -497,7 +493,7 @@ commit 或 rollback
 | `NEVER`          | 必须无事务，有事务就抛异常         |    |
 
 
-✅ 一、REQUIRED（默认）
+**1.1 REQUIRED(默认)**
 {{< codeblock REQUIRED java>}}
 @Transactional(propagation = Propagation.REQUIRED)
 public void methodA() {
@@ -511,7 +507,8 @@ public void methodA() {
 
 缺点：如果 B 抛异常，整个 A 都回滚，容易传播太广
 
-🔁 二、REQUIRES_NEW（强制新事务）
+
+**1.2 REQUIRES_NEW(强制新事务)**
 {{< codeblock REQUIRED_NEW java>}}
 java
 复制
@@ -534,13 +531,10 @@ public void saveLog() {
 
 行为：挂起 outer() 的事务，自己创建一个新事务
 
-适合场景：
+适合场景：记录操作日志、异步保存等，不影响主流程; 希望“部分提交”的子操作，即使主事务失败也不影响它
 
-记录操作日志、异步保存等，不影响主流程
 
-希望“部分提交”的子操作，即使主事务失败也不影响它
-
-🪜 三、NESTED（嵌套事务）
+**1.3 NESTED(嵌套事务)**
 {{< codeblock NESTED java>}}
 @Transactional
 public void parent() {
@@ -561,13 +555,12 @@ public void save2() {
 
 行为：如果有事务，就创建一个“保存点”，可以局部回滚而不影响外层；如果没有事务，则等价于 REQUIRED。
 
-底层依赖 JDBC 的 savepoint 支持
+底层依赖 JDBC 的 savepoint 支持(*注意：不是所有数据库 + JDBC 驱动都支持 NESTED*)
 
-*注意：不是所有数据库 + JDBC 驱动都支持 NESTED*
 
-👀 四、实战中常见“坑”与场景
+**1.4 实战中常见“坑”与场景**
 
-❌ 1. 内部方法调用事务失效
+a. ❌内部方法调用事务失效
 {{< codeblock trap java>}}
 @Transactional
 public void outer() {
@@ -582,12 +575,10 @@ public void inner() {
 
 解决方案：
 
-用 AOP 自调用方案：将 inner() 放到别的 bean 中
+- 用 AOP 自调用方案：将 inner() 放到别的 bean 中
+- 或通过 ApplicationContext.getBean(...).inner() 调用
 
-或通过 ApplicationContext.getBean(...).inner() 调用
-
-
-🔥 2. 想要内层事务失败但主事务继续（REQUIRES_NEW）
+b. 🔥主操作成功与否, 不影响子操作提交（REQUIRES_NEW）
 {{< codeblock solution java>}}
 @Transactional
 public void mainProcess() {
@@ -600,7 +591,7 @@ public void mainProcess() {
 }
 {{< /codeblock >}}
 
-⚠️ 3. 想回滚子操作，但主事务继续（NESTED）
+c. ⚠想回滚子操作, 但主事务继续（NESTED）
 {{< codeblock  java>}}
 @Transactional
 public void saveAll() {
@@ -615,7 +606,7 @@ public void saveAll() {
 
 只会 rollback 到保存点，不会影响外层事务。
 
-**🛠 总结：如何选择事务传播行为？**
+**🛠 总结：如何选择事务传播行为?**
 
 |目标	                                    |建议使用    |
 |---                                        |--- |
@@ -627,7 +618,7 @@ public void saveAll() {
 
 
 
-#### 2.0 Isolation
+#### 2. Isolation
 
 以下是 MySQL 事务隔离级别的简要场景及效果区别：
 
@@ -686,15 +677,15 @@ public void saveAll() {
 
 MySQL 默认是 REPEATABLE READ，但在 Spring 中默认是 DEFAULT，表示由数据库决定
 {{< blockquote >}}
-通常情况下，select语句是不会对数据加锁，妨碍影响其他的DML和DDL操作。同时，在多版本一致读机制的支持下，select语句也不会被其他类型语句所阻碍。
-而selec... for update 语句是我们经常使用手工加锁语句。在数据库中执行select.for update,大家会发现会对数据库中的表或某些行数据进行锁表，在mysql四中，如果查询条件带有主键，会锁行数据，如果没有，会锁表。
+通常情况下，select语句是不会对数据加锁，妨碍影响其他的DML和DDL操作。同时，在多版本一致读机制的支持下，select语句也不会被其他类型语句所阻碍</br>
+而select... for update 语句是我们经常使用手工加锁语句。在数据库中执行select...for update,大家会发现会对数据库中的表或某些行数据进行锁表，在mysql四中，如果查询条件带有主键，会锁行数据，如果没有，会锁表</br>
 由于InnoDB预设是Row-LevelLock，所以只有「明确」的指定主键，MySQL才会执行Row lock(只锁住被选取的资料例)，否则MySQL将会执行Table Lock(将整个资料表单给锁住)。
 {{< /blockquote >}}
 
 
 
 
-#### 2.1 Isolation生命周期
+**2.1 Isolation生命周期**
 
 隔离级别不是你在 Java 方法中设定了就马上生效。它的生效时机是：在“开启数据库事务时”
 
@@ -706,7 +697,8 @@ public void innerMethod() { ... }
 这样 Spring 会挂起外部事务，开启一个新事务，才会按你的 Isolation 设置来生效！
 
 
-#### 2.2 阅读列表文章
+**2.2 阅读列表文章**
+
 [Mysql 事务隔离级别和锁的关系](https://www.cnblogs.com/zhengzhaoxiang/p/13972252.html)
 
 > **锁防止别的事务修改或删除，GAP锁防止别的事务新增，**行锁和 GAP锁结合形成的的 Next-Key锁共同解决了 RR级别在写数据时的幻读问题。
@@ -728,21 +720,31 @@ public void innerMethod() { ... }
 
 #### 1. JDBC事务的控制流程
 
-┌──────────────────────────────┬────────────────────────────────┐
-│         JDBC 原始写法         │       Spring @Transactional     │
-├──────────────────────────────┼────────────────────────────────┤
-│ Connection conn =            │ @Transactional                  │
-│   dataSource.getConnection();│ public void doBiz() {           │
-│ conn.setAutoCommit(false);   │     userRepo.save(user);       │
-│ try {                        │     orderRepo.save(order);     │
-│     // 执行业务SQL           │ }                               │
-│     conn.commit();           │ // Spring 自动管理事务          │
-│ } catch (Exception e) {      │                                  │
-│     conn.rollback();         │                                  │
-│ } finally {                  │                                  │
-│     conn.close();            │                                  │
-│ }                            │                                  │
-└──────────────────────────────┴────────────────────────────────┘
+{{< tabbed-codeblock JDBC_Spring java >}}
+<!-- tab jdbc -->
+
+Connection conn = dataSource.getConnection();
+conn.setAutoCommit(false);
+try {
+    // 执行业务SQL
+    conn.commit();
+} catch (Exception e) {
+    conn.rollback();
+} finally {
+    conn.close();
+}
+<!-- endtab -->
+<!-- tab spring -->
+@Transactional
+public void doBiz() {
+    userRepo.save(user);
+    orderRepo.save(order);
+}
+// Spring 自动管理事务
+<!-- endtab -->
+{{< /tabbed-codeblock >}}
+
+
 
 
 #### 2. 学习列表
