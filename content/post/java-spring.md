@@ -349,25 +349,291 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
 把事务传播放在这里, 主要是借鉴了[ChatGPT的解答](https://chatgpt.com/c/67f53a1e-c224-8006-8be6-47110ff83864)
 
+| 层级        | 技术/概念                | 说明                             |
+| --------- | -------------------- | ------------------------------ |
+| **应用层**   | `@Transactional`     | Spring 提供的注解式事务管理，声明式封装        |
+| **框架层**   | Spring Tx（事务管理器）     | 管理事务的开始、提交、回滚等流程               |
+| **数据访问层** | JDBC / JPA / MyBatis | 实际执行 SQL 的工具，Spring Tx 会和它们协作  |
+| **驱动层**   | JDBC Driver          | 具体数据库厂商实现的事务接口                 |
+| **数据库层**  | MySQL / Postgres 等   | 数据真正执行事务：BEGIN、COMMIT、ROLLBACK |
+
+
 ### A. Transactional
+
+@Transactional 是 Spring 提供的声明式事务语法糖；
+
+它的本质行为是基于 JDBC 的事务控制（或者 JPA 的 EntityManager，但底层还是 JDBC）；
+
+它不属于“纯粹的 JDBC API 知识”，但必须理解 JDBC 事务机制，你才能真正理解它怎么起作用。
+
+**Spring @Transactional 的执行流程图**
+{{< blockquote flow >}}
+你调用某个标注 @Transactional 的方法
+↓
+Spring AOP 拦截这个方法调用（通过代理）
+↓
+进入事务拦截器 TransactionInterceptor
+↓
+  ├─ 判断当前线程是否已有事务
+  │    ├─ 如果已有事务，则根据传播行为决定是否复用/新建
+  │    └─ 如果没有事务，开始新事务：
+  │         └─ DataSource 获取连接，setAutoCommit(false)
+↓
+执行你的业务方法
+  ├─ 方法正常返回：提交事务（conn.commit）
+  └─ 方法抛出异常：根据规则决定是否 rollback
+↓
+释放连接（交还给连接池）
+↓
+返回控制权给你
+{{< /blockquote >}}
+
+0. 图解 Spring @Transactional 方法执行的源码栈流程, 从业务代码出发：
+{{< codeblock call java >}}
+@Service
+public class UserService {
+
+    @Transactional
+    public void createUser() {
+        // 保存用户
+        userRepository.save(...);
+    }
+}
+{{< /codeblock >}}
+
+1. 你调用 userService.createUser()，其实是代理对象在执行：
+{{< codeblock invoke java >}}
+// 原始调用
+userService.createUser();
+
+// 实际是 Spring 生成的代理对象执行：
+proxy.invoke(createUser)
+{{< /codeblock >}}
+
+2. 代理对象内部执行：TransactionInterceptor.invoke(...)
+{{< codeblock proxy java>}}
+public Object invoke(MethodInvocation invocation) throws Throwable {
+    // 获取事务属性（来自 @Transactional）
+    TransactionAttribute txAttr = getTransactionAttributeSource().getTransactionAttribute(...);
+
+    // 获取事务管理器（DataSourceTransactionManager）
+    PlatformTransactionManager tm = determineTransactionManager(...);
+
+    // 创建事务（开启 conn.setAutoCommit(false)）
+    TransactionStatus status = tm.getTransaction(txAttr);
+
+    Object retVal;
+    try {
+        // 调用真正的方法体
+        retVal = invocation.proceed();
+
+        // 没异常 -> 提交事务
+        tm.commit(status);
+    } catch (Throwable ex) {
+        // 有异常 -> 回滚事务
+        tm.rollback(status);
+        throw ex;
+    }
+
+    return retVal;
+}
+{{< /codeblock >}}
+
+3. 数据库连接处理（DataSourceTransactionManager）
+{{< codeblock jdbc java>}}
+public TransactionStatus getTransaction(...) {
+    // 从当前线程获取 ConnectionHolder，如果没有就新建连接
+    Connection con = dataSource.getConnection();
+
+    // 设置 autoCommit 为 false
+    con.setAutoCommit(false);
+
+    // 用 TransactionSynchronizationManager 绑定到当前线程
+}
+{{< /codeblock >}}
+
+4. 提交 or 回滚阶段
+{{< codeblock commit java>}}
+// 正常提交：
+con.commit();
+
+// 异常回滚：
+con.rollback();
+{{< /codeblock >}}
+
+5. 小结：完整调用栈路径
+{{< blockquote >}}
+你写的 createUser() 方法
+   ↓
+Spring AOP 代理对象（JDK / CGLIB）
+   ↓
+TransactionInterceptor.invoke()
+   ↓
+DataSourceTransactionManager.getTransaction()
+   ↓
+业务方法执行
+   ↓
+commit 或 rollback
+{{< /blockquote >}}
+
+💬 小提示
+第一次执行事务方法时，Spring 会做大量准备工作，但 之后会缓存事务属性（如传播行为、异常回滚规则等），执行效率是很高的。
+
+事务状态、连接等都存在线程局部变量中，一个线程一个事务上下文。
+
+你用的 @Transactional 其实是调用链的“开关”，底下跑的是一整套 AOP + JDBC 的组合机制。
+
 
 #### 1. Propagation
 
-- 事务传播, 需要时则加入传播的扩散要求  
-  @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
+| 类型               | 名称                    | 说明 |
+| ---------------- | --------------------- | -- |
+| ✅ `REQUIRED`     | 有事务用当前，没有就新建（默认）      |    |
+| ✅ `REQUIRES_NEW` | 始终新建事务，挂起外层事务         |    |
+| ✅ `NESTED`       | 如果有事务，就嵌套一个“保存点”；否则新建 |    |
+| `SUPPORTS`       | 有事务就参与，没有就非事务执行       |    |
+| `NOT_SUPPORTED`  | 总是非事务执行，会挂起已有事务       |    |
+| `MANDATORY`      | 必须有事务，没有就抛异常          |    |
+| `NEVER`          | 必须无事务，有事务就抛异常         |    |
 
-- 何时该扩散, 内层事务如何处理, 可以组合考虑
+
+✅ 一、REQUIRED（默认）
+{{< codeblock REQUIRED java>}}
+@Transactional(propagation = Propagation.REQUIRED)
+public void methodA() {
+    methodB(); // methodB 也是 @Transactional（默认）
+}
+{{< /codeblock >}}
+
+行为：methodB 会复用 methodA 的事务
+
+优点：简单、效率高
+
+缺点：如果 B 抛异常，整个 A 都回滚，容易传播太广
+
+🔁 二、REQUIRES_NEW（强制新事务）
+{{< codeblock REQUIRED_NEW java>}}
+java
+复制
+编辑
+@Transactional
+public void outer() {
+    saveMainData();
+    try {
+        saveLog(); // 新事务
+    } catch (Exception e) {
+        log.error("日志保存失败");
+    }
+}
+
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+public void saveLog() {
+    ...
+}
+{{< /codeblock >}}
+
+行为：挂起 outer() 的事务，自己创建一个新事务
+
+适合场景：
+
+记录操作日志、异步保存等，不影响主流程
+
+希望“部分提交”的子操作，即使主事务失败也不影响它
+
+🪜 三、NESTED（嵌套事务）
+{{< codeblock NESTED java>}}
+@Transactional
+public void parent() {
+    save1(); // 插入数据1
+    try {
+        save2(); // 抛异常
+    } catch (Exception e) {
+        ...
+    }
+    save3();
+}
+
+@Transactional(propagation = Propagation.NESTED)
+public void save2() {
+    ...
+}
+{{< /codeblock >}}
+
+行为：如果有事务，就创建一个“保存点”，可以局部回滚而不影响外层；如果没有事务，则等价于 REQUIRED。
+
+底层依赖 JDBC 的 savepoint 支持
+
+*注意：不是所有数据库 + JDBC 驱动都支持 NESTED*
+
+👀 四、实战中常见“坑”与场景
+
+❌ 1. 内部方法调用事务失效
+{{< codeblock trap java>}}
+@Transactional
+public void outer() {
+    this.inner(); // 不会经过代理，事务注解失效！
+}
+
+@Transactional
+public void inner() {
+    ...
+}
+{{< /codeblock >}}
+
+解决方案：
+
+用 AOP 自调用方案：将 inner() 放到别的 bean 中
+
+或通过 ApplicationContext.getBean(...).inner() 调用
 
 
-#### 2. Isolation
+🔥 2. 想要内层事务失败但主事务继续（REQUIRES_NEW）
+{{< codeblock solution java>}}
+@Transactional
+public void mainProcess() {
+    ...
+    try {
+        logService.writeLog(); // 使用 REQUIRES_NEW
+    } catch (Exception e) {
+        log.warn("日志失败，但主流程继续");
+    }
+}
+{{< /codeblock >}}
+
+⚠️ 3. 想回滚子操作，但主事务继续（NESTED）
+{{< codeblock  java>}}
+@Transactional
+public void saveAll() {
+    ...
+    try {
+        subSave(); // NESTED
+    } catch (Exception e) {
+        log.warn("子保存失败，但父继续");
+    }
+}
+{{< /codeblock >}}
+
+只会 rollback 到保存点，不会影响外层事务。
+
+**🛠 总结：如何选择事务传播行为？**
+
+|目标	                                    |建议使用    |
+|---                                        |--- |
+|所有操作要么全成功，要么全失败	                |REQUIRED   |
+|主操作成功与否不影响子操作提交	                |REQUIRES_NEW   |
+|子操作失败只想 rollback 子操作，不影响父流程    |NESTED |
+|子操作不是核心流程，可无事务执行                |NOT_SUPPORTED or SUPPORTS   |
+
+
+
+
+#### 2.0 Isolation
 
 以下是 MySQL 事务隔离级别的简要场景及效果区别：
 
 - Read Uncommitted
 
   **场景**: 允许读取未提交的数据。  
-
-  **效果**:  
 
   **脏读**: 可能发生，读取其他事务未提交的数据。  
 
@@ -379,8 +645,6 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
   **场景**: 只读取已提交的数据，避免读取未提交事务的内容。  
 
-  **效果**:  
-
   **脏读**: 不会发生，保证读取的是已提交数据。  
 
   **不可重复读**: 可能发生，因为同一事务中重复读取时，数据可能被其他事务修改。  
@@ -389,17 +653,38 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 
   **Tips**: 不可重复读重点在于update和delete
 
-
 - Repeatable Read (MySQL默认)
+
   **场景**: 保证同一事务中，读取的结果是固定的，即便其他事务修改了数据。  
-  **效果**:  
+
   **脏读**: 不会发生。  
+
   **不可重复读**: 不会发生，事务中数据一致。  
+
   **幻读**: 通过**间隙锁**避免，查询范围内的数据是固定的。  
 
   **Tips**: 该级别产生幻读的重点场景在于insert, 总的来说就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读，表现形式很多
 
-            备注: 概念和用法
+- Serializable
+
+  **场景**: 强制事务串行化，确保事务间完全隔离。  
+
+  **脏读**: 不会发生。  
+
+  **不可重复读**: 不会发生。  
+
+  **幻读**: 不会发生，因为会对范围内的操作加锁，阻止插入或修改。  
+
+- 总结表格
+
+| Isolation Level  | 脏读(Dirty Read) | 不可重复读(Non Repeatable Read) | 幻读(Phantom Read) |
+| ---------------- | --- | ----- | --- |
+| READ UNCOMMITTED | ✅ 有 | ✅ 有   | ✅ 有 |
+| READ COMMITTED   | ❌ 无 | ✅ 有   | ✅ 有 |
+| REPEATABLE READ  | ❌ 无 | ❌ 无   | ✅ 有 |
+| SERIALIZABLE     | ❌ 无 | ❌ 无   | ❌ 无 |
+
+MySQL 默认是 REPEATABLE READ，但在 Spring 中默认是 DEFAULT，表示由数据库决定
 {{< blockquote >}}
 通常情况下，select语句是不会对数据加锁，妨碍影响其他的DML和DDL操作。同时，在多版本一致读机制的支持下，select语句也不会被其他类型语句所阻碍。
 而selec... for update 语句是我们经常使用手工加锁语句。在数据库中执行select.for update,大家会发现会对数据库中的表或某些行数据进行锁表，在mysql四中，如果查询条件带有主键，会锁行数据，如果没有，会锁表。
@@ -407,24 +692,21 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 {{< /blockquote >}}
 
 
-- Serializable
-  **场景**: 强制事务串行化，确保事务间完全隔离。  
-  **效果**:  
-  **脏读**: 不会发生。  
-  **不可重复读**: 不会发生。  
-  **幻读**: 不会发生，因为会对范围内的操作加锁，阻止插入或修改。  
 
 
-- 总结表格
+#### 2.1 Isolation生命周期
 
-| Isolation Level  | 脏读(Dirty Read) | 不可重复读(Non Repeatable Read) | 幻读(Phantom Read) |
-|------------------|------|------------|-------|
-| Read Uncommitted | ✅   | ✅         | ✅    |
-| Read Committed   | ❌   | ✅         | ✅    |
-| Repeatable Read  | ❌   | ❌         | ❌    |
-| Serializable     | ❌   | ❌         | ❌    |
+隔离级别不是你在 Java 方法中设定了就马上生效。它的生效时机是：在“开启数据库事务时”
+
+✅ 正确做法（如确实要变更隔离级别）：
+{{< codeblock isolation java >}}
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+public void innerMethod() { ... }
+{{< /codeblock >}}
+这样 Spring 会挂起外部事务，开启一个新事务，才会按你的 Isolation 设置来生效！
 
 
+#### 2.2 阅读列表文章
 [Mysql 事务隔离级别和锁的关系](https://www.cnblogs.com/zhengzhaoxiang/p/13972252.html)
 
 > **锁防止别的事务修改或删除，GAP锁防止别的事务新增，**行锁和 GAP锁结合形成的的 Next-Key锁共同解决了 RR级别在写数据时的幻读问题。
@@ -435,13 +717,36 @@ module-bpm模块中有用到, 拿来主义, 上游入库后"生产"出下游库�
 >
 > > 这里要吐槽一句，不要看到 select就说不会加锁了，在Serializable这个级别，还是会加锁的！
 
-
 [Java面试必问的MySQL锁与事务隔离级别](https://juejin.cn/post/6920072842935533576)
 
 [数据库事务、隔离级别和锁ACID的真实含义隔离级别和并发控制MySQL和PostgreSQL对比如何写代码](https://cloud.tencent.com/developer/article/1121737)略读
 
 
+
+
 ### B. JDBC
+
+#### 1. JDBC事务的控制流程
+
+┌──────────────────────────────┬────────────────────────────────┐
+│         JDBC 原始写法         │       Spring @Transactional     │
+├──────────────────────────────┼────────────────────────────────┤
+│ Connection conn =            │ @Transactional                  │
+│   dataSource.getConnection();│ public void doBiz() {           │
+│ conn.setAutoCommit(false);   │     userRepo.save(user);       │
+│ try {                        │     orderRepo.save(order);     │
+│     // 执行业务SQL           │ }                               │
+│     conn.commit();           │ // Spring 自动管理事务          │
+│ } catch (Exception e) {      │                                  │
+│     conn.rollback();         │                                  │
+│ } finally {                  │                                  │
+│     conn.close();            │                                  │
+│ }                            │                                  │
+└──────────────────────────────┴────────────────────────────────┘
+
+
+#### 2. 学习列表
+
 Once a connection is obtained we can interact with the database. 
 The JDBC Statement, CallableStatement, and PreparedStatement interfaces define the methods 
 and properties that enable you to send SQL or PL/SQL commands and receive data from your database.
